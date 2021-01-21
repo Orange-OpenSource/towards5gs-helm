@@ -66,7 +66,6 @@ EOF
 
 ### Install free5gc
 ```console
-git clone https://github.com/raoufkh/5gprojects.git && cd 5gprojects/charts
 helm -n <namespace> install <release-name> ./free5gc/
 ```
 

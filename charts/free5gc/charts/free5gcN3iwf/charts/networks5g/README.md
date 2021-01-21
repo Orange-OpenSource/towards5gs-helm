@@ -14,7 +14,6 @@ This Helm chart provides [NetworkAttachmentDefinition](https://docs.google.com/d
 
 ### Install NETWORKS5G
 ```console
-git clone https://github.com/raoufkh/5gprojects.git && cd 5gprojects/charts
 kubectl create ns <namespace>
 helm -n <namespace> install <release-name> ./free5gcUserPlane/
 ```
@@ -84,8 +83,3 @@ This chart allows you to customize its installation. The table below shows the p
 ## Limitations
 Currently, this Helm chart uses the [MACVLAN plugin](https://www.cni.dev/plugins/main/macvlan/) for all network attachment definition. However, the use of a Userspace CNI plugin like [SR-IOV] is necessary for user plane traffic (N3 and N6 interfaces). For the next versions, we are planning to provide an option to use this CNI plugin.
 
-### Brouillon
-networks5g.ovn4nfv.enabled | If true The [ovn4nfv] will be used fo N3 and N6 interfaces
-networks5g.ovn4nfv.name | The name of network attachment definition when ovn4nfv is enabled
-networks5g.ovn4nfv.n3network.name | The name of N3 network attachment definition when ovn4nfv is enabled
-networks5g.ovn4nfv.n6network.name | The name of N6 network attachment definition when ovn4nfv is enabled

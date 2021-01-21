@@ -4,7 +4,7 @@
 
 ## TL;DR
 ```console
-helm repo add towards5gs 'https://raw.githubusercontent.com/raoufkh/5gprojects/master/repo/'
+helm repo add towards5gs 'https://gitlab.forge.orange-labs.fr/towards5gs/towards5gs-helm/-/raw/master/repo/'
 helm repo update
 helm search repo
 ```

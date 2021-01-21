@@ -36,9 +36,9 @@ make
 sudo make install
 ```
 #### Install the user plane
-Run the following commands on a host that can communicate with the API server of your cluster.
+1. Clone the project and then access the free5gcUserPlane parent chart folder `towards5gs-helm/charts/free5gc/charts`.
+2. Run the following commands on a host that can communicate with the API server of your cluster.
 ```console
-git clone https://github.com/raoufkh/5gprojects.git && cd 5gprojects/charts
 kubectl create ns <namespace>
 helm -n <namespace> install <release-name> ./free5gcUserPlane/
 ```
@@ -76,8 +76,9 @@ EOF
 ```
 **NOTE:** you must create the folder on the right node before creating the Peristent Volume.
 #### Install the control plane
+1. Clone the project and then access the free5gcUserPlane parent chart folder `towards5gs-helm/charts/free5gc/charts`.
+2. Run the following commands on a host that can communicate with the API server of your cluster.
 ```console
-git clone https://github.com/raoufkh/5gprojects.git && cd 5gprojects/charts
 helm -n <namespace> install <release-name> ./free5gcControlPlane/
 ```
 
@@ -96,8 +97,9 @@ The WEBUI can be accessed at the second cluster with `nodePort=30500`. So you ca
 ### Test with UERANSIM
 Do the following on the first cluster.
 #### Install UERANSIM
+1. Clone the project and then go to the free5gcUserPlane parent chart folder `charts`.
+2. Run the following commands on a host that can communicate with the API server of your cluster.
 ```console
-git clone https://github.com/raoufkh/5gprojects.git && cd 5gprojects/charts
 helm -n <namespace> install --set networks5g.n2network.enabled=false <release-name> ./ueransim/
 ```
 We have disabled the N2 network because it was already created by the N3iwf.

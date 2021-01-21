@@ -14,7 +14,6 @@ This is a Helm chart for deploying [UERANSIM](https://github.com/aligungr/UERANS
 
 ### Install UERANSIM
 ```console
-git clone https://github.com/raoufkh/5gprojects.git && cd 5gprojects/charts
 kubectl create ns <namespace>
 helm -n <namespace> install <release-name> ./ueransim/
 ```
@@ -56,7 +55,7 @@ This chart allows you to customize its installation. The table below shows the p
 
 | Parameter | Description | Default value |
 | --- | --- | --- |
-| `global.image.registry` | The global Docker image registry. | `raoufkh063` |
+| `global.image.registry` | The global Docker image registry. | `towards5gs` |
 | `global.datanetworks.dn1` | The name of the data network used for the simulated UE. | `internet` |
 | `global.multiCluster` | Must be set to `true` if you are deploying the the N3IWF in a different cluster from the one where the control plane is deployed and `global.amf.service.ngap.enabled` is set to true. | `false` |
 | `global.cpClusterIP` | The IP address of one of the cluster nodes where the control plane is deployed. | `nil` |

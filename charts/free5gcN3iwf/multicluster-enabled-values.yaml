@@ -1,5 +1,0 @@
-global:
-  multiCluster: true
-  cpClusterIP: 192.168.121.16 # set this to the IP of the cluster where control plane is deployed
-  upClusterIP: 192.168.121.17 # set this to the IP of the cluster where user plane is deployed
-

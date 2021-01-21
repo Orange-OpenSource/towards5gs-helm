@@ -2,7 +2,7 @@
 
 This is a Helm chart for deploying the [free5GC](https://github.com/free5gc/free5gc)-v3.0.4 user plane on Kubernetes.
 
-This chart is included in the [dependencies](../free5gc/charts) of the [main chart](../free5gc). Furthermore, it can be installed separately on Kubernetes a cluster at the same network with the clusters where the [free5gcControlPlane](../free5gcControlPlane) and the [free5gcN3iwf](../free5gcN3iwf) are deployed.
+This chart is included in the [dependencies](/charts/free5gc/charts) of the [main chart](/charts/free5gc). Furthermore, it can be installed separately on Kubernetes a cluster at the same network with the clusters where the [free5gcControlPlane](../free5gcControlPlane) and the [free5gcN3iwf](../free5gcN3iwf) are deployed.
 
 ## Prerequisites
  - A Kubernetes cluster ready to use with all worker nodes using kernel `5.0.0-23-generic` and they should contain gtp5g kernel module.
@@ -32,7 +32,6 @@ sudo make install
 ### Install the user plane
 Run the following commands on a host that can communicate with the API server of your cluster.
 ```console
-git clone https://github.com/raoufkh/5gprojects.git && cd 5gprojects/charts
 kubectl create ns <namespace>
 helm -n <namespace> install <release-name> ./free5gcUserPlane/
 ```
@@ -74,7 +73,7 @@ This chart allows you to customize its installation. The table below shows the p
 | Parameter | Description | Default value |
 | --- | --- | --- |
 | `global.projectName` | The name of the project. | `free5gc` |
-| `global.image.registry` | The global Docker image registry. | `raoufkh063` |
+| `global.image.registry` | The global Docker image registry. | `towards5gs` |
 | `global.multiCluster` | Must be set to `true` if you are deploying the the user plane in a different cluster from the one where the control plane is deployed. | `false` |
 | `global.uesubnet` | The UE subnet used to apply NAT POSTROUTING rules. | `10.1.0.0/16` |
 | `global.uesubnet1` | The UE subnet in the UPF configuration. | `10.1.0.0/17` |
@@ -100,7 +99,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `upf.name` | The Network Function name of UPF. | `upf` |
 | `upf.replicaCount` | The number of UPF replicas. | `1` |
 | `upf.image.name` | The UPF Docker image name. | `free5gc-upf` |
-| `upf.image.tag` | The UPF Docker image tag. | `"1.0"` |
+| `upf.image.tag` | The UPF Docker image tag. | `"v3.0.4"` |
 | `upf.configmap.name` | The name of the configmap to be used to import the configuration to the UPF POD. | `upf-configmap` |
 | `upf.volume.name` | The name of the volume to be mounted to the UPF POD. | `upf-volume` |
 | `upf.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/` |

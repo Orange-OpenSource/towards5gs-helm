@@ -1,8 +1,8 @@
-# free5gcN3iwf Helm chart
+﻿# free5gcN3iwf Helm chart
 
 This is a Helm chart for deploying the Non-3GPP Interworking Function from the [free5GC](https://github.com/free5gc/free5gc) project (v3.0.4) on Kubernetes.
 
-This chart is included in the [dependencies](../free5gc/charts) of the [main chart](../free5gc). Furthermore, it can be installed separately on Kubernetes a cluster from which the [free5gcControlPlane](../free5gcControlPlane) and the [free5gcUserPlane](../free5gcUserPlane) are reachable.
+This chart is included in the [dependencies](/charts/free5gc/charts) of the [main chart](/charts/free5gc). Furthermore, it can be installed separately on Kubernetes a cluster from which the [free5gcControlPlane](/charts/free5gcControlPlane) and the [free5gcUserPlane](/charts/free5gcUserPlane) are reachable.
 
 ## Prerequisites
  - A Kubernetes cluster ready to use. You can use [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/) to create it.
@@ -16,7 +16,6 @@ This chart is included in the [dependencies](../free5gc/charts) of the [main cha
 
 ### Install the N3iwf
 ```console
-git clone https://github.com/raoufkh/5gprojects.git && cd 5gprojects/charts
 kubectl create ns <namespace>
 helm -n <namespace> install <release-name> ./free5gcN3iwf/
 ```
@@ -46,7 +45,7 @@ helm -n <namespace> uninstall <release-name>
 In this section, we'll suppose that you have only one interface on each Kubernetes node and its name is `toto`. Then you have to set these parameters to `toto`:
  - `networks5g.n2network.masterIf`
  - `networks5g.n4network.masterIf`
-Please see [NETWORKS5G's README](../networks5g) for more details.
+Please see [NETWORKS5G's README](/charts/networks5g) for more details.
 
 ## Customized installation
 This chart allows you to customize its installation. The table below shows the parameters that can be modified before installing the chart or when upgrading it as well as their default values.
@@ -56,7 +55,7 @@ This chart allows you to customize its installation. The table below shows the p
 | Parameter | Description | Default value |
 | --- | --- | --- |
 | `global.projectName` | The name of the project. | `free5gc` |
-| `global.image.registry` | The global Docker image registry. | `raoufkh063` |
+| `global.image.registry` | The global Docker image registry. | `towards5gs` |
 | `global.multiCluster` | Must be set to `true` if you are deploying the the N3IWF in a different cluster from the one where the control plane is deployed and `global.amf.service.ngap.enabled` is set to true. | `false` |
 | `global.cpClusterIP` | The IP address of one of the cluster nodes where the control plane is deployed. | `nil` |
 | `global.non3gppuesubnet.prefixIP` | The prefix of the subnet IP from within IPs will be assigned to non3gpp users. | `10.0.0` |
@@ -79,7 +78,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `n3iwf.n3if.ipAddress` | The IP address of N3iwf’s N3 interface. | `10.100.50.237` |
 | `n3iwf.n2if.ipAddress`| The IP address of N3iwf’s N2 interface. | `10.100.50.251` |
 | `n3iwf.image.name` | The N3IWF Docker image name. | `free5gc-n3iwf` |
-| `n3iwf.image.tag` | The N3IWF Docker image tag. | `"1.0"` |
+| `n3iwf.image.tag` | The N3IWF Docker image tag. | `"v3.0.4"` |
 | `free5gc.configmap.name` | The name of the configmap to be used to import free5GC.conf to the N3iwf POD. | `free5gc4n3iwf-configmap` |
 | `n3iwf.configmap.name` | The name of the configmap to be used to import the configuration to the N3iwf POD. | `n3iwf-configmap` |
 | `n3iwf.volume.name` | The name of the volume to be mounted to the N3iwf POD. | `n3iwf-volume` |
@@ -91,7 +90,7 @@ This chart allows you to customize its installation. The table below shows the p
 | --- | --- | --- |
 | `createNetworks` | If `true` then the networks5g subchart will be installed. | `true` |
 
-For the rest of parameters, please refer to this [page](../networks5g) to check the list of configurable parameters in the [networks5g](../networks5g) chart. If you want to override any parameter from this chart, please check this [link](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/).
+For the rest of parameters, please refer to this [page](/charts/networks5g) to check the list of configurable parameters in the [networks5g](/charts/networks5g) chart. If you want to override any parameter from this chart, please check this [link](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/).
 
 ## Reference
  - https://github.com/free5gc/free5gc

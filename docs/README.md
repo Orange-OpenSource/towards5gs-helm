@@ -21,16 +21,13 @@ Refer to this [link](https://helm.sh/docs/intro/install/) to view all possible i
 
 ## Using our Helm charts
 
-### Using edge versions
-```console
-git clone https://github.com/raoufkh/5gprojects.git
-```
-The edge versions of all charts are available on the [charts](../charts/) directory.
+### By cloning the project
+1. Clone the project and then.
+2. Go to the charts folder `charts`.
 
-### Using stable versions
-The stable versions of all charts are available on the [towards5GS repository](../repo/).
+### By using our Helm repository
 ```console
-helm repo add towards5gs 'https://raw.githubusercontent.com/raoufkh/5gprojects/master/repo/'
+helm repo add towards5gs 'https://gitlab.forge.orange-labs.fr/towards5gs/towards5gs-helm/-/raw/master/repo/'
 helm repo update
 helm search repo
 ```
