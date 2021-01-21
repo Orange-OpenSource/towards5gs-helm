@@ -2,9 +2,9 @@
 
 This is a Helm chart for deploying the [free5GC](https://github.com/free5gc/free5gc)-v3.0.4 on Kubernetes. Tt deploys the following Helm charts:
  - [networks5g](../networks5g).
- - [free5gcUserPlane](../free5gcUserPlane).
- - [free5gcControlPlane](../free5gcUserPlane).
- - [free5gcN3iwf](../free5gcN3iwf).
+ - [free5gcUserPlane](./charts/free5gcUserPlane).
+ - [free5gcControlPlane](./charts/free5gcUserPlane).
+ - [free5gcN3iwf](./charts/free5gcN3iwf).
 
 ## Prerequisites
  - A Kubernetes cluster ready to use with all worker nodes using kernel `5.0.0-23-generic` and they should contain gtp5g kernel module.
@@ -104,9 +104,9 @@ This chart allows you to customize its installation. The table below shows the p
 ### Main chart parameters
 | Parameter | Description | Default value |
 | --- | --- | --- |
-| `free5gcUserPlane` | If `true` then the [free5gcUserPlane](../free5gcUserPlane) subchart will be installed. | `true` |
-| `deployControlPlane` | If `true` then the [free5gcControlPlane](../free5gcControlPlane) subchart will be installed. | `true` |
-| `deployN3iwf` | If `true` then the [free5gcN3iwf](../free5gcN3iwf) subchart will be installed. | `true` |
+| `free5gcUserPlane` | If `true` then the [free5gcUserPlane](./charts/free5gcUserPlane) subchart will be installed. | `true` |
+| `deployControlPlane` | If `true` then the [free5gcControlPlane](./charts/free5gcControlPlane) subchart will be installed. | `true` |
+| `deployN3iwf` | If `true` then the [free5gcN3iwf](./charts/free5gcN3iwf) subchart will be installed. | `true` |
 | `createNetworks` | If `true` then the [NETWORKS5G](../networks5g) subchart will be installed. | `true` |
 
 ### Global and subcharts' parameters
