@@ -1,0 +1,40 @@
+global:
+  amf:
+    service:
+      ngap:
+        enabled: true
+        name: amf-n2
+        port: 38412
+        nodeport: 31412
+        protocol: SCTP
+        type: NodePort
+upf:
+  name: upf
+upfb:
+  name: upfb
+upf1:
+  name: upf1
+upf2:
+  name: upf2
+
+networks5g:
+  n2network:
+    enabled: false
+
+global:
+  multiCluster: true
+  cpClusterIP: 192.168.121.16 # set this to the IP of the cluster where control plane is deployed
+  upClusterIP: 192.168.121.17 # set this to the IP of the cluster where user plane is deployed
+
+mongodb:
+  service:
+    type: NodePort
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+{{- if .Values.nrf.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.nrf.service.name }}
+  labels:
+    project: {{ .Values.global.projectName }}
+    nf: {{ .Values.nrf.name }}
+spec:
+  ports:
+    - port: {{ .Values.nrf.port }}
+  selector:
+    project: {{ .Values.global.projectName }}
+    nf: {{ .Values.nrf.name }}
+{{- end }}

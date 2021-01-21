@@ -1,0 +1,292 @@
+# Default values for free5gcControlPlane chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  projectName: free5gc
+  userPlaneArchitecture: oneupf  # possible values are "oneupf" and "ulcl"
+  multiCluster: false
+  cpClusterIP: 192.168.121.16
+  upClusterIP: 192.168.121.20
+  uesubnet: 10.1.0.0/16
+  ueRouting:
+    destination1: 10.100.100.16
+    destination2: 10.100.100.26
+  datanetworks:
+    dn1: internet
+    dn2: internet2
+  image:
+    registry: towards5gs
+  sbi:
+    scheme: http
+  upf:
+    n4if:  # PFCP
+      ipAddress: 10.100.50.241
+    n3if:  # GTPU
+      ipAddress: 10.100.50.233
+    n6if:  # DN
+      ipAddress: 10.100.100.12
+    service:
+      pfcp:
+        enabled: false
+        name: upf-n4
+        port: 8805
+        nodeport: 30805
+        protocol: UDP
+        type: NodePort
+  upfb:
+    n4if:  # PFCP
+      ipAddress: 10.100.50.241
+    n3if:  # GTPU
+      ipAddress: 10.100.50.233
+    n6if:  # DN
+      ipAddress: 10.100.100.12
+    service:
+      pfcp:
+        name: upfb-n4
+        nodeport: 30805
+  upf1:
+    n4if:  # PFCP
+      ipAddress: 10.100.50.242
+    n3if:  # GTPU
+      ipAddress: 10.100.50.234
+    n6if:  # DN
+      ipAddress: 10.100.100.13
+    service:
+      pfcp:
+        name: upf1-n4
+        nodeport: 30806
+  upf2:
+    n4if:  # PFCP
+      ipAddress: 10.100.50.243
+    n3if:  # GTPU
+      ipAddress: 10.100.50.235
+    n6if:  # DN
+      ipAddress: 10.100.100.14
+    service:
+      pfcp:
+        name: upf2-n4
+        nodeport: 30807
+  smf:
+    n4if:
+      ipAddress: 10.100.50.244
+  amf:
+    n2if:  # NGAP
+      ipAddress: 10.100.50.249
+    service:
+      ngap:
+        enabled: false
+        name: amf-n2
+        port: 38412
+        nodeport: 31412
+        protocol: SCTP
+        type: NodePort
+  gnb:
+    n3if:
+      ipAddress: 10.100.50.236
+  db:
+    nodePort: &dbnodeport "30017"
+
+initcontainers:
+  curl:
+    registry: towards5gs
+    image: initcurl
+    tag: "1.0.0"
+  busybox:
+    image: busybox
+    tag: "1.32.0"
+    
+db:
+  enabled: true
+
+# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it
+mongodb:
+  fullnameOverride: mongodb
+  useStatefulSet: true
+  auth:
+    enabled: false
+  persistence:
+    size: 6Gi
+    mountPath: /bitnami/mongodb/data/db/
+    volumeClaimTemplates:
+      selector:
+        matchLabels:
+          project: free5gc
+  service:
+    name: mongodb
+    type: ClusterIP
+    port: 27017
+    nodePort: *dbnodeport
+
+volume:
+  mount: /free5gc/config/
+
+amf:
+  enabled: true
+  name: amf
+  replicaCount: 1
+  image:
+    name: free5gc-amf
+    tag: "v3.0.4"
+  port: 80
+  service:
+    name: amf-namf
+  configmap:
+    name: amf-configmap
+  volume:
+    name: amf-volume
+    
+ausf:
+  enabled: true
+  name: ausf
+  replicaCount: 1
+  image:
+    name: free5gc-ausf
+    tag: "v3.0.4"
+  port: 80
+  service:
+    name: ausf-nausf
+  configmap:
+    name: ausf-configmap
+  volume:
+    name: ausf-volume
+
+nrf:
+  enabled: true
+  name: nrf
+  replicaCount: 1
+  image:
+    name: free5gc-nrf
+    tag: "v3.0.4"
+  port: 29510
+  service:      
+    name: nrf-nnrf
+  configmap:
+    name: nrf-configmap
+  volume:
+    name: nrf-volume
+    
+nssf:
+  enabled: true
+  name: nssf
+  replicaCount: 1
+  image:
+    name: free5gc-nssf
+    tag: "v3.0.4"
+  port: 80
+  service:
+    name: nssf-nnssf
+  configmap:
+    name: nssf-configmap
+  volume:
+    name: nssf-volume
+    
+pcf:
+  enabled: true
+  name: pcf
+  replicaCount: 1
+  image:
+    name: free5gc-pcf
+    tag: "v3.0.4"
+  port: 80
+  service:
+    name: pcf-npcf
+  configmap:
+    name: pcf-configmap
+  volume:
+    name: pcf-volume
+    
+smf:
+  enabled: true
+  name: smf
+  replicaCount: 1
+  image:
+    name: free5gc-smf
+    tag: "v3.0.4"
+  port: 80
+  service:
+    pfcp:
+      name: pfcp-smf
+      port: 8805
+      nodeport: 30805
+      protocol: UDP
+      type: NodePort
+    name: smf-nsmf
+  configmap:
+    name: smf-configmap
+  volume:
+    name: smf-volume
+    
+udm:
+  enabled: true
+  name: udm
+  replicaCount: 1
+  image:
+    name: free5gc-udm
+    tag: "v3.0.4"
+  port: 80
+  service:
+    name: udm-nudm
+  configmap:
+    name: udm-configmap
+  volume:
+    name: udm-volume
+    
+udr:
+  enabled: true
+  name: udr
+  replicaCount: 1
+  image:
+    name: free5gc-udr
+    tag: "v3.0.4"
+  port: 80
+  service:
+    name: udr-nudr
+  configmap:
+    name: udr-configmap
+  volume:
+    name: udr-volume
+    
+webui:
+  enabled: true
+  name: webui
+  replicaCount: 1
+  image:
+    name: free5gc-webui
+    tag: "v3.0.4"
+  port: 5000
+  configmap:
+    name: webui-configmap
+  service:
+    name: webui-service
+    type: NodePort
+    nodePort: 30500
+  volume:
+    name: webui-volume
+
+free5gc:
+  configmap:
+    create: true
+    name: free5gc4controlplane-configmap
+
+createNetworks: true
+
+networks5g:
+  n4network:
+    name: n4network
+    subnetIP: 10.100.50.240
+    cidr: 29
+  n3network:
+    enabled: false
+    name: n3network
+    subnetIP: 10.100.50.232
+  n6network:
+    enabled: false
+  n2network:
+    name: n2network
+    subnetIP: 10.100.50.248
+    cidr: 29
+  ovn4nfv:       # The ovn4nfv plugin can be used for N3 and N6 interfaces which do not forward control plane trafic
+    enabled: false
+    name: ovn4nfv-k8s-plugin
+

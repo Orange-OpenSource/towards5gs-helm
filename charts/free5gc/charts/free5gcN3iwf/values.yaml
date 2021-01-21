@@ -1,0 +1,83 @@
+# Default values for free5gcN3iwf chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  projectName: free5gc
+  multiCluster: false
+  non3gppuesubnet:
+    prefixIP: 10.0.0
+  image:
+    registry: towards5gs
+  amf:
+    n2if:  # NGAP
+      ipAddress: 10.100.50.249
+    service:
+      ngap:
+        enabled: false
+        name: amf-n2
+        port: 38412
+        nodeport: 31412
+        protocol: SCTP
+        type: ClusterIP
+  db:
+    nodePort: "30017"
+
+n3iwf:
+  enabled: true
+  name: n3iwf
+  replicaCount: 1
+  n3if:  # GTPU
+    ipAddress: 10.100.50.237
+  n2if:  # NGAP
+    ipAddress: 10.100.50.251
+  ike:  # define an interface for the IKE daemon as mentioned in the free5gc github README.md
+    name: ikenetwork
+    prefixIP: 172.16.10
+    suffixIP: 5 
+  image:
+    name: free5gc-n3iwf
+    tag: "v3.0.4"
+  configmap:
+    name: n3iwf-configmap
+  volume:
+    name: n3iwf-volume
+
+free5gc:
+  configmap:
+    create: true
+    name: free5gc4n3iwf-configmap
+
+mongodb:
+  service:
+    name: mongodb
+
+volume:
+  mount: /free5gc/config/
+
+
+createNetworks: true
+
+networks5g:
+  n4network:
+    enabled: false
+  n3network:
+    enabled: false
+    name: n3network
+    subnetIP: 10.100.50.232
+    cidr: 29
+  n6network:
+    enabled: false
+  n2network:
+    enabled: true
+    name: n2network
+    subnetIP: 10.100.50.248
+    cidr: 29
+  ovn4nfv:       # The ovn4nfv plugin can be used for N3 and N6 interfaces
+    enabled: false
+    name: ovn4nfv-k8s-plugin
+    n6network:
+      name: n6net
+    n3network:
+      name: n3net
+

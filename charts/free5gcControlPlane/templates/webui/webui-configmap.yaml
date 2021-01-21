@@ -1,0 +1,19 @@
+{{- if .Values.webui.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.webui.configmap.name }}
+  labels:
+    app: {{ .Values.global.projectName }}
+data:
+  webuicfg.conf: |
+    info:
+      version: 1.0.0
+      description: Docker-WebUI initial local configuration
+    
+    configuration:
+      mongodb:
+        name: free5gc
+        url: mongodb://{{ .Values.mongodb.service.name }}:{{ .Values.mongodb.service.port }}
+{{- end }}
+

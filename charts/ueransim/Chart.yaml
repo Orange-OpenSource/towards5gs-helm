@@ -1,0 +1,14 @@
+apiVersion: v2
+name: ueransim
+description: A Helm chart to deploy UERANSIM
+version: 0.1.1
+appVersion: 2.2.2
+dependencies:
+- name: networks5g
+  condition: createNetworks
+icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+maintainers:
+  - email: abderaouf.khichane@orange.com
+    name: Abderaouf KHICHANE
+  - email: ilhem.fajjari@orange.com
+    name: Ilhem FAJJARI

@@ -1,0 +1,144 @@
+# Default values for free5gc-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  name: free5gc
+  userPlaneArchitecture: oneupf  # possible values are "oneupf" and "ulcl"
+  multiCluster: false
+  cpClusterIP: 192.168.121.16
+  upClusterIP: 192.168.121.20
+  uesubnet: 10.1.0.0/16
+  ueRouting:
+    destination1: 10.100.100.16
+    destination2: 10.100.100.26
+  non3gppuesubnet:
+    prefixIP: 10.0.0
+  datanetworks:
+    dn1: internet
+    dn2: internet2
+  image:
+    registry: towards5gs
+  upf:
+    n4if:  # PFCP
+      ipAddress: 10.100.50.241
+    n3if:  # GTPU
+      ipAddress: 10.100.50.233
+    n6if:  # DN
+      ipAddress: 10.100.100.12
+    service:
+      pfcp:
+        enabled: false
+        name: upf-n4
+        port: 8805
+        nodeport: 30805
+        protocol: UDP
+        type: NodePort
+  upfb:
+    n4if:  # PFCP
+      ipAddress: 10.100.50.241
+    n3if:  # GTPU
+      ipAddress: 10.100.50.233
+    n6if:  # DN
+      ipAddress: 10.100.100.12
+    service:
+      pfcp:
+        name: upfb-n4
+        nodeport: 30805
+  upf1:
+    n4if:  # PFCP
+      ipAddress: 10.100.50.242
+    n3if:  # GTPU
+      ipAddress: 10.100.50.234
+    n6if:  # DN
+      ipAddress: 10.100.100.13
+    service:
+      pfcp:
+        name: upf1-n4
+        nodeport: 30806
+  upf2:
+    n4if:  # PFCP
+      ipAddress: 10.100.50.243
+    n3if:  # GTPU
+      ipAddress: 10.100.50.235
+    n6if:  # DN
+      ipAddress: 10.100.100.14
+    service:
+      pfcp:
+        name: upf2-n4
+        nodeport: 30807
+  smf:
+    n4if:
+      ipAddress: 10.100.50.244
+  amf:
+    n2if:  # NGAP
+      ipAddress: 10.100.50.249
+    service:
+      ngap:
+        enabled: false
+        name: amf-n2
+        port: 38412
+        nodeport: 31412
+        protocol: SCTP
+        type: NodePort
+  gnb:
+    n3if:
+      ipAddress: 10.100.50.236
+
+
+deployControlPlane: true              # set to "true" if you want to deploy the control plane NFs (AMF, AUSF, NRF, NSSF, PCF, SMF, UDM, UDR)
+deployUserPlane: true                 # set to "true" if you want to deploy the user plane NFs (UPF)
+deployN3iwf: true
+createNetworks: true
+
+free5gcUserPlane:
+  createNetworks: false
+
+free5gcControlPlane:
+  createNetworks: false
+
+free5gcN3iwf:
+  createNetworks: false
+
+networks5g:
+  n2network:
+    enabled: true
+    name: n2network
+    masterIf: eth0
+    subnetIP: 10.100.50.248
+    cidr: 29
+    gatewayIP: 10.100.50.254
+    excludeIP: 10.100.50.254 
+  n4network:
+    enabled: true
+    name: n4network
+    masterIf: eth0
+    subnetIP: 10.100.50.240
+    cidr: 29
+    gatewayIP: 10.100.50.246
+    excludeIP: 10.100.50.246  
+  n3network:
+    enabled: true
+    name: n3network
+    masterIf: eth0
+    subnetIP: 10.100.50.232
+    cidr: 29
+    gatewayIP: 10.100.50.238
+    excludeIP: 10.100.50.238  
+  n6network:
+    enabled: true
+    name: n6network
+    masterIf: eth1
+    subnetIP: 10.100.100.0
+    cidr: 24
+    gatewayIP: 10.100.100.1
+    excludeIP: 10.100.100.254
+  ovn4nfv:
+    enabled: false
+    name: ovn4nfv-k8s-plugin
+
+
+
+
+
+

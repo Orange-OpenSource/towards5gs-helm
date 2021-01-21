@@ -1,0 +1,31 @@
+{{- if and .Values.global.upf.service.pfcp.enabled (eq .Values.global.userPlaneArchitecture "ulcl") }}
+{{- if and .Values.global.multiCluster }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.global.upf1.service.pfcp.name }}
+  labels:
+    project: {{ .Values.global.projectName }}
+    nf: {{ .Values.upf1.name }}
+spec:
+  type: {{ .Values.global.upf.service.pfcp.type }}
+  ports:
+    - name: n4
+      port: {{ .Values.global.upf.service.pfcp.port }}
+      targetPort: {{ .Values.global.upf1.service.pfcp.nodeport }}
+      protocol: {{ .Values.global.upf.service.pfcp.protocol }}
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.global.upf1.service.pfcp.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.global.upClusterIP }}
+    ports:
+      - name: n4
+        port: {{ .Values.global.upf1.service.pfcp.nodeport }}
+        protocol: {{ .Values.global.upf.service.pfcp.protocol }}
+{{- end }}
+{{- end }}
+

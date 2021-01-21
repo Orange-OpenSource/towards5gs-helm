@@ -1,0 +1,69 @@
+{{- if eq .Values.global.userPlaneArchitecture "ulcl" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.upf2.name }}
+  labels:
+    project: {{ .Values.global.projectName }}
+    nf: {{ .Values.upf2.name }}
+spec:
+  selector:
+    matchLabels:
+      project: {{ .Values.global.projectName }}
+      nf: {{ .Values.upf2.name }}
+  replicas: {{ .Values.upf2.replicaCount }}
+  template:
+    metadata:
+      labels:
+        project: {{ .Values.global.projectName }}
+        nf: {{ .Values.upf2.name }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/upf2/upf2-configmap.yaml") . | sha256sum }}
+{{- if or (not .Values.networks5g.ovn4nfv.enabled) (not .Values.global.upf.service.pfcp.enabled) }}
+        k8s.v1.cni.cncf.io/networks: '[
+{{- if not .Values.networks5g.ovn4nfv.enabled }}
+          { "name": "{{ .Values.networks5g.n3network.name }}", "interface": "n3", "ips": [ "{{ .Values.global.upf2.n3if.ipAddress }}/{{ .Values.networks5g.n3network.cidr }}" ] },
+          { "name": "{{ .Values.networks5g.n6network.name }}", "interface": "n6", "ips": [ "{{ .Values.global.upf2.n6if.ipAddress }}/{{ .Values.networks5g.n6network.cidr }}" ] }{{- end }}{{- if and (not .Values.global.upf.service.pfcp.enabled) (not .Values.networks5g.ovn4nfv.enabled) }},{{- end }}
+{{- if not .Values.global.upf.service.pfcp.enabled }}
+          { "name": "{{ .Values.networks5g.n4network.name }}", "interface": "n4", "ips": [ "{{ .Values.global.upf2.n4if.ipAddress }}/{{ .Values.networks5g.n4network.cidr }}" ] }
+{{- end }}
+          ]'
+{{- end }}
+{{- if .Values.networks5g.ovn4nfv.enabled }}
+        k8s.v1.cni.cncf.io/networks: {{ .Values.networks5g.ovn4nfv.name }}
+        k8s.plugin.opnfv.org/nfn-network: '{ "type": "ovn4nfv", "interface": [{ "name": "{{ .Values.networks5g.ovn4nfv.n6network.name }}", "ipAddress":"{{ .Values.global.upf2.n6if.ipAddress }}", "interface": "n6" , "defaultGateway": "false"}, { "name": "{{ .Values.networks5g.ovn4nfv.n3network.name }}", "ipAddress": "{{ .Values.global.upf2.n3if.ipAddress }}", "interface": "n3" , "defaultGateway": "false"}]}'
+{{- end }}
+    spec:
+      containers:
+      - image: {{ .Values.global.image.registry }}/{{ .Values.upf.image.name }}:{{ .Values.upf.image.tag }}
+        name: {{ .Values.upf2.name }}
+        ports:
+        - name: n4
+          containerPort: {{ .Values.global.upf.service.pfcp.port }}
+          protocol: {{ .Values.global.upf.service.pfcp.protocol }}
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
+        command: ["/free5gc/config/wrapper.sh"]
+        volumeMounts:
+        - mountPath: {{ .Values.upf.volume.mount }}
+          name: {{ .Values.upf2.volume.name }}
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "1"
+          limits:
+            memory: "256Mi"
+            cpu: "1"
+      restartPolicy: Always
+      volumes:
+      - name: {{ .Values.upf2.volume.name }}
+        configMap:
+          name: {{ .Values.upf2.configmap.name }}
+          items:
+          - key: upfcfg2.yaml
+            path: upfcfg.yaml
+          - key: wrapper.sh
+            path: wrapper.sh
+            mode: 0777
+{{- end }}

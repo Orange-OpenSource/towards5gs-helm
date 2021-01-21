@@ -1,0 +1,24 @@
+{{- if .Values.udr.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.udr.configmap.name }}
+  labels:
+    app: {{ .Values.global.projectName }}
+data:
+  udrcfg.conf: |
+    info:
+      version: 1.0.0
+      description: UDR initial local configuration
+    
+    configuration:
+      sbi:
+        scheme: {{ .Values.global.sbi.scheme }}
+        registerIPv4: {{ .Values.udr.service.name }} # IP used to register to NRF
+        bindingIPv4: 0.0.0.0  # IP used to bind the service
+        port: {{ .Values.udr.port }}
+      mongodb:
+        name: free5gc
+        url: mongodb://{{ .Values.mongodb.service.name }}:{{ .Values.mongodb.service.port }}
+      nrfUri: {{ .Values.global.sbi.scheme }}://{{ .Values.nrf.service.name }}:{{ .Values.nrf.port }}
+{{- end }}

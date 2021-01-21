@@ -1,0 +1,64 @@
+{{- if and .Values.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+      annotations:
+{{- if or (not .Values.networks5g.ovn4nfv.enabled) (not .Values.global.amf.service.ngap.enabled) }}
+        k8s.v1.cni.cncf.io/networks: '[
+{{- if not .Values.networks5g.ovn4nfv.enabled }}
+          { "name": "{{ .Values.networks5g.n3network.name }}", "interface": "n3", "ips": [ "{{ .Values.global.gnb.n3if.ipAddress }}/{{ .Values.networks5g.n3network.cidr }}" ] }{{- end }}{{- if and (not .Values.global.amf.service.ngap.enabled) (not .Values.networks5g.ovn4nfv.enabled) }},{{- end }}
+{{- if not .Values.global.amf.service.ngap.enabled }}
+          { "name": "{{ .Values.networks5g.n2network.name }}", "interface": "n2", "ips": [ "{{ .Values.n2if.ipAddress }}/{{ .Values.networks5g.n2network.cidr }}" ] }
+{{- end }}
+          ]'
+{{- end }}
+{{- if .Values.networks5g.ovn4nfv.enabled }}
+        k8s.v1.cni.cncf.io/networks: {{ .Values.networks5g.ovn4nfv.name }}
+        k8s.plugin.opnfv.org/nfn-network: '{ "type": "ovn4nfv", "interface": [{ "name": "{{ .Values.networks5g.ovn4nfv.n3network.name }}", "ipAddress": "{{ .Values.global.gnb.n3if.ipAddress }}", "interface": "n3" , "defaultGateway": "false"}]}'
+{{- end }}
+    spec:
+      containers:
+      - image: {{ .Values.global.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}
+        name: {{ .Values.name }}
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
+        #command: ["./nr-agent"]
+        volumeMounts:
+        - mountPath: {{ .Values.volume.mount }}
+          name: {{ .Values.volume.name }}
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "250m"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      volumes:
+      - name: {{ .Values.volume.name }}
+        configMap:
+          name: {{ .Values.configmap.name }}
+          items:
+          - key: profile.yaml
+            path: profile.yaml
+          - key: gnb.yaml
+            path: {{ .Values.which5gCore }}/gnb.yaml
+          - key: ue.yaml
+            path: {{ .Values.which5gCore }}/ue.yaml
+          - key: general.yaml
+            path: {{ .Values.which5gCore }}/general.yaml
+{{- end }}

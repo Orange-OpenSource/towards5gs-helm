@@ -1,0 +1,29 @@
+{{- if and .Values.global.amf.service.ngap.enabled }}
+{{- if and .Values.global.multiCluster }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.global.amf.service.ngap.name }}
+  labels:
+    project: {{ .Values.global.projectName }}
+spec:
+  type: {{ .Values.global.amf.service.ngap.type }}
+  ports:
+    - name: n2
+      port: {{ .Values.global.amf.service.ngap.port }}
+      targetPort: {{ .Values.global.amf.service.ngap.nodeport }}
+      protocol: {{ .Values.global.amf.service.ngap.protocol }}
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.global.amf.service.ngap.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.global.cpClusterIP }}
+    ports:
+      - name: n2
+        port: {{ .Values.global.amf.service.ngap.nodeport }}
+        protocol: {{ .Values.global.amf.service.ngap.protocol }}
+{{- end }}
+{{- end }}

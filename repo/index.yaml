@@ -1,0 +1,158 @@
+apiVersion: v1
+entries:
+  free5gc:
+  - apiVersion: v2
+    appVersion: 3.0.4
+    created: "2021-01-21T09:34:20.171246809+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    - condition: deployUserPlane
+      name: free5gcUserPlane
+      repository: ""
+    - condition: deployControlPlane
+      name: free5gcControlPlane
+      repository: ""
+    - condition: deployN3iwf
+      name: free5gcN3iwf
+      repository: ""
+    description: A Helm chart to deploy Free5gc
+    digest: 63e02fdda49ab60b3d97edf5763adb067b24726046ad494fde56863b03700a06
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc
+    urls:
+    - free5gc-0.1.0.tgz
+    version: 0.1.0
+  free5gcControlPlane:
+  - apiVersion: v2
+    appVersion: 3.0.4
+    created: "2021-01-21T09:34:20.176924435+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    - condition: db.enabled
+      name: mongodb
+      repository: ""
+    description: A Helm chart to deploy the control plane of free5gc
+    digest: 9b57a203635d724879cada2303c9df3da6a12b1b2cb4394f703ad78a419baacb
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gcControlPlane
+    urls:
+    - free5gcControlPlane-0.1.0.tgz
+    version: 0.1.0
+  free5gcN3iwf:
+  - apiVersion: v2
+    appVersion: 3.0.4
+    created: "2021-01-21T09:34:20.177769867+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy the n3iwf function of free5gc
+    digest: 469f9feebfe95a28122904b5ebd422375b61fed13948ebadb16da6fcb5f107ef
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gcN3iwf
+    urls:
+    - free5gcN3iwf-0.1.0.tgz
+    version: 0.1.0
+  free5gcUserPlane:
+  - apiVersion: v2
+    appVersion: 3.0.4
+    created: "2021-01-21T09:34:20.178836462+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy the user plane of free5gc
+    digest: 32b00846a116a1501d971b288304601b1528eda8b46d6a80d2e5db4296351f08
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gcUserPlane
+    urls:
+    - free5gcUserPlane-0.1.0.tgz
+    version: 0.1.0
+  networks5g:
+  - apiVersion: v2
+    appVersion: 3.0.4
+    created: "2021-01-21T09:34:20.179218559+01:00"
+    description: A Helm chart to deploy the user plane of free5gc
+    digest: 1bb5e7ce1247d0fa85373fa27ed9a444e9b2760b3a1584958aa3bf612ec904ba
+    icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: networks5g
+    urls:
+    - networks5g-0.1.0.tgz
+    version: 0.1.0
+  ueransim:
+  - apiVersion: v2
+    appVersion: 2.2.2
+    created: "2021-01-21T09:34:20.181626598+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy UERANSIM
+    digest: 05114a42a04758316e7cc5c00251475f8d95e6c712ec9b7176097fbf7e2855f2
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 2.2.1
+    created: "2021-01-21T09:34:20.180457222+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy UERANSIM
+    digest: 52aae25c5c1eba2064e1b152c94ed193383015dc85db171b75e9bf5c38df2556
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-01-21T09:34:20.163238044+01:00"

@@ -1,0 +1,108 @@
+# Default values for ueransim-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  userPlaneArchitecture: oneupf  # possible values are "oneupf" and "ulcl"
+  multiCluster: false
+  cpClusterIP: 192.168.121.16
+  uesubnet: 10.1.0.0/16
+  datanetworks:
+    dn1: &dn1 internet
+    dn2: internet2
+  image:
+    registry: towards5gs
+  upf:
+    n4if:  # PFCP
+      ipAddress: 10.100.50.241
+    n3if:  # GTPU
+      ipAddress: 10.100.50.233
+    n6if:  # DN
+      ipAddress: 10.100.100.12
+  upfb:
+    n4if:  # PFCP
+      ipAddress: 10.100.50.241
+    n3if:  # GTPU
+      ipAddress: 10.100.50.233
+    n6if:  # DN
+      ipAddress: 10.100.100.12
+  upf1:
+    n4if:  # PFCP
+      ipAddress: 10.100.50.242
+    n3if:  # GTPU
+      ipAddress: 10.100.50.234
+    n6if:  # DN
+      ipAddress: 10.100.100.13
+  upf2:
+    n4if:  # PFCP
+      ipAddress: 10.100.50.243
+    n3if:  # GTPU
+      ipAddress: 10.100.50.235
+    n6if:  # DN
+      ipAddress: 10.100.100.14
+  amf:
+    n2if:  # NGAP
+      ipAddress: 10.100.50.249
+    service:
+      ngap:
+        enabled: false
+        name: amf-n2
+        port: 38412
+        nodeport: 31412
+        protocol: SCTP
+        type: NodePort
+  gnb:
+    n3if:
+      ipAddress: 10.100.50.236
+
+enabled: true
+name: ueransim
+# So far only "free5gc" has been tested
+which5gCore: free5gc
+
+replicaCount: 1
+
+image:
+  name: ueransim
+  tag: "v2.2.2"
+
+configmap:
+  name: ueransim-configmap
+
+volume:
+  name: ueransim-volume
+  mount: /ueransim/UERANSIM/config
+
+n2if:  # NGAP
+  ipAddress: 10.100.50.250
+
+datanetwork: *dn1
+
+createNetworks: true
+
+networks5g:
+  n4network:
+    enabled: false
+    name: n4network
+    subnetIP: 10.100.50.240
+  n3network:
+    enabled: false
+    name: n3network
+    subnetIP: 10.100.50.232
+    cidr: 29
+  n6network:
+    enabled: false
+    name: n6network
+    subnetIP: 10.100.100.0     # The prefix IP of the Data Network
+    gateway: 1
+  n2network:
+    name: n2network
+    subnetIP: 10.100.50.248
+    cidr: 29
+  ovn4nfv:       # The ovn4nfv plugin can be used for N3 and N6 interfaces
+    enabled: false
+    name: ovn4nfv-k8s-plugin
+    n6network:
+      name: n6net
+    n3network:
+      name: n3net

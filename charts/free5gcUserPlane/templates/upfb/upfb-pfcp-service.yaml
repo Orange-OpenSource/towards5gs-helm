@@ -1,0 +1,20 @@
+{{- if and .Values.global.upf.service.pfcp.enabled (eq .Values.global.userPlaneArchitecture "ulcl") }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.global.upfb.service.pfcp.name }}
+  labels:
+    project: {{ .Values.global.projectName }}
+    nf: {{ .Values.upfb.name }}
+spec:
+  type: {{ .Values.global.upf.service.pfcp.type }}
+  ports:
+    - name: n4
+      port: {{ .Values.global.upf.service.pfcp.port }}
+      nodePort: {{ .Values.global.upfb.service.pfcp.nodeport }}
+      protocol: {{ .Values.global.upf.service.pfcp.protocol }}
+  selector:
+    project: {{ .Values.global.projectName }}
+    nf: {{ .Values.upfb.name }}
+{{- end }}
+

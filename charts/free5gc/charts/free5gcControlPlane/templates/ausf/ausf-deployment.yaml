@@ -1,0 +1,60 @@
+{{- if .Values.ausf.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.ausf.name }}
+  labels:
+    project: {{ .Values.global.projectName }}
+    nf: ausf
+spec:
+  selector:
+    matchLabels:
+      project: {{ .Values.global.projectName }}
+      nf: ausf
+  replicas: {{ .Values.ausf.replicaCount }}
+  template:
+    metadata:
+      labels:
+        project: {{ .Values.global.projectName }}
+        nf: ausf
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/ausf/ausf-configmap.yaml") . | sha256sum }}-{{ include (print $.Template.BasePath "/global/free5gc-configmap.yaml") . | sha256sum }}
+    spec:
+      initContainers:
+      - name: wait-nrf
+        image: {{ .Values.initcontainers.curl.registry }}/{{ .Values.initcontainers.curl.image }}:{{ .Values.initcontainers.curl.tag }}
+        env:
+        - name: DEPENDENCIES
+          value: {{ .Values.global.sbi.scheme }}://{{ .Values.nrf.service.name }}:{{ .Values.nrf.port }}
+        command: ['sh', '-c', 'set -x; for dependency in $DEPENDENCIES; do while [ $(curl --connect-timeout 5 -s -o /dev/null -w "%{http_code}" $dependency) -ne 200 ]; do echo waiting for dependencies; sleep 1; done; done;']
+      containers:
+      - image: {{ .Values.global.image.registry }}/{{ .Values.ausf.image.name }}:{{ .Values.ausf.image.tag }}
+        name: {{ .Values.ausf.name }}
+        ports:
+        - containerPort: {{ .Values.ausf.port }}
+        command: ["./ausf"]
+        args: ["-ausfcfg", "../config/ausfcfg.conf"]  
+        env:
+          - name: GIN_MODE
+            value: release
+        volumeMounts:
+        - mountPath: {{ .Values.volume.mount }}
+          name: {{ .Values.ausf.volume.name }}
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "150m"
+          limits:
+            memory: "64Mi"
+            cpu: "150m"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      volumes:
+      - name: {{ .Values.ausf.volume.name }}
+        projected:
+          sources:
+          - configMap:
+              name: {{ .Values.ausf.configmap.name }}
+          - configMap:
+              name: {{ .Values.free5gc.configmap.name }}
+{{- end }}

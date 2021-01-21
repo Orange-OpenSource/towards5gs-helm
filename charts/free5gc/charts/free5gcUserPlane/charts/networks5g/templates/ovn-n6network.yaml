@@ -1,0 +1,12 @@
+{{- if .Values.ovn4nfv.enabled }}
+apiVersion: k8s.plugin.opnfv.org/v1alpha1
+kind: Network
+metadata:
+  name: {{ .Values.ovn4nfv.n6network.name }}
+spec:
+  cniType : ovn4nfv
+  ipv4Subnets:
+  - subnet: {{ .Values.n6network.subnetIP }}/{{ .Values.n6network.cidr }}
+    name: subnet1
+    gateway: {{ .Values.n6network.gatewayIP }}/{{ .Values.n6network.cidr }}
+{{- end }}

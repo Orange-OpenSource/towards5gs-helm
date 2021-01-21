@@ -1,0 +1,15 @@
+{{- if .Values.udr.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.udr.service.name }}
+  labels:
+    project: {{ .Values.global.projectName }}
+    nf: {{ .Values.udr.name }}
+spec:
+  ports:
+    - port: {{ .Values.udr.port }}
+  selector:
+    project: {{ .Values.global.projectName }}
+    nf: {{ .Values.udr.name }}
+{{- end }}
