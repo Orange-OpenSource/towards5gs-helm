@@ -129,7 +129,7 @@ Commands:
   session-create  Trigger a PDU session establishment for a specified UE
   ue-ping         Trigger a ping request for the specified UE
   ue-deregister   Trigger a de-registration for the specified UE
-```
+```console
 Please refer to this [link](https://github.com/aligungr/UERANSIM/wiki/Installation-and-Usage) for more information on the usage of this command.
 #### Advanced testing
 You can use the created TUN interface for more advanced testing. Please check this [link](https://github.com/aligungr/UERANSIM/wiki/Using-Data-Plane-Features).

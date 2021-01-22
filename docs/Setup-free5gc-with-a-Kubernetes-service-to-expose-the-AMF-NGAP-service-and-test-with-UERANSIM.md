@@ -26,7 +26,7 @@ Follow [Setup free5gc on multiple clusters and test with UERANSIM](./Setup free5
 ### Test with UERANSIM
 Follow [Setup free5gc on multiple clusters and test with UERANSIM](./Setup free5gc with a Kubernetes service to expose the AMF NGAP service and test with UERANSIM.md) by overrding the command used for installing the UERANSIM by:
 ```console
-helm -n <namespace> --set global.cpClusterIP={replace by the IP of one of your second cluster nodes} -f ./ueransim/multicluster-enabled-values.yaml -f ./ueransim/services-enabled-values.yaml <release-name> ./ueransim/
+helm -n <namespace> --set global.cpClusterIP={replace by the IP of one of your second cluster nodes}  -f ./free5gcControlPlane/services-enabled-values.yaml <release-name> ./free5gcControlPlane/
 ```
 #### Advanced testing
 You can use the created TUN interface for more advanced testing. Please check this [link](https://github.com/aligungr/UERANSIM/wiki/Using-Data-Plane-Features).

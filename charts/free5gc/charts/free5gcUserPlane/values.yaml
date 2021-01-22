@@ -115,6 +115,7 @@ networks5g:
     subnetIP: 10.100.100.0     # The subnet IP of the Data Network
     gateway: 1
   n2network:
+    enabled: false
     name: n2network
     subnetIP: 10.100.50.248
   ovn4nfv:       # The ovn4nfv plugin can be used for N3 and N6 interfaces
