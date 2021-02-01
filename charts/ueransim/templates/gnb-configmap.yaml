@@ -1,0 +1,55 @@
+{{- if .Values.gnb.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.gnb.configmap.name }}
+  labels:
+    app: {{ .Values.projectName }}
+    component: {{ .Values.gnb.name }}
+data:
+  gnb-config.yaml: |
+{{- if eq .Values.which5gCore "free5gc" }}
+    mcc: '208'          # Mobile Country Code value
+    mnc: '93'           # Mobile Network Code value (2 or 3 digits)
+{{- end }}
+{{- if eq .Values.which5gCore "open5gs" }}
+    mcc: 901
+    mnc: 70
+{{- end }}
+    
+    nci: '0x0000000100' # NR Cell Identity (36-bit)
+    idLength: 32        # NR gNB ID length in bits [22...32]
+    tac: 1              # Tracking Area Code
+    
+    linkIp: 0.0.0.0   # gNB's local IP address for Radio Link Simulation (Usually same with local IP)
+{{- if .Values.global.amf.service.ngap.enabled }}
+    ngapIp: 0.0.0.0   # gNB's local IP address for N2 Interface (Usually same with local IP)
+{{- else }}
+    ngapIp: {{ .Values.n2if.ipAddress }}
+{{- end }}
+    gtpIp: {{ .Values.global.gnb.n3if.ipAddress }}    # gNB's local IP address for N3 Interface (Usually same with local IP)
+    
+    # List of AMF address information
+    amfConfigs:
+{{- if .Values.global.amf.service.ngap.enabled }}
+{{- if .Values.global.multiCluster }}
+      - address: {{ .Values.global.cpClusterIP }}
+        port: {{ .Values.global.amf.service.ngap.nodeport }}
+{{- else }}
+      - address: {{ .Values.global.amf.service.ngap.name }}
+        port: {{ .Values.global.amf.service.ngap.port }}
+{{- end }}
+{{- else }}
+      - address: {{ .Values.global.amf.n2if.ipAddress }}
+        port: {{ .Values.global.amf.service.ngap.port }}
+{{- end }}
+    
+    # List of supported S-NSSAIs by this gNB
+    slices:
+      - sst: 1
+        sd: 0x010203
+    
+    # Indicates whether or not SCTP stream number errors should be ignored.
+    ignoreStreamIds: true
+
+{{- end }}

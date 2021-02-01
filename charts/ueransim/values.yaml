@@ -55,23 +55,39 @@ global:
     n3if:
       ipAddress: 10.100.50.236
 
-enabled: true
-name: ueransim
-# So far only "free5gc" has been tested
+projectName: ueransim
 which5gCore: free5gc
 
-replicaCount: 1
+gnb:
+  enabled: true
+  name: gnb
+  replicaCount: 1
+  image:
+    name: ueransim-gnb
+    tag: "v3.0.2"
+  configmap:
+    name: gnb-configmap
+  volume:
+    name: gnb-volume
+    mount: /ueransim/config
+  service:
+    name: gnb-service
+    type: ClusterIP
+    port: 4997
+    protocol: UDP
 
-image:
-  name: ueransim
-  tag: "v2.2.2"
-
-configmap:
-  name: ueransim-configmap
-
-volume:
-  name: ueransim-volume
-  mount: /ueransim/UERANSIM/config
+ue:
+  enabled: true
+  name: ue
+  replicaCount: 1
+  image:
+    name: ueransim-ue
+    tag: "v3.0.2"
+  configmap:
+    name: ue-configmap
+  volume:
+    name: ue-volume
+    mount: /ueransim/config
 
 n2if:  # NGAP
   ipAddress: 10.100.50.250

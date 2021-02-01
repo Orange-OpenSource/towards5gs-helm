@@ -1,0 +1,19 @@
+{{- if and .Values.gnb.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.gnb.service.name }}
+  labels:
+    app: {{ .Values.projectName }}
+    component: {{ .Values.gnb.name }}
+spec:
+  type: {{ .Values.gnb.service.type }}
+  ports:
+    - name: gnb-ue
+      port: {{ .Values.gnb.service.port }}
+      protocol: {{ .Values.gnb.service.protocol }}
+  selector:
+    app: {{ .Values.projectName }}
+    component: {{ .Values.gnb.name }}
+{{- end }}
+

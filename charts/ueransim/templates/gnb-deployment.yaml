@@ -1,19 +1,22 @@
-{{- if and .Values.enabled }}
+{{- if and .Values.gnb.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-{{ .Values.name }}
+  name: {{ .Release.Name }}-{{ .Values.gnb.name }}
   labels:
-    app: {{ .Values.name }}
+    app: {{ .Values.projectName }}
+    component: {{ .Values.gnb.name }}
 spec:
   selector:
     matchLabels:
-      app: {{ .Values.name }}
+      app: {{ .Values.projectName }}
+      component: {{ .Values.gnb.name }}
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        app: {{ .Values.name }}
+        app: {{ .Values.projectName }}
+        component: {{ .Values.gnb.name }}
       annotations:
 {{- if or (not .Values.networks5g.ovn4nfv.enabled) (not .Values.global.amf.service.ngap.enabled) }}
         k8s.v1.cni.cncf.io/networks: '[
@@ -30,15 +33,20 @@ spec:
 {{- end }}
     spec:
       containers:
-      - image: {{ .Values.global.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}
-        name: {{ .Values.name }}
+      - image: {{ .Values.global.image.registry }}/{{ .Values.gnb.image.name }}:{{ .Values.gnb.image.tag }}
+        name: {{ .Values.gnb.name }}
+        ports:
+        - name: gnb-ue
+          containerPort: {{ .Values.gnb.service.port }}
+          protocol: {{ .Values.gnb.service.protocol }}
         securityContext:
           capabilities:
             add: ["NET_ADMIN"]
-        #command: ["./nr-agent"]
+        command: ["./nr-gnb"]
+        args: ["-c", "{{ .Values.gnb.volume.mount }}/gnb-config.yaml"]  
         volumeMounts:
-        - mountPath: {{ .Values.volume.mount }}
-          name: {{ .Values.volume.name }}
+        - mountPath: {{ .Values.gnb.volume.mount }}
+          name: {{ .Values.gnb.volume.name }}
         resources:
           requests:
             memory: "256Mi"
@@ -49,16 +57,7 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       volumes:
-      - name: {{ .Values.volume.name }}
+      - name: {{ .Values.gnb.volume.name }}
         configMap:
-          name: {{ .Values.configmap.name }}
-          items:
-          - key: profile.yaml
-            path: profile.yaml
-          - key: gnb.yaml
-            path: {{ .Values.which5gCore }}/gnb.yaml
-          - key: ue.yaml
-            path: {{ .Values.which5gCore }}/ue.yaml
-          - key: general.yaml
-            path: {{ .Values.which5gCore }}/general.yaml
+          name: {{ .Values.gnb.configmap.name }}
 {{- end }}

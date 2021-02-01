@@ -3,7 +3,7 @@ entries:
   free5gc:
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-01-22T00:32:31.413948443+01:00"
+    created: "2021-02-01T12:07:56.37599401+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -34,7 +34,7 @@ entries:
   free5gcControlPlane:
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-01-22T00:32:31.419561777+01:00"
+    created: "2021-02-01T12:07:56.386788248+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -59,7 +59,7 @@ entries:
   free5gcN3iwf:
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-01-22T00:32:31.420462153+01:00"
+    created: "2021-02-01T12:07:56.388877385+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -81,7 +81,7 @@ entries:
   free5gcUserPlane:
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-01-22T00:32:31.421473646+01:00"
+    created: "2021-02-01T12:07:56.391337289+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -103,7 +103,7 @@ entries:
   networks5g:
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-01-22T00:32:31.421860536+01:00"
+    created: "2021-02-01T12:07:56.392238766+01:00"
     description: A Helm chart to deploy the user plane of free5gc
     digest: b9f3b1628aed64ab8ae898f63a7d4b1c6b11e8b9cd8bf0207665653f69c1a15b
     icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
@@ -118,14 +118,52 @@ entries:
     version: 0.1.0
   ueransim:
   - apiVersion: v2
-    appVersion: 2.2.2
-    created: "2021-01-22T00:32:31.424570702+01:00"
+    appVersion: v3.0.2
+    created: "2021-02-01T12:07:56.403139031+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
       repository: ""
     description: A Helm chart to deploy UERANSIM
-    digest: ed6d4efb8ef6717c2f8f26c0c6dce84bb3979ed79d511c6a80336a31b1fc56a8
+    digest: e616954de6b9a65e8742590e37cbc8c0b69073a753cd9798ecc2a9e22ecc6112
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: v3.0.1
+    created: "2021-02-01T12:07:56.401332898+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy UERANSIM
+    digest: 832e9b624baeb2a1ffd9f5a041bcc54d3da34ff66494ff685851bb586cebca0e
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 2.2.2
+    created: "2021-02-01T12:07:56.39909073+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy UERANSIM
+    digest: 441badd6d6c2bd1b65673838b9c6210325ff4de2ebb42b58f81ea3751bced463
     icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
     maintainers:
     - email: abderaouf.khichane@orange.com
@@ -138,13 +176,13 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 2.2.1
-    created: "2021-01-22T00:32:31.422762738+01:00"
+    created: "2021-02-01T12:07:56.394344563+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
       repository: ""
     description: A Helm chart to deploy UERANSIM
-    digest: 52aae25c5c1eba2064e1b152c94ed193383015dc85db171b75e9bf5c38df2556
+    digest: f18eee39477b625202425542f04729655a72013ca8dc688876037895ffcf117f
     icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
     maintainers:
     - email: abderaouf.khichane@orange.com
@@ -155,4 +193,4 @@ entries:
     urls:
     - ueransim-0.1.0.tgz
     version: 0.1.0
-generated: "2021-01-22T00:32:31.405761557+01:00"
+generated: "2021-02-01T12:07:56.355873414+01:00"

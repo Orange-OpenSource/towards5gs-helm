@@ -1,0 +1,44 @@
+{{- if .Values.ue.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.ue.name }}
+  labels:
+    app: {{ .Values.projectName }}
+    component: {{ .Values.ue.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.projectName }}
+      component: {{ .Values.ue.name }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.projectName }}
+        component: {{ .Values.ue.name }}
+    spec:
+      containers:
+      - image: {{ .Values.global.image.registry }}/{{ .Values.ue.image.name }}:{{ .Values.ue.image.tag }}
+        name: {{ .Values.ue.name }}
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
+        command: ["./wrapper.sh"]
+        volumeMounts:
+        - mountPath: {{ .Values.ue.volume.mount }}
+          name: {{ .Values.ue.volume.name }}
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "120m"
+          limits:
+            memory: "128Mi"
+            cpu: "120m"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      volumes:
+      - name: {{ .Values.ue.volume.name }}
+        configMap:
+          name: {{ .Values.ue.configmap.name }}
+{{- end }}
