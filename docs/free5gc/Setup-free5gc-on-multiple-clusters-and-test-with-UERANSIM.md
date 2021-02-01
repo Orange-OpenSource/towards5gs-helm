@@ -103,36 +103,9 @@ Do the following on the first cluster.
 helm -n <namespace> install --set networks5g.n2network.enabled=false <release-name> ./ueransim/
 ```
 We have disabled the N2 network because it was already created by the N3iwf.
-#### Access the UERANSIM POD
-Retrieve the POD name.
-```console
-kubectl -n <namespace> get pods -l "app=ueransim"
-```
-And then...
-```console
-kubectl -n <namespace> exec -it {replace by the UERANSIM POD name} -- bash
-```
-Please check this [link](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/) for more details on this operation.
-#### Use the nr-cli command for testing
-This command mus be run inside the UERANSIM POD.
-```console
-Usage: nr-cli [-hV] [COMMAND]
-  -h, --help      Show this help message and exit.
-  -V, --version   Print version information and exit.
-Commands:
-  gnb-create      Create and initialize a new GNB
-  ue-create       Create and initialize a new UE
-  gnb-list        List all the gNBs associated with this UERANSIM agent
-  ue-list         List all the UEs associated with this UERANSIM agent
-  gnb-status      Dump some information about specified gNB's general status
-  ue-status       Dump some information about specified UE's general status
-  session-create  Trigger a PDU session establishment for a specified UE
-  ue-ping         Trigger a ping request for the specified UE
-  ue-deregister   Trigger a de-registration for the specified UE
-```console
-Please refer to this [link](https://github.com/aligungr/UERANSIM/wiki/Installation-and-Usage) for more information on the usage of this command.
-#### Advanced testing
-You can use the created TUN interface for more advanced testing. Please check this [link](https://github.com/aligungr/UERANSIM/wiki/Using-Data-Plane-Features).
+
+#### Test with the TUN interface
+You can use the created TUN interface for more advanced testing. Please refer to the UERANSIM helm chart's README and check this [link](https://github.com/aligungr/UERANSIM/wiki/) for more details.
 
 ## Reference
  - https://github.com/free5gc/free5gc
