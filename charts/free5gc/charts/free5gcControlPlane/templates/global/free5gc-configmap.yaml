@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Values.global.projectName }}
 data:
-  free5GC.conf: |
+  free5GC.yaml: |
     db_uri: mongodb://{{ .Values.mongodb.service.name }}/free5GC
 
     #all logging levels

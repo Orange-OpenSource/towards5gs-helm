@@ -32,7 +32,7 @@ spec:
         name: {{ .Values.webui.name }}
         ports:
         - containerPort: {{ .Values.webui.port }}
-        command: ["./webui"]
+        command: ["./webconsole"]
         env:
           - name: GIN_MODE
             value: release

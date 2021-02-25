@@ -33,7 +33,7 @@ spec:
         ports:
         - containerPort: {{ .Values.nssf.port }}
         command: ["./nssf"]
-        args: ["-nssfcfg", "../config/nssfcfg.conf"]   
+        args: ["-nssfcfg", "../config/nssfcfg.yaml"]   
         env:
           - name: GIN_MODE
             value: release

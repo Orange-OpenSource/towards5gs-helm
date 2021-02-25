@@ -1,6 +1,6 @@
 ﻿# free5gcControlPlane Helm chart
 
-This is a Helm chart for deploying the [free5GC](https://github.com/free5gc/free5gc)-v3.0.4 control plane network functions (AMF, AUSF, NRF, NSSF, PCF, SMF, UDM, UDR and WEBUI) on Kubernetes. For the backend data base, it relies on the [Bitnami](https://github.com/bitnami) maintained [MongoDB](https://github.com/bitnami/charts/tree/master/bitnami/mongodb) Helm chart.
+This is a Helm chart for deploying the [free5GC](https://github.com/free5gc/free5gc)-v3.0.5 control plane network functions (AMF, AUSF, NRF, NSSF, PCF, SMF, UDM, UDR and WEBUI) on Kubernetes. For the backend data base, it relies on the [Bitnami](https://github.com/bitnami) maintained [MongoDB](https://github.com/bitnami/charts/tree/master/bitnami/mongodb) Helm chart.
 
 This chart is included in the [dependencies](/charts/free5gc/charts) of the [main chart](/charts/free5gc). Furthermore, it can be installed separately on Kubernetes a cluster at the same network with the clusters where the [free5gcUserPlane](../free5gcUserPlane) and the [free5gcN3iwf](../free5gcN3iwf) are deployed.
 
@@ -95,14 +95,15 @@ This chart allows you to customize its installation. The table below shows the p
 | `global.ueRouting.destination1` | When ULCL is enabled, the traffic goes through the UPF1 for this destination. | `10.100.100.16` |
 | `global.ueRouting.destination2` | When ULCL is enabled, the traffic goes through the UPF2 for this destination. | `10.100.100.26` |
 | `global.datanetworks.dn1` | The name of the data network. | `internet` |
-| `global.userPlaneArchitecture` | User plane topology. Possible values are `oneupf` and `ulcl` | `oneupf` |
+| `global.userPlaneArchitecture` | User plane topology. Possible values are `single` and `ulcl` | `single` |
 | `global.upf.n3if.IpAddress` | The IP address of the UPF’s N3 interface. | `10.100.50.233` |
 | `global.upf.n4if.IpAddress` | The IP address of the UPF’s N4 interface. | `10.100.50.241` |
 | `global.upfb.n3if.IpAddress` | The IP address of the UPFb’s N3 interface. | `10.100.50.233` |
+| `global.upfb.n9if.IpAddress` | The IP address of the UPFb’s N9 interface. | `10.100.50.225` |
 | `global.upfb.n4if.IpAddress` | The IP address of the UPFb’s N4 interface. | `10.100.50.241` |
-| `global.upf1.n3if.IpAddress` | The IP address of the UPF1’s N3 interface. | `10.100.50.234` |
+| `global.upf1.n9if.IpAddress` | The IP address of the UPF1’s N3 interface. | `10.100.50.226` |
 | `global.upf1.n4if.IpAddress` | The IP address of the UPF1’s N4 interface. | `10.100.50.242` |
-| `global.upf2.n3if.IpAddress` | The IP address of the UPF2’s N3 interface. | `10.100.50.235` |
+| `global.upf2.n9if.IpAddress` | The IP address of the UPF2’s N3 interface. | `10.100.50.227` |
 | `global.upf2.n4if.IpAddress` | The IP address of the UPF2’s N4 interface. | `10.100.50.243` |
 | `global.sbi.scheme` | The SBI scheme for all control plane NFs. Possible values are `http` and `https` | `http` |
 | `global.smf.n4if.IpAddress` | The IP address of the SMF’s N4 interface. | `10.100.50.249` |
@@ -137,7 +138,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `amf.name` | The Network Function name of AMF. | `amf` |
 | `amf.replicaCount` | The number of AMF replicas. | `1` |
 | `amf.image.name` | The AMF Docker image name. | `free5gc-amf` |
-| `amf.image.tag` | The AMF Docker image tag. | `"v3.0.4"` |
+| `amf.image.tag` | The AMF Docker image tag. | `"v3.0.5"` |
 | `amf.port` | The AMF SBI port number. | `80` |
 | `amf.service.name` | The name of the service used to expose the AMF SBI interface. | `amf-service` |
 | `amf.configmap.name` | The name of the configmap to be used to import the configuration to the AMF POD. | `amf-configmap` |
@@ -146,7 +147,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `ausf.name` | The Network Function name of AUSF. | `ausf` |
 | `ausf.replicaCount` | The number of AUSF replicas. | `1` |
 | `ausf.image.name` | The AUSF Docker image name. | `free5gc-ausf` |
-| `ausf.image.tag` | The AUSF Docker image tag. | `"v3.0.4"` |
+| `ausf.image.tag` | The AUSF Docker image tag. | `"v3.0.5"` |
 | `ausf.port` | The AUSF SBI port number. | `80` |
 | `ausf.service.name` | The name of the service used to expose the AUSF SBI interface. | `ausf-service` |
 | `ausf.configmap.name` | The name of the configmap to be used to import the configuration to the AUSF POD. | `ausf-configmap` |
@@ -155,7 +156,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `nrf.name` | The Network Function name of NRF. | `nrf` |
 | `nrf.replicaCount` | The number of NRF replicas. | `1` |
 | `nrf.image.name` | The NRF Docker image name. | `free5gc-nrf` |
-| `nrf.image.tag` | The NRF Docker image tag. | `"v3.0.4"` |
+| `nrf.image.tag` | The NRF Docker image tag. | `"v3.0.5"` |
 | `nrf.port` | The NRF SBI port number. | `29510` |
 | `nrf.service.name` | The name of the service used to expose the NRF SBI interface. | `nrf-service` |
 | `nrf.configmap.name` | The name of the configmap to be used to import the configuration to the NRF POD. | `nrf-configmap` |
@@ -164,7 +165,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `nssf.name` | The Network Function name of NSSF. | `nssf` |
 | `nssf.replicaCount` | The number of NSSF replicas. | `1` |
 | `nssf.image.name` | The NSSF Docker image name. | `free5gc-nssf` |
-| `nssf.image.tag` | The NSSF Docker image tag. | `"v3.0.4"` |
+| `nssf.image.tag` | The NSSF Docker image tag. | `"v3.0.5"` |
 | `nssf.port` | The NSSF SBI port number. | `80` |
 | `nssf.service.name` | The name of the service used to expose the NSSF SBI interface. | `nssf-service` |
 | `nssf.configmap.name` | The name of the configmap to be used to import the configuration to the NSSF POD. | `nssf-configmap` |
@@ -173,7 +174,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `pcf.name` | The Network Function name of PCF. | `pcf` |
 | `pcf.replicaCount` | The number of PCF replicas. | `1` |
 | `pcf.image.name` | The PCF Docker image name. | `free5gc-pcf` |
-| `pcf.image.tag` | The PCF Docker image tag. | `"v3.0.4"` |
+| `pcf.image.tag` | The PCF Docker image tag. | `"v3.0.5"` |
 | `pcf.port` | The PCF SBI port number. | `80` |
 | `pcf.service.name` | The name of the service used to expose the PCF SBI interface. | `pcf-service` |
 | `pcf.configmap.name` | The name of the configmap to be used to import the configuration to the PCF POD. | `pcf-configmap` |
@@ -182,7 +183,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `smf.name` | The Network Function name of SMF. | `smf` |
 | `smf.replicaCount` | The number of SMF replicas. | `1` |
 | `smf.image.name` | The SMF Docker image name. | `free5gc-smf` |
-| `smf.image.tag` | The SMF Docker image tag. | `"v3.0.4"` |
+| `smf.image.tag` | The SMF Docker image tag. | `"v3.0.5"` |
 | `smf.port` | The SMF SBI port number. | `80` |
 | `smf.service.name` | The name of the service used to expose the SMF SBI interface. | `smf-service` |
 | `smf.configmap.name` | The name of the configmap to be used to import the configuration to the SMF POD. | `smf-configmap` |
@@ -191,7 +192,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `udm.name` | The Network Function name of UDM. | `udm` |
 | `udm.replicaCount` | The number of UDM replicas. | `1` |
 | `udm.image.name` | The UDM Docker image name. | `free5gc-udm` |
-| `udm.image.tag` | The UDM Docker image tag. | `"v3.0.4"` |
+| `udm.image.tag` | The UDM Docker image tag. | `"v3.0.5"` |
 | `udm.port` | The UDM SBI port number. | `80` |
 | `udm.service.name` | The name of the service used to expose the UDM SBI interface. | `udm-service` |
 | `udm.configmap.name` | The name of the configmap to be used to import the configuration to the UDM POD. | `udm-configmap` |
@@ -200,7 +201,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `udr.name` | The Network Function name of UDR. | `udr` |
 | `udr.replicaCount` | The number of UDR replicas. | `1` |
 | `udr.image.name` | The UDR Docker image name. | `free5gc-udr` |
-| `udr.image.tag` | The UDR Docker image tag. | `"v3.0.4"` |
+| `udr.image.tag` | The UDR Docker image tag. | `"v3.0.5"` |
 | `udr.port` | The UDR SBI port number. | `80` |
 | `udr.service.name` | The name of the service used to expose the UDR SBI interface. | `udr-service` |
 | `udr.configmap.name` | The name of the configmap to be used to import the configuration to the UDR POD. | `udr-configmap` |
@@ -212,7 +213,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `webui.name` | The name of WEBUI. | `webui` |
 | `webui.replicaCount` | The number of WEBUI replicas. | `1` |
 | `webui.image.name` | The WEBUI Docker image name. | `free5gc-webui` |
-| `webui.image.tag` | The WEBUI Docker image tag. | `"v3.0.4"` |
+| `webui.image.tag` | The WEBUI Docker image tag. | `"v3.0.5"` |
 | `webui.port` | The WEBUI port number. | `5000` |
 | `webui.service.name` | The name of the service used to expose the WEBUI. | `webui-service` |
 | `webui.service.type` | The type of the service used to expose the WEBUI. | `NodePort` |

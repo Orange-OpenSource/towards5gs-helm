@@ -1,6 +1,6 @@
 # free5gcUserPlane Helm chart
 
-This is a Helm chart for deploying the [free5GC](https://github.com/free5gc/free5gc)-v3.0.4 user plane on Kubernetes.
+This is a Helm chart for deploying the [free5GC](https://github.com/free5gc/free5gc)-v3.0.5 user plane on Kubernetes.
 
 This chart is included in the [dependencies](/charts/free5gc/charts) of the [main chart](/charts/free5gc). Furthermore, it can be installed separately on Kubernetes a cluster at the same network with the clusters where the [free5gcControlPlane](../free5gcControlPlane) and the [free5gcN3iwf](../free5gcN3iwf) are deployed.
 
@@ -78,17 +78,18 @@ This chart allows you to customize its installation. The table below shows the p
 | `global.uesubnet` | The UE subnet used to apply NAT POSTROUTING rules. | `10.1.0.0/16` |
 | `global.uesubnet1` | The UE subnet in the UPF configuration. | `10.1.0.0/17` |
 | `global.datanetworks.dn1` | The name of the data network. | `internet` |
-| `global.userPlaneArchitecture` | User plane topology. Possible values are `oneupf` and `ulcl` | `oneupf` |
+| `global.userPlaneArchitecture` | User plane topology. Possible values are `single` and `ulcl` | `single` |
 | `global.upf.n3if.IpAddress` | The IP address of the UPF’s N3 interface. | `10.100.50.233` |
 | `global.upf.n4if.IpAddress` | The IP address of the UPF’s N4 interface. | `10.100.50.241` |
 | `global.upf.n6if.IpAddress` | The IP address of the UPF’s N6 interface. | `10.100.100.12` |
 | `global.upfb.n3if.IpAddress` | The IP address of the UPFb’s N3 interface. | `10.100.50.233` |
+| `global.upfb.n9if.IpAddress` | The IP address of the UPFb’s N9 interface. | `10.100.50.225` |
 | `global.upfb.n4if.IpAddress` | The IP address of the UPFb’s N4 interface. | `10.100.50.241` |
 | `global.upfb.n6if.IpAddress` | The IP address of the UPFb’s N6 interface. | `10.100.100.12` |
-| `global.upf1.n3if.IpAddress` | The IP address of the UPF1’s N3 interface. | `10.100.50.234` |
+| `global.upf1.n9if.IpAddress` | The IP address of the UPF1’s N3 interface. | `10.100.50.226` |
 | `global.upf1.n4if.IpAddress` | The IP address of the UPF1’s N4 interface. | `10.100.50.242` |
 | `global.upf1.n6if.IpAddress` | The IP address of the UPF1’s N6 interface. | `10.100.100.13` |
-| `global.upf2.n3if.IpAddress` | The IP address of the UPF2’s N3 interface. | `10.100.50.235` |
+| `global.upf2.n9if.IpAddress` | The IP address of the UPF2’s N3 interface. | `10.100.50.227` |
 | `global.upf2.n4if.IpAddress` | The IP address of the UPF2’s N4 interface. | `10.100.50.243` |
 | `global.upf2.n6if.IpAddress` | The IP address of the UPF2’s N6 interface. | `10.100.100.14` |
 
@@ -99,7 +100,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `upf.name` | The Network Function name of UPF. | `upf` |
 | `upf.replicaCount` | The number of UPF replicas. | `1` |
 | `upf.image.name` | The UPF Docker image name. | `free5gc-upf` |
-| `upf.image.tag` | The UPF Docker image tag. | `"v3.0.4"` |
+| `upf.image.tag` | The UPF Docker image tag. | `"v3.0.5"` |
 | `upf.configmap.name` | The name of the configmap to be used to import the configuration to the UPF POD. | `upf-configmap` |
 | `upf.volume.name` | The name of the volume to be mounted to the UPF POD. | `upf-volume` |
 | `upf.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/` |

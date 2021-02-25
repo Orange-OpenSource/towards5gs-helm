@@ -1,4 +1,4 @@
-{{- if and .Values.global.upf.service.pfcp.enabled (eq .Values.global.userPlaneArchitecture "oneupf") }}
+{{- if and .Values.global.upf.service.pfcp.enabled (eq .Values.global.userPlaneArchitecture "single") }}
 apiVersion: v1
 kind: Service
 metadata:

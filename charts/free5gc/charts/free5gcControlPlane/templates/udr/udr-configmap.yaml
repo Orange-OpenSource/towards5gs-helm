@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Values.global.projectName }}
 data:
-  udrcfg.conf: |
+  udrcfg.yaml: |
     info:
       version: 1.0.0
       description: UDR initial local configuration
@@ -21,4 +21,21 @@ data:
         name: free5gc
         url: mongodb://{{ .Values.mongodb.service.name }}:{{ .Values.mongodb.service.port }}
       nrfUri: {{ .Values.global.sbi.scheme }}://{{ .Values.nrf.service.name }}:{{ .Values.nrf.port }}
+
+    # the kind of log output
+      # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      # ReportCaller: enable the caller report or not, value: true or false
+    logger:
+      UDR:
+        debugLevel: info
+        ReportCaller: false
+      MongoDBLibrary:
+        debugLevel: info
+        ReportCaller: false
+      PathUtil:
+        debugLevel: info
+        ReportCaller: false
+      OpenApi:
+        debugLevel: info
+        ReportCaller: false
 {{- end }}

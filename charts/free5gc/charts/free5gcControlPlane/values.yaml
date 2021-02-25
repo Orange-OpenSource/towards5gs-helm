@@ -4,11 +4,13 @@
 
 global:
   projectName: free5gc
-  userPlaneArchitecture: oneupf  # possible values are "oneupf" and "ulcl"
+  userPlaneArchitecture: single  # possible values are "single" and "ulcl"
   multiCluster: false
   cpClusterIP: 192.168.121.16
   upClusterIP: 192.168.121.20
   uesubnet: 10.1.0.0/16
+  uesubnet1: 10.1.0.0/17
+  uesubnet2: 10.1.128.0/17
   ueRouting:
     destination1: 10.100.100.16
     destination2: 10.100.100.26
@@ -39,6 +41,8 @@ global:
       ipAddress: 10.100.50.241
     n3if:  # GTPU
       ipAddress: 10.100.50.233
+    n9if:  # GTPU
+      ipAddress: 10.100.50.225
     n6if:  # DN
       ipAddress: 10.100.100.12
     service:
@@ -50,6 +54,8 @@ global:
       ipAddress: 10.100.50.242
     n3if:  # GTPU
       ipAddress: 10.100.50.234
+    n9if:  # GTPU
+      ipAddress: 10.100.50.226
     n6if:  # DN
       ipAddress: 10.100.100.13
     service:
@@ -61,6 +67,8 @@ global:
       ipAddress: 10.100.50.243
     n3if:  # GTPU
       ipAddress: 10.100.50.235
+    n9if:  # GTPU
+      ipAddress: 10.100.50.227
     n6if:  # DN
       ipAddress: 10.100.100.14
     service:
@@ -99,24 +107,20 @@ initcontainers:
 db:
   enabled: true
 
-# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it
+# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
 mongodb:
-  fullnameOverride: mongodb
+  fullnameOverride: "mongodb"
   useStatefulSet: true
   auth:
     enabled: false
   persistence:
     size: 6Gi
     mountPath: /bitnami/mongodb/data/db/
-    volumeClaimTemplates:
-      selector:
-        matchLabels:
-          project: free5gc
   service:
     name: mongodb
     type: ClusterIP
     port: 27017
-    nodePort: *dbnodeport
+    nodePort: "30017"
 
 volume:
   mount: /free5gc/config/
@@ -127,7 +131,7 @@ amf:
   replicaCount: 1
   image:
     name: free5gc-amf
-    tag: "v3.0.4"
+    tag: "v3.0.5"
   port: 80
   service:
     name: amf-namf
@@ -142,7 +146,7 @@ ausf:
   replicaCount: 1
   image:
     name: free5gc-ausf
-    tag: "v3.0.4"
+    tag: "v3.0.5"
   port: 80
   service:
     name: ausf-nausf
@@ -157,8 +161,8 @@ nrf:
   replicaCount: 1
   image:
     name: free5gc-nrf
-    tag: "v3.0.4"
-  port: 29510
+    tag: "v3.0.5"
+  port: 8000
   service:      
     name: nrf-nnrf
   configmap:
@@ -172,7 +176,7 @@ nssf:
   replicaCount: 1
   image:
     name: free5gc-nssf
-    tag: "v3.0.4"
+    tag: "v3.0.5"
   port: 80
   service:
     name: nssf-nnssf
@@ -187,7 +191,7 @@ pcf:
   replicaCount: 1
   image:
     name: free5gc-pcf
-    tag: "v3.0.4"
+    tag: "v3.0.5"
   port: 80
   service:
     name: pcf-npcf
@@ -202,7 +206,7 @@ smf:
   replicaCount: 1
   image:
     name: free5gc-smf
-    tag: "v3.0.4"
+    tag: "v3.0.5"
   port: 80
   service:
     pfcp:
@@ -223,7 +227,7 @@ udm:
   replicaCount: 1
   image:
     name: free5gc-udm
-    tag: "v3.0.4"
+    tag: "v3.0.5"
   port: 80
   service:
     name: udm-nudm
@@ -238,7 +242,7 @@ udr:
   replicaCount: 1
   image:
     name: free5gc-udr
-    tag: "v3.0.4"
+    tag: "v3.0.5"
   port: 80
   service:
     name: udr-nudr
@@ -253,7 +257,7 @@ webui:
   replicaCount: 1
   image:
     name: free5gc-webui
-    tag: "v3.0.4"
+    tag: "v3.0.5"
   port: 5000
   configmap:
     name: webui-configmap
@@ -281,6 +285,8 @@ networks5g:
     name: n3network
     subnetIP: 10.100.50.232
   n6network:
+    enabled: false
+  n9network:
     enabled: false
   n2network:
     name: n2network

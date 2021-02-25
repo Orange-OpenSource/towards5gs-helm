@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Values.global.projectName }}
 data:
-  ausfcfg.conf: |
+  ausfcfg.yaml: |
     info:
       version: 1.0.0
       description: AUSF initial local configuration
@@ -26,4 +26,18 @@ data:
         - mcc: 123
           mnc: 45
       groupId: ausfGroup001
+    
+    # the kind of log output
+      # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      # ReportCaller: enable the caller report or not, value: true or false
+    logger:
+      AUSF:
+        debugLevel: info
+        ReportCaller: false
+      PathUtil:
+        debugLevel: info
+        ReportCaller: false
+      OpenApi:
+        debugLevel: info
+        ReportCaller: false
 {{- end }}

@@ -1,6 +1,6 @@
 # free5gc Helm chart
 
-This is a Helm chart for deploying the [free5GC](https://github.com/free5gc/free5gc)-v3.0.4 on Kubernetes. Tt deploys the following Helm charts:
+This is a Helm chart for deploying the [free5GC](https://github.com/free5gc/free5gc)-v3.0.5 on Kubernetes. Tt deploys the following Helm charts:
  - [networks5g](../networks5g).
  - [free5gcUserPlane](../free5gcUserPlane).
  - [free5gcControlPlane](../free5gcUserPlane).
@@ -114,6 +114,7 @@ Please check this [link](https://helm.sh/docs/chart_template_guide/subcharts_and
 
 ## Reference
  - https://github.com/free5gc/free5gc
+ - https://github.com/free5gc/free5gc-compose
 
 
 

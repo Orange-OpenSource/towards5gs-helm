@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Values.global.projectName }}
 data:
-  smfcfg.conf: |
+  smfcfg.yaml: |
     info:
       version: 1.0.0
       description: SMF initial local configuration
@@ -19,22 +19,40 @@ data:
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ .Values.smf.port }}
         tls:
-          key: /free5gc/support/TLS/smf.key
-          pem: /free5gc/support/TLS/smf.pem
+          key: free5gc/support/TLS/smf.key
+          pem: free5gc/support/TLS/smf.pem
       serviceNameList:
         - nsmf-pdusession
         - nsmf-event-exposure
-      snssai_info:
+        - nsmf-oam
+      snssaiInfos:
         - sNssai:
             sst: 1
             sd: 010203
-          dnnSmfInfoList:
-            - dnn: {{ .Values.global.datanetworks.dn1 }}
+          dnnInfos: # DNN information list
+            - dnn: {{ .Values.global.datanetworks.dn1 }} # Data Network Name
+              dns: # the IP address of DNS
+                ipv4: 8.8.8.8
+                ipv6: 2001:4860:4860::8888
+              ueSubnet: {{ .Values.global.uesubnet1 }} # should be CIDR type
         - sNssai:
             sst: 1
             sd: 112233
-          dnnSmfInfoList:
-            - dnn: {{ .Values.global.datanetworks.dn1 }}
+          dnnInfos: # DNN information list
+            - dnn: {{ .Values.global.datanetworks.dn1 }} # Data Network Name
+              dns: # the IP address of DNS
+                ipv4: 8.8.8.8
+                ipv6: 2001:4860:4860::8888
+              ueSubnet: {{ .Values.global.uesubnet2 }} # should be CIDR type ?????
+        - sNssai:
+            sst: 2
+            sd: 112234    
+          dnnInfos:
+            - dnn: internet
+              dns: 
+                ipv4: 8.8.8.8
+                ipv6: 2001:4860:4860::8888
+              ueSubnet: 10.2.0.0/16
       pfcp:
 {{- if .Values.global.upf.service.pfcp.enabled }}
         addr: 0.0.0.0
@@ -42,11 +60,10 @@ data:
         addr: {{ .Values.global.smf.n4if.ipAddress }}
 {{- end }}
       userplane_information:
-{{- if eq .Values.global.userPlaneArchitecture "oneupf" }}
+{{- if eq .Values.global.userPlaneArchitecture "single" }}
         up_nodes:
           gNB1:
             type: AN
-            an_ip: {{ .Values.global.gnb.n3if.ipAddress }} 
           UPF:
             type: UPF
 {{- if .Values.global.upf.service.pfcp.enabled }}
@@ -54,7 +71,22 @@ data:
 {{- else }}
             node_id: {{ .Values.global.upf.n4if.ipAddress }} # UPF N4 address
 {{- end }}
-            up_resource_ip: {{ .Values.global.upf.n3if.ipAddress }} # UPF N3 address      
+            sNssaiUpfInfos:
+              - sNssai:
+                  sst: 1
+                  sd: 010203
+                dnnUpfInfoList:
+                  - dnn: {{ .Values.global.datanetworks.dn1 }}
+              - sNssai:
+                  sst: 1
+                  sd: 112233
+                dnnUpfInfoList:
+                  - dnn: {{ .Values.global.datanetworks.dn1 }}
+            interfaces:
+              - interfaceType: N3
+                endpoints:
+                  - {{ .Values.global.upf.n3if.ipAddress }} # UPF N3 address
+                networkInstance: {{ .Values.global.datanetworks.dn1 }}
         links:
           - A: gNB1
             B: UPF
@@ -64,22 +96,6 @@ data:
           gNB1:
             type: AN
             an_ip: {{ .Values.global.gnb.n3if.ipAddress }} 
-          AnchorUPF1:
-            type: UPF
-{{- if .Values.global.upf.service.pfcp.enabled }}
-            node_id: {{ .Values.global.upf1.service.pfcp.name }} # UPF N4 address
-{{- else }}
-            node_id: {{ .Values.global.upf1.n4if.ipAddress }} # PFCP address
-{{- end }}
-            up_resource_ip: {{ .Values.global.upf1.n3if.ipAddress }} # GTPU address
-          AnchorUPF2:
-            type: UPF
-{{- if .Values.global.upf.service.pfcp.enabled }}
-            node_id: {{ .Values.global.upf2.service.pfcp.name }} # UPF N4 address
-{{- else }}
-            node_id: {{ .Values.global.upf2.n4if.ipAddress }} # PFCP address
-{{- end }}
-            up_resource_ip: {{ .Values.global.upf2.n3if.ipAddress }} # GTPU address
           BranchingUPF:
             type: UPF
 {{- if .Values.global.upf.service.pfcp.enabled }}
@@ -87,7 +103,62 @@ data:
 {{- else }}
             node_id: {{ .Values.global.upfb.n4if.ipAddress }} # PFCP address
 {{- end }}
-            up_resource_ip: {{ .Values.global.upfb.n3if.ipAddress }} # GTPU address
+            sNssaiUpfInfos:
+              - sNssai:
+                  sst: 1
+                  sd: 010203
+                dnnUpfInfoList:
+                  - dnn: {{ .Values.global.datanetworks.dn1 }}
+              - sNssai:
+                  sst: 1
+                  sd: 112233
+                dnnUpfInfoList:
+                  - dnn: {{ .Values.global.datanetworks.dn1 }}
+            interfaces:
+              - interfaceType: N3
+                endpoints:
+                  - {{ .Values.global.upfb.n3if.ipAddress }} 
+                networkInstance: {{ .Values.global.datanetworks.dn1 }}
+              - interfaceType: N9
+                endpoints:
+                  - {{ .Values.global.upfb.n9if.ipAddress }}
+                networkInstance: {{ .Values.global.datanetworks.dn1 }}
+          AnchorUPF1:
+            type: UPF
+{{- if .Values.global.upf.service.pfcp.enabled }}
+            node_id: {{ .Values.global.upf1.service.pfcp.name }} # UPF N4 address
+{{- else }}
+            node_id: {{ .Values.global.upf1.n4if.ipAddress }} # PFCP address
+{{- end }}
+            sNssaiUpfInfos:
+              - sNssai:
+                  sst: 1
+                  sd: 010203
+                dnnUpfInfoList:
+                  - dnn: {{ .Values.global.datanetworks.dn1 }}
+            interfaces:
+              - interfaceType: N9
+                endpoints:
+                  - {{ .Values.global.upf1.n9if.ipAddress }} # UPF1 N9 address
+                networkInstance: {{ .Values.global.datanetworks.dn1 }}
+          AnchorUPF2:
+            type: UPF
+{{- if .Values.global.upf.service.pfcp.enabled }}
+            node_id: {{ .Values.global.upf2.service.pfcp.name }} # UPF N4 address
+{{- else }}
+            node_id: {{ .Values.global.upf2.n4if.ipAddress }} # PFCP address
+{{- end }}
+            sNssaiUpfInfos:
+              - sNssai:
+                  sst: 1
+                  sd: 010203
+                dnnUpfInfoList:
+                  - dnn: {{ .Values.global.datanetworks.dn1 }}
+            interfaces:
+              - interfaceType: N9
+                endpoints:
+                  - {{ .Values.global.upf2.n9if.ipAddress }} # UPF2 N9 address
+                networkInstance: {{ .Values.global.datanetworks.dn1 }}
         links:
           - A: gNB1
             B: BranchingUPF
@@ -96,6 +167,7 @@ data:
           - A: BranchingUPF
             B: AnchorUPF2
 {{- end }}
+      ue_subnet: {{ .Values.global.uesubnet }}
       dnn:
         {{ .Values.global.datanetworks.dn1 }}:
           dns:
@@ -105,20 +177,40 @@ data:
           dns:
             ipv4: 8.8.4.4
             ipv6: 2001:4860:4860::8844
-      ue_subnet: {{ .Values.global.uesubnet }}
       nrfUri: {{ .Values.global.sbi.scheme }}://{{ .Values.nrf.service.name }}:{{ .Values.nrf.port }}
 {{- if eq .Values.global.userPlaneArchitecture "ulcl" }}
       ulcl: true
 {{- end }}
+    logger:
+      SMF:
+        debugLevel: info
+        ReportCaller: false
+      NAS:
+        debugLevel: info
+        ReportCaller: false
+      NGAP:
+        debugLevel: info
+        ReportCaller: false
+      Aper:
+        debugLevel: info
+        ReportCaller: false
+      PathUtil:
+        debugLevel: info
+        ReportCaller: false
+      OpenApi:
+        debugLevel: info
+        ReportCaller: false
+      PFCP:
+        debugLevel: info
+        ReportCaller: false
+
   uerouting.yaml: |
-{{- if eq .Values.global.userPlaneArchitecture "ulcl" }}
     info:
       version: 1.0.0
       description: Routing information for UE
-    
     ueRoutingInfo:
       - SUPI: imsi-208930000000003
-        AN: {{ .Values.global.upf1.n3if.ipAddress }}
+        AN: {{ .Values.global.upf1.n9if.ipAddress }}
         PathList:
           - DestinationIP: {{ .Values.global.ueRouting.destination1 }}
             UPF: !!seq
@@ -131,7 +223,7 @@ data:
               - AnchorUPF2
     
       - SUPI: imsi-208930000000004
-        AN: {{ .Values.global.upf2.n3if.ipAddress }}
+        AN: {{ .Values.global.upf2.n9if.ipAddress }}
         PathList:
           - DestinationIP: {{ .Values.global.ueRouting.destination1 }}
             UPF: !!seq
@@ -142,18 +234,17 @@ data:
             UPF: !!seq
               - BranchingUPF
               - AnchorUPF2
-{{- end }}
 
-#### Currently, when using the UPF service name in the SMF config, the SMF crashes. So we are using the following script to replace the UPF service name by its IP address.
+#### This script will be able to be using to replace the UPF service name by its IP address. This feature is still not available.
   wrapper.sh: |
     #!/bin/sh
 
 {{- if and .Values.global.upf.service.pfcp.enabled }}
     ### Copy the IP address of UPF service in the SMF configuration. Currently when not doing that the SMF can connect to the UPF but show an error when trying to send a PDU session creation request to the UPF (we think this par of the code has to change).
     cp /free5gc/config2/uerouting.yaml {{ .Values.volume.mount }}
-    cp /free5gc/config2/free5GC.conf {{ .Values.volume.mount }}
+    cp /free5gc/config2/free5GC.yaml {{ .Values.volume.mount }}
 
-{{- if eq .Values.global.userPlaneArchitecture "oneupf" }}
+{{- if eq .Values.global.userPlaneArchitecture "single" }}
     upfIP=$(nslookup {{ .Values.global.upf.service.pfcp.name }} | grep "Address" | awk '{print $3}')
     sed -i "s/{{ .Values.global.upf.service.pfcp.name }}/$upfIP/g" /free5gc/config2/smfcfg.conf
 {{- end }}
@@ -161,12 +252,12 @@ data:
     upfbIP=$(nslookup {{ .Values.global.upfb.service.pfcp.name }} | grep "Address" | awk '{print $3}')
     upf1IP=$(nslookup {{ .Values.global.upf1.service.pfcp.name }} | grep "Address" | awk '{print $3}')
     upf2IP=$(nslookup {{ .Values.global.upf2.service.pfcp.name }} | grep "Address" | awk '{print $3}')
-    sed -i "s/{{ .Values.global.upfb.service.pfcp.name }}/$upfbIP/g" /free5gc/config2/smfcfg.conf
-    sed -i "s/{{ .Values.global.upf1.service.pfcp.name }}/$upf1IP/g" /free5gc/config2/smfcfg.conf
-    sed -i "s/{{ .Values.global.upf2.service.pfcp.name }}/$upf2IP/g" /free5gc/config2/smfcfg.conf
+    sed -i "s/{{ .Values.global.upfb.service.pfcp.name }}/$upfbIP/g" /free5gc/config2/smfcfg.yaml
+    sed -i "s/{{ .Values.global.upf1.service.pfcp.name }}/$upf1IP/g" /free5gc/config2/smfcfg.yaml
+    sed -i "s/{{ .Values.global.upf2.service.pfcp.name }}/$upf2IP/g" /free5gc/config2/smfcfg.yaml
 {{- end }}
-    cp /free5gc/config2/smfcfg.conf {{ .Values.volume.mount }}
+    cp /free5gc/config2/smfcfg.yaml {{ .Values.volume.mount }}
 {{- end }}
-    /free5gc/smf/smf -smfcfg {{ .Values.volume.mount }}smfcfg.conf 
+    /free5gc/smf/smf -smfcfg {{ .Values.volume.mount }}smfcfg.yaml 
 {{- end }}
 

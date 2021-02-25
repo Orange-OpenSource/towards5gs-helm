@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Values.global.projectName }}
 data:
-  free5GC.conf: |
+  free5GC.yaml: |
 {{- if .Values.global.multiCluster }}
     db_uri: mongodb://{{ .Values.global.cpClusterIP }}:{{ .Values.global.db.nodePort }}/free5GC
 {{- else }}

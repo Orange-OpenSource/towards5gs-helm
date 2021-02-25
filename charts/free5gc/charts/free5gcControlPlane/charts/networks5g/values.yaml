@@ -45,7 +45,7 @@ n6network:
   #gateway: 1  # you should be able to access the Data Network through this gateway "192.168.121.1"
 
 n9network:
-  enabled: false
+  enabled: true
   name: n9network
   masterIf: eth0
   subnetIP: 10.100.50.224

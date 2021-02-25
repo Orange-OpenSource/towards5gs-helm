@@ -1,4 +1,4 @@
-{{- if eq .Values.global.userPlaneArchitecture "oneupf" }}
+{{- if eq .Values.global.userPlaneArchitecture "single" }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

@@ -36,7 +36,7 @@ spec:
       containers:
       - image: {{ .Values.global.image.registry }}/{{ .Values.n3iwf.image.name }}:{{ .Values.n3iwf.image.tag }}
         name: {{ .Values.n3iwf.name }}
-        command: ["sh", "-c", "../config/n3iwf-ipsec.sh && ./n3iwf -n3iwfcfg ../config/n3iwfcfg.conf"]
+        command: ["sh", "-c", "../config/n3iwf-ipsec.sh && ./n3iwf -n3iwfcfg ../config/n3iwfcfg.yaml"]
         env:
         - name: GIN_MODE
           value: release
@@ -62,8 +62,8 @@ spec:
           - configMap:
               name: {{ .Values.n3iwf.configmap.name }}
               items:
-              - key: n3iwfcfg.conf
-                path: n3iwfcfg.conf
+              - key: n3iwfcfg.yaml
+                path: n3iwfcfg.yaml
               - key: n3iwf-ipsec.sh
                 path: n3iwf-ipsec.sh
                 mode: 0777

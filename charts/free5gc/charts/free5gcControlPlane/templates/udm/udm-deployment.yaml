@@ -33,7 +33,7 @@ spec:
         ports:
         - containerPort: {{ .Values.udm.port }}
         command: ["./udm"]
-        args: ["-udmcfg", "../config/udmcfg.conf"]   
+        args: ["-udmcfg", "../config/udmcfg.yaml"]   
         env:
           - name: GIN_MODE
             value: release

@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Values.global.projectName }}
 data:
-  nssfcfg.conf: |
+  nssfcfg.yaml: |
     info:
       version: 1.0.0
       description: NSSF initial local configuration
@@ -329,4 +329,18 @@ data:
               homeSnssai:
                 sst: 1
                 sd: 3
+    
+    # the kind of log output
+      # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      # ReportCaller: enable the caller report or not, value: true or false
+    logger:
+      NSSF:
+        debugLevel: info
+        ReportCaller: false
+      PathUtil:
+        debugLevel: info
+        ReportCaller: false
+      OpenApi:
+        debugLevel: info
+        ReportCaller: false
 {{- end }}

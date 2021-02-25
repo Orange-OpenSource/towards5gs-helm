@@ -42,7 +42,7 @@ spec:
           containerPort: {{ .Values.global.amf.service.ngap.port }}
           protocol: {{ .Values.global.amf.service.ngap.protocol }}
         command: ["./amf"]
-        args: ["-amfcfg", "../config/amfcfg.conf"]   
+        args: ["-amfcfg", "../config/amfcfg.yaml"]   
         env:
           - name: GIN_MODE
             value: release

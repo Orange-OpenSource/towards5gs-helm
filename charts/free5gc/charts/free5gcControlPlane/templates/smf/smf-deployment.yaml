@@ -47,7 +47,7 @@ spec:
         command: ["sh", "-c", "{{ .Values.volume.mount }}wrapper.sh"]
 {{- end }}
         #command: ["./smf"]
-        #args: ["-smfcfg", "../config/smfcfg.conf"]   
+        #args: ["-smfcfg", "../config/smfcfg.yaml"]   
         env:
           - name: GIN_MODE
             value: release
@@ -75,8 +75,8 @@ spec:
               name: {{ .Values.smf.configmap.name }}
               # All items can be deleted after solving the problem
               items:
-              - key: smfcfg.conf
-                path: smfcfg.conf
+              - key: smfcfg.yaml
+                path: smfcfg.yaml
               - key: uerouting.yaml
                 path: uerouting.yaml
               - key: wrapper.sh

@@ -14,6 +14,7 @@ data:
     configuration:
       # debugLevel: panic|fatal|error|warn|info|debug|trace
       debugLevel: info
+      ReportCaller: false
     
       pfcp:
 {{- if not .Values.global.upf.service.pfcp.enabled }}
@@ -23,7 +24,7 @@ data:
 {{- end }}
     
       gtpu:
-        - addr: {{ .Values.global.upf2.n3if.ipAddress }}
+        - addr: {{ .Values.global.upf2.n9if.ipAddress }}
         # [optional] gtpu.name
         # - name: upf.5gc.nctu.me
         # [optional] gtpu.ifname
@@ -33,7 +34,7 @@ data:
         - dnn: {{ .Values.global.datanetworks.dn1 }}
           cidr: {{ .Values.global.uesubnet1 }}
           # [optional] apn_list[*].natifname
-         # natifname: eth0
+          natifname: n6
 
   wrapper.sh: |
     #!/bin/bash

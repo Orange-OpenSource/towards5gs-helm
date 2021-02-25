@@ -37,7 +37,7 @@ n3iwf:
     suffixIP: 5 
   image:
     name: free5gc-n3iwf
-    tag: "v3.0.4"
+    tag: "v3.0.5"
   configmap:
     name: n3iwf-configmap
   volume:
@@ -67,6 +67,8 @@ networks5g:
     subnetIP: 10.100.50.232
     cidr: 29
   n6network:
+    enabled: false
+  n9network:
     enabled: false
   n2network:
     enabled: true

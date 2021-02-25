@@ -1,5 +1,5 @@
 global:
-  userPlaneArchitecture: ulcl  # possible values are "oneupf" and "ulcl"
+  userPlaneArchitecture: ulcl  # possible values are "single" and "ulcl"
 
 
 

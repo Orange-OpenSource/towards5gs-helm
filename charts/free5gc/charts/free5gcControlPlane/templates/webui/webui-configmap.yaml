@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Values.global.projectName }}
 data:
-  webuicfg.conf: |
+  webuicfg.yaml: |
     info:
       version: 1.0.0
       description: Docker-WebUI initial local configuration

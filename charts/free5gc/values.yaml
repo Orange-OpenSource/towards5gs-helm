@@ -4,7 +4,7 @@
 
 global:
   name: free5gc
-  userPlaneArchitecture: oneupf  # possible values are "oneupf" and "ulcl"
+  userPlaneArchitecture: single  # possible values are "single" and "ulcl"
   multiCluster: false
   cpClusterIP: 192.168.121.16
   upClusterIP: 192.168.121.20
@@ -39,6 +39,8 @@ global:
       ipAddress: 10.100.50.241
     n3if:  # GTPU
       ipAddress: 10.100.50.233
+    n9if:  # GTPU
+      ipAddress: 10.100.50.225
     n6if:  # DN
       ipAddress: 10.100.100.12
     service:
@@ -50,6 +52,8 @@ global:
       ipAddress: 10.100.50.242
     n3if:  # GTPU
       ipAddress: 10.100.50.234
+    n9if:  # GTPU
+      ipAddress: 10.100.50.226
     n6if:  # DN
       ipAddress: 10.100.100.13
     service:
@@ -61,6 +65,8 @@ global:
       ipAddress: 10.100.50.243
     n3if:  # GTPU
       ipAddress: 10.100.50.235
+    n9if:  # GTPU
+      ipAddress: 10.100.50.227
     n6if:  # DN
       ipAddress: 10.100.100.14
     service:
