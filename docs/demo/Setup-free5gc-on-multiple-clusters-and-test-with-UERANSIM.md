@@ -92,6 +92,7 @@ helm -n <namespace> install <release-name> ./free5gcN3iwf/
 
 ### Add user information
 The WEBUI can be accessed at the second cluster with `nodePort=30500`. So you can access it by using this url `{replace by the IP of one of your second cluster nodes}:30500`.
+
 **Note:** the simulated UE will accept `OP` instead of `OPC` so please make sure setting that in the WEBUI graphical interface.
 
 ### Test with UERANSIM
@@ -105,7 +106,7 @@ helm -n <namespace> install --set networks5g.n2network.enabled=false <release-na
 We have disabled the N2 network because it was already created by the N3iwf.
 
 #### Test with the TUN interface
-You can use the created TUN interface for more advanced testing. Please refer to the UERANSIM helm chart's README and check this [link](https://github.com/aligungr/UERANSIM/wiki/) for more details.
+You can use the created TUN interface for more advanced testing. Please refer to the UERANSIM helm chart's README and check this [link](https://github.com/aligungr/UERANSIM/wiki/)  and the [UERANSIM chart Readme](/charts/ueransim) for more details.
 
 ## Reference
  - https://github.com/free5gc/free5gc
