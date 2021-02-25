@@ -5,6 +5,7 @@ Cloud native has now become the de facto approach to software development in the
  - Container technologies
  - Microservice architectures
  - Orchestration and automation
+ 
 Please refer to this [link](https://github.com/cncf/toc/blob/master/DEFINITION.md) for more details.
 
 ## Cloud native for 5G
@@ -13,14 +14,16 @@ Traditional cellular networks consisted of several boxes deploying monolithic ne
  - Cloud native Network Functions (CNFs) are resilient. This can be explained by the simplicity of replacing a failed microservice compared to restoring an entire application.
  - The encapsulation of the microservices that make up a network function and their dependencies in containers offers better portability across the underlying infrastructure and allows for efficient resource consumption, thanks to their light nature.
  - As the level of granularity increases, future changes to applications will be faster and easier to automate by leveraging DevOps tools and applying an agile project management approach.
+
 Please refer to this [whitepaper](https://github.com/cncf/telecom-user-group/blob/master/whitepaper/cloud_native_thinking_for_telecommunications.md) for more details.
 
 ## Why using Kubernetes?
-[Kubernetes](https://kubernetes.io/) is the name of an open source system aimed at providing a platform for the orchestration of containerized workloads. Since the use of containers requires the presence of a tool that allows the automation of their lifecycle management (deployment, configuration, update,
-scaling, self-healing ...etc.), the use of an orchestration tool such as Kubernetes becomes unavoidable.
+[Kubernetes](https://kubernetes.io/) is the name of an open source system aimed at providing a platform for the orchestration of containerized workloads. Since the use of containers requires the presence of a tool that allows the automation of their lifecycle management (deployment, configuration, update, scaling, self-healing ...etc.), the use of an orchestration tool such as Kubernetes becomes unavoidable.
+
 Please feel free to visit the [official Kubernetes documentation](https://kubernetes.io/docs/home/) for more details.
 
 ## Why using Helm?
 [Helm](https://kubernetes.io/) is an open source tool hosted and managed by the CNCF. It aims to simplify the management of complex Kubernetes applications. Indeed, it provides a method to package a Kubernetes application in order to avoid the complexity related to the management of a very large number of Kubernetes objects. The management of a Kuubernetes application includes its instantiation, updates, rollbacks and its termination.
 The deployment unit under Helm is called a [chart](https://helm.sh/docs/topics/charts/). It is an element gathering multiple Kubernetes manifets describing the desired state of Kubernetes objects.
+
 Please feel free to visit the [official Helm documentation](https://helm.sh/docs/) for more details.
