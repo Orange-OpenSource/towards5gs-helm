@@ -115,6 +115,8 @@ networks5g:
     name: n2network
     subnetIP: 10.100.50.248
     cidr: 29
+  n9network:
+    enabled: false
   ovn4nfv:       # The ovn4nfv plugin can be used for N3 and N6 interfaces
     enabled: false
     name: ovn4nfv-k8s-plugin

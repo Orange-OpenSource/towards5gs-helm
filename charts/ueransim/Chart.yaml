@@ -1,7 +1,7 @@
 apiVersion: v2
 name: ueransim
 description: A Helm chart to deploy UERANSIM
-version: 0.2.1
+version: 1.0.2
 appVersion: v3.0.2
 dependencies:
 - name: networks5g

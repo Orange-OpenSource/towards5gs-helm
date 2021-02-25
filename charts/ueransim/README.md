@@ -49,7 +49,7 @@ In this section, we'll suppose that you have only one interface on each Kubernet
 Please see [NETWORKS5G's README](../networks5g) for more details.
 
 ## Usage information
-Once this helm chart is installed, a PDU session will be crated automatically. Furthermore, a TUN interface will be created on the UE POD. This interface can be used to test the connectivity:
+Once this helm chart installed, a PDU session will be crated automatically. Furthermore, a TUN interface will be created on the UE POD. This interface can be used to test the connectivity:
 ```console
 kubectl -n <namespace> exec -it <ue-pod-name> -- bash
 ```
@@ -67,7 +67,7 @@ ip address
 ```console
 ping -I uesimtun0 www.google.com
 traceroute -i uesimtun0 www.google.com
-curl -i uesimtun0 www.google.com
+curl --interface uesimtun0 www.google.com
 ```
 
 ## Customized installation
@@ -79,7 +79,7 @@ This chart allows you to customize its installation. The table below shows the p
 | --- | --- | --- |
 | `global.image.registry` | The global Docker image registry. | `towards5gs` |
 | `global.datanetworks.dn1` | The name of the data network used for the simulated UE. | `internet` |
-| `global.multiCluster` | Must be set to `true` if you are deploying the the UERANSIM in a different cluster from the one where the control plane is deployed and `global.amf.service.ngap.enabled` is set to true. | `false` |
+| `global.multiCluster` | Must be set to `true` if you are deploying the the N3IWF in a different cluster from the one where the control plane is deployed and `global.amf.service.ngap.enabled` is set to true. | `false` |
 | `global.cpClusterIP` | The IP address of one of the cluster nodes where the control plane is deployed. | `nil` |
 | `global.amf.n2if.IpAddress` | The IP address of the AMF’s N2 interface. | `10.100.50.249` |
 | `global.amf.service.ngap.enabled` | If `true` then a Kubernetes service will be used to access the AMF NGAP service instead of accessing directly the AMF’s N2 interface. If the `global.multiCluster` is set to `true` then a service will be created to route the trafic to the Kubernetes cluster where the free5GC control plane is deployed. | `false` |
