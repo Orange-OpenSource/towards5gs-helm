@@ -5,7 +5,7 @@ This guideline shows how to deploy the free5gc on a Kubernetes cluster and then 
 
 
 ## Prerequisites
- - A Kubernetes cluster supporting SCTP with all worker nodes using kernel 5.0.0-23-generic and they should contain gtp5g kernel module.
+ - A Kubernetes cluster supporting SCTP with all worker nodes using kernel 5.0.0-23-generic and they should contain gtp5g kernel module ([required for the Free5GC UPF element](https://github.com/free5gc/free5gc/wiki/Installation#a-prerequisites)).
  - [Multus-CNI](https://github.com/intel/multus-cni) deployed on each cluster
  - [Helm3](https://helm.sh/docs/intro/install/) to communicate with each cluster.
  - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (optional).
