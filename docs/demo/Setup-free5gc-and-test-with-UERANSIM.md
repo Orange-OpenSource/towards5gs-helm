@@ -75,10 +75,30 @@ On the [charts](../../charts) directory, run:
 ```console
 helm -n <namespace> install --set createNetworks=false <release-name> ./ueransim/
 ```
+#### Check the state of the created pods
+```console
+kubectl -n <namespace> get pods -l "app=ueransim"
+```
 
 #### Test with the TUN interface
-You can use the created TUN interface for more advanced testing. Please refer to the UERANSIM helm chart's [README](../../charts/ueransim) and check this [link](https://github.com/aligungr/UERANSIM/wiki/)  and the [UERANSIM chart Readme](/charts/ueransim) for more details.
+Once the UERANSIM components created, you can access to the UE pod by running:
+```console
+kubectl -n <namespace> exec -it <ue-pod-name> -- bash
+```
+Then, you can use the created TUN interface for more advanced testing. Please refer to the UERANSIM helm chart's [README](../../charts/ueransim) and check this [link](https://github.com/aligungr/UERANSIM/wiki/)  and the [UERANSIM chart Readme](/charts/ueransim) for more details.
+```console
+# Run this inside the container
+ip address 
+...
+5: uesimtun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 500
+    link/none 
+    inet 10.1.0.1/32 scope global uesimtun0
+       valid_lft forever preferred_lft forever
 
+ping -I uesimtun0 www.google.com
+traceroute -i uesimtun0 www.google.com
+curl --interface uesimtun0 www.google.com
+```
 ## Reference
  - https://github.com/free5gc/free5gc/wiki
  - https://github.com/free5gc/free5gc-compose
