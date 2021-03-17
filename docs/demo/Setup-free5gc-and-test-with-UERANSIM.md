@@ -1,14 +1,16 @@
-# Setup free5gc on multiple clusters and test with UERANSIM
+# Setup free5gc on one single one and test with UERANSIM
 
 This guideline shows how to deploy the free5gc on a Kubernetes cluster and then test it with UERANSIM. 
 
 
 
 ## Prerequisites
- - A Kubernetes cluster supporting SCTP with all worker nodes using kernel 5.0.0-23-generic and they should contain gtp5g kernel module ([required for the Free5GC UPF element](https://github.com/free5gc/free5gc/wiki/Installation#a-prerequisites)).
- - [Multus-CNI](https://github.com/intel/multus-cni) deployed on each cluster
- - [Helm3](https://helm.sh/docs/intro/install/) to communicate with each cluster.
+ - A Kubernetes cluster supporting SCTP
+ - Kubernetrs worker nodes with kernel 5.0.0-23-generic and containing gtp5g kernel module ([required for the Free5GC UPF element](https://github.com/free5gc/free5gc/wiki/Installation#a-prerequisites)).
+ - [Multus-CNI](https://github.com/intel/multus-cni).
+ - [Helm3](https://helm.sh/docs/intro/install/).
  - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (optional).
+ - A Persistent Volume (size 8Gi). 
  - A physical network interface on each Kubernetes node named eth0.
  - A physical network interface on each Kubernetes node named eth1 to connect the UPF to the Data Network.
 
@@ -55,7 +57,7 @@ EOF
 #### Install the Free5GC Helm chart
 On the [charts](../../charts) directory, run:
 ```console
-helm -n <namespace> install <release-name> ./free5gc/
+helm -n <namespace> install <free5GC-release-name> ./free5gc/
 ```
 
 #### Check the state of the created pods
@@ -73,7 +75,7 @@ For adding a new subscriber, please refer to the [Free5GC documentation](https:/
 #### Install the UERANSIM Helm chart
 On the [charts](../../charts) directory, run:
 ```console
-helm -n <namespace> install --set createNetworks=false <release-name> ./ueransim/
+helm -n <namespace> install --set createNetworks=false <UERANSIM-release-name> ./ueransim/
 ```
 #### Check the state of the created pods
 ```console
@@ -103,6 +105,5 @@ curl --interface uesimtun0 www.google.com
  - https://github.com/free5gc/free5gc/wiki
  - https://github.com/free5gc/free5gc-compose
  - https://github.com/aligungr/UERANSIM/wiki/Usage#using-the-tun-interface
-
 
 
