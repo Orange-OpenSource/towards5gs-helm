@@ -8,10 +8,6 @@ global:
         nodeport: 31412
         protocol: SCTP
         type: NodePort
-  upf:
-    service:
-      pfcp:
-        enabled: true
 
 networks5g:
   n2network:
