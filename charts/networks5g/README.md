@@ -55,6 +55,8 @@ This chart allows you to customize its installation. The table below shows the p
 | `n2network.excludeIP` | An exluded IP address from the subnet range. You can give this address to a MACVLAN interface on the host in order to enable to containers to communicate with their host via the N2 interface (optional). | `10.100.50.254` |
 
 ### N3 Network parameters
+| Parameter | Description | Default value |
+| --- | --- | --- |
 | `n3network.enabled` | If true a network attachment definition will be created fo the N3 network. | `true` |
 | `n3network.name` | N3 network name. | `n3network` |
 | `n3network.masterIf` | N3 network MACVLAN master interface. | `eth0` |
@@ -64,6 +66,8 @@ This chart allows you to customize its installation. The table below shows the p
 | `n3network.excludeIP` | An exluded IP address from the subnet range. You can give this address to a MACVLAN interface on the host in order to enable to containers to communicate with their host via the N3 interface (optional). | `10.100.50.238` |
 
 ### N4 Network parameters
+| Parameter | Description | Default value |
+| --- | --- | --- |
 | `n4network.enabled` | If true a network attachment definition will be created fo the N4 network. | `true` |
 | `n4network.name` | N4 network name. | `n4network` |
 | `n4network.masterIf` | N4 network MACVLAN master interface. | `eth0` |
@@ -73,12 +77,25 @@ This chart allows you to customize its installation. The table below shows the p
 | `n4network.excludeIP` | An exluded IP address from the subnet range. You can give this address to a MACVLAN interface on the host in order to enable to containers to communicate with their host via the N4 interface (optional). | `10.100.50.246` |
 
 ### N6 Network parameters
+| Parameter | Description | Default value |
+| --- | --- | --- |
 | `n6network.enabled` | If true a network attachment definition will be created fo the N6 network. | `true` |
 | `n6network.name` | N6 network name. | `n6network` |
 | `n6network.masterIf` | N6 network MACVLAN master interface. The IP address of this interface must be in the N6 network subnet IP rang. | `eth1` |
 | `n6network.subnetIP` | N6 network subnet IP address (The IP address of the Data Network. | `10.100.100.0` |
 | `n6network.cidr` | N6 network cidr. | `24` |
 | `n6network.gatewayIP` | N6 network gateway IP address (The IP address to go to the Data Network). | `10.100.100.1` |
+
+### N9 Network parameters
+| Parameter | Description | Default value |
+| --- | --- | --- |
+| `n9network.enabled` | If true a network attachment definition will be created fo the N9 network. | `true` |
+| `n9network.name` | N9 network name. | `n9network` |
+| `n9network.masterIf` | N9 network MACVLAN master interface. | `eth0` |
+| `n9network.subnetIP` | N9 network subnet IP address. | `10.100.50.224` |
+| `n9network.cidr` | N9 network cidr. | `29` |
+| `n9network.gatewayIP` | N9 network gateway IP address. | `10.100.50.230` |
+| `n9network.excludeIP` | An exluded IP address from the subnet range. You can give this address to a MACVLAN interface on the host in order to enable to containers to communicate with their host via the N9 interface (optional). | `10.100.50.230` |
 
 ## Limitations
 Currently, this Helm chart uses the [MACVLAN plugin](https://www.cni.dev/plugins/main/macvlan/) for all network attachment definition. However, the use of a Userspace CNI plugin like [SR-IOV] is necessary for user plane traffic (N3 and N6 interfaces). For the next versions, we are planning to provide an option to use this CNI plugin.
