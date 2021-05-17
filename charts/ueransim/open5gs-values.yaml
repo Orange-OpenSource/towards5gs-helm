@@ -1,0 +1,32 @@
+gnb:
+  configuration:
+    mcc: '901'
+    mnc: '70'
+    slices:
+      - sst: 1
+        sd: 1
+ue:
+  configuration:
+    supi: 'imsi-901700000000001'
+    mcc: '901'
+    mnc: '70'
+    key: '465B5CE8B199B49FAA5F0A2EE238A6BC'
+    op: 'E8ED289DEBA952E4283B54E88E6183CA'
+    opType: 'OPC'
+    amf: '8000'
+    imei: '356938035643803'
+    imeiSv: '4370816125816151'
+    sessions:
+      - type: 'IPv4'
+        apn: 'internet'
+        slice:
+          sst: 0x01
+          sd: 0x010203
+    # Configured NSSAI for this UE by HPLMN
+    configured-nssai:
+      - sst: 0x01
+        sd: 0x010203
+    # Default Configured NSSAI for this UE
+    default-nssai:
+      - sst: 1
+        sd: 1

@@ -24,7 +24,7 @@ spec:
         securityContext:
           capabilities:
             add: ["NET_ADMIN"]
-        command: ["./wrapper.sh"]
+        command: ["{{ .Values.ue.volume.mount }}/wrapper.sh"]
         volumeMounts:
         - mountPath: {{ .Values.ue.volume.mount }}
           name: {{ .Values.ue.volume.name }}
@@ -41,4 +41,11 @@ spec:
       - name: {{ .Values.ue.volume.name }}
         configMap:
           name: {{ .Values.ue.configmap.name }}
+          items:
+          - key: ue-config.yaml
+            path: ue-config.yaml
+          - key: wrapper.sh
+            path: wrapper.sh
+            mode: 0755
+
 {{- end }}

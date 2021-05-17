@@ -56,7 +56,6 @@ global:
       ipAddress: 10.100.50.236
 
 projectName: ueransim
-which5gCore: free5gc
 
 gnb:
   enabled: true
@@ -64,7 +63,7 @@ gnb:
   replicaCount: 1
   image:
     name: ueransim-gnb
-    tag: "v3.0.2"
+    tag: "v3.1.3"
   configmap:
     name: gnb-configmap
   volume:
@@ -75,19 +74,66 @@ gnb:
     type: ClusterIP
     port: 4997
     protocol: UDP
-
+  configuration:
+    mcc: '208' # Mobile Country Code value
+    mnc: '93'  # Mobile Network Code value (2 or 3 digits)
+    nci: '0x000000010'  # NR Cell Identity (36-bit)
+    idLength: 32        # NR gNB ID length in bits [22...32]
+    tac: 1     # Tracking Area Code
+    # List of supported S-NSSAIs by this gNB
+    slices:
+      - sst: 0x1
+        sd: 0x010203
+    # Indicates whether or not SCTP stream number errors should be ignored.
+    ignoreStreamIds: true
 ue:
   enabled: true
   name: ue
   replicaCount: 1
   image:
     name: ueransim-ue
-    tag: "v3.0.2"
+    tag: "v3.1.3"
   configmap:
     name: ue-configmap
   volume:
     name: ue-volume
     mount: /ueransim/config
+  command: "./nr-ue -c ../config/ue-config.yaml"  # This is the command that will be launched in the UE container
+  # A script that will be run after the UE creation. It may be used to periodically generate traffic
+  script: ""
+  configuration: 
+    supi: "imsi-208930000000003"  # IMSI number
+    mcc: '208' # Mobile Country Code value
+    mnc: '93' # Mobile Network Code value (2 or 3 digits)
+    key: "8baf473f2f8fd09487cccbd7097c6862" # Operator code (OP or OPC) of the UE
+    op: "8e27b6af0e692e750f32667a3b14605d" # This value specifies the OP type and it can be either 'OP' or 'OPC'
+    opType: "OPC" # This value specifies the OP type and it can be either 'OP' or 'OPC'
+    amf: '8000' # Authentication Management Field (AMF) value
+    imei: '356938035643803' # IMEI number of the device
+    imeiSv: '4370816125816151'
+    sessions:
+      - type: "IPv4"
+        apn: "internet"
+        slice:
+          sst: 0x01
+          sd: 0x010203
+    # Configured NSSAI for this UE by HPLMN
+    configured-nssai:
+      - sst: 0x01
+        sd: 0x010203
+    # Default Configured NSSAI for this UE
+    default-nssai:
+      - sst: 1
+        sd: 1
+    # Supported encryption and integrity algorithms by this UE
+    integrity:
+      IA1: true
+      IA2: true
+      IA3: true
+    ciphering:
+      EA1: true
+      EA2: true
+      EA3: true
 
 n2if:  # NGAP
   ipAddress: 10.100.50.250

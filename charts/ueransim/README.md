@@ -1,4 +1,4 @@
-#UERANSIM Helm chart
+# UERANSIM Helm chart
 
 This is a Helm chart for deploying [UERANSIM](https://github.com/aligungr/UERANSIM) on Kubernetes. It has been tested only with [free5GC](../chart/free5gc) but should also run with [open5gs](https://github.com/open5gs/open5gs).
 
@@ -40,7 +40,11 @@ helm -n <namespace> uninstall <release-name>
 ## Configuration
 
 ### Testing with another 5G core network
-This Helm chart has been tested only with [free5GC](../chart/free5gc) but should also run with [open5gs](https://github.com/open5gs/open5gs). If you want to test it with open5gs then you should only set `which5gCore` to `open5gs`.
+This Helm chart has been tested only with [free5GC](../chart/free5gc) but should also run with [open5gs](https://github.com/open5gs/open5gs). If you want to test it with open5gs then you should only use the `open5gs-values.yaml` file to override the Helm chart default values.
+```console
+helm -n <namespace> install -f ./ueransim/open5gs-values.yaml <release-name> ./ueransim/
+```
+
 
 ### Networks configuration
 In this section, we'll suppose that you have only one interface on each Kubernetes node and its name is `toto`. Then you have to set these parameters to `toto`:
@@ -100,22 +104,26 @@ This chart allows you to customize its installation. The table below shows the p
 | `ue.name` | Th name of the UE (used in labels and when naming the deployment). | `ue` |
 | `ue.replicaCount` | The number of UE replicas | `1` |
 | `ue.image.name` | The UE Docker image name. | `ueransim-ue` |
-| `ue.image.tag` | The UE Docker image tag. | `"v2.2.2"` |
+| `ue.image.tag` | The UE Docker image tag. | `"v3.1.3"` |
 | `ue.configmap.name` | The name of the configmap to be used to import the configuration to the UE POD. | `ue-configmap` |
 | `ue.volume.name` | The name of the volume to be mounted to the UE POD. | `ue-volume` |
 | `ue.volume.mount` | The path to the folder where configuration files should be mounted on the UE POD. | `/ueransim/config` |
+| `ue.configuration` | The UERANSIM UE [configuration](https://github.com/aligungr/UERANSIM/wiki/Configuration#ue-configuration) in YAML format. | Check [values.yaml](./values.yaml) |
+| `ue.command` | The command to be executed to run the UERANSIM UE. | `"../build/nr-ue -c ./ue-config.yaml"` |
+| `ue.script` | A script to be executed after running the UERANSIM UE. It may be used to periodically generate traffic for example. | `""` |
 | `gnb.enabled` | If `true` then deploy the UERANSIM gNB. | `true` |
 | `gnb.name` | Th name of the gNB (used in labels and when naming the deployment). | `gnb` |
 | `gnb.replicaCount` | The number of gNB replicas | `1` |
 | `gnb.image.name` | The gNB Docker image name. | `ueransim-gnb` |
-| `gnb.image.tag` | The gNB Docker image tag. | `"v2.2.2"` |
+| `gnb.image.tag` | The gNB Docker image tag. | `"v3.1.3"` |
 | `gnb.configmap.name` | The name of the configmap to be used to import the configuration to the gNB POD. | `gnb-configmap` |
 | `gnb.volume.name` | The name of the volume to be mounted to the gNB POD. | `gnb-volume` |
 | `gnb.volume.mount` | The path to the folder where configuration files should be mounted on the gNB POD. | `/ueransim/config` |
 | `gnb.service.name` | The name of the service to expose the RADIO interface. | `gnb-service` |
 | `gnb.service.type` | The type of the service to expose the RADIO interface. | `ClusterIP` |
 | `gnb.service.port` | The port number used for the RADIO interface. | `4997` |
-| `gnb.service.port` | The protocol used for the RADIO interface. | `4997` |
+| `gnb.service.protocol` | The protocol used for the RADIO interface. | `UDP` |
+| `gnb.configuration` | The UERANSIM gNB [configuration](https://github.com/aligungr/UERANSIM/wiki/Configuration#gnb-configuration) in YAML format. | Check [values.yaml](./values.yaml) |
 | `n2if.ipAddress`| The IP address of gNB’s N2 interface. | `10.100.50.250` |
 
 ### Networking parameters
