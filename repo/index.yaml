@@ -3,7 +3,7 @@ entries:
   free5gc:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-02-14T21:40:55.735072338+01:00"
+    created: "2021-03-07T06:48:44.005383685+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -33,7 +33,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-02-14T21:40:55.701191337+01:00"
+    created: "2021-03-07T06:48:43.959027669+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -64,7 +64,7 @@ entries:
   free5gcControlPlane:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-02-14T21:40:55.761740029+01:00"
+    created: "2021-03-07T06:48:44.056935154+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -88,7 +88,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-02-14T21:40:55.745634994+01:00"
+    created: "2021-03-07T06:48:44.0260481+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -113,7 +113,7 @@ entries:
   free5gcN3iwf:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-02-14T21:40:55.765667498+01:00"
+    created: "2021-03-07T06:48:44.06377561+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -134,7 +134,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-02-14T21:40:55.763814268+01:00"
+    created: "2021-03-07T06:48:44.06070038+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -156,7 +156,7 @@ entries:
   free5gcUserPlane:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-02-14T21:40:55.770463889+01:00"
+    created: "2021-03-07T06:48:44.070183805+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -177,7 +177,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-02-14T21:40:55.768103837+01:00"
+    created: "2021-03-07T06:48:44.067143704+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -199,7 +199,7 @@ entries:
   networks5g:
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2021-02-14T21:40:55.772293153+01:00"
+    created: "2021-03-07T06:48:44.0721128+01:00"
     description: A Helm chart to deploy the user plane of free5gc
     digest: 51fd3eaf752f2406b62125facb7471f20d8d7cb0a0936779e1b33a90dd19ec28
     icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
@@ -214,7 +214,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-02-14T21:40:55.771438131+01:00"
+    created: "2021-03-07T06:48:44.071271196+01:00"
     description: A Helm chart to deploy the user plane of free5gc
     digest: b9f3b1628aed64ab8ae898f63a7d4b1c6b11e8b9cd8bf0207665653f69c1a15b
     icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
@@ -229,8 +229,103 @@ entries:
     version: 0.1.0
   ueransim:
   - apiVersion: v2
+    appVersion: v3.1.3
+    created: "2021-03-07T06:48:44.091915651+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy UERANSIM
+    digest: 7fd2f8890ea11c75f3ce0190d696bfa12dc45fab258d998929db7fce00098faf
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-1.1.3.tgz
+    version: 1.1.3
+  - apiVersion: v2
+    appVersion: v3.1.2
+    created: "2021-03-07T06:48:44.090001242+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy UERANSIM
+    digest: af90a301ac0c67c3211a4fd7459fd7b89602b9fe76860c7ef887fb1a5665e634
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
+    appVersion: v3.1.1
+    created: "2021-03-07T06:48:44.088055722+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy UERANSIM
+    digest: 7dfba6af84055042451910b0177309b4cc9321667daf6b647ac71883bde10376
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
+    appVersion: v3.1.0
+    created: "2021-03-07T06:48:44.086143903+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy UERANSIM
+    digest: 405bf6483e6ff1b82410a0d1fe52c491a3fe083e3c722111af7efafbcb5d3b37
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: v3.0.3
+    created: "2021-03-07T06:48:44.084163988+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy UERANSIM
+    digest: 9c032a39916a1d5315fe673c794fd35035337236bfa707d45e937578ad7370f8
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
     appVersion: v3.0.2
-    created: "2021-02-14T21:40:55.782583943+01:00"
+    created: "2021-03-07T06:48:44.081510789+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -249,7 +344,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: v3.0.1
-    created: "2021-02-14T21:40:55.780416029+01:00"
+    created: "2021-03-07T06:48:44.079470543+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -268,7 +363,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 2.2.2
-    created: "2021-02-14T21:40:55.776522543+01:00"
+    created: "2021-03-07T06:48:44.075957167+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -287,7 +382,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 2.2.1
-    created: "2021-02-14T21:40:55.774368197+01:00"
+    created: "2021-03-07T06:48:44.074021113+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -304,4 +399,4 @@ entries:
     urls:
     - ueransim-0.1.0.tgz
     version: 0.1.0
-generated: "2021-02-14T21:40:55.657453941+01:00"
+generated: "2021-03-07T06:48:43.922972308+01:00"
