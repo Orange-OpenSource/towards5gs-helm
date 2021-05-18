@@ -27,7 +27,7 @@ Refer to this [link](https://helm.sh/docs/intro/install/) to view all possible i
 
 ### By using our Helm repository
 ```console
-helm repo add towards5gs 'https://gitlab.forge.orange-labs.fr/towards5gs/towards5gs-helm/-/raw/master/repo/'
+helm repo add towards5gs 'https://raw.githubusercontent.com/Orange-OpenSource/towards5gs-helm/main/repo/'
 helm repo update
 helm search repo
 ```
