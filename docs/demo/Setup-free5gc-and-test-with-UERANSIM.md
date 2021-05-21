@@ -101,9 +101,26 @@ ping -I uesimtun0 www.google.com
 traceroute -i uesimtun0 www.google.com
 curl --interface uesimtun0 www.google.com
 ```
+## Troubleshooting
+### Clean MongoDB
+According to the [Free5GC documentation](https://github.com/free5gc/free5gc/wiki), you may sometimes need to drop the data stored in the MongoDB. To do so with our implementation, you need simply to empty the folder that was used in the Persistent Volume on the corresponding node.
+```console
+sudo rm -rf {path-to-folder}/*
+```
+### TUN interface correctly created on the UE but internet 
+This may occur because of `ipv4.ip_forward` being enabled on the UPF POD. In fact, this functionalty is needed by the UPF as it allows him to [act as a router](http://linux-ip.net/html/routing-forwarding.html).
+
+To check if is enabled, please this command on the UPF POD. The result must be 1.
+```console
+cat /proc/sys/net/ipv4/ip_forward
+```
+We remind you that some CNI plugins (e.g. [Flannel](https://github.com/flannel-io/flannel)) allow this functionality by default, while others (.e.g. [Calico](https://github.com/projectcalico/cni-plugin)) require a [special configuration](https://docs.projectcalico.org/reference/host-endpoints/forwarded).
+
+
 ## Reference
  - https://github.com/free5gc/free5gc/wiki
  - https://github.com/free5gc/free5gc-compose
  - https://github.com/aligungr/UERANSIM/wiki/Usage#using-the-tun-interface
+ - https://docs.projectcalico.org/about/about-calico
 
 
