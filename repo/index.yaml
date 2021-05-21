@@ -3,7 +3,37 @@ entries:
   free5gc:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-05-19T14:57:12.903363403+02:00"
+    created: "2021-05-21T13:52:49.925303148+02:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    - condition: deployUserPlane
+      name: free5gcUserPlane
+      repository: ""
+    - condition: deployControlPlane
+      name: free5gcControlPlane
+      repository: ""
+    - condition: deployN3iwf
+      name: free5gcN3iwf
+      repository: ""
+    description: A Helm chart to deploy Free5gc
+    digest: 26d66cb9f317f867b0384e1d461d9c52fa5b514cfb29194b54be519242de9b23
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc
+    urls:
+    - free5gc-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-05-21T13:52:49.916914836+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -33,7 +63,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-05-19T14:57:12.867103678+02:00"
+    created: "2021-05-21T13:52:49.909226379+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -64,7 +94,31 @@ entries:
   free5gcControlPlane:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-05-19T14:57:12.945871086+02:00"
+    created: "2021-05-21T13:52:49.941124836+02:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    - condition: db.enabled
+      name: mongodb
+      repository: ""
+    description: A Helm chart to deploy the control plane of free5gc
+    digest: 79110eef1ca24b0f61bd128cd2fc198c38dceb0af0e8dd3617777992d9d5120c
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gcControlPlane
+    urls:
+    - free5gcControlPlane-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-05-21T13:52:49.935482772+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -88,7 +142,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-05-19T14:57:12.923272802+02:00"
+    created: "2021-05-21T13:52:49.930698587+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -113,7 +167,28 @@ entries:
   free5gcN3iwf:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-05-19T14:57:12.953568677+02:00"
+    created: "2021-05-21T13:52:49.943839842+02:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy the n3iwf function of free5gc
+    digest: de8892db8cc7c3e461935bef02dfbb2b7967bc8c8c6e49ff9134bbe69840f547
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gcN3iwf
+    urls:
+    - free5gcN3iwf-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-05-21T13:52:49.942884288+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -134,7 +209,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-05-19T14:57:12.949955407+02:00"
+    created: "2021-05-21T13:52:49.942014912+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -156,7 +231,28 @@ entries:
   free5gcUserPlane:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-05-19T14:57:12.962495305+02:00"
+    created: "2021-05-21T13:52:49.946991162+02:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy the user plane of free5gc
+    digest: f8cf516e006c14b7fc9a75afde02920f3e4068f0a821a7ac68f6d63c2fcac000
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gcUserPlane
+    urls:
+    - free5gcUserPlane-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-05-21T13:52:49.945940705+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -177,7 +273,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-05-19T14:57:12.958057572+02:00"
+    created: "2021-05-21T13:52:49.944882285+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -198,8 +294,23 @@ entries:
     version: 0.1.0
   networks5g:
   - apiVersion: v2
+    appVersion: 0.1.2
+    created: "2021-05-21T13:52:49.948858024+02:00"
+    description: A Helm chart to deploy the user plane of free5gc
+    digest: a2e3e57e5a0ae24108f74849521303a8ae083ca131d86973b69d55a41bd4c56b
+    icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: networks5g
+    urls:
+    - networks5g-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     appVersion: 0.1.1
-    created: "2021-05-19T14:57:12.966034817+02:00"
+    created: "2021-05-21T13:52:49.948466343+02:00"
     description: A Helm chart to deploy the user plane of free5gc
     digest: 51fd3eaf752f2406b62125facb7471f20d8d7cb0a0936779e1b33a90dd19ec28
     icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
@@ -214,7 +325,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-05-19T14:57:12.964302076+02:00"
+    created: "2021-05-21T13:52:49.948061981+02:00"
     description: A Helm chart to deploy the user plane of free5gc
     digest: b9f3b1628aed64ab8ae898f63a7d4b1c6b11e8b9cd8bf0207665653f69c1a15b
     icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
@@ -230,7 +341,26 @@ entries:
   ueransim:
   - apiVersion: v2
     appVersion: v3.1.3
-    created: "2021-05-19T14:57:13.00108313+02:00"
+    created: "2021-05-21T13:52:49.960650494+02:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy UERANSIM
+    digest: 017b09df59aecbb09396474974290aaa575bc58d6dbe8fd55cf37b3a0938abbc
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-1.1.5.tgz
+    version: 1.1.5
+  - apiVersion: v2
+    appVersion: v3.1.3
+    created: "2021-05-21T13:52:49.959523586+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -249,7 +379,7 @@ entries:
     version: 1.1.4
   - apiVersion: v2
     appVersion: v3.1.3
-    created: "2021-05-19T14:57:12.997753739+02:00"
+    created: "2021-05-21T13:52:49.958398699+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -268,7 +398,7 @@ entries:
     version: 1.1.3
   - apiVersion: v2
     appVersion: v3.1.2
-    created: "2021-05-19T14:57:12.994856813+02:00"
+    created: "2021-05-21T13:52:49.957406412+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -287,7 +417,7 @@ entries:
     version: 1.1.2
   - apiVersion: v2
     appVersion: v3.1.1
-    created: "2021-05-19T14:57:12.991872166+02:00"
+    created: "2021-05-21T13:52:49.955694852+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -306,7 +436,7 @@ entries:
     version: 1.1.1
   - apiVersion: v2
     appVersion: v3.1.0
-    created: "2021-05-19T14:57:12.988888067+02:00"
+    created: "2021-05-21T13:52:49.954676925+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -325,7 +455,7 @@ entries:
     version: 1.1.0
   - apiVersion: v2
     appVersion: v3.0.3
-    created: "2021-05-19T14:57:12.985866423+02:00"
+    created: "2021-05-21T13:52:49.953649597+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -344,7 +474,7 @@ entries:
     version: 1.0.3
   - apiVersion: v2
     appVersion: v3.0.2
-    created: "2021-05-19T14:57:12.981155497+02:00"
+    created: "2021-05-21T13:52:49.952594816+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -363,7 +493,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: v3.0.1
-    created: "2021-05-19T14:57:12.978207039+02:00"
+    created: "2021-05-21T13:52:49.951585029+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -382,7 +512,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 2.2.2
-    created: "2021-05-19T14:57:12.974077564+02:00"
+    created: "2021-05-21T13:52:49.95062083+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -401,7 +531,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 2.2.1
-    created: "2021-05-19T14:57:12.970280729+02:00"
+    created: "2021-05-21T13:52:49.949715316+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -418,4 +548,4 @@ entries:
     urls:
     - ueransim-0.1.0.tgz
     version: 0.1.0
-generated: "2021-05-19T14:57:12.830759604+02:00"
+generated: "2021-05-21T13:52:49.900736759+02:00"
