@@ -18,6 +18,9 @@ Please consult this [link](/motivations.md) to see the motivations that have led
 ## Contributing
 Moving towards a Cloud native model for the 5G system is not a simple task. We welcome all new [contributions](./CONTRIBUTING.md) making this project better!
 
+## Acknowledgement
+Thanks to both Free5GC and UERANSIM teams for their great efforts.
+
 ## License
 ***towards5GS-helm*** is under [Apache 2.0](./LICENSE) license.
 
