@@ -102,23 +102,7 @@ global:
   gnb:
     n3if:
       ipAddress: 10.100.50.236
-
-
-deployControlPlane: true              # set to "true" if you want to deploy the control plane NFs (AMF, AUSF, NRF, NSSF, PCF, SMF, UDM, UDR)
-deployUserPlane: true                 # set to "true" if you want to deploy the user plane NFs (UPF)
-deployN3iwf: true
-createNetworks: true
-
-free5gcUserPlane:
-  createNetworks: false
-
-free5gcControlPlane:
-  createNetworks: false
-
-free5gcN3iwf:
-  createNetworks: false
-
-networks5g:
+#Global network parametes
   n2network:
     enabled: true
     name: n2network
@@ -157,6 +141,17 @@ networks5g:
 
 
 
+deployControlPlane: true              # set to "true" if you want to deploy the control plane NFs (AMF, AUSF, NRF, NSSF, PCF, SMF, UDM, UDR)
+deployUserPlane: true                 # set to "true" if you want to deploy the user plane NFs (UPF)
+deployN3iwf: true
+createNetworks: true
 
+free5gcUserPlane:
+  createNetworks: false
 
+free5gcControlPlane:
+  createNetworks: false
+
+free5gcN3iwf:
+  createNetworks: false
 

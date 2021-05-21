@@ -78,6 +78,27 @@ global:
       pfcp:
         name: upf2-n4
         nodeport: 30807
+#Global network parametes
+  n4network:
+    name: n4network
+    subnetIP: 10.100.50.240
+  n3network:
+    name: n3network
+    subnetIP: 10.100.50.232
+  n6network:
+    name: n6network
+    subnetIP: 10.100.100.0     # The subnet IP of the Data Network
+    gateway: 1
+  n2network:
+    enabled: false
+  ovn4nfv:       # The ovn4nfv plugin can be used for N3 and N6 interfaces
+    enabled: false
+    name: ovn4nfv-k8s-plugin
+    n6network:
+      name: n6net
+    n3network:
+      name: n3net
+
 
 upf:
   name: upf
@@ -116,27 +137,4 @@ upfb:
     name: upfb-volume
 
 createNetworks: true
-
-networks5g:
-  n4network:
-    name: n4network
-    subnetIP: 10.100.50.240
-  n3network:
-    name: n3network
-    subnetIP: 10.100.50.232
-  n6network:
-    name: n6network
-    subnetIP: 10.100.100.0     # The subnet IP of the Data Network
-    gateway: 1
-  n2network:
-    enabled: false
-    name: n2network
-    subnetIP: 10.100.50.248
-  ovn4nfv:       # The ovn4nfv plugin can be used for N3 and N6 interfaces
-    enabled: false
-    name: ovn4nfv-k8s-plugin
-    n6network:
-      name: n6net
-    n3network:
-      name: n3net
 

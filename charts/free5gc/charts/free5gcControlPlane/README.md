@@ -77,8 +77,8 @@ If you want to use HTTPS for control plane communications you have to set `globa
 
 ### Networks configuration
 In this section, we'll suppose that you have only one interface on each Kubernetes node and its name is `toto`. Then you have to set these parameters to `toto`:
- - `networks5g.n2network.masterIf`
- - `networks5g.n4network.masterIf`
+ - `global.n2network.masterIf`
+ - `global.n4network.masterIf`
 Please see [NETWORKS5G's README](../networks5g) for more details.
 
 ## Customized installation

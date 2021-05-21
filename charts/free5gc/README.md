@@ -90,11 +90,11 @@ If you want to enable the ULCL feature you have to set `global.userPlaneArchitec
 
 ### Networks configuration
 In this section, we'll suppose that you have only one interface on each Kubernetes node and its name is `toto`. Then you have to set these parameters to `toto`:
- - `networks5g.n2network.masterIf`
- - `networks5g.n3network.masterIf`
- - `networks5g.n4network.masterIf`
- - `networks5g.n6network.masterIf`
-In addition, please make sure `networks5g.n6network.subnetIP`, `networks5g.n6network.gatewayIP` and `global.upf.n6if.IpAddress` parameters will match the IP address of the `toto` interface in order to make the UPF able to reach the Data Network via its N6 interface.
+ - `global.n2network.masterIf`
+ - `global.n3network.masterIf`
+ - `global.n4network.masterIf`
+ - `global.n6network.masterIf`
+In addition, please make sure `global.n6network.subnetIP`, `global.n6network.gatewayIP` and `global.upf.n6if.IpAddress` parameters will match the IP address of the `toto` interface in order to make the UPF able to reach the Data Network via its N6 interface.
 In case of ULCL enabled take care about `global.upfb.n6if.IpAddress`, `global.upf1.n6if.IpAddress` and `global.upf2.n6if.IpAddress` instead of `global.upf.n6if.IpAddress`.
 Please see [NETWORKS5G's README](../networks5g) for more details.
 

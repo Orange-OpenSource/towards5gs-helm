@@ -32,17 +32,17 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/n3iwf/n3iwf-configmap.yaml") . | sha256sum }}-{{ include (print $.Template.BasePath "/n3iwf/free5gc-configmap.yaml") . | sha256sum }}
         k8s.v1.cni.cncf.io/networks: '[
-{{- if not .Values.networks5g.ovn4nfv.enabled }}
-          { "name": "{{ .Values.networks5g.n3network.name }}", "interface": "n3", "ips": [ "{{ .Values.n3iwf.n3if.ipAddress }}/{{ .Values.networks5g.n3network.cidr }}" ] },
+{{- if not .Values.global.ovn4nfv.enabled }}
+          { "name": "{{ .Values.global.n3network.name }}", "interface": "n3", "ips": [ "{{ .Values.n3iwf.n3if.ipAddress }}/{{ .Values.global.n3network.cidr }}" ] },
 {{- end }}
 {{- if not .Values.global.amf.service.ngap.enabled }}
-          { "name": "{{ .Values.networks5g.n2network.name }}", "interface": "n2", "ips": [ "{{ .Values.n3iwf.n2if.ipAddress }}/{{ .Values.networks5g.n2network.cidr }}" ] },
+          { "name": "{{ .Values.global.n2network.name }}", "interface": "n2", "ips": [ "{{ .Values.n3iwf.n2if.ipAddress }}/{{ .Values.global.n2network.cidr }}" ] },
 {{- end }}
           { "name": "{{ .Values.n3iwf.ike.name }}", "interface": "ike", "ips": [ "{{ .Values.n3iwf.ike.prefixIP }}.{{ .Values.n3iwf.ike.suffixIP }}/24" ] }
           ]'
-{{- if .Values.networks5g.ovn4nfv.enabled }}
-        k8s.v1.cni.cncf.io/networks: {{ .Values.networks5g.ovn4nfv.name }}
-        k8s.plugin.opnfv.org/nfn-network: '{ "type": "ovn4nfv", "interface": [{ "name": "{{ .Values.networks5g.ovn4nfv.n3network.name }}", "ipAddress": "{{ .Values.n3iwf.n3if.ipAddress }}", "interface": "n3" , "defaultGateway": "false"}]}'
+{{- if .Values.global.ovn4nfv.enabled }}
+        k8s.v1.cni.cncf.io/networks: {{ .Values.global.ovn4nfv.name }}
+        k8s.plugin.opnfv.org/nfn-network: '{ "type": "ovn4nfv", "interface": [{ "name": "{{ .Values.global.ovn4nfv.n3network.name }}", "ipAddress": "{{ .Values.n3iwf.n3if.ipAddress }}", "interface": "n3" , "defaultGateway": "false"}]}'
 {{- end }}
     spec:
       containers:

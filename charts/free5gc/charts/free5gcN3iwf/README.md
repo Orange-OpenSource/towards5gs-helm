@@ -22,7 +22,7 @@ helm -n <namespace> install <release-name> ./free5gcN3iwf/
 
 Note that if you have already installed the UERANSIM on the same cluster, you should disable the creation of the N2 network as it has already been created for the UERANSIM.
 ```console
-helm -n <namespace> install --set networks5g.n2network.enabled=false <release-name> ./free5gcN3iwf/
+helm -n <namespace> install --set global.n2network.enabled=false <release-name> ./free5gcN3iwf/
 ```
 
 ### Check the state of the created pod
@@ -43,8 +43,8 @@ helm -n <namespace> uninstall <release-name>
 
 ### Networks configuration
 In this section, we'll suppose that you have only one interface on each Kubernetes node and its name is `toto`. Then you have to set these parameters to `toto`:
- - `networks5g.n2network.masterIf`
- - `networks5g.n4network.masterIf`
+ - `global.n2network.masterIf`
+ - `global.n4network.masterIf`
 Please see [NETWORKS5G's README](/charts/networks5g) for more details.
 
 ## Customized installation

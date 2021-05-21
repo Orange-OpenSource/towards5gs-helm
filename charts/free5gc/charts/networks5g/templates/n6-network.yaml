@@ -10,24 +10,24 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-{{- if and .Values.n6network.enabled (not .Values.ovn4nfv.enabled) }}
+{{- if and .Values.global.n6network.enabled (not .Values.global.ovn4nfv.enabled) }}
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-  name: {{ .Values.n6network.name }}
+  name: {{ .Values.global.n6network.name }}
 spec:
   config: '{
       "cniVersion": "0.3.1",
       "type": "macvlan",
-      "master": {{ .Values.n6network.masterIf | quote }},
+      "master": {{ .Values.global.n6network.masterIf | quote }},
       "mode": "bridge",
       "ipam": {
         "type": "static",
-        "subnet": "{{ .Values.n6network.subnetIP }}/{{ .Values.n6network.cidr }}",
+        "subnet": "{{ .Values.global.n6network.subnetIP }}/{{ .Values.global.n6network.cidr }}",
         "routes": [
-          { "dst": "{{ .Values.n6network.subnetIP }}/{{ .Values.n6network.cidr }}", "gw": "{{ .Values.n6network.gatewayIP }}" }
+          { "dst": "{{ .Values.global.n6network.subnetIP }}/{{ .Values.global.n6network.cidr }}", "gw": "{{ .Values.global.n6network.gatewayIP }}" }
         ],
-        "gateway": "{{ .Values.n6network.gatewayIP }}"
+        "gateway": "{{ .Values.global.n6network.gatewayIP }}"
       }
     }'
 {{- end }}

@@ -34,6 +34,31 @@ global:
         type: ClusterIP
   db:
     nodePort: "30017"
+#Global network parametes
+  n4network:
+    enabled: false
+  n3network:
+    enabled: false
+    name: n3network
+    subnetIP: 10.100.50.232
+    cidr: 29
+  n6network:
+    enabled: false
+  n9network:
+    enabled: false
+  n2network:
+    enabled: true
+    name: n2network
+    subnetIP: 10.100.50.248
+    cidr: 29
+  ovn4nfv:       # The ovn4nfv plugin can be used for N3 and N6 interfaces
+    enabled: false
+    name: ovn4nfv-k8s-plugin
+    n6network:
+      name: n6net
+    n3network:
+      name: n3net
+
 
 n3iwf:
   enabled: true
@@ -69,29 +94,4 @@ volume:
 
 
 createNetworks: true
-
-networks5g:
-  n4network:
-    enabled: false
-  n3network:
-    enabled: false
-    name: n3network
-    subnetIP: 10.100.50.232
-    cidr: 29
-  n6network:
-    enabled: false
-  n9network:
-    enabled: false
-  n2network:
-    enabled: true
-    name: n2network
-    subnetIP: 10.100.50.248
-    cidr: 29
-  ovn4nfv:       # The ovn4nfv plugin can be used for N3 and N6 interfaces
-    enabled: false
-    name: ovn4nfv-k8s-plugin
-    n6network:
-      name: n6net
-    n3network:
-      name: n3net
 

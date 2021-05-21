@@ -34,11 +34,11 @@ helm -n <namespace> uninstall <release-name>
 
 ## Configuration
 In this section, we'll suppose that you have only one interface on each Kubernetes node and its name is `toto`. Then you have to set these parameters to `toto`:
- - `n2network.masterIf`
- - `n3network.masterIf`
- - `n4network.masterIf`
- - `n6network.masterIf`
-In addition, please make sure `n6network.subnetIP` and `n6network.gatewayIP` parameters will match the IP address of the `toto` interface in order to make the UPF able to reach the Data Network via its N6 interface.
+ - `global.n2network.masterIf`
+ - `global.n3network.masterIf`
+ - `global.n4network.masterIf`
+ - `global.n6network.masterIf`
+In addition, please make sure `global.n6network.subnetIP` and `global.n6network.gatewayIP` parameters will match the IP address of the `toto` interface and its gateway in order to make the UEs able to reach the Data Network through the UPF via its N6 interface.
 
 ## Customized installation
 This chart allows you to customize its installation. The table below shows the parameters that can be modified before installing the chart or when upgrading it as well as their default values.
@@ -46,39 +46,56 @@ This chart allows you to customize its installation. The table below shows the p
 ### N2 Network parameters
 | Parameter | Description | Default value |
 | --- | --- | --- |
-| `n2network.enabled` | If true a network attachment definition will be created fo the N2 network. | `true` |
-| `n2network.name` | N2 network name. | `n2network` |
-| `n2network.masterIf` | N2 network MACVLAN master interface. | `eth0` |
-| `n2network.subnetIP` | N2 network subnet IP address. | `10.100.50.248` |
-| `n2network.cidr` | N2 network cidr. | `29` |
-| `n2network.gatewayIP` | N2 network gateway IP address. | `10.100.50.254` |
-| `n2network.excludeIP` | An exluded IP address from the subnet range. You can give this address to a MACVLAN interface on the host in order to enable to containers to communicate with their host via the N2 interface (optional). | `10.100.50.254` |
+| `global.n2network.enabled` | If true a network attachment definition will be created fo the N2 network. | `true` |
+| `global.n2network.name` | N2 network name. | `n2network` |
+| `global.n2network.masterIf` | N2 network MACVLAN master interface. | `eth0` |
+| `global.n2network.subnetIP` | N2 network subnet IP address. | `10.100.50.248` |
+| `global.n2network.cidr` | N2 network cidr. | `29` |
+| `global.n2network.gatewayIP` | N2 network gateway IP address. | `10.100.50.254` |
+| `global.n2network.excludeIP` | An exluded IP address from the subnet range. You can give this address to a MACVLAN interface on the host in order to enable to containers to communicate with their host via the N2 interface (optional). | `10.100.50.254` |
 
 ### N3 Network parameters
-| `n3network.enabled` | If true a network attachment definition will be created fo the N3 network. | `true` |
-| `n3network.name` | N3 network name. | `n3network` |
-| `n3network.masterIf` | N3 network MACVLAN master interface. | `eth0` |
-| `n3network.subnetIP` | N3 network subnet IP address. | `10.100.50.232` |
-| `n3network.cidr` | N3 network cidr. | `29` |
-| `n3network.gatewayIP` | N3 network gateway IP address. | `10.100.50.238` |
-| `n3network.excludeIP` | An exluded IP address from the subnet range. You can give this address to a MACVLAN interface on the host in order to enable to containers to communicate with their host via the N3 interface (optional). | `10.100.50.238` |
+| Parameter | Description | Default value |
+| --- | --- | --- |
+| `global.n3network.enabled` | If true a network attachment definition will be created fo the N3 network. | `true` |
+| `global.n3network.name` | N3 network name. | `n3network` |
+| `global.n3network.masterIf` | N3 network MACVLAN master interface. | `eth0` |
+| `global.n3network.subnetIP` | N3 network subnet IP address. | `10.100.50.232` |
+| `global.n3network.cidr` | N3 network cidr. | `29` |
+| `global.n3network.gatewayIP` | N3 network gateway IP address. | `10.100.50.238` |
+| `global.n3network.excludeIP` | An exluded IP address from the subnet range. You can give this address to a MACVLAN interface on the host in order to enable to containers to communicate with their host via the N3 interface (optional). | `10.100.50.238` |
 
 ### N4 Network parameters
-| `n4network.enabled` | If true a network attachment definition will be created fo the N4 network. | `true` |
-| `n4network.name` | N4 network name. | `n4network` |
-| `n4network.masterIf` | N4 network MACVLAN master interface. | `eth0` |
-| `n4network.subnetIP` | N4 network subnet IP address. | `10.100.50.240` |
-| `n4network.cidr` | N4 network cidr. | `29` |
-| `n4network.gatewayIP` | N4 network gateway IP address. | `10.100.50.246` |
-| `n4network.excludeIP` | An exluded IP address from the subnet range. You can give this address to a MACVLAN interface on the host in order to enable to containers to communicate with their host via the N4 interface (optional). | `10.100.50.246` |
+| Parameter | Description | Default value |
+| --- | --- | --- |
+| `global.n4network.enabled` | If true a network attachment definition will be created fo the N4 network. | `true` |
+| `global.n4network.name` | N4 network name. | `n4network` |
+| `global.n4network.masterIf` | N4 network MACVLAN master interface. | `eth0` |
+| `global.n4network.subnetIP` | N4 network subnet IP address. | `10.100.50.240` |
+| `global.n4network.cidr` | N4 network cidr. | `29` |
+| `global.n4network.gatewayIP` | N4 network gateway IP address. | `10.100.50.246` |
+| `global.n4network.excludeIP` | An exluded IP address from the subnet range. You can give this address to a MACVLAN interface on the host in order to enable to containers to communicate with their host via the N4 interface (optional). | `10.100.50.246` |
 
 ### N6 Network parameters
-| `n6network.enabled` | If true a network attachment definition will be created fo the N6 network. | `true` |
-| `n6network.name` | N6 network name. | `n6network` |
-| `n6network.masterIf` | N6 network MACVLAN master interface. The IP address of this interface must be in the N6 network subnet IP rang. | `eth1` |
-| `n6network.subnetIP` | N6 network subnet IP address (The IP address of the Data Network. | `10.100.100.0` |
-| `n6network.cidr` | N6 network cidr. | `24` |
-| `n6network.gatewayIP` | N6 network gateway IP address (The IP address to go to the Data Network). | `10.100.100.1` |
+| Parameter | Description | Default value |
+| --- | --- | --- |
+| `global.n6network.enabled` | If true a network attachment definition will be created fo the N6 network. | `true` |
+| `global.n6network.name` | N6 network name. | `n6network` |
+| `global.n6network.masterIf` | N6 network MACVLAN master interface. The IP address of this interface must be in the N6 network subnet IP rang. | `eth1` |
+| `global.n6network.subnetIP` | N6 network subnet IP address (The IP address of the Data Network. | `10.100.100.0` |
+| `global.n6network.cidr` | N6 network cidr. | `24` |
+| `global.n6network.gatewayIP` | N6 network gateway IP address (The IP address to go to the Data Network). | `10.100.100.1` |
+
+### N9 Network parameters
+| Parameter | Description | Default value |
+| --- | --- | --- |
+| `global.n9network.enabled` | If true a network attachment definition will be created fo the N9 network. | `true` |
+| `global.n9network.name` | N9 network name. | `n9network` |
+| `global.n9network.masterIf` | N9 network MACVLAN master interface. | `eth0` |
+| `global.n9network.subnetIP` | N9 network subnet IP address. | `10.100.50.224` |
+| `global.n9network.cidr` | N9 network cidr. | `29` |
+| `global.n9network.gatewayIP` | N9 network gateway IP address. | `10.100.50.230` |
+| `global.n9network.excludeIP` | An exluded IP address from the subnet range. You can give this address to a MACVLAN interface on the host in order to enable to containers to communicate with their host via the N9 interface (optional). | `10.100.50.230` |
 
 ## Limitations
 Currently, this Helm chart uses the [MACVLAN plugin](https://www.cni.dev/plugins/main/macvlan/) for all network attachment definition. However, the use of a Userspace CNI plugin like [SR-IOV] is necessary for user plane traffic (N3 and N6 interfaces). For the next versions, we are planning to provide an option to use this CNI plugin.

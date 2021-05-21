@@ -13,7 +13,7 @@
 apiVersion: v2
 name: free5gcControlPlane
 description: A Helm chart to deploy the control plane of free5gc
-version: 0.1.1
+version: 0.1.2
 appVersion: v3.0.5
 dependencies:
 - name: networks5g

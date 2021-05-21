@@ -154,7 +154,7 @@ datanetwork: *dn1
 
 createNetworks: true
 
-networks5g:
+global:
   n4network:
     enabled: false
     name: n4network

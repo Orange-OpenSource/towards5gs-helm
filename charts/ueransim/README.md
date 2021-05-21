@@ -20,7 +20,7 @@ helm -n <namespace> install <release-name> ./ueransim/
 
 Note that if you have already installed the N3iwf on the same cluster, you should disable the creation of the N2 network as it has already been created for the N3iwf.
 ```console
-helm -n <namespace> install --set networks5g.n2network.enabled=false <release-name> ./ueransim/
+helm -n <namespace> install --set global.n2network.enabled=false <release-name> ./ueransim/
 ```
 
 ### Check the state of the created pod
@@ -47,9 +47,9 @@ helm -n <namespace> install -f ./ueransim/open5gs-values.yaml <release-name> ./u
 
 
 ### Networks configuration
-In this section, we'll suppose that you have only one interface on each Kubernetes node and its name is `toto`. Then you have to set these parameters to `toto`:
- - `networks5g.n2network.masterIf`
- - `networks5g.n4network.masterIf`
+In this section, we'll suppose that you have at least one interface on each Kubernetes node and its name is `toto`. Then you have to set these parameters to `toto`:
+ - `global.n2network.masterIf`
+ - `global.n4network.masterIf`
 Please see [NETWORKS5G's README](../networks5g) for more details.
 
 ## Usage information

@@ -10,11 +10,11 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-{{- if .Values.ovn4nfv.enabled }}
+{{- if .Values.global.ovn4nfv.enabled }}
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-  name: {{ .Values.ovn4nfv.name }}
+  name: {{ .Values.global.ovn4nfv.name }}
 spec:
   config: '{
       "cniVersion": "0.3.1",
