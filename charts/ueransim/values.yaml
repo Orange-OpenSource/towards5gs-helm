@@ -66,6 +66,35 @@ global:
   gnb:
     n3if:
       ipAddress: 10.100.50.236
+#Global network parametes
+  n4network:
+    enabled: false
+    name: n4network
+    subnetIP: 10.100.50.240
+  n3network:
+    enabled: false
+    name: n3network
+    subnetIP: 10.100.50.232
+    cidr: 29
+  n6network:
+    enabled: false
+    name: n6network
+    subnetIP: 10.100.100.0     # The prefix IP of the Data Network
+    gateway: 1
+  n2network:
+    name: n2network
+    subnetIP: 10.100.50.248
+    cidr: 29
+  n9network:
+    enabled: false
+  ovn4nfv:       # The ovn4nfv plugin can be used for N3 and N6 interfaces
+    enabled: false
+    name: ovn4nfv-k8s-plugin
+    n6network:
+      name: n6net
+    n3network:
+      name: n3net
+
 
 projectName: ueransim
 
@@ -153,32 +182,3 @@ n2if:  # NGAP
 datanetwork: *dn1
 
 createNetworks: true
-
-global:
-  n4network:
-    enabled: false
-    name: n4network
-    subnetIP: 10.100.50.240
-  n3network:
-    enabled: false
-    name: n3network
-    subnetIP: 10.100.50.232
-    cidr: 29
-  n6network:
-    enabled: false
-    name: n6network
-    subnetIP: 10.100.100.0     # The prefix IP of the Data Network
-    gateway: 1
-  n2network:
-    name: n2network
-    subnetIP: 10.100.50.248
-    cidr: 29
-  n9network:
-    enabled: false
-  ovn4nfv:       # The ovn4nfv plugin can be used for N3 and N6 interfaces
-    enabled: false
-    name: ovn4nfv-k8s-plugin
-    n6network:
-      name: n6net
-    n3network:
-      name: n3net
