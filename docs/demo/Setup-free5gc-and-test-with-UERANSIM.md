@@ -108,9 +108,9 @@ According to the [Free5GC documentation](https://github.com/free5gc/free5gc/wiki
 sudo rm -rf {path-to-folder}/*
 ```
 ### TUN interface correctly created on the UE but internet 
-This may occur because of `ipv4.ip_forward` being enabled on the UPF POD. In fact, this functionalty is needed by the UPF as it allows him to [act as a router](http://linux-ip.net/html/routing-forwarding.html).
+This may occur because of `ipv4.ip_forward` being disabled on the UPF POD. In fact, this functionalty is needed by the UPF as it allows him to [act as a router](http://linux-ip.net/html/routing-forwarding.html).
 
-To check if is enabled, please this command on the UPF POD. The result must be 1.
+To check if it is enabled, run this command on the UPF POD. The result must be 1.
 ```console
 cat /proc/sys/net/ipv4/ip_forward
 ```
