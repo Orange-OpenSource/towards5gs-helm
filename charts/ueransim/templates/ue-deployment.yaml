@@ -23,7 +23,7 @@ spec:
     matchLabels:
       app: {{ .Values.projectName }}
       component: {{ .Values.ue.name }}
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.ue.replicaCount }}
   template:
     metadata:
       labels:
