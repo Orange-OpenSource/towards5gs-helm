@@ -1,0 +1,87 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI, Michal CHABIERA
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- if .Values.ue.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.ue.test.connectivity.configmap.name }}
+  annotations:
+    "halm.sh/hook": test
+data:
+  script-connectivity-test.sh: |
+    #!/bin/bash
+    echo "Get ue pod name"
+    pod_name="$(kubectl -n free5gc get pods | grep -- -ue- | awk '{print $1}')"
+    echo "${pod_name}"
+    echo "***********************************************************************"
+    echo ""
+
+    echo "Get ip address table for ${pod_name}"
+    ip_address="$(kubectl -n free5gc exec -i ${pod_name} -- bash -c 'ip address')"
+    echo "${ip_address}"
+    tun_interface="$(echo "$ip_address" | awk '$1 ~ /^[0-9].*/ && $2 ~/^uesimtun0/ {print}')"
+    if [ -z "$tun_interface" ] ; then
+      echo ""
+      echo "uesimtun0 interface not found"
+      exit 1
+    fi
+    echo "***********************************************************************"
+    echo ""
+
+    echo "Test connectivity"
+    ping_output="$(kubectl -n free5gc exec -i ${pod_name} -- bash -c 'ping -c 10 -I uesimtun0  google.com')"
+    echo "${ping_output}"
+    echo "***********************************************************************"
+    echo ""
+    ping_statistics="$(echo "$ping_output" |tail -n -2 |awk -F', ' 'NR==1 {print}')"
+    loss_rate="$(echo "$ping_statistics" |awk -F', ' '{for(i=1; i<=NF; i++){if(match($i, /packet loss$/))print $i}}')"
+    if [ "$loss_rate" != "100% packet loss" ] ; then
+      echo "Connection test passed - ${loss_rate}"
+      exit 0
+    else
+      echo "Connection test failed - ${loss_rate}"
+      exit 1
+    fi
+#    echo "$ping_output" |tail -n -2 |awk -F', ' 'NR==1 { print ($3 == "0% packet loss"? "Connection passed - " $3: "Connection failed - " $3)}'
+
+    #ping -qc10 google.com |awk -F', ' 'END {print ($3 == "0% packet loss"? "Connection passed - " $3: "Connection failed - " $3)}'
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.ue.test.connectivity.name }}
+  annotations:
+    helm.sh/hook: test
+spec:
+  template:
+    spec:
+      containers:
+      - name: {{ .Values.ue.test.connectivity.name }}
+        image: {{ .Values.ue.test.connectivity.image }}
+        imagePullPolicy: IfNotPresent
+        command: ["bin/sh"]
+        args: ["/scripts/script-connectivity-test.sh"]
+        volumeMounts:
+        - name: {{ .Values.ue.test.connectivity.volume.name }}
+          mountPath: {{ .Values.ue.test.connectivity.volume.mount }}
+          readOnly: true
+      volumes:
+      - name: {{ .Values.ue.test.connectivity.volume.name }}
+        configMap:
+          defaultMode: 0755
+          name: {{ .Values.ue.test.connectivity.configmap.name }}
+      restartPolicy: Never
+  backoffLimit: 4
+  ttlSecondsAfterFinished: {{ .Values.ue.test.connectivity.ttlseconds }}
+{{- end }}
