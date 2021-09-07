@@ -175,6 +175,17 @@ ue:
       EA1: true
       EA2: true
       EA3: true
+  test:
+    connectivity:
+      name: ue-connectivity-test
+      image: bitnami/kubectl:1.22.0
+      configmap:
+        name: connectivity-test-configmap
+      volume:
+        name: connectivity-test-volume
+        mount: /scripts
+      ttlseconds: 100
+
 
 n2if:  # NGAP
   ipAddress: 10.100.50.250
