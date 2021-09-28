@@ -63,12 +63,12 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Create the name of the service account to use
+Define the name of free5GC ConfigMap
 */}}
-{{- define "free5gc-nrf.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "free5gc-nrf.fullname" .) .Values.serviceAccount.name }}
+{{- define "free5gc-nrf.free5GCCMName" -}}
+{{- if .Values.free5gc.configmap.create }}
+{{- .Values.free5gc.configmap.name }}
 {{- else }}
-{{- default "default" .Values.serviceAccount.name }}
+{{- .Values.global.free5gc.configmap.name }}
 {{- end }}
 {{- end }}

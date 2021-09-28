@@ -109,5 +109,5 @@ spec:
           - configMap:
               name: {{ .configmap.name }}
           - configMap:
-              name: {{ $.Values.free5gc.configmap.name }}
+              name: {{ include "free5gc-nrf.free5GCCMName" $ }}
 {{- end }}

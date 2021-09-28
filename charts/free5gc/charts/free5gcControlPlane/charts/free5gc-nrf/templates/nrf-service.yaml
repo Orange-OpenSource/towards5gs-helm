@@ -10,22 +10,24 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
+{{- with .Values.nrf }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.global.nrf.service.name }}
+  name: {{ $.Values.global.nrf.service.name }}
   labels:
-    {{- include "free5gc-nrf.labels" . | nindent 4 }}
-    project: {{ .Values.global.projectName }}
-    nf: {{ .Values.nrf.name }}
+    {{- include "free5gc-nrf.labels" $ | nindent 4 }}
+    project: {{ $.Values.global.projectName }}
+    nf: {{ .name }}
 spec:
-  type: {{ .Values.global.nrf.service.type }}
+  type: {{ $.Values.global.nrf.service.type }}
   ports:
-    - port: {{ .Values.global.nrf.service.port }}
-      targetPort: {{ .Values.nrf.port }}
+    - port: {{ $.Values.global.nrf.service.port }}
+      targetPort: {{ $.Values.global.nrf.service.port }}
       protocol: TCP
       name: http
   selector:
-    {{- include "free5gc-nrf.selectorLabels" . | nindent 4 }}
-    project: {{ .Values.global.projectName }}
-    nf: {{ .Values.nrf.name }}
+    {{- include "free5gc-nrf.selectorLabels" $ | nindent 4 }}
+    project: {{ $.Values.global.projectName }}
+    nf: {{ .name }}
+{{- end }}

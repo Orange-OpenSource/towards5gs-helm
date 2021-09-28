@@ -10,13 +10,13 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-{{- if .Values.nrf.enabled }}
+{{- with .Values.nrf }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.nrf.configmap.name }}
+  name: {{ .configmap.name }}
   labels:
-    app: {{ .Values.global.projectName }}
+    app: {{ $.Values.global.projectName }}
 data:
   nrfcfg.yaml: |
     info:
@@ -25,31 +25,13 @@ data:
     
     configuration:
       MongoDBName: free5gc
-      MongoDBUrl: mongodb://{{ .Values.mongodb.service.name }}:{{ .Values.mongodb.service.port }}
+      MongoDBUrl: mongodb://{{ $.Values.mongodb.service.name }}:{{ $.Values.mongodb.service.port }}
       sbi:
-        scheme: {{ .Values.global.sbi.scheme }}
-        registerIPv4: {{ .Values.nrf.service.name }} # IP used to serve NFs or register to another NRF
+        scheme: {{ $.Values.global.sbi.scheme }}
+        registerIPv4: {{ $.Values.global.nrf.service.name }} # IP used to serve NFs or register to another NRF
         bindingIPv4: 0.0.0.0  # IP used to bind the service
-        port: {{ .Values.nrf.port }}
-      DefaultPlmnId:
-        mcc: 208
-        mnc: 93
-      serviceNameList:
-        - nnrf-nfm
-        - nnrf-disc
-    
-    logger:
-      NRF:
-        debugLevel: info
-        ReportCaller: false
-      PathUtil:
-        debugLevel: info
-        ReportCaller: false
-      OpenApi:
-        debugLevel: info
-        ReportCaller: false
-      MongoDBLibrary:
-        debugLevel: info
-        ReportCaller: false
+        port: {{ $.Values.global.nrf.service.port }}
+
+      {{- toYaml .configuration.configuration | nindent 6 }}
 {{- end }}
 
