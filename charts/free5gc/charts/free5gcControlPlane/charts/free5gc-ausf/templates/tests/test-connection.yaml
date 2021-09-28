@@ -10,12 +10,13 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
+{{- with .Values.ausf }}
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "free5gc-ausf.fullname" . }}-test-connection"
+  name: "{{ include "free5gc-ausf.fullname" $ }}-test-connection"
   labels:
-    {{- include "free5gc-ausf.labels" . | nindent 4 }}
+    {{- include "free5gc-ausf.labels" $ | nindent 4 }}
   annotations:
     "helm.sh/hook": test
 spec:
@@ -23,5 +24,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ .Values.global.ausf.service.name }}:{{ .Values.ausf.service.port }}']
+      args: ['{{ .service.name }}:{{ .service.port }}']
   restartPolicy: Never
