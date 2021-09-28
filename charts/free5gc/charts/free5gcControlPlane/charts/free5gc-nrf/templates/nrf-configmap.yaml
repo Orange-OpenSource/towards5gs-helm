@@ -33,5 +33,9 @@ data:
         port: {{ $.Values.global.nrf.service.port }}
 
       {{- toYaml .configuration.configuration | nindent 6 }}
+
+    logger:
+      {{- toYaml .configuration.logger | nindent 6 }}
+
 {{- end }}
 
