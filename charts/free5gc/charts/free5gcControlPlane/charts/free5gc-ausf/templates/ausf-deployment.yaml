@@ -75,24 +75,6 @@ spec:
           name: {{ .volume.name }}
         resources:
             {{- toYaml .resources | nindent 12 }}
-        readinessProbe:
-          initialDelaySeconds: {{ .readinessProbe.initialDelaySeconds }}
-          periodSeconds: {{ .readinessProbe.periodSeconds }}
-          timeoutSeconds: {{ .readinessProbe.timeoutSeconds }}
-          failureThreshold:  {{ .readinessProbe.failureThreshold }}
-          successThreshold: {{ .readinessProbe.successThreshold }}
-          httpGet:
-            scheme: {{ $.Values.global.sbi.scheme | quote | upper }}
-            port: {{ .service.port }}
-        livenessProbe:
-          initialDelaySeconds: {{ .livenessProbe.initialDelaySeconds }}
-          periodSeconds: {{ .livenessProbe.periodSeconds }}
-          timeoutSeconds: {{ .livenessProbe.timeoutSeconds }}
-          failureThreshold: {{ .livenessProbe.failureThreshold }}
-          successThreshold: {{ .livenessProbe.successThreshold }}
-          httpGet:
-            scheme: {{ $.Values.global.sbi.scheme | quote | upper }}
-            port: {{ .service.port }}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       nodeSelector:
