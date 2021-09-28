@@ -83,7 +83,7 @@ spec:
           successThreshold: {{ .readinessProbe.successThreshold }}
           httpGet:
             scheme: {{ $.Values.global.sbi.scheme | quote | upper }}
-            port: {{ .port }}
+            port: {{ $.Values.global.nrf.service.port }}
         livenessProbe:
           initialDelaySeconds: {{ .livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ .livenessProbe.periodSeconds }}
@@ -92,7 +92,7 @@ spec:
           successThreshold: {{ .livenessProbe.successThreshold }}
           httpGet:
             scheme: {{ $.Values.global.sbi.scheme | quote | upper }}
-            port: {{ .port }}
+            port: {{ $.Values.global.nrf.service.port }}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       nodeSelector:
