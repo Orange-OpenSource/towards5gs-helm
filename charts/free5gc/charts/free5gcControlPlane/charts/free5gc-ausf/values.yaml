@@ -68,7 +68,7 @@ ausf:
   volume:
     name: ausf-volume
     mount: /free5gc/config/
-    podAnnotations: {}
+  podAnnotations: {}
     # additional annotations
   imagePullSecrets: []
   podSecurityContext: {}
