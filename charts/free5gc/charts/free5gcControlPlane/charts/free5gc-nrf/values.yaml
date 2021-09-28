@@ -61,7 +61,6 @@ nrf:
     name: towards5gs/free5gc-nrf
     tag: "v3.0.5"
     pullPolicy: IfNotPresent
-  port: 8000
   configmap:
     name: nrf-configmap
   volume:
