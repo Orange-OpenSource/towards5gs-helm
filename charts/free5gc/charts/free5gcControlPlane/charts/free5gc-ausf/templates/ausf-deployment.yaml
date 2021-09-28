@@ -62,7 +62,7 @@ spec:
         securityContext:
             {{- toYaml .securityContext | nindent 12 }}
         ports:
-        - containerPort: {{ .port }}
+        - containerPort: {{ .service.port }}
         command: ["./ausf"]
         args: ["-ausfcfg", "../config/ausfcfg.yaml"]
         env: 
