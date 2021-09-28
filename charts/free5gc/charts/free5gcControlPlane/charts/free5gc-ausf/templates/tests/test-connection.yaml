@@ -26,3 +26,4 @@ spec:
       command: ['wget']
       args: ['{{ .service.name }}:{{ .service.port }}']
   restartPolicy: Never
+{{- end }}
