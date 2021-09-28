@@ -37,8 +37,6 @@ initcontainers:
     image: busybox
     tag: "1.32.0"
 
-db:
-  enabled: true
 # This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
 mongodb:
   fullnameOverride: "mongodb"
