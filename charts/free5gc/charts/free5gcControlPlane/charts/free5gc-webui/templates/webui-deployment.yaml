@@ -64,6 +64,7 @@ spec:
         ports:
         - containerPort: {{ .service.port }}
         command: ["./webconsole"]
+        args: ["-webuicfg", "../config/webuicfg.yaml"]
         env:
           - name: GIN_MODE
             value: release
