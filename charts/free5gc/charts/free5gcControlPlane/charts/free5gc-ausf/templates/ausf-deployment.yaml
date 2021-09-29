@@ -65,9 +65,7 @@ spec:
         - containerPort: {{ .service.port }}
         command: ["./ausf"]
         args: ["-ausfcfg", "../config/ausfcfg.yaml"]
-        env: 
-          - name: DB_URI
-            value: mongodb://{{ $.Values.mongodb.service.name }}/free5gc
+        env:
           - name: GIN_MODE
             value: release
         volumeMounts:

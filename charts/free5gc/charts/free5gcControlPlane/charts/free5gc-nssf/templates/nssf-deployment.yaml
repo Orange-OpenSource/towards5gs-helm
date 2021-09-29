@@ -66,8 +66,6 @@ spec:
         command: ["./nssf"]
         args: ["-nssfcfg", "../config/nssfcfg.yaml"]
         env: 
-          - name: DB_URI
-            value: mongodb://{{ $.Values.mongodb.service.name }}/free5gc
           - name: GIN_MODE
             value: release
         volumeMounts:
