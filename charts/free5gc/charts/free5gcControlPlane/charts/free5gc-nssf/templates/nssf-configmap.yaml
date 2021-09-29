@@ -10,7 +10,7 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-{{- with .Values.ausf }}
+{{- with .Values.nssf }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -18,7 +18,7 @@ metadata:
   labels:
     app: {{ $.Values.global.projectName }}
 data:
-  ausfcfg.yaml: |
+  nssfcfg.yaml: |
     info:
       version: 1.0.0
       description: NSSF initial local configuration
