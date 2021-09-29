@@ -10,7 +10,7 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-{{- with .Values.ausf }}
+{{- with .Values.nssf }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -18,7 +18,7 @@ metadata:
   labels:
     app: {{ $.Values.global.projectName }}
 data:
-  ausfcfg.yaml: |
+  nssfcfg.yaml: |
     info:
       version: 1.0.0
       description: NSSF initial local configuration
@@ -36,44 +36,44 @@ data:
         - snssai:
             sst: 1
           nsiInformationList:
-            - nrfId: {{ .Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 10
         - snssai:
             sst: 1
             sd: 1
           nsiInformationList:
-            - nrfId: {{ .Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 11
         - snssai:
             sst: 1
             sd: 2
           nsiInformationList:
-            - nrfId: {{ .Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 12
-            - nrfId: {{ .Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 12
         - snssai:
             sst: 1
             sd: 3
           nsiInformationList:
-            - nrfId: {{ .Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 13
         - snssai:
             sst: 2
           nsiInformationList:
-            - nrfId: {{ .Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 20
         - snssai:
             sst: 2
             sd: 1
           nsiInformationList:
-            - nrfId: {{ .Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 21
         - snssai:
             sst: 1
             sd: 010203
           nsiInformationList:
-            - nrfId: {{ .Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 22
       amfSetList:
         - amfSetId: 1
@@ -81,7 +81,7 @@ data:
             - ffa2e8d7-3275-49c7-8631-6af1df1d9d26
             - 0e8831c3-6286-4689-ab27-1e2161e15cb1
             - a1fba9ba-2e39-4e22-9c74-f749da571d0d
-          nrfAmfSet: {{ .Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:8081/nnrf-nfm/v1/nf-instances
+          nrfAmfSet: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:8081/nnrf-nfm/v1/nf-instances
           supportedNssaiAvailabilityData:
             - tai:
                 plmnId:
@@ -107,7 +107,7 @@ data:
                 - sst: 1
                   sd: 2
         - amfSetId: 2
-          nrfAmfSet: {{ .Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:8084/nnrf-nfm/v1/nf-instances
+          nrfAmfSet: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:8084/nnrf-nfm/v1/nf-instances
           supportedNssaiAvailabilityData:
             - tai:
                 plmnId:
