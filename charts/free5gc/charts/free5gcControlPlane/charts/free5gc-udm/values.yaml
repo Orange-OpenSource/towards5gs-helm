@@ -1,0 +1,209 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for free5gcControlPlane chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+global:
+  projectName: free5gc
+  nrf:
+    service:
+      name: nrf-nnrf
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30800"
+  sbi:
+    scheme: http
+
+initcontainers:
+  curl:
+    registry: towards5gs
+    image: initcurl
+    tag: "1.0.0"
+  busybox:
+    image: busybox
+    tag: "1.32.0"
+
+# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
+mongodb:
+  service:
+    name: mongodb
+    type: ClusterIP
+    port: 27017
+    nodePort: "30017"
+
+udm:
+  name: udm
+  replicaCount: 1
+  image:
+    name: towards5gs/free5gc-udm
+    tag: "v3.0.5"
+    pullPolicy: IfNotPresent
+  service:
+    name: udm-nudm
+    type: ClusterIP
+    port: 80
+  configmap:
+    name: udm-configmap
+  volume:
+    name: udm-volume
+    mount: /free5gc/config/
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  readinessProbe:
+    initialDelaySeconds: 0
+    periodSeconds: 1
+    timeoutSeconds: 1
+    failureThreshold:  40
+    successThreshold: 1
+  livenessProbe:
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 10
+    failureThreshold: 3
+    successThreshold: 1
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  ingress:
+    enabled: false
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths: []
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+  configuration:
+    configuration:
+      serviceNameList:
+        - nudm-sdm
+        - nudm-uecm
+        - nudm-ueau
+        - nudm-ee
+        - nudm-pp
+      keys:
+        udmProfileAHNPublicKey: 5a8d38864820197c3394b92613b20b91633cbd897119273bf8e4a6f4eec0a650
+        udmProfileAHNPrivateKey: c53c22208b61860b06c62e5406a7b330c2b577aa5558981510d128247d38bd1d
+        udmProfileBHNPublicKey: 0472DA71976234CE833A6907425867B82E074D44EF907DFB4B3E21C1C2256EBCD15A7DED52FCBB097A4ED250E036C7B9C8C7004C4EEDC4F068CD7BF8D3F900E3B4
+        udmProfileBHNPrivateKey: F1AB1074477EBCC7F554EA1C5FC368B1616730155E0041AC447D6301975FECDA
+    logger:
+      UDM:
+        debugLevel: info
+        ReportCaller: false
+      OpenApi:
+        debugLevel: info
+        ReportCaller: false
+      PathUtil:
+        debugLevel: info
+        ReportCaller: false
+
+free5gc:
+  configmap:
+    create: true
+    name: free5gc4udm-configmap
+  configuration:
+      #all logging levels
+      #panic
+      #fatal
+      #error
+      #warn
+      #info
+      #debug
+      #trace
+      logger:
+      # network function
+        AMF:
+          debugLevel: info
+          ReportCaller: true
+        SMF:
+          debugLevel: info
+          ReportCaller: true
+        UDR:
+          debugLevel: info
+          ReportCaller: true
+        UDM:
+          debugLevel: info
+          ReportCaller: true
+        NRF:
+          debugLevel: info
+          ReportCaller: true
+        PCF:
+          debugLevel: info
+          ReportCaller: true
+        AUSF:
+          debugLevel: info
+          ReportCaller: true
+        N3IWF:
+          debugLevel: info
+          ReportCaller: true
+      # library
+        NAS:
+          debugLevel: info
+          ReportCaller: true
+        FSM:
+          debugLevel: info
+          ReportCaller: true
+        NGAP:
+          debugLevel: info
+          ReportCaller: true
+        NamfComm:
+          debugLevel: info
+          ReportCaller: true
+        NamfEventExposure:
+          debugLevel: info
+          ReportCaller: true
+        NsmfPDUSession:
+          debugLevel: info
+          ReportCaller: true
+        NudrDataRepository:
+          debugLevel: info
+          ReportCaller: true
+        OpenApi:
+          debugLevel: info
+          ReportCaller: true
+        Aper:
+          debugLevel: info
+          ReportCaller: true
+        CommonConsumerTest:
+          debugLevel: info
+          ReportCaller: true
+      # webui
+        WEBUI:
+          debugLevel: info
+          ReportCaller: true
+
+
+
