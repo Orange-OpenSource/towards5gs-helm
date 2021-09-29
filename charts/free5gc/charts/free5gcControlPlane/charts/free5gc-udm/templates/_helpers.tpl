@@ -13,7 +13,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "free5gc-nssf.name" -}}
+{{- define "free5gc-udm.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -22,7 +22,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "free5gc-nssf.fullname" -}}
+{{- define "free5gc-udm.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -38,16 +38,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "free5gc-nssf.chart" -}}
+{{- define "free5gc-udm.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "free5gc-nssf.labels" -}}
-helm.sh/chart: {{ include "free5gc-nssf.chart" . }}
-{{ include "free5gc-nssf.selectorLabels" . }}
+{{- define "free5gc-udm.labels" -}}
+helm.sh/chart: {{ include "free5gc-udm.chart" . }}
+{{ include "free5gc-udm.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -57,15 +57,15 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "free5gc-nssf.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "free5gc-nssf.name" . }}
+{{- define "free5gc-udm.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "free5gc-udm.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Define the name of free5GC ConfigMap
 */}}
-{{- define "free5gc-nssf.free5GCCMName" -}}
+{{- define "free5gc-udm.free5GCCMName" -}}
 {{- if .Values.free5gc.configmap.create }}
 {{- .Values.free5gc.configmap.name }}
 {{- else }}
