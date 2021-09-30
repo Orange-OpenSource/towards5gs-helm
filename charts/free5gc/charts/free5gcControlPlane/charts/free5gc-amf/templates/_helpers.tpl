@@ -63,6 +63,15 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+AMF Pod Annotations
+*/}}
+{{- define "free5gc-amf.amfAnnotations" -}}
+{{- if .Values.amf.podAnnotations }}
+{{- toYaml .Values.amf.podAnnotations }}
+{{- end }}
+{{- end }}
+
+{{/*
 Define the name of free5GC ConfigMap
 */}}
 {{- define "free5gc-amf.free5GCCMName" -}}
