@@ -63,6 +63,17 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+PCF Pod Annotations
+*/}}
+{{- define "free5gc-pcf.pcfAnnotations" -}}
+{{- with .Values.pcf }}
+{{- if .podAnnotations }}
+{{- toYaml .podAnnotations }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{/*
 Define the name of free5GC ConfigMap
 */}}
 {{- define "free5gc-pcf.free5GCCMName" -}}

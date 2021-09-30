@@ -66,8 +66,10 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 AMF Pod Annotations
 */}}
 {{- define "free5gc-amf.amfAnnotations" -}}
-{{- if .Values.amf.podAnnotations }}
-{{- toYaml .Values.amf.podAnnotations }}
+{{- with .Values.amf }}
+{{- if .podAnnotations }}
+{{- toYaml .podAnnotations }}
+{{- end }}
 {{- end }}
 {{- end }}
 

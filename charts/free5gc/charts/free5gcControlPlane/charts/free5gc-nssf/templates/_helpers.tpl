@@ -63,6 +63,17 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+NSSF Pod Annotations
+*/}}
+{{- define "free5gc-nssf.nssfAnnotations" -}}
+{{- with .Values.nssf }}
+{{- if .podAnnotations }}
+{{- toYaml .podAnnotations }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{/*
 Define the name of free5GC ConfigMap
 */}}
 {{- define "free5gc-nssf.free5GCCMName" -}}

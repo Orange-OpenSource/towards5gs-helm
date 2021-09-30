@@ -63,6 +63,17 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+NRF Pod Annotations
+*/}}
+{{- define "free5gc-nrf.nrfAnnotations" -}}
+{{- with .Values.nrf }}
+{{- if .podAnnotations }}
+{{- toYaml .podAnnotations }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{/*
 Define the name of free5GC ConfigMap
 */}}
 {{- define "free5gc-nrf.free5GCCMName" -}}

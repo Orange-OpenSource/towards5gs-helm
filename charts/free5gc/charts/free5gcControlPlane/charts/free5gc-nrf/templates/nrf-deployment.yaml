@@ -30,11 +30,9 @@ spec:
       nf: {{ .name }}
   template:
     metadata:
-      {{- with .podAnnotations }}
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/nrf-configmap.yaml") . | sha256sum }}-{{ include (print $.Template.BasePath "/free5gc-configmap.yaml") . | sha256sum }}
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        {{- include "free5gc-nrf.nrfAnnotations" $ | nindent 8 }}
+        checksum/config: {{ include (print $.Template.BasePath "/nrf-configmap.yaml") $ | sha256sum }}-{{ include (print $.Template.BasePath "/free5gc-configmap.yaml") $ | sha256sum }}
       labels:
         {{- include "free5gc-nrf.selectorLabels" $ | nindent 8 }}
         project: {{ $.Values.global.projectName }}
