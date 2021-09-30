@@ -32,7 +32,7 @@ spec:
     metadata:
       {{- with .podAnnotations }}
       annotations:
-{{- if not .Values.global.amf.service.ngap.enabled }}
+{{- if not $.Values.global.amf.service.ngap.enabled }}
         k8s.v1.cni.cncf.io/networks: '[
           { "name": "{{ .Values.global.n2network.name }}-{{ .name }}", "interface": "n2", "ips": [ "{{ .Values.global.amf.n2if.ipAddress }}/{{ .Values.global.n2network.cidr }}" ] }
           ]'
