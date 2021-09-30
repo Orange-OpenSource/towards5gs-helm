@@ -39,10 +39,8 @@ spec:
             { "name": "{{ $.Values.global.n2network.name }}-{{ .name }}",
               "interface": "n2",
               "ips": [ "{{ $.Values.global.amf.n2if.ipAddress }}/{{ $.Values.global.n2network.cidr }}" ],
-              "gateway": [ "{{ .Values.global.n2network.gatewayIP }}" ]
+              "gateway": [ "{{ $.Values.global.n2network.gatewayIP }}" ]
             }]'
-
-
 {{- end }}
         checksum/config: {{ include (print $.Template.BasePath "/amf-configmap.yaml") $ | sha256sum }}-{{ include (print $.Template.BasePath "/free5gc-configmap.yaml") $ | sha256sum }}
       labels:
