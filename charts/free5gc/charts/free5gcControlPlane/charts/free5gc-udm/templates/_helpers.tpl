@@ -63,6 +63,17 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+UDM Pod Annotations
+*/}}
+{{- define "free5gc-udm.udmAnnotations" -}}
+{{- with .Values.udm }}
+{{- if .podAnnotations }}
+{{- toYaml .podAnnotations }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{/*
 Define the name of free5GC ConfigMap
 */}}
 {{- define "free5gc-udm.free5GCCMName" -}}
