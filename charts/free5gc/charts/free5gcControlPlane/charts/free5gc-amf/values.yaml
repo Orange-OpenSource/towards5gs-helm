@@ -40,10 +40,6 @@ global:
         type: NodePort
   n2network:
     name: n2network
-    subnetIP: 10.100.50.248
-    cidr: 29
-  n2network:
-    name: n2network
     masterIf: eth0
     subnetIP: 10.100.50.248
     cidr: 29
