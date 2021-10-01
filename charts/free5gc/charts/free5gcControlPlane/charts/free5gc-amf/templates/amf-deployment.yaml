@@ -10,8 +10,6 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-{{- $amfConfigHash := include (print $.Template.BasePath "/amf-configmap.yaml") . | sha256sum -}}
-{{- $free5gcConfigHash := include (print $.Template.BasePath "/free5gc-configmap.yaml") . | sha256sum -}}
 {{- with .Values.amf }}
 apiVersion: apps/v1
 kind: Deployment
@@ -42,7 +40,7 @@ spec:
               "gateway": [ "{{ $.Values.global.n2network.gatewayIP }}" ]
             }]'
 {{- end }}
-        checksum/config: {{ include (print $.Template.BasePath "/amf-configmap.yaml") $ | sha256sum }}-{{ include (print $.Template.BasePath "/free5gc-configmap.yaml") $ | sha256sum }}
+        checksum/config: {{ include (print $.Template.BasePath "/amf-configmap.yaml") $ | sha256sum }}
       labels:
         {{- include "free5gc-amf.selectorLabels" $ | nindent 8 }}
         project: {{ $.Values.global.projectName }}
@@ -102,6 +100,4 @@ spec:
           sources:
           - configMap:
               name: {{ .configmap.name }}
-          - configMap:
-              name: {{ include "free5gc-amf.free5GCCMName" $ }}
 {{- end }}

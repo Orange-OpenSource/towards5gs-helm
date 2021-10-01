@@ -63,12 +63,13 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Define the name of free5GC ConfigMap
+UDR Pod Annotations
 */}}
-{{- define "free5gc-udr.free5GCCMName" -}}
-{{- if .Values.free5gc.configmap.create }}
-{{- .Values.free5gc.configmap.name }}
-{{- else }}
-{{- .Values.global.free5gc.configmap.name }}
+{{- define "free5gc-udr.udrAnnotations" -}}
+{{- with .Values.udr }}
+{{- if .podAnnotations }}
+{{- toYaml .podAnnotations }}
 {{- end }}
 {{- end }}
+{{- end }}
+

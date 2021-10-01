@@ -73,13 +73,3 @@ PCF Pod Annotations
 {{- end }}
 {{- end }}
 
-{{/*
-Define the name of free5GC ConfigMap
-*/}}
-{{- define "free5gc-pcf.free5GCCMName" -}}
-{{- if .Values.free5gc.configmap.create }}
-{{- .Values.free5gc.configmap.name }}
-{{- else }}
-{{- .Values.global.free5gc.configmap.name }}
-{{- end }}
-{{- end }}
