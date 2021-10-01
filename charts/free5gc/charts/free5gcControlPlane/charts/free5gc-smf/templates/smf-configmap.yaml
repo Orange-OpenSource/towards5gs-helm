@@ -43,4 +43,12 @@ data:
     logger:
       {{- toYaml .configuration.logger | nindent 6 }}
 
+
+  uerouting.yaml: |
+    info:
+      version: 1.0.0
+      description: Routing information for UE
+    ueRoutingInfo:
+      {{- toYaml .configuration.logger | nindent 6 }}
+
 {{- end }}

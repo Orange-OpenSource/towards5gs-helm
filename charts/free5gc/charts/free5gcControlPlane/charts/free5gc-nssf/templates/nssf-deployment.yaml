@@ -32,7 +32,7 @@ spec:
     metadata:
       annotations:
         {{- include "free5gc-nssf.nssfAnnotations" $ | nindent 8 }}
-        checksum/config: {{ include (print $.Template.BasePath "/nssf-configmap.yaml") $ | sha256sum }}-{{ include (print $.Template.BasePath "/free5gc-configmap.yaml") $ | sha256sum }}
+        checksum/config: {{ include (print $.Template.BasePath "/nssf-configmap.yaml") $ | sha256sum }}
       labels:
         {{- include "free5gc-nssf.selectorLabels" $ | nindent 8 }}
         project: {{ $.Values.global.projectName }}
@@ -86,6 +86,4 @@ spec:
           sources:
           - configMap:
               name: {{ .configmap.name }}
-          - configMap:
-              name: {{ include "free5gc-nssf.free5GCCMName" $ }}
 {{- end }}

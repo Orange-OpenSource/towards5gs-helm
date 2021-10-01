@@ -10,8 +10,6 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-{{- $smfConfigHash := include (print $.Template.BasePath "/smf-configmap.yaml") $ | sha256sum -}}
-{{- $free5gcConfigHash := include (print $.Template.BasePath "/free5gc-configmap.yaml") $ | sha256sum -}}
 {{- with .Values.smf }}
 apiVersion: apps/v1
 kind: Deployment
@@ -40,7 +38,7 @@ spec:
               "ips": [ "{{ $.Values.global.smf.n4if.ipAddress }}/{{ $.Values.global.n4network.cidr }}" ],
               "gateway": [ "{{ $.Values.global.n4network.gatewayIP }}" ]
             }]'
-        checksum/config: {{ $smfConfigHash }}-{{ $free5gcConfigHash }}
+        checksum/config: {{ include (print $.Template.BasePath "/smf-configmap.yaml") $ | sha256sum }}
       labels:
         {{- include "free5gc-smf.selectorLabels" $ | nindent 8 }}
         project: {{ $.Values.global.projectName }}
@@ -105,6 +103,4 @@ spec:
                 path: smfcfg.yaml
               - key: uerouting.yaml
                 path: uerouting.yaml
-          - configMap:
-              name: {{ include "free5gc-smf.free5GCCMName" $ }}
 {{- end }}
