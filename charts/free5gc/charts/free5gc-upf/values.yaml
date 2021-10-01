@@ -169,6 +169,17 @@ upf1:
     maxReplicas: 100
     targetCPUUtilizationPercentage: 80
     # targetMemoryUtilizationPercentage: 80
+  configuration:
+    configuration:
+      # debugLevel: panic|fatal|error|warn|info|debug|trace
+      debugLevel: info
+      ReportCaller: false
+
+      dnn_list:
+        - dnn: internet
+          cidr: 10.1.0.0/17
+          # [optional] apn_list[*].natifname
+          natifname: n6
 
 upf2:
   name: upf2
@@ -222,6 +233,17 @@ upf2:
     maxReplicas: 100
     targetCPUUtilizationPercentage: 80
     # targetMemoryUtilizationPercentage: 80
+  configuration:
+    configuration:
+      # debugLevel: panic|fatal|error|warn|info|debug|trace
+      debugLevel: info
+      ReportCaller: false
+
+      dnn_list:
+        - dnn: internet
+          cidr: 10.1.0.0/17
+          # [optional] apn_list[*].natifname
+          natifname: n6
 
 upfb:
   name: upfb
@@ -277,3 +299,14 @@ upfb:
     maxReplicas: 100
     targetCPUUtilizationPercentage: 80
     # targetMemoryUtilizationPercentage: 80
+  configuration:
+    configuration:
+      # debugLevel: panic|fatal|error|warn|info|debug|trace
+      debugLevel: info
+      ReportCaller: false
+
+      dnn_list:
+        - dnn: internet
+          cidr: 10.1.0.0/17
+          # [optional] apn_list[*].natifname
+          # natifname: n6
