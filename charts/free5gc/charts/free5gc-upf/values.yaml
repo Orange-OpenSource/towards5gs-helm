@@ -76,13 +76,12 @@ upf:
   securityContext:
     capabilities:
       add: ["NET_ADMIN"]
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
+  limits:
+      cpu: 500m
+      memory: 512Mi
     requests:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 500m
+      memory: 512Mi
   readinessProbe:
     initialDelaySeconds: 0
     periodSeconds: 1
