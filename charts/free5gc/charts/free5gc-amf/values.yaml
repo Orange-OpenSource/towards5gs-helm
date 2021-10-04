@@ -124,8 +124,8 @@ amf:
     #  - secretName: chart-example-tls
     #    hosts:
     #      - chart-example.local
-  configuration:
-    configuration:
+  configuration: 
+    configuration: |-
       amfName: AMF
       serviceNameList:
         - namf-comm
@@ -149,9 +149,9 @@ amf:
             mnc: 93
           snssaiList:
             - sst: 1
-              sd: 010203
+              sd:  "010203"
             - sst: 1
-              sd: 112233
+              sd: "112233"
       supportDnnList:
         - internet
       security:
