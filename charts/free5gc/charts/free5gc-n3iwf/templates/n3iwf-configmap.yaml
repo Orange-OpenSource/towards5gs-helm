@@ -34,7 +34,7 @@ data:
 
       # Bind Interfaces
       # IKE interface
-      IKEBindAddress: {{ .ike.prefixIP }}.{{ .ike.suffixIP }}  
+      IKEBindAddress: {{ .ike.ipAddress }} 
       # contrarly to the example used in docker compose here we attribute a special interface for the IKE daemon (as specified in the free5gc main project in github)
 
       # GTP interface
