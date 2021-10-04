@@ -17,77 +17,14 @@
 global:
   name: free5gc
   userPlaneArchitecture: single  # possible values are "single" and "ulcl"
-  multiCluster: false
-  cpClusterIP: 192.168.121.16
-  upClusterIP: 192.168.121.20
-  uesubnet: 10.1.0.0/16
-  ueRouting:
-    destination1: 10.100.100.16
-    destination2: 10.100.100.26
-  non3gppuesubnet:
-    prefixIP: 10.0.0
-  datanetworks:
-    dn1: internet
-    dn2: internet2
-  image:
-    registry: towards5gs
-  upf:
-    n4if:  # PFCP
-      ipAddress: 10.100.50.241
-    n3if:  # GTPU
-      ipAddress: 10.100.50.233
-    n6if:  # DN
-      ipAddress: 10.100.100.12
+  nrf:
     service:
-      pfcp:
-        enabled: false
-        name: upf-n4
-        port: 8805
-        nodeport: 30805
-        protocol: UDP
-        type: NodePort
-  upfb:
-    n4if:  # PFCP
-      ipAddress: 10.100.50.241
-    n3if:  # GTPU
-      ipAddress: 10.100.50.233
-    n9if:  # GTPU
-      ipAddress: 10.100.50.225
-    n6if:  # DN
-      ipAddress: 10.100.100.12
-    service:
-      pfcp:
-        name: upfb-n4
-        nodeport: 30805
-  upf1:
-    n4if:  # PFCP
-      ipAddress: 10.100.50.242
-    n3if:  # GTPU
-      ipAddress: 10.100.50.234
-    n9if:  # GTPU
-      ipAddress: 10.100.50.226
-    n6if:  # DN
-      ipAddress: 10.100.100.13
-    service:
-      pfcp:
-        name: upf1-n4
-        nodeport: 30806
-  upf2:
-    n4if:  # PFCP
-      ipAddress: 10.100.50.243
-    n3if:  # GTPU
-      ipAddress: 10.100.50.235
-    n9if:  # GTPU
-      ipAddress: 10.100.50.227
-    n6if:  # DN
-      ipAddress: 10.100.100.14
-    service:
-      pfcp:
-        name: upf2-n4
-        nodeport: 30807
-  smf:
-    n4if:
-      ipAddress: 10.100.50.244
+      name: nrf-nnrf
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30800"
+  sbi:
+    scheme: http
   amf:
     n2if:  # NGAP
       ipAddress: 10.100.50.249
@@ -99,59 +36,73 @@ global:
         nodeport: 31412
         protocol: SCTP
         type: NodePort
-  gnb:
-    n3if:
-      ipAddress: 10.100.50.236
-#Global network parametes
+  smf:
+    n4if:
+      ipAddress: 10.100.50.244
+  #Global network parametes
   n2network:
-    enabled: true
     name: n2network
     masterIf: eth0
     subnetIP: 10.100.50.248
     cidr: 29
     gatewayIP: 10.100.50.254
-    excludeIP: 10.100.50.254 
-  n4network:
-    enabled: true
-    name: n4network
-    masterIf: eth0
-    subnetIP: 10.100.50.240
-    cidr: 29
-    gatewayIP: 10.100.50.246
-    excludeIP: 10.100.50.246  
+    excludeIP: 10.100.50.254
   n3network:
-    enabled: true
     name: n3network
     masterIf: eth0
     subnetIP: 10.100.50.232
     cidr: 29
     gatewayIP: 10.100.50.238
-    excludeIP: 10.100.50.238  
+    excludeIP: 10.100.50.238
+  n4network:
+    name: n4network
+    masterIf: eth0
+    subnetIP: 10.100.50.240
+    cidr: 29
+    gatewayIP: 10.100.50.246
+    excludeIP: 10.100.50.246
   n6network:
-    enabled: true
     name: n6network
     masterIf: eth1
     subnetIP: 10.100.100.0
     cidr: 24
     gatewayIP: 10.100.100.1
     excludeIP: 10.100.100.254
-  ovn4nfv:
+  n9network:
+    name: n9network
+    masterIf: eth0
+    subnetIP: 10.100.50.224
+    cidr: 29
+    gatewayIP: 10.100.50.230
+    excludeIP: 10.100.50.230
+
+
+# These parameters can be used to enable/disable deployment of subcharts
+deployMongoDB: true              
+deployAMF: true                 
+deployAUSF: true
+deployN3IWF: false
+deployNRF: true              
+deployNSSF: true                 
+deployPCF: true
+deploySMF: true
+deployUDM: true
+deployUDM: true
+deployUDR: true
+deployUPF: true
+deployWEBUI: true
+
+# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
+mongodb:
+  fullnameOverride: "mongodb"
+  useStatefulSet: true
+  auth:
     enabled: false
-    name: ovn4nfv-k8s-plugin
-
-
-
-deployControlPlane: true              # set to "true" if you want to deploy the control plane NFs (AMF, AUSF, NRF, NSSF, PCF, SMF, UDM, UDR)
-deployUserPlane: true                 # set to "true" if you want to deploy the user plane NFs (UPF)
-deployN3iwf: true
-createNetworks: true
-
-free5gcUserPlane:
-  createNetworks: false
-
-free5gcControlPlane:
-  createNetworks: false
-
-free5gcN3iwf:
-  createNetworks: false
-
+  persistence:
+    size: 6Gi
+    mountPath: /bitnami/mongodb/data/db/
+  service:
+    name: mongodb
+    type: ClusterIP
+    port: 27017
+    nodePort: "30017"

@@ -13,6 +13,73 @@
 global:
   userPlaneArchitecture: ulcl  # possible values are "single" and "ulcl"
 
+free5gc-smf:
+ smf:
+  configuration:
+    configuration:
+      userplane_information:
+        up_nodes:
+          gNB1:
+            type: AN
+            an_ip: 10.100.50.236
+          BranchingUPF:
+            type: UPF
+            node_id: 10.100.50.241 # PFCP address
+            sNssaiUpfInfos:
+              - sNssai:
+                  sst: 1
+                  sd: 010203
+                dnnUpfInfoList:
+                  - dnn: internet
+              - sNssai:
+                  sst: 1
+                  sd: 112233
+                dnnUpfInfoList:
+                  - dnn: internet
+            interfaces:
+              - interfaceType: N3
+                endpoints:
+                  - 10.100.50.233
+                networkInstance: internet
+              - interfaceType: N9
+                endpoints:
+                  - 10.100.50.225
+                networkInstance: internet
+          AnchorUPF1:
+            type: UPF
+            node_id: 10.100.50.242 # PFCP address
+            sNssaiUpfInfos:
+              - sNssai:
+                  sst: 1
+                  sd: 010203
+                dnnUpfInfoList:
+                  - dnn: internet
+            interfaces:
+              - interfaceType: N9
+                endpoints:
+                  - 10.100.50.226 # UPF1 N9 address
+                networkInstance: internet
+          AnchorUPF2:
+            type: UPF
+            node_id: 10.100.50.243 # PFCP address
+            sNssaiUpfInfos:
+              - sNssai:
+                  sst: 1
+                  sd: 010203
+                dnnUpfInfoList:
+                  - dnn: internet
+            interfaces:
+              - interfaceType: N9
+                endpoints:
+                  - 10.100.50.227 # UPF2 N9 address
+                networkInstance: internet
+        links:
+          - A: gNB1
+            B: BranchingUPF
+          - A: BranchingUPF
+            B: AnchorUPF1
+          - A: BranchingUPF
+            B: AnchorUPF2
 
 
 

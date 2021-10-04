@@ -32,7 +32,6 @@ spec:
     metadata:
       annotations:
         {{- include "free5gc-n3iwf.n3iwfAnnotations" $ | nindent 8 }}
-{{- if not $.Values.global.amf.service.ngap.enabled }}
         k8s.v1.cni.cncf.io/networks: '[
         {{- if not $.Values.global.amf.service.ngap.enabled }}
             { "name": "{{ $.Values.global.n2network.name }}-{{ .name }}",
@@ -53,7 +52,6 @@ spec:
               "gateway": [ "{{ .ike.gatewayIP }}" ]
             }            
             ]'
-{{- end }}
         checksum/config: {{ include (print $.Template.BasePath "/n3iwf-configmap.yaml") $ | sha256sum }}
       labels:
         {{- include "free5gc-n3iwf.selectorLabels" $ | nindent 8 }}
