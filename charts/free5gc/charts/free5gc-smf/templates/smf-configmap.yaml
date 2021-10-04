@@ -49,6 +49,6 @@ data:
       version: 1.0.0
       description: Routing information for UE
     ueRoutingInfo:
-      {{- toYaml .configuration.logger | nindent 6 }}
+      {{- toYaml .configuration.ueRoutingInfo | nindent 6 }}
 
 {{- end }}
