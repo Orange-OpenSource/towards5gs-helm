@@ -178,3 +178,7 @@ n3iwf:
       PathUtil:
         debugLevel: info
         ReportCaller: false
+
+# These parameters apply in case of deployinh N3IWF if a different cluster from the one where AMF is deployed and a Kubernetes service is used for AMF' N2 interface
+multiCluster: false
+cpClusterIP: ""
