@@ -34,17 +34,17 @@ spec:
       annotations:
         {{- include "free5gc-upf.upf2Annotations" $ | nindent 8 }}
         k8s.v1.cni.cncf.io/networks: '[
-            { "name": "{{ $.Values.global.n9network.name }}-{{ .name }}",
+            { "name": "{{ $.Values.global.n9network.name }}-{{ include "free5gc-upf.fullname" $ }}",
               "interface": "n9",
               "ips": [ "{{ .n9if.ipAddress }}/{{ $.Values.global.n9network.cidr }}" ],
               "gateway": [ "{{ $.Values.global.n9network.gatewayIP }}" ]
             },
-            { "name": "{{ $.Values.global.n6network.name }}-{{ .name }}",
+            { "name": "{{ $.Values.global.n6network.name }}-{{ include "free5gc-upf.fullname" $ }}",
               "interface": "n6",
               "ips": [ "{{ .n6if.ipAddress }}/{{ $.Values.global.n6network.cidr }}" ],
               "gateway": [ "{{ $.Values.global.n6network.gatewayIP }}" ]
             },
-            { "name": "{{ $.Values.global.n4network.name }}-{{ .name }}",
+            { "name": "{{ $.Values.global.n4network.name }}-{{ include "free5gc-upf.fullname" $ }}",
               "interface": "n4",
               "ips": [ "{{ .n4if.ipAddress }}/{{ $.Values.global.n4network.cidr }}" ],
               "gateway": [ "{{ $.Values.global.n4network.gatewayIP }}" ]
