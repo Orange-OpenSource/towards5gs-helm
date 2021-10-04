@@ -10,6 +10,7 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
+{{- if eq .Values.global.userPlaneArchitecture "ulcl" }}
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
@@ -38,3 +39,4 @@ spec:
         }
       ]
     }'
+{{- end }}
