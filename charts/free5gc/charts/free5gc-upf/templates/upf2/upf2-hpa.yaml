@@ -10,6 +10,7 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
+{{- if eq .Values.global.userPlaneArchitecture "ulcl" }}
 {{- with .Values.upf2 }}
 {{- if .autoscaling.enabled }}
 apiVersion: autoscaling/v2beta1
@@ -40,3 +41,5 @@ spec:
     {{- end }}
 {{- end }}
 {{- end }}
+{{- end }}
+
