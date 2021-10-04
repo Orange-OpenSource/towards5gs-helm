@@ -1,0 +1,74 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.ue }}
+{{- if .enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ueransim.fullname" $ }}-{{ .name }}
+  labels:
+    {{- include "ueransim.labels" $ | nindent 4 }}
+    app: {{ $.Values.projectName }}
+    component: {{ .name }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "ueransim.selectorLabels" $ | nindent 6 }}
+      app: {{ $.Values.projectName }}
+      component: {{ .name }}
+  replicas: {{ .replicaCount }}
+  template:
+    metadata:
+      annotations:
+        {{- include "ueransim.ueAnnotations" $ | nindent 8 }}
+      labels:
+        {{- include "ueransim.selectorLabels" $ | nindent 8 }}
+        app: {{ $.Values.projectName }}
+        component: {{ .name }}
+    spec:
+      imagePullSecrets:
+        {{- toYaml .imagePullSecrets | nindent 8 }}
+      securityContext:
+        {{- toYaml .podSecurityContext | nindent 8 }}
+      containers:
+      - image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}
+        name: {{ .name }}
+        securityContext:
+            {{- toYaml .securityContext | nindent 12 }}
+        command: ["{{ .volume.mount }}/wrapper.sh"]
+        volumeMounts:
+        - mountPath: {{ .volume.mount }}
+          name: {{ .volume.name }}
+        resources:
+            {{- toYaml .resources | nindent 12 }}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      nodeSelector:
+        {{- toYaml .nodeSelector | nindent 8 }}
+      affinity:
+        {{- toYaml .affinity | nindent 8 }}
+      tolerations:
+        {{- toYaml .tolerations | nindent 8 }}
+
+      volumes:
+      - name: {{ .volume.name }}
+        configMap:
+          name: {{ .configmap.name }}
+          items:
+          - key: ue-config.yaml
+            path: ue-config.yaml
+          - key: wrapper.sh
+            path: wrapper.sh
+            mode: 0755
+{{- end }}
+{{- end }}
