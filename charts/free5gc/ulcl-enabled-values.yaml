@@ -15,8 +15,8 @@ global:
 
 free5gc-smf:
  smf:
-  configuration: |-
-    configuration:
+  configuration:
+    configuration: |-
       smfName: SMF
       serviceNameList:
         - nsmf-pdusession
