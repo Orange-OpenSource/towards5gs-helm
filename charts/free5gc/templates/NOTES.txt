@@ -15,4 +15,4 @@
 #
 
 1. Get the list of created Pods by running:
-  kubectl get pods --namespace {{ $.Release.Namespace }} -l "app.kubernetes.io/name={{ include "free5gc-amf.name" $ }},app.kubernetes.io/instance={{ $.Release.Name }}
+  kubectl get pods --namespace {{ $.Release.Namespace }} -l "project={{ $.Values.global.projectName }}"
