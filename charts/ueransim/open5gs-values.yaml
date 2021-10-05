@@ -11,14 +11,21 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 gnb:
-  configuration:
+  configuration: |-
+    nci: '0x000000010'  # NR Cell Identity (36-bit)
+    idLength: 32        # NR gNB ID length in bits [22...32]
+    tac: 1     # Tracking Area Code
+    # List of supported S-NSSAIs by this gNB
+    # Indicates whether or not SCTP stream number errors should be ignored.
+    ignoreStreamIds: true
+
     mcc: '901'
     mnc: '70'
     slices:
       - sst: 1
         sd: 1
 ue:
-  configuration:
+  configuration: |-
     supi: 'imsi-901700000000001'
     mcc: '901'
     mnc: '70'
@@ -42,3 +49,12 @@ ue:
     default-nssai:
       - sst: 1
         sd: 1
+    # Supported encryption and integrity algorithms by this UE
+    integrity:
+      IA1: true
+      IA2: true
+      IA3: true
+    ciphering:
+      EA1: true
+      EA2: true
+      EA3: true
