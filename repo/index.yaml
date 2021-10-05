@@ -3,7 +3,7 @@ entries:
   free5gc:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.831169646+02:00"
+    created: "2021-10-05T19:23:52.860897033+02:00"
     dependencies:
     - condition: deployMongoDB
       name: mongodb
@@ -57,7 +57,7 @@ entries:
     version: 1.0.0
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.746392915+02:00"
+    created: "2021-10-05T19:23:52.793064124+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -87,7 +87,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.720701675+02:00"
+    created: "2021-10-05T19:23:52.76553544+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -117,7 +117,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-10-05T19:13:47.696245905+02:00"
+    created: "2021-10-05T19:23:52.73856891+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -148,7 +148,7 @@ entries:
   free5gc-amf:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.834548697+02:00"
+    created: "2021-10-05T19:23:52.863398195+02:00"
     description: A Helm chart to deploy the Free5GC AMF
     digest: 58b7071ce2e97457bf26202c6954882053fb505d47e652b4135126bd14308e24
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
@@ -167,7 +167,7 @@ entries:
   free5gc-ausf:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.837133835+02:00"
+    created: "2021-10-05T19:23:52.865376517+02:00"
     description: A Helm chart to deploy the Free5GC AUSF
     digest: 01fbf36fdf10ef785401dd1da60d37d71b77f921cc54a05ccc078a156e0e9156
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
@@ -186,7 +186,7 @@ entries:
   free5gc-n3iwf:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.840152467+02:00"
+    created: "2021-10-05T19:23:52.867790924+02:00"
     description: A Helm chart to deploy the Free5GC N3IWF
     digest: 40afbce29e88d4cdb7f8ffd781d59193f0edc93f4160712d8ba66d5372d87832
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
@@ -205,7 +205,7 @@ entries:
   free5gc-nrf:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.858551914+02:00"
+    created: "2021-10-05T19:23:52.881963205+02:00"
     dependencies:
     - condition: db.enabled
       name: mongodb
@@ -228,7 +228,7 @@ entries:
   free5gc-nssf:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.861913663+02:00"
+    created: "2021-10-05T19:23:52.884547669+02:00"
     description: A Helm chart to deploy the Free5GC NSSF
     digest: 76f8c9a55a86b615eb5a325e0bf2667288ad3fa3fb728769aa3c2404c087c52e
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
@@ -247,7 +247,7 @@ entries:
   free5gc-pcf:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.864443277+02:00"
+    created: "2021-10-05T19:23:52.886633567+02:00"
     description: A Helm chart to deploy the Free5GC PCF
     digest: 9b069592bcd8a86c8f6ef463a0a215d4308acab95259aa9d865ec6eae64d7e77
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
@@ -266,7 +266,7 @@ entries:
   free5gc-smf:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.867937451+02:00"
+    created: "2021-10-05T19:23:52.889319337+02:00"
     description: A Helm chart to deploy the Free5GC SMF
     digest: c32f1eb26de693af7726623bf7aa03981163dac5c59ea0eb6a6c414d50ebdeef
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
@@ -285,7 +285,7 @@ entries:
   free5gc-udm:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.870593095+02:00"
+    created: "2021-10-05T19:23:52.891375057+02:00"
     description: A Helm chart to deploy the Free5GC UDM
     digest: 1910073f167aa8b48e6aeeed72dcf2a565250a3b97996980697570c1ea38b03a
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
@@ -304,7 +304,7 @@ entries:
   free5gc-udr:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.886156184+02:00"
+    created: "2021-10-05T19:23:52.905201876+02:00"
     dependencies:
     - condition: db.enabled
       name: mongodb
@@ -327,7 +327,7 @@ entries:
   free5gc-upf:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.891259659+02:00"
+    created: "2021-10-05T19:23:52.91195449+02:00"
     description: A Helm chart to deploy the Free5GC User Plane
     digest: 109602e92d650d2e96a91bab01cdf0d8a4c3e29b69ea0affe0d5096c87a70d19
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
@@ -346,7 +346,7 @@ entries:
   free5gc-webui:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.908375686+02:00"
+    created: "2021-10-05T19:23:52.928962612+02:00"
     dependencies:
     - condition: db.enabled
       name: mongodb
@@ -369,7 +369,7 @@ entries:
   free5gcControlPlane:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.972294517+02:00"
+    created: "2021-10-05T19:23:52.983727637+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -378,8 +378,8 @@ entries:
       name: mongodb
       repository: ""
     deprecated: true
-    description: A Helm chart to deploy the control plane of free5gc
-    digest: f2b152446745b89b65a26183a7a098480dcd33189f92352d22f3a559b1452249
+    description: DEPRECATED - A Helm chart to deploy the control plane of free5gc
+    digest: fd5e244cf2f2c35ff3795b703c8d26353725980e878dff3ba5dde8cb2ec00980
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
     maintainers:
     - email: abderaouf.khichane@orange.com
@@ -394,7 +394,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.949833913+02:00"
+    created: "2021-10-05T19:23:52.963448244+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -418,7 +418,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-10-05T19:13:47.928137621+02:00"
+    created: "2021-10-05T19:23:52.947017025+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -443,14 +443,14 @@ entries:
   free5gcN3iwf:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.983341975+02:00"
+    created: "2021-10-05T19:23:52.994236668+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
       repository: ""
     deprecated: true
-    description: A Helm chart to deploy the n3iwf function of free5gc
-    digest: 03aa5c197a4e375fbb44fa37051e92fc62335819d782369a528be738e5132e4c
+    description: DEPRECATED - A Helm chart to deploy the n3iwf function of free5gc
+    digest: d84be8e74fdbb14ae0833e1cc0d89cfa63970919cdee99c58de9ffc5177f1ac0
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
     maintainers:
     - email: abderaouf.khichane@orange.com
@@ -465,7 +465,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.979511712+02:00"
+    created: "2021-10-05T19:23:52.98978569+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -486,7 +486,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-10-05T19:13:47.975911234+02:00"
+    created: "2021-10-05T19:23:52.986691826+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -508,14 +508,14 @@ entries:
   free5gcUserPlane:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.996543109+02:00"
+    created: "2021-10-05T19:23:53.005864716+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
       repository: ""
     deprecated: true
-    description: A Helm chart to deploy the user plane of free5gc
-    digest: 62fa3adc578a4cda41d00f9f52ce60f78c4d69c03026f1da79c992a8bd0f06d6
+    description: DEPRECATED - Helm chart to deploy the user plane of free5gc
+    digest: c57724cbc4edb46eb32c138175aede4e98010d0a640e4fccf919373a1b87fb15
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
     maintainers:
     - email: abderaouf.khichane@orange.com
@@ -530,7 +530,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-10-05T19:13:47.992123144+02:00"
+    created: "2021-10-05T19:23:53.002193799+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -551,7 +551,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-10-05T19:13:47.987619367+02:00"
+    created: "2021-10-05T19:23:52.998239304+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -573,10 +573,10 @@ entries:
   networks5g:
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2021-10-05T19:13:48.001438828+02:00"
+    created: "2021-10-05T19:23:53.010104939+02:00"
     deprecated: true
-    description: A Helm chart to deploy the user plane of free5gc
-    digest: c652c8cfdb11521e214ca6077b3e339cafce9bf52563c99b3bb63feb13e035cc
+    description: DEPRECATED - A Helm chart to deploy the user plane of free5gc
+    digest: 89ad942bd85e1a3e9d6e9321f32f2ae03050c96d9e924fed7cd0fbabdd5b07b6
     icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
     maintainers:
     - email: abderaouf.khichane@orange.com
@@ -589,7 +589,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2021-10-05T19:13:47.999751524+02:00"
+    created: "2021-10-05T19:23:53.008469087+02:00"
     description: A Helm chart to deploy the user plane of free5gc
     digest: 51fd3eaf752f2406b62125facb7471f20d8d7cb0a0936779e1b33a90dd19ec28
     icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
@@ -604,7 +604,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-10-05T19:13:47.998188708+02:00"
+    created: "2021-10-05T19:23:53.007148606+02:00"
     description: A Helm chart to deploy the user plane of free5gc
     digest: b9f3b1628aed64ab8ae898f63a7d4b1c6b11e8b9cd8bf0207665653f69c1a15b
     icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
@@ -620,7 +620,7 @@ entries:
   ueransim:
   - apiVersion: v2
     appVersion: v3.1.3
-    created: "2021-10-05T19:13:48.05658759+02:00"
+    created: "2021-10-05T19:23:53.065589166+02:00"
     description: A Helm chart to deploy UERANSIM
     digest: b2c9e30784ae031cef287decef2f87484918cd8e6d7272e60d44630a1b7074ef
     icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
@@ -635,7 +635,7 @@ entries:
     version: 2.0.0
   - apiVersion: v2
     appVersion: v3.1.3
-    created: "2021-10-05T19:13:48.053361155+02:00"
+    created: "2021-10-05T19:23:53.062918743+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -654,7 +654,7 @@ entries:
     version: 1.1.6
   - apiVersion: v2
     appVersion: v3.1.3
-    created: "2021-10-05T19:13:48.04827175+02:00"
+    created: "2021-10-05T19:23:53.058682273+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -673,7 +673,7 @@ entries:
     version: 1.1.4
   - apiVersion: v2
     appVersion: v3.1.3
-    created: "2021-10-05T19:13:48.04093995+02:00"
+    created: "2021-10-05T19:23:53.048613594+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -692,7 +692,7 @@ entries:
     version: 1.1.3
   - apiVersion: v2
     appVersion: v3.1.2
-    created: "2021-10-05T19:13:48.036955729+02:00"
+    created: "2021-10-05T19:23:53.043091536+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -711,7 +711,7 @@ entries:
     version: 1.1.2
   - apiVersion: v2
     appVersion: v3.1.1
-    created: "2021-10-05T19:13:48.032691805+02:00"
+    created: "2021-10-05T19:23:53.037487293+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -730,7 +730,7 @@ entries:
     version: 1.1.1
   - apiVersion: v2
     appVersion: v3.1.0
-    created: "2021-10-05T19:13:48.028515478+02:00"
+    created: "2021-10-05T19:23:53.032440931+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -749,7 +749,7 @@ entries:
     version: 1.1.0
   - apiVersion: v2
     appVersion: v3.0.3
-    created: "2021-10-05T19:13:48.024408404+02:00"
+    created: "2021-10-05T19:23:53.029105686+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -768,7 +768,7 @@ entries:
     version: 1.0.3
   - apiVersion: v2
     appVersion: v3.0.2
-    created: "2021-10-05T19:13:48.020122713+02:00"
+    created: "2021-10-05T19:23:53.025815114+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -787,7 +787,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: v3.0.1
-    created: "2021-10-05T19:13:48.015714157+02:00"
+    created: "2021-10-05T19:23:53.022392976+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -806,7 +806,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 2.2.2
-    created: "2021-10-05T19:13:48.011617591+02:00"
+    created: "2021-10-05T19:23:53.019087009+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -825,7 +825,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 2.2.1
-    created: "2021-10-05T19:13:48.007725927+02:00"
+    created: "2021-10-05T19:23:53.014967018+02:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -842,4 +842,4 @@ entries:
     urls:
     - ueransim-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-05T19:13:47.666097205+02:00"
+generated: "2021-10-05T19:23:52.710047211+02:00"
