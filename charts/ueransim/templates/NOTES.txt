@@ -13,3 +13,16 @@
 #
 # Visit the project at https://github.com/Orange-OpenSource/towards5gs-helm
 #
+
+1. Get the UE Pod name by running:
+  export POD_NAME=$(kubectl get pods --namespace {{ $.Release.Namespace }} -l "component={{ .Values.ue.name }}" $ }} -o jsonpath="{.items[0].metadata.name}")
+
+2. Check that uesimtun0 interface has been created by running these commands:
+  kubectl --namespace {{ $.Release.Namespace }} logs $POD_NAME
+  kubectl --namespace {{ $.Release.Namespace }} exec -it $POD_NAME -- ip address
+
+2. Try to access internet from the UE by running:
+  kubectl --namespace {{ $.Release.Namespace }} exec -it $POD_NAME -- ping -I uesimtun0 www.google.com
+  kubectl --namespace {{ $.Release.Namespace }} exec -it $POD_NAME -- curl --interface uesimtun0 www.google.com
+  kubectl --namespace {{ $.Release.Namespace }} exec -it $POD_NAME -- traceroute -i uesimtun0 www.google.com
+
