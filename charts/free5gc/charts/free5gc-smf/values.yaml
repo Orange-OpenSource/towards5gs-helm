@@ -118,7 +118,7 @@ smf:
     #    hosts:
     #      - chart-example.local
   configuration:
-    configuration:
+    configuration: |-
       serviceNameList:
         - nsmf-pdusession
         - nsmf-event-exposure
@@ -177,7 +177,7 @@ smf:
         links: # the topology graph of userplane, A and B represent the two nodes of each link
           - A: gNB1
             B: UPF
-    ueRoutingInfo:
+    ueRoutingInfo: |-
       - SUPI: imsi-208930000000003
         AN: 10.100.50.226
         PathList:

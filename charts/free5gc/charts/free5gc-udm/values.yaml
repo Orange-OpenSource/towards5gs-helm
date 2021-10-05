@@ -107,7 +107,7 @@ udm:
     #    hosts:
     #      - chart-example.local
   configuration:
-    configuration:
+    configuration: |-
       serviceNameList:
         - nudm-sdm
         - nudm-uecm

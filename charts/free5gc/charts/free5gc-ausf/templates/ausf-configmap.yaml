@@ -32,7 +32,7 @@ data:
       
       nrfUri: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
       
-      {{- toYaml .configuration.configuration | nindent 6 }}
+      {{- .configuration.configuration | nindent 6 }}
 
     logger:
       {{- toYaml .configuration.logger | nindent 6 }}

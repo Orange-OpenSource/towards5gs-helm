@@ -40,7 +40,7 @@ data:
       # GTP interface
       GTPBindAddress: {{ .n3if.ipAddress }}
       
-      {{- toYaml .configuration.configuration | nindent 6 }}
+      {{- .configuration.configuration | nindent 6 }}
 
     logger:
       {{- toYaml .configuration.logger | nindent 6 }}
@@ -52,7 +52,7 @@ data:
     ### N3iwf IPSec tunnel configuration
     
     ip l add name ipsec0 type vti local {{ .ike.ipAddress }} remote 0.0.0.0 key 5
-    ip a add {{ .configuration.configuration.IPSecInterfaceAddress }}/24 dev ipsec0
+    ip a add {{ .configuration.IPSecInterfaceAddress }}/24 dev ipsec0
     ip l set dev ipsec0 up
 
 {{- end }}

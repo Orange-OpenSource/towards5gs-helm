@@ -133,7 +133,7 @@ data:
                   sd: 1
                 - sst: 2
 
-      {{- toYaml .configuration.configuration | nindent 6 }}
+      {{- .configuration.configuration | nindent 6 }}
 
     logger:
       {{- toYaml .configuration.logger | nindent 6 }}

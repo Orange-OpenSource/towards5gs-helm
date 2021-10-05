@@ -116,7 +116,8 @@ n3iwf:
     # targetMemoryUtilizationPercentage: 80
 
   configuration:
-    configuration:
+    IPSecInterfaceAddress: 10.0.0.1
+    configuration: |-
       N3IWFInformation:
         GlobalN3IWFID:
           PLMNID:
