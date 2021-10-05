@@ -36,44 +36,44 @@ data:
         - snssai:
             sst: 1
           nsiInformationList:
-            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 10
         - snssai:
             sst: 1
             sd: 1
           nsiInformationList:
-            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 11
         - snssai:
             sst: 1
             sd: 2
           nsiInformationList:
-            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 12
-            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 12
         - snssai:
             sst: 1
             sd: 3
           nsiInformationList:
-            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 13
         - snssai:
             sst: 2
           nsiInformationList:
-            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 20
         - snssai:
             sst: 2
             sd: 1
           nsiInformationList:
-            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 21
         - snssai:
             sst: 1
             sd: 010203
           nsiInformationList:
-            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.port }}/nnrf-nfm/v1/nf-instances
+            - nrfId: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}/nnrf-nfm/v1/nf-instances
               nsiId: 22
       amfSetList:
         - amfSetId: 1
