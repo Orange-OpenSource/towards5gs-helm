@@ -119,6 +119,7 @@ smf:
     #      - chart-example.local
   configuration:
     configuration: |-
+      smfName: SMF
       serviceNameList:
         - nsmf-pdusession
         - nsmf-event-exposure
