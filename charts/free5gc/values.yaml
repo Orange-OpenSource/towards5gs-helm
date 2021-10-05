@@ -93,7 +93,7 @@ deployUPF: true
 deployWEBUI: true
 
 # Disable the deployment of mongodb as an NRF subchart
-nrf:
+free5gc-nrf:
   db:
     enabled: false
 
