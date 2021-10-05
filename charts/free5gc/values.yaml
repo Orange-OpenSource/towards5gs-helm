@@ -87,7 +87,6 @@ deployNSSF: true
 deployPCF: true
 deploySMF: true
 deployUDM: true
-deployUDM: true
 deployUDR: true
 deployUPF: true
 deployWEBUI: true
