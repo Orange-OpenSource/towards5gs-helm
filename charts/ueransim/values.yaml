@@ -82,7 +82,7 @@ gnb:
   tolerations: []
   affinity: {}
   
-  configuration:
+  configuration: |-
     mcc: '208' # Mobile Country Code value
     mnc: '93'  # Mobile Network Code value (2 or 3 digits)
     nci: '0x000000010'  # NR Cell Identity (36-bit)
@@ -110,6 +110,8 @@ ue:
   command: "./nr-ue -c ../config/ue-config.yaml"  # This is the command that will be launched in the UE container
   # A script that will be run after the UE creation. It may be used to periodically generate traffic
   script: ""
+  # script: |-
+  #   ping .....
 
   podAnnotations: {}
     # additional annotations
@@ -129,7 +131,7 @@ ue:
   tolerations: []
   affinity: {}
 
-  configuration: 
+  configuration: |-
     supi: "imsi-208930000000003"  # IMSI number
     mcc: '208' # Mobile Country Code value
     mnc: '93' # Mobile Network Code value (2 or 3 digits)
@@ -162,6 +164,7 @@ ue:
       EA1: true
       EA2: true
       EA3: true
+  
   test:
     connectivity:
       name: ue-connectivity-test
