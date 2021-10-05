@@ -95,7 +95,7 @@ deployWEBUI: true
 # Disable the deployment of mongodb as an NRF subchart
 nrf:
   db:
-    enabled: true
+    enabled: false
 
 # This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
 mongodb:
