@@ -78,6 +78,8 @@ This chart allows you to customize its installation. The table below shows the p
 
 
 ### N3 Network parameters
+| Parameter | Description | Default value |
+| --- | --- | --- |
 | `global.n3network.name` | N3 network name. | `n3network` |
 | `global.n3network.masterIf` | N3 network MACVLAN master interface. | `eth0` |
 | `global.n3network.subnetIP` | N3 network subnet IP address. | `10.100.50.232` |
@@ -85,6 +87,8 @@ This chart allows you to customize its installation. The table below shows the p
 | `global.n3network.gatewayIP` | N3 network gateway IP address. | `10.100.50.238` |
 
 ### N4 Network parameters
+| Parameter | Description | Default value |
+| --- | --- | --- |
 | `global.n4network.name` | N4 network name. | `n4network` |
 | `global.n4network.masterIf` | N4 network MACVLAN master interface. | `eth0` |
 | `global.n4network.subnetIP` | N4 network subnet IP address. | `10.100.50.240` |
@@ -92,6 +96,8 @@ This chart allows you to customize its installation. The table below shows the p
 | `global.n4network.gatewayIP` | N4 network gateway IP address. | `10.100.50.246` |
 
 ### N6 Network parameters
+| Parameter | Description | Default value |
+| --- | --- | --- |
 | `global.n6network.name` | N6 network name. | `n6network` |
 | `global.n6network.masterIf` | N6 network MACVLAN master interface. The IP address of this interface must be in the N6 network subnet IP rang. | `eth1` |
 | `global.n6network.subnetIP` | N6 network subnet IP address (The IP address of the Data Network. | `10.100.100.0` |
@@ -99,6 +105,11 @@ This chart allows you to customize its installation. The table below shows the p
 | `global.n6network.gatewayIP` | N6 network gateway IP address (The IP address to go to the Data Network). | `10.100.100.1` |
 
 ### N9 Network parameters
+These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
+
+| Parameter | Description | Default value |
+| --- | --- | --- |
+These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 | `global.n9network.name` | N9 network name. | `n9network` |
 | `global.n9network.masterIf` | N9 network MACVLAN master interface. The IP address of this interface must be in the N9 network subnet IP rang. | `eth1` |
 | `global.n9network.subnetIP` | N9 network subnet IP address (The IP address of the Data Network. | `10.100.50.224` |
@@ -124,6 +135,8 @@ These parameters if `global.userPlaneArchitecture` is set to `signle`.
 ### UPF1 parameters
 These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 
+| Parameter | Description | Default value |
+| --- | --- | --- |
 | `upf1.name` | The Network Function name of UPF1. | `upf1` |
 | `upf1.replicaCount` | The number of UPF1 replicas. | `1` |
 | `upf.image.name` | The UPF Docker image name. | `towards5gs/free5gc-upf` |
@@ -138,6 +151,8 @@ These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 ### UPF2 parameters
 These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 
+| Parameter | Description | Default value |
+| --- | --- | --- |
 | `upf2.name` | The Network Function name of UPF2. | `upf2` |
 | `upf2.replicaCount` | The number of UPF2 replicas. | `1` |
 | `upf.image.name` | The UPF Docker image name. | `towards5gs/free5gc-upf` |
@@ -152,6 +167,8 @@ These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 ### UPFb parameters
 These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 
+| Parameter | Description | Default value |
+| --- | --- | --- |
 | `upfb.name` | The Network Function name of UPFb. | `upfb` |
 | `upfb.replicaCount` | The number of UPFb replicas. | `1` |
 | `upf.image.name` | The UPF Docker image name. | `towards5gs/free5gc-upf` |
