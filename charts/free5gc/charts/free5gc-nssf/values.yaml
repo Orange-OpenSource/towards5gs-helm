@@ -107,7 +107,7 @@ nssf:
     #    hosts:
     #      - chart-example.local
   configuration:  
-    configuration:
+    configuration: |-
       nssfName: NSSF
       serviceNameList:
         - nnssf-nsselection

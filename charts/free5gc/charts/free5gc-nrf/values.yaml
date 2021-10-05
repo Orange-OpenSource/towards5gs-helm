@@ -112,7 +112,7 @@ nrf:
     #    hosts:
     #      - chart-example.local
   configuration:
-    configuration:
+    configuration: |-
       DefaultPlmnId:
         mcc: 208
         mnc: 93

@@ -107,7 +107,7 @@ pcf:
     #    hosts:
     #      - chart-example.local
   configuration:
-    configuration:
+    configuration: |-
       pcfName: PCF
       timeFormat: 2019-01-02 15:04:05
       defaultBdtRefId: BdtPolicyId-
