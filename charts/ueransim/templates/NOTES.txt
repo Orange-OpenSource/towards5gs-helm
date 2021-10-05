@@ -15,7 +15,7 @@
 #
 
 1. Get the UE Pod name by running:
-  export POD_NAME=$(kubectl get pods --namespace {{ $.Release.Namespace }} -l "component={{ .Values.ue.name }}" $ }} -o jsonpath="{.items[0].metadata.name}")
+  export POD_NAME=$(kubectl get pods --namespace {{ $.Release.Namespace }} -l "component={{ .Values.ue.name }}" -o jsonpath="{.items[0].metadata.name}")
 
 2. Check that uesimtun0 interface has been created by running these commands:
   kubectl --namespace {{ $.Release.Namespace }} logs $POD_NAME
