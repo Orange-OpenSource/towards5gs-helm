@@ -10,22 +10,23 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-{{- if .Values.ue.enabled }}
+{{- with .Values.ue }}
+{{- if .enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.ue.configmap.name }}
+  name: {{ .configmap.name }}
   labels:
-    app: {{ .Values.projectName }}
-    component: {{ .Values.ue.name }}
+    app: {{ $.Values.projectName }}
+    component: {{ .name }}
 data:
   ue-config.yaml: |
 
-{{- toYaml .Values.ue.configuration | nindent 4 }}
+    {{- .configuration | nindent 4 }}
     
     # List of gNB IP addresses for Radio Link Simulation
     gnbSearchList:
-      - {{ .Values.gnb.service.name }}
+      - {{ $.Values.gnb.service.name }}
 
   wrapper.sh: |
     #!/bin/bash
@@ -33,9 +34,9 @@ data:
     mkdir /dev/net
     mknod /dev/net/tun c 10 200
 
-    {{ .Values.ue.command }} 
+    {{ .command }} 
 
-{{ .Values.ue.script | nindent 4 }}
+    {{ .script | nindent 4 }}
 
-
+{{- end }}
 {{- end }}

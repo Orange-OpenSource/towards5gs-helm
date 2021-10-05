@@ -22,7 +22,7 @@ metadata:
 data:
   gnb-config.yaml: |
 
-{{- toYaml .configuration | nindent 4 }}
+    {{- .configuration | nindent 4 }}
     
     linkIp: 0.0.0.0   # gNB's local IP address for Radio Link Simulation (Usually same with local IP)
     # gNB's local IP address for N2 Interface (Usually same with local IP)
