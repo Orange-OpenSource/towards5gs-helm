@@ -20,7 +20,7 @@ metadata:
 data:
   smfcfg.yaml: |
     info:
-      version: 1.0.0
+      version: 1.0.2
       description: SMF initial local configuration
 
     configuration:
@@ -46,7 +46,7 @@ data:
 
   uerouting.yaml: |
     info:
-      version: 1.0.0
+      version: 1.0.1
       description: Routing information for UE
     ueRoutingInfo:
       {{- .configuration.ueRoutingInfo | nindent 6 }}
