@@ -39,7 +39,7 @@ data:
         # - ifname: gtpif
     
   wrapper.sh: |
-    #!/bin/bash
+    #!/bin/sh
 
     iptables -A FORWARD -j ACCEPT
     iptables -t nat -A POSTROUTING -s {{ $.Values.global.uesubnet }} -o n6 -j MASQUERADE  # Allow routing traffic comming from the UE SUBNET to the interface N6
