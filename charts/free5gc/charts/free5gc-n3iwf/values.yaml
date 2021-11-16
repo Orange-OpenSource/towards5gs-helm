@@ -45,15 +45,6 @@ global:
     gatewayIP: 10.100.50.238
     excludeIP: 10.100.50.238
 
-initcontainers:
-  curl:
-    registry: towards5gs
-    image: initcurl
-    tag: "1.0.0"
-  busybox:
-    image: busybox
-    tag: "1.32.0"
-
 n3iwf:
   name: n3iwf
   replicaCount: 1
