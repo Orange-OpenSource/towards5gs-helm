@@ -18,11 +18,6 @@ kubectl create ns <namespace>
 helm -n <namespace> install <release-name> ./ueransim/
 ```
 
-Note that if you have already installed the N3iwf on the same cluster, you should disable the creation of the N2 network as it has already been created for the N3iwf.
-```console
-helm -n <namespace> install --set global.n2network.enabled=false <release-name> ./ueransim/
-```
-
 ### Check the state of the created pod
 ```console
 kubectl -n <namespace> get pods -l "app=ueransim"
@@ -50,7 +45,6 @@ helm -n <namespace> install -f ./ueransim/open5gs-values.yaml <release-name> ./u
 In this section, we'll suppose that you have at least one interface on each Kubernetes node and its name is `toto`. Then you have to set these parameters to `toto`:
  - `global.n2network.masterIf`
  - `global.n4network.masterIf`
-Please see [NETWORKS5G's README](../networks5g) for more details.
 
 ## Usage information
 Once this helm chart installed, a PDU session will be crated automatically. Furthermore, a TUN interface will be created on the UE POD. This interface can be used to test the connectivity:
@@ -81,8 +75,9 @@ This chart allows you to customize its installation. The table below shows the p
 
 | Parameter | Description | Default value |
 | --- | --- | --- |
-| `global.multiCluster` | Must be set to `true` if you are deploying the the N3IWF in a different cluster from the one where the control plane is deployed and `global.amf.service.ngap.enabled` is set to true. | `false` |
+| `global.multiCluster` | Must be set to `true` if you are deploying the the UERANSIM in a different cluster from the one where AMF is deployed and `global.amf.service.ngap.enabled` is set to true. | `false` |
 | `global.cpClusterIP` | The IP address of one of the cluster nodes where the control plane is deployed. | `nil` |
+
 
 | `global.amf.service.ngap.name` | The name of the AMF NGAP service. | `amf-n2` |
 | `global.amf.service.ngap.type` | The type of the AMF NGAP service. | `ClusterIP` |
@@ -109,7 +104,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `global.n3network.cidr` | N3 network cidr. | `29` |
 | `global.n3network.gatewayIP` | N3 network gateway IP address. | `10.100.50.238` |
 
-### Main chart parameters
+### Common parameters
 
 | Parameter | Description | Default value |
 | --- | --- | --- |
@@ -131,10 +126,19 @@ This chart allows you to customize its installation. The table below shows the p
 | `gnb.service.type` | The type of the service to expose the RADIO interface. | `ClusterIP` |
 | `gnb.service.port` | The port number used for the RADIO interface. | `4997` |
 | `gnb.service.protocol` | The protocol used for the RADIO interface. | `UDP` |
-| `gnb.configuration` | The UERANSIM gNB [configuration](https://github.com/aligungr/UERANSIM/wiki/Configuration#gnb-configuration) in YAML format. | Check [values.yaml](./values.yaml) |
-| `gnb.ipAddress`| The IP address of gNB’s N2 interface. | `10.100.50.250` |
+| `gnb.n2if.ipAddress`| The IP address of gNB’s N2 interface. | `10.100.50.250` |
+| `gnb.n3if.ipAddress`| The IP address of gNB’s N3 interface. | `10.100.50.250` |
 | `gnb.amf.n2if.IpAddress` | The IP address of the AMF’s N2 interface. | `10.100.50.249` |
+| `gnb.amf.n2if.port` | AMF NGAP port number. | `10.100.50.249` |
 | `gnb.amf.service.ngap.enabled` | If `true` then a Kubernetes service will be used to access the AMF NGAP service instead of accessing directly the AMF’s N2 interface. `gnb.amf.n2if.IpAddress` must be set to the name of the service or IP address of a node where AMF is deployed. | `false` |
+| `gnb.configuration` | The UERANSIM gNB [configuration](https://github.com/aligungr/UERANSIM/wiki/Configuration#gnb-configuration) in plain text. | Check [values.yaml](./values.yaml) |
+| `gnb.podAnnotations` | Pod annotations. | `{}`|
+| `gnb.imagePullSecrets` | Image pull secrets. | `[]`|
+| `gnb.podSecurityContext` | Pod secutity context. | `[]`|
+| `gnb.resources` | CPU and memory requests and limits. | `see values.yaml`|
+| `gnb.nodeSelector` | Node selector. | `{}`|
+| `gnb.tolerations` | Tolerations. | `{}`|
+| `gnb.affinity` | Affinity. | `{}`|
 
 ### UE parameters
 
@@ -148,9 +152,9 @@ This chart allows you to customize its installation. The table below shows the p
 | `ue.configmap.name` | The name of the configmap to be used to import the configuration to the UE POD. | `ue-configmap` |
 | `ue.volume.name` | The name of the volume to be mounted to the UE POD. | `ue-volume` |
 | `ue.volume.mount` | The path to the folder where configuration files should be mounted on the UE POD. | `/ueransim/config` |
-| `ue.configuration` | The UERANSIM UE [configuration](https://github.com/aligungr/UERANSIM/wiki/Configuration#ue-configuration) in YAML format. | Check [values.yaml](./values.yaml) |
 | `ue.command` | The command to be executed to run the UERANSIM UE. | `"../build/nr-ue -c ./ue-config.yaml"` |
 | `ue.script` | A script to be executed after running the UERANSIM UE. It may be used to periodically generate traffic for example. | `""` |
+| `ue.configuration` | The UERANSIM UE [configuration](https://github.com/aligungr/UERANSIM/wiki/Configuration#ue-configuration) in plain text. | Check [values.yaml](./values.yaml) |
 
 ## Reference
  - https://github.com/aligungr/UERANSIM/wiki/
