@@ -30,7 +30,6 @@ smf:
               dns: # the IP address of DNS
                 ipv4: 8.8.8.8
                 ipv6: 2001:4860:4860::8888
-              ueSubnet: 10.1.0.0/17 # should be CIDR type
         - sNssai:
             sst: 1
             sd: 112233
@@ -39,7 +38,6 @@ smf:
               dns: # the IP address of DNS
                 ipv4: 8.8.8.8
                 ipv6: 2001:4860:4860::8888
-              ueSubnet: 10.1.128.0/17 # should be CIDR type ?????
         - sNssai:
             sst: 2
             sd: 112234    
@@ -48,13 +46,14 @@ smf:
               dns: 
                 ipv4: 8.8.8.8
                 ipv6: 2001:4860:4860::8888
-              ueSubnet: 10.2.0.0/16
-      userplane_information:
-        up_nodes:
-          gNB1:
-            type: AN
-            an_ip: 10.100.50.236
-          BranchingUPF:
+      plmnList: # the list of PLMN IDs that this SMF belongs to (optional, remove this key when unnecessary)
+        - mcc: "208" # Mobile Country Code (3 digits string, digit: 0~9)
+          mnc: "93" # Mobile Network Code (2 or 3 digits string, digit: 0~9)
+      userplane_information: # list of userplane information
+        up_nodes: # information of userplane node (AN or UPF)
+          gNB1: # the name of the node
+            type: AN # the type of the node (AN or UPF)
+          UPFB:
             type: UPF
             node_id: 10.100.50.241 # PFCP address
             sNssaiUpfInfos:
@@ -77,7 +76,7 @@ smf:
                 endpoints:
                   - 10.100.50.225
                 networkInstance: internet
-          AnchorUPF1:
+          UPF1:
             type: UPF
             node_id: 10.100.50.242 # PFCP address
             sNssaiUpfInfos:
@@ -86,12 +85,14 @@ smf:
                   sd: 010203
                 dnnUpfInfoList:
                   - dnn: internet
+                    pools:
+                    - cidr: 10.1.0.0/17
             interfaces:
               - interfaceType: N9
                 endpoints:
                   - 10.100.50.226 # UPF1 N9 address
                 networkInstance: internet
-          AnchorUPF2:
+          UPF2:
             type: UPF
             node_id: 10.100.50.243 # PFCP address
             sNssaiUpfInfos:
@@ -100,6 +101,8 @@ smf:
                   sd: 010203
                 dnnUpfInfoList:
                   - dnn: internet
+                    pools:
+                    - cidr: 10.1.128.0/17
             interfaces:
               - interfaceType: N9
                 endpoints:
@@ -107,14 +110,12 @@ smf:
                 networkInstance: internet
         links:
           - A: gNB1
-            B: BranchingUPF
-          - A: BranchingUPF
-            B: AnchorUPF1
-          - A: BranchingUPF
-            B: AnchorUPF2
-
-
-
-
+            B: UPFB
+          - A: UPFB
+            B: UPF1
+          - A: UPFB
+            B: UPF2
+      locality: area1 # Name of the location where a set of AMF, SMF and UPFs are located
+      ulcl: true
 
 
