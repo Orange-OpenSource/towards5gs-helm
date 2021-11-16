@@ -27,7 +27,7 @@ helm -n <namespace> install <release-name> ./free5gc-amf/
 kubectl -n <namespace> get pods -l "nf=amf"
 ```
 
-### Uninstall the user plane
+### Uninstall the AMF
 ```console
 helm -n <namespace> delete <release-name>
 ```
