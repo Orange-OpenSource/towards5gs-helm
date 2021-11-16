@@ -93,7 +93,7 @@ data:
 
     #ping -qc10 google.com |awk -F', ' 'END {print ($3 == "0% packet loss"? "Connection passed - " $3: "Connection failed - " $3)}'
 ---
-apiVersion: batch/v1
+apiVersion: v1
 kind: Pod
 metadata:
   name: "{{ include "ueransim.fullname" . }}-test-connection"
