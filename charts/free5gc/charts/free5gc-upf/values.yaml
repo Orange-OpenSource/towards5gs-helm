@@ -18,7 +18,7 @@
 global:
   projectName: free5gc
   userPlaneArchitecture: single  # possible values are "single" and "ulcl"
-  uesubnet: 10.1.0.0/17
+  uesubnet: 10.1.0.0/16
 #Global network parametes
   n4network:
     name: n4network
@@ -320,4 +320,3 @@ upfb:
           cidr: 10.1.0.0/17
           # [optional] apn_list[*].natifname
           # natifname: n6
-          
