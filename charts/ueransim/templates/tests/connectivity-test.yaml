@@ -102,8 +102,6 @@ metadata:
   annotations:
     helm.sh/hook: test
 spec:
-  template:
-    spec:
       serviceAccountName: {{ include "ueransim.fullname" . }}-test-connection
       containers:
       - name: ue-test-conncection
@@ -121,6 +119,4 @@ spec:
           defaultMode: 0755
           name: {{ .Values.ue.test.connectivity.configmap.name }}
       restartPolicy: Never
-  backoffLimit: 4
-  ttlSecondsAfterFinished: {{ .Values.ue.test.connectivity.ttlseconds }}
 {{- end }}
