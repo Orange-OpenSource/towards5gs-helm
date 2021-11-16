@@ -52,7 +52,6 @@ webui:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-webui
-    tag: "v3.0.5"
     pullPolicy: IfNotPresent
   service:
     name: webui-service
@@ -109,4 +108,20 @@ webui:
     #  - secretName: chart-example-tls
     #    hosts:
     #      - chart-example.local
-  configuration: {}
+  configuration:
+    # the kind of log output
+    # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+    # ReportCaller: enable the caller report or not, value: true or false
+    logger:
+      WEBUI:
+        debugLevel: info
+        ReportCaller: true
+      PathUtil:
+        debugLevel: info
+        ReportCaller: false
+      OpenApi:
+        debugLevel: info
+        ReportCaller: false
+      MongoDBLibrary:
+        debugLevel: info
+        ReportCaller: false

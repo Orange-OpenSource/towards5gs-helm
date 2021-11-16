@@ -38,7 +38,7 @@ data:
         # - ifname: gtpif
     
   wrapper.sh: |
-    #!/bin/bash
+    #!/bin/sh
 
     ### Implement networking rules
     iptables -A FORWARD -j ACCEPT

@@ -20,7 +20,7 @@ metadata:
 data:
   udmcfg.yaml: |
     info:
-      version: 1.0.0
+      version: 1.0.1
       description: UDM initial local configuration
 
     configuration:

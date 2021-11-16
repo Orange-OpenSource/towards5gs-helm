@@ -59,7 +59,6 @@ nrf:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-nrf
-    tag: "v3.0.5"
     pullPolicy: IfNotPresent
   configmap:
     name: nrf-configmap

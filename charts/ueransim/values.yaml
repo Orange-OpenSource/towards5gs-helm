@@ -174,4 +174,4 @@ ue:
       volume:
         name: connectivity-test-volume
         mount: /scripts
-      ttlseconds: 100
+      ttlseconds: 50

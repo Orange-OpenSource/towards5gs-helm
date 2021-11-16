@@ -45,7 +45,7 @@ In addition to the README provided in each Helm chart, the [Documentation](.) di
  - [Setup Free5GC and test with UERANSIM](demo/Setup-free5gc-and-test-with-UERANSIM.md)
  - [Setup free5gc on multiple clusters and test with UERANSIM](demo/Setup-free5gc-on-multiple-clusters-and-test-with-UERANSIM.md)
  - [Setup free5gc on multiple clusters with a Kubernetes service to expose the AMF NGAP service and test with UERANSIM](demo/Setup-free5gc-with-a-Kubernetes-service-to-expose-the-AMF-NGAP-service-and-test-with-UERANSIM.md)
- - [Setup free5gc on multiple clusters with ULCL mode and test with UERANSIM](demo/Setup-free5gc-on-multiple-clusters-with-ULCL-mode-and-test-with-UERANSIM.md)
+
 
 
 
