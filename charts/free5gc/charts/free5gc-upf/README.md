@@ -1,6 +1,6 @@
 # free5gc-upf Helm chart
 
-This is a Helm chart for deploying the [free5GC](https://github.com/free5gc/free5gc)-v3.0.5 UPF on Kubernetes.
+This is a Helm chart for deploying the [free5GC](https://github.com/free5gc/free5gc) UPF on Kubernetes.
 
 This chart is included in the [dependencies](/charts/free5gc/charts) of the [main chart](/charts/free5gc). Furthermore, it can be installed separately on Kubernetes a cluster at the same network with the clusters other Free5GC NFs are deployed.
 
