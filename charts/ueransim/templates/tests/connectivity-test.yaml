@@ -11,6 +11,35 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 {{- if .Values.ue.enabled }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "ueransim.fullname" . }}-test-connection
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ include "ueransim.fullname" . }}-test-connection
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["get", "create"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ include "ueransim.fullname" . }}-test-connection
+subjects:
+- kind: ServiceAccount
+  name: {{ include "ueransim.fullname" . }}-test-connection
+  namespace: {{ $.Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ include "ueransim.fullname" . }}-test-connection
+  apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -59,7 +88,7 @@ data:
     #ping -qc10 google.com |awk -F', ' 'END {print ($3 == "0% packet loss"? "Connection passed - " $3: "Connection failed - " $3)}'
 ---
 apiVersion: batch/v1
-kind: Job
+kind: Pod
 metadata:
   name: "{{ include "ueransim.fullname" . }}-test-connection"
   labels:
@@ -69,6 +98,7 @@ metadata:
 spec:
   template:
     spec:
+      serviceAccountName: {{ include "ueransim.fullname" . }}-test-connection
       containers:
       - name: ue-test-conncection
         image: {{ .Values.ue.test.connectivity.image }}
