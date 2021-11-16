@@ -15,7 +15,7 @@ name: free5gc-webui
 description: A Helm chart to deploy the Free5GC WEBUI
 type: application
 version: 0.1.1
-appVersion: "latest"
+appVersion: "v3.0.6"
 dependencies:
 - name: mongodb
   condition: db.enabled

@@ -14,7 +14,7 @@ apiVersion: v2
 name: free5gc
 description: A Helm chart to deploy Free5gc
 version: 1.0.1
-appVersion: "latest"
+appVersion: "v3.0.6"
 dependencies:
 - name: mongodb
   condition: deployMongoDB
