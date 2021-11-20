@@ -100,7 +100,7 @@ In this section, we'll suppose that you have only one interface on each Kubernet
  - `global.n2network.masterIf`
  - `global.n3network.masterIf`
  - `global.n4network.masterIf`
- - `global.n6network.masterIf`
+ - `global.n9network.masterIf`
 
 In addition, please make sure `global.n6network.subnetIP`, `global.n6network.gatewayIP` and `upf.n6if.IpAddress` parameters will match the IP address of the `toto` interface in order to make the UPF able to reach the Data Network via its N6 interface.
 
@@ -180,7 +180,7 @@ These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 | --- | --- | --- |
 These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 | `global.n9network.name` | N9 network name. | `n9network` |
-| `global.n9network.masterIf` | N9 network MACVLAN master interface. The IP address of this interface must be in the N9 network subnet IP rang. | `eth1` |
+| `global.n9network.masterIf` | N9 network MACVLAN master interface. The IP address of this interface must be in the N9 network subnet IP rang. | `eth0` |
 | `global.n9network.subnetIP` | N9 network subnet IP address (The IP address of the Data Network. | `10.100.50.224` |
 | `global.n9network.cidr` | N9 network cidr. | `29` |
 | `global.n9network.gatewayIP` | N9 network gateway IP address (The IP address to go to the Data Network). | `10.100.50.230` |
