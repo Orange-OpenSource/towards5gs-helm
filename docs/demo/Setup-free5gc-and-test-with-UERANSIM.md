@@ -135,6 +135,13 @@ cat /proc/sys/net/ipv4/ip_forward
 ```
 We remind you that some CNI plugins (e.g. [Flannel](https://github.com/flannel-io/flannel)) allow this functionality by default, while others (.e.g. [Calico](https://github.com/projectcalico/cni-plugin)) require a [special configuration](https://docs.projectcalico.org/reference/host-endpoints/forwarded).
 
+### Promiscuous mode
+[Promiscuous mode](https://en.wikipedia.org/wiki/Promiscuous_mode) must be enabled for master interfaces of MACVLAN interfaces. In fact, allows network interfaces to intercept packets even if the MAC destination address on these packets is different from the MAC address of this interface. This is necesary as MACVLAN interfaces we are using will have diffrent MAC addresses from MAC addresses of their master interfaces.
+
+**NOTE:** how to enable Promiscuous highly depends on the technology or the tool used for the creation of VMs. Thus, you should check if it is enabled by default in your platform or how to enable it.
+
+https://github.com/Orange-OpenSource/towards5gs-helm/issues/6#issuecomment-952618212
+
 
 ## Reference
  - https://github.com/free5gc/free5gc/wiki
