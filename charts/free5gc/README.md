@@ -102,7 +102,7 @@ In this section, we'll suppose that you have only one interface on each Kubernet
  - `global.n4network.masterIf`
  - `global.n9network.masterIf`
 
-In addition, please make sure `global.n6network.subnetIP`, `global.n6network.gatewayIP` and `upf.n6if.IpAddress` parameters will match the IP address of the `toto` interface in order to make the UPF able to reach the Data Network via its N6 interface.
+In addition, please make sure `global.n6network.subnetIP`, `global.n6network.gatewayIP` and `free5gc-upf.upf.n6if.IpAddress` parameters will match the IP address of the `toto` interface in order to make the UPF able to reach the Data Network via its N6 interface.
 
 In case of ULCL enabled take care about `free5gc-upf.upfb.n6if.IpAddress`, `free5gc-upf.upf1.n6if.IpAddress` and `free5gc-upf.upf2.n6if.IpAddress` instead of `free5gc-upf.upf.n6if.IpAddress`.
 
