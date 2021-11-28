@@ -96,10 +96,12 @@ helm -n <namespace> uninstall <release-name>
 If you want to enable the ULCL feature, you can use the [ulcl-enabled-values.yaml](./ulcl-enabled-values.yaml) to override the default chart values.
 
 ### Networks configuration
+
 In this section, we'll suppose that you have only one interface on each Kubernetes node and its name is `toto`. Then you have to set these parameters to `toto`:
  - `global.n2network.masterIf`
  - `global.n3network.masterIf`
  - `global.n4network.masterIf`
+ - `global.n6network.masterIf`
  - `global.n9network.masterIf`
 
 In addition, please make sure `global.n6network.subnetIP`, `global.n6network.gatewayIP` and `free5gc-upf.upf.n6if.IpAddress` parameters will match the IP address of the `toto` interface in order to make the UPF able to reach the Data Network via its N6 interface.
