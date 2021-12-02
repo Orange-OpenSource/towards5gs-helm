@@ -41,7 +41,6 @@ gnb:
   replicaCount: 1
   image:
     name: towards5gs/ueransim-gnb
-    tag: "v3.1.3"
     pullPolicy: IfNotPresent
   configmap:
     name: gnb-configmap
@@ -100,7 +99,6 @@ ue:
   replicaCount: 1
   image:
     name: towards5gs/ueransim-ue
-    tag: "v3.1.3"
     pullPolicy: IfNotPresent
   configmap:
     name: ue-configmap
@@ -141,6 +139,18 @@ ue:
     amf: '8000' # Authentication Management Field (AMF) value
     imei: '356938035643803' # IMEI number of the device
     imeiSv: '4370816125816151'
+    # UAC Access Identities Configuration
+    uacAic:
+      mps: false
+      mcs: false
+    # UAC Access Control Class
+    uacAcc:
+      normalClass: 0
+      class11: false
+      class12: false
+      class13: false
+      class14: false
+      class15: false
     sessions:
       - type: "IPv4"
         apn: "internet"
@@ -164,6 +174,10 @@ ue:
       EA1: true
       EA2: true
       EA3: true
+    # Integrity protection maximum data rate for user plane
+    integrityMaxRate:
+      uplink: 'full'
+      downlink: 'full'
   
   test:
     connectivity:

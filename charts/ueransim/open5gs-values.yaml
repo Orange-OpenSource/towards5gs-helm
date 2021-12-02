@@ -35,16 +35,26 @@ ue:
     amf: '8000'
     imei: '356938035643803'
     imeiSv: '4370816125816151'
+    # UAC Access Identities Configuration
+    uacAic:
+      mps: false
+      mcs: false
+    # UAC Access Control Class
+    uacAcc:
+      normalClass: 0
+      class11: false
+      class12: false
+      class13: false
+      class14: false
+      class15: false
     sessions:
       - type: 'IPv4'
         apn: 'internet'
         slice:
-          sst: 0x01
-          sd: 0x010203
+          sst: 1
     # Configured NSSAI for this UE by HPLMN
     configured-nssai:
-      - sst: 0x01
-        sd: 0x010203
+      - sst: 1
     # Default Configured NSSAI for this UE
     default-nssai:
       - sst: 1
