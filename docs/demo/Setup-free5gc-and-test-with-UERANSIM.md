@@ -46,6 +46,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: example-local-pv9
+  namespace: <namespace>
   labels:
     project: free5gc
 spec:
