@@ -44,7 +44,7 @@ helm -n <namespace> install -f ./ueransim/open5gs-values.yaml <release-name> ./u
 ### Networks configuration
 In this section, we'll suppose that you have at least one interface on each Kubernetes node and its name is `toto`. Then you have to set these parameters to `toto`:
  - `global.n2network.masterIf`
- - `global.n4network.masterIf`
+ - `global.n3network.masterIf`
 
 ## Usage information
 Once this helm chart installed, a PDU session will be crated automatically. Furthermore, a TUN interface will be created on the UE POD. This interface can be used to test the connectivity:
