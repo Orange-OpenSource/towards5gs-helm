@@ -77,8 +77,6 @@ This chart allows you to customize its installation. The table below shows the p
 | --- | --- | --- |
 | `global.multiCluster` | Must be set to `true` if you are deploying the the UERANSIM in a different cluster from the one where AMF is deployed and `global.amf.service.ngap.enabled` is set to true. | `false` |
 | `global.cpClusterIP` | The IP address of one of the cluster nodes where the control plane is deployed. | `nil` |
-
-
 | `global.amf.service.ngap.name` | The name of the AMF NGAP service. | `amf-n2` |
 | `global.amf.service.ngap.type` | The type of the AMF NGAP service. | `ClusterIP` |
 | `global.amf.service.ngap.port` | The AMF NGAP port number. | `38412` |
