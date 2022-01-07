@@ -60,7 +60,7 @@ These parameters apply only if `global.amf.service.ngap.enabled` is set to `fals
 
 | Parameter | Description | Default value |
 | --- | --- | --- |
-| `global.amf.n2if.IpAddress` | The IP address of the AMF’s N2 interface. | `10.100.50.249` |
+| `global.amf.n2if.ipAddress` | The IP address of the AMF’s N2 interface. | `10.100.50.249` |
 | `global.n2network.name` | N2 network name. | `n2network` |
 | `global.n2network.masterIf` | N2 network MACVLAN master interface. | `eth0` |
 | `global.n2network.subnetIP` | N2 network subnet IP address. | `10.100.50.248` |

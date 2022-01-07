@@ -104,9 +104,9 @@ In this section, we'll suppose that you have only one interface on each Kubernet
  - `global.n6network.masterIf`
  - `global.n9network.masterIf`
 
-In addition, please make sure `global.n6network.subnetIP`, `global.n6network.gatewayIP` and `free5gc-upf.upf.n6if.IpAddress` parameters will match the IP address of the `toto` interface in order to make the UPF able to reach the Data Network via its N6 interface.
+In addition, please make sure `global.n6network.subnetIP`, `global.n6network.gatewayIP` and `free5gc-upf.upf.n6if.ipAddress` parameters will match the IP address of the `toto` interface in order to make the UPF able to reach the Data Network via its N6 interface.
 
-In case of ULCL enabled take care about `free5gc-upf.upfb.n6if.IpAddress`, `free5gc-upf.upf1.n6if.IpAddress` and `free5gc-upf.upf2.n6if.IpAddress` instead of `free5gc-upf.upf.n6if.IpAddress`.
+In case of ULCL enabled take care about `free5gc-upf.upfb.n6if.ipAddress`, `free5gc-upf.upf1.n6if.ipAddress` and `free5gc-upf.upf2.n6if.ipAddress` instead of `free5gc-upf.upf.n6if.ipAddress`.
 
 ## Customized installation
 This chart allows you to customize its installation. The table below shows the parameters that can be modified before installing the chart or when upgrading it as well as their default values.
@@ -130,8 +130,8 @@ Please check this [link](https://helm.sh/docs/chart_template_guide/subcharts_and
 | `global.nrf.service.type` | The type of the NRF SBI service. | `NodePort` |
 | `global.nrf.service.port` | The NRF SBI port number. | `8000` |
 | `global.nrf.service.port` | The NRF SBI service nodePort number. | `30800` |
-| `global.smf.n4if.IpAddress` | The IP address of the SMF’s N4 interface. | `10.100.50.249` |
-| `global.amf.n2if.IpAddress` | The IP address of the AMF’s N2 interface. | `10.100.50.249` |
+| `global.smf.n4if.ipAddress` | The IP address of the SMF’s N4 interface. | `10.100.50.249` |
+| `global.amf.n2if.ipAddress` | The IP address of the AMF’s N2 interface. | `10.100.50.249` |
 | `global.amf.service.ngap.enabled` | If `true` then a Kubernetes service will be used to expose the AMF NGAP service. | `false` |
 | `global.amf.service.ngap.name` | The name of the AMF NGAP service. | `amf-n2` |
 | `global.amf.service.ngap.type` | The type of the AMF NGAP service. | `NodePort` |
