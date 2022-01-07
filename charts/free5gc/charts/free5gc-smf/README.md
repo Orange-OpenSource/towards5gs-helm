@@ -53,7 +53,7 @@ This chart allows you to customize its installation. The table below shows the p
 
 | Parameter | Description | Default value |
 | --- | --- | --- |
-| `global.smf.n4if.IpAddress` | The IP address of the SMF’s N4 interface. | `10.100.50.244` |
+| `global.smf.n4if.ipAddress` | The IP address of the SMF’s N4 interface. | `10.100.50.244` |
 | `global.n4network.name` | N4 network name. | `n4network` |
 | `global.n4network.masterIf` | N4 network MACVLAN master interface. | `eth0` |
 | `global.n4network.subnetIP` | N4 network subnet IP address. | `10.100.50.240` |

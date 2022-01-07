@@ -62,9 +62,9 @@ In this section, we'll suppose that you have only one interface on each Kubernet
  - `global.n4network.masterIf`
  - `global.n6network.masterIf`
 
-In addition, please make sure `global.n6network.subnetIP`, `global.n6network.gatewayIP` and `upf.n6if.IpAddress` parameters will match the IP address of the `toto` interface in order to make the UPF able to reach the Data Network via its N6 interface.
+In addition, please make sure `global.n6network.subnetIP`, `global.n6network.gatewayIP` and `upf.n6if.ipAddress` parameters will match the IP address of the `toto` interface in order to make the UPF able to reach the Data Network via its N6 interface.
 
-In case of ULCL enabled take care about `upfb.n6if.IpAddress`, `upf1.n6if.IpAddress` and `upf2.n6if.IpAddress` instead of `upf.n6if.IpAddress`.
+In case of ULCL enabled take care about `upfb.n6if.ipAddress`, `upf1.n6if.ipAddress` and `upf2.n6if.ipAddress` instead of `upf.n6if.ipAddress`.
 
 ## Customized installation
 This chart allows you to customize its installation. The table below shows the parameters that can be modified before installing the chart or when upgrading it as well as their default values.
@@ -128,9 +128,9 @@ These parameters if `global.userPlaneArchitecture` is set to `signle`.
 | `upf.configmap.name` | The name of the configmap to be used to import the configuration to the UPF POD. | `upf-configmap` |
 | `upf.volume.name` | The name of the volume to be mounted to the UPF POD. | `upf-volume` |
 | `upf.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/` |
-| `upf.n3if.IpAddress` | The IP address of the UPF’s N3 interface. | `10.100.50.233` |
-| `upf.n4if.IpAddress` | The IP address of the UPF’s N4 interface. | `10.100.50.241` |
-| `upf.n6if.IpAddress` | The IP address of the UPF’s N6 interface. | `10.100.100.12` |
+| `upf.n3if.ipAddress` | The IP address of the UPF’s N3 interface. | `10.100.50.233` |
+| `upf.n4if.ipAddress` | The IP address of the UPF’s N4 interface. | `10.100.50.241` |
+| `upf.n6if.ipAddress` | The IP address of the UPF’s N6 interface. | `10.100.100.12` |
 
 ### UPF1 parameters
 These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
@@ -144,9 +144,9 @@ These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 | `upf1.configmap.name` | The name of the configmap to be used to import the configuration to the UPF1 POD. | `upf1-configmap` |
 | `upf1.volume.name` | The name of the volume to be mounted to the UPF1 POD. | `upf1-volume` |
 | `upf1.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/` |
-| `upf1.n4if.IpAddress` | The IP address of the UPF1’s N4 interface. | `10.100.50.242` |
-| `upf1.n6if.IpAddress` | The IP address of the UPF1’s N6 interface. | `10.100.100.13` |
-| `upf1.n9if.IpAddress` | The IP address of the UPF1’s N9 interface. | `10.100.50.226` |
+| `upf1.n4if.ipAddress` | The IP address of the UPF1’s N4 interface. | `10.100.50.242` |
+| `upf1.n6if.ipAddress` | The IP address of the UPF1’s N6 interface. | `10.100.100.13` |
+| `upf1.n9if.ipAddress` | The IP address of the UPF1’s N9 interface. | `10.100.50.226` |
 
 ### UPF2 parameters
 These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
@@ -160,9 +160,9 @@ These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 | `upf2.configmap.name` | The name of the configmap to be used to import the configuration to the UPF2 POD. | `upf2-configmap` |
 | `upf2.volume.name` | The name of the volume to be mounted to the UPF2 POD. | `upf2-volume` |
 | `upf2.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/` |
-| `upf2.n4if.IpAddress` | The IP address of the UPF2’s N4 interface. | `10.100.50.243` |
-| `upf2.n6if.IpAddress` | The IP address of the UPF2’s N6 interface. | `10.100.100.14` |
-| `upf2.n9if.IpAddress` | The IP address of the UPF2’s N9 interface. | `10.100.50.227` |
+| `upf2.n4if.ipAddress` | The IP address of the UPF2’s N4 interface. | `10.100.50.243` |
+| `upf2.n6if.ipAddress` | The IP address of the UPF2’s N6 interface. | `10.100.100.14` |
+| `upf2.n9if.ipAddress` | The IP address of the UPF2’s N9 interface. | `10.100.50.227` |
 
 ### UPFb parameters
 These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
@@ -176,10 +176,10 @@ These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 | `upfb.configmap.name` | The name of the configmap to be used to import the configuration to the UPFb POD. | `upfb-configmap` |
 | `upfb.volume.name` | The name of the volume to be mounted to the UPFb POD. | `upfb-volume` |
 | `upfb.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/` |
-| `upfb.n3if.IpAddress` | The IP address of the UPFb’s N3 interface. | `10.100.50.233` |
-| `upfb.n4if.IpAddress` | The IP address of the UPFb’s N4 interface. | `10.100.50.241` |
-| `upfb.n6if.IpAddress` | The IP address of the UPFb’s N6 interface. | `10.100.100.12` |
-| `upfb.n9if.IpAddress` | The IP address of the UPFb’s N9 interface. | `10.100.50.225` |
+| `upfb.n3if.ipAddress` | The IP address of the UPFb’s N3 interface. | `10.100.50.233` |
+| `upfb.n4if.ipAddress` | The IP address of the UPFb’s N4 interface. | `10.100.50.241` |
+| `upfb.n6if.ipAddress` | The IP address of the UPFb’s N6 interface. | `10.100.100.12` |
+| `upfb.n9if.ipAddress` | The IP address of the UPFb’s N9 interface. | `10.100.50.225` |
 
 ## Known limitations
 Currently, this Helm chart uses the [MACVLAN plugin](https://www.cni.dev/plugins/main/macvlan/) for all network attachment definition. However, the use of a Userspace CNI plugin like [SR-IOV] is necessary for user plane traffic (N3 and N6 interfaces). Using this CNI plugin may be possible in next versions.

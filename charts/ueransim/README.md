@@ -82,7 +82,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `global.amf.service.ngap.port` | The AMF NGAP port number. | `38412` |
 | `global.amf.service.ngap.nodeport` | The nodePort number to access the AMF NGAP service from outside of cluster. | `31412` |
 | `global.amf.service.ngap.protocol` | The protocol used for this service. | `SCTP` |
-| `global.gnb.n3if.IpAddress` | The IP address of the UERANSIM’s N3 interface. | `10.100.50.233` |
+| `global.gnb.n3if.ipAddress` | The IP address of the UERANSIM’s N3 interface. | `10.100.50.233` |
 
 ### N2 Network parameters
 | Parameter | Description | Default value |
@@ -126,9 +126,9 @@ This chart allows you to customize its installation. The table below shows the p
 | `gnb.service.protocol` | The protocol used for the RADIO interface. | `UDP` |
 | `gnb.n2if.ipAddress`| The IP address of gNB’s N2 interface. | `10.100.50.250` |
 | `gnb.n3if.ipAddress`| The IP address of gNB’s N3 interface. | `10.100.50.250` |
-| `gnb.amf.n2if.IpAddress` | The IP address of the AMF’s N2 interface. | `10.100.50.249` |
+| `gnb.amf.n2if.ipAddress` | The IP address of the AMF’s N2 interface. | `10.100.50.249` |
 | `gnb.amf.n2if.port` | AMF NGAP port number. | `10.100.50.249` |
-| `gnb.amf.service.ngap.enabled` | If `true` then a Kubernetes service will be used to access the AMF NGAP service instead of accessing directly the AMF’s N2 interface. `gnb.amf.n2if.IpAddress` must be set to the name of the service or IP address of a node where AMF is deployed. | `false` |
+| `gnb.amf.service.ngap.enabled` | If `true` then a Kubernetes service will be used to access the AMF NGAP service instead of accessing directly the AMF’s N2 interface. `gnb.amf.n2if.ipAddress` must be set to the name of the service or IP address of a node where AMF is deployed. | `false` |
 | `gnb.configuration` | The UERANSIM gNB [configuration](https://github.com/aligungr/UERANSIM/wiki/Configuration#gnb-configuration) in plain text. | Check [values.yaml](./values.yaml) |
 | `gnb.podAnnotations` | Pod annotations. | `{}`|
 | `gnb.imagePullSecrets` | Image pull secrets. | `[]`|
