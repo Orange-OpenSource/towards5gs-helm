@@ -60,11 +60,12 @@ gnb:
 
   amf:
     n2if:  # NGAP
-      ipAddress: 10.100.50.249
+      ipAddress: amf-n2
+      #ipAddress: 10.100.50.249
       port: 38412
     service:
       ngap:
-        enabled: false  # if true set gnb.amf.n2if.ipAddress to the name of AMF NGAP service or the IP of the cluster hosting the AMF
+        enabled: true  # if true set gnb.amf.n2if.ipAddress to the name of AMF NGAP service or the IP of the cluster hosting the AMF
 
   podAnnotations: {}
     # additional annotations
