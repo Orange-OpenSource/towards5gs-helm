@@ -52,7 +52,7 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.ue.test.connectivity.configmap.name }}
   annotations:
-    "halm.sh/hook": test
+    "helm.sh/hook": test
 data:
   script-connectivity-test.sh: |
     #!/bin/bash
