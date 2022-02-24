@@ -17,30 +17,33 @@ This guideline shows how to deploy the free5gc on multiple clusters and then tes
 **Note:** If the names of network interfaces on your Kubernetes nodes are different from `eth0` and `eth1`, see [Networks configuration](#networks-configuration).
 
 ## Networks configuration
-Please refer to this section (Networks configuration) on each chart's README to make sure you'll not have a networking related issue.
+Please refer to this section [Networks configuration](https://github.com/Orange-OpenSource/towards5gs-helm/tree/main/charts/free5gc#networks-configuration) to make sure you'll not have a networking related issue.
+
 
 ## Steps
 
 ### Deploy the user plane on the first cluster
 Do the following on the first cluster.
-#### Verify the kernel version on worker nodes
+
+#### Install gtp5g kernel module
+First check that the Linux kernel version on Kubernetes worker nodes is `5.0.0-23-generic` or `5.4.x`. 
 ```console
 uname -r
 ```
-It should be `5.0.0-23-generic`.
-#### Install the gtp5g kernel module on worker nodes
+Then, on each worker node, install the [gtp5g kernel module](https://github.com/free5gc/gtp5g). 
 ```console
-git clone https://github.com/PrinzOwO/gtp5g.git
+git clone -b v0.3.1 https://github.com/free5gc/gtp5g.git
 cd gtp5g
 make
 sudo make install
 ```
+
 #### Install the user plane
-1. Clone the project and then access the free5gcUserPlane parent chart folder `towards5gs-helm/charts/free5gc/charts`.
+1. Clone the project and go to the free5gc chart dependencies folder `towards5gs-helm/charts/free5gc/charts`.
 2. Run the following commands on a host that can communicate with the API server of your cluster.
 ```console
 kubectl create ns <namespace>
-helm -n <namespace> install <release-name> ./free5gcUserPlane/
+helm -n <namespace> install upf ./free5gc-upf/
 ```
 
 ### Deploy the control plane on the second cluster
@@ -75,19 +78,29 @@ spec:
 EOF
 ```
 **NOTE:** you must create the folder on the right node before creating the Peristent Volume.
+
 #### Install the control plane
-1. Clone the project and then access the free5gcUserPlane parent chart folder `towards5gs-helm/charts/free5gc/charts`.
+1. Clone the project and and go to the free5gc chart dependencies folder `towards5gs-helm/charts/free5gc/charts`.
 2. Run the following commands on a host that can communicate with the API server of your cluster.
 ```console
-helm -n <namespace> install <release-name> ./free5gcControlPlane/
+helm -n <namespace> install nrf ./free5gc-nrf/
+helm -n <namespace> install udr ./free5gc-udr/
+helm -n <namespace> install udm ./free5gc-udm/
+helm -n <namespace> install ausf ./free5gc-ausf/
+helm -n <namespace> install nssf ./free5gc-nssf/
+helm -n <namespace> install amf ./free5gc-amf/
+helm -n <namespace> install pcf ./free5gc-pcf/
+helm -n <namespace> install smf ./free5gc-smf/
+helm -n <namespace> install webui ./free5gc-webui/
 ```
 
 ### Deploy the N3iwf on the first cluster
 Do the following on the first cluster.
 
-#### Install the N3iwf
+#### Install the N3iwf (optional)
+This network function has not been yet tested.
 ```console
-helm -n <namespace> install <release-name> ./free5gcN3iwf/
+helm -n <namespace> install <release-name> ./free5gc-n3iwf/
 ```
 
 ### Add user information
@@ -101,7 +114,7 @@ Do the following on the first cluster.
 1. Clone the project and then go to the free5gcUserPlane parent chart folder `charts`.
 2. Run the following commands on a host that can communicate with the API server of your cluster.
 ```console
-helm -n <namespace> install --set networks5g.n2network.enabled=false <release-name> ./ueransim/
+helm -n <namespace> install ueransim ./ueransim/
 ```
 We have disabled the N2 network because it was already created by the N3iwf.
 

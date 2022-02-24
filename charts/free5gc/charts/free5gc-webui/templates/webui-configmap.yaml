@@ -1,0 +1,34 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.webui }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .configmap.name }}
+  labels:
+    app: {{ $.Values.global.projectName }}
+data:
+  webuicfg.yaml: |
+    info:
+      version: 1.0.0
+      description: WEBUI initial local configuration
+
+    configuration:
+      mongodb:
+        name: free5gc
+        url: mongodb://{{ $.Values.mongodb.service.name }}:{{ $.Values.mongodb.service.port }}
+        
+    logger:
+      {{- toYaml .configuration.logger | nindent 6 }}
+
+{{- end }}

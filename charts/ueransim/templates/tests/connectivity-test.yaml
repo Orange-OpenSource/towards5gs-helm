@@ -11,6 +11,41 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 {{- if .Values.ue.enabled }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "ueransim.fullname" . }}-test-connection
+  annotations:
+    "halm.sh/hook": test
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ include "ueransim.fullname" . }}-test-connection
+  annotations:
+    "halm.sh/hook": test
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["get", "create"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ include "ueransim.fullname" . }}-test-connection
+  annotations:
+    "halm.sh/hook": test
+subjects:
+- kind: ServiceAccount
+  name: {{ include "ueransim.fullname" . }}-test-connection
+  namespace: {{ $.Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ include "ueransim.fullname" . }}-test-connection
+  apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -22,13 +57,13 @@ data:
   script-connectivity-test.sh: |
     #!/bin/bash
     echo "Get ue pod name"
-    pod_name="$(kubectl -n free5gc get pods | grep -- -ue- | awk '{print $1}')"
+    export pod_name=$(kubectl get pods --namespace {{ $.Release.Namespace }} -l "component={{ .Values.ue.name }}" -o jsonpath="{.items[0].metadata.name}")
     echo "${pod_name}"
     echo "***********************************************************************"
     echo ""
 
     echo "Get ip address table for ${pod_name}"
-    ip_address="$(kubectl -n free5gc exec -i ${pod_name} -- bash -c 'ip address')"
+    ip_address="$(kubectl -n {{ $.Release.Namespace }} exec -i ${pod_name} -- bash -c 'ip address')"
     echo "${ip_address}"
     tun_interface="$(echo "$ip_address" | awk '$1 ~ /^[0-9].*/ && $2 ~/^uesimtun0/ {print}')"
     if [ -z "$tun_interface" ] ; then
@@ -40,12 +75,13 @@ data:
     echo ""
 
     echo "Test connectivity"
-    ping_output="$(kubectl -n free5gc exec -i ${pod_name} -- bash -c 'ping -c 10 -I uesimtun0  google.com')"
+    ping_output="$(kubectl -n {{ $.Release.Namespace }} exec -i ${pod_name} -- bash -c 'ping -c 10 -I uesimtun0  www.google.com')"
     echo "${ping_output}"
     echo "***********************************************************************"
     echo ""
     ping_statistics="$(echo "$ping_output" |tail -n -2 |awk -F', ' 'NR==1 {print}')"
     loss_rate="$(echo "$ping_statistics" |awk -F', ' '{for(i=1; i<=NF; i++){if(match($i, /packet loss$/))print $i}}')"
+    echo "Packet loss-rate is $loss_rate"
     if [ "$loss_rate" != "100% packet loss" ] ; then
       echo "Connection test passed - ${loss_rate}"
       exit 0
@@ -57,17 +93,18 @@ data:
 
     #ping -qc10 google.com |awk -F', ' 'END {print ($3 == "0% packet loss"? "Connection passed - " $3: "Connection failed - " $3)}'
 ---
-apiVersion: batch/v1
-kind: Job
+apiVersion: v1
+kind: Pod
 metadata:
-  name: {{ .Values.ue.test.connectivity.name }}
+  name: "{{ include "ueransim.fullname" . }}-test-connection"
+  labels:
+    {{- include "ueransim.labels" . | nindent 4 }}
   annotations:
     helm.sh/hook: test
 spec:
-  template:
-    spec:
+      serviceAccountName: {{ include "ueransim.fullname" . }}-test-connection
       containers:
-      - name: {{ .Values.ue.test.connectivity.name }}
+      - name: ue-test-conncection
         image: {{ .Values.ue.test.connectivity.image }}
         imagePullPolicy: IfNotPresent
         command: ["bin/sh"]
@@ -82,6 +119,4 @@ spec:
           defaultMode: 0755
           name: {{ .Values.ue.test.connectivity.configmap.name }}
       restartPolicy: Never
-  backoffLimit: 4
-  ttlSecondsAfterFinished: {{ .Values.ue.test.connectivity.ttlseconds }}
 {{- end }}

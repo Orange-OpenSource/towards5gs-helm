@@ -1,0 +1,42 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.gnb }}
+{{- if .enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .configmap.name }}
+  labels:
+    app: {{ $.Values.projectName }}
+    component: {{ .name }}
+data:
+  gnb-config.yaml: |
+
+    {{- .configuration | nindent 4 }}
+    
+    linkIp: 0.0.0.0   # gNB's local IP address for Radio Link Simulation (Usually same with local IP)
+    # gNB's local IP address for N2 Interface (Usually same with local IP)
+{{- if .amf.service.ngap.enabled }}
+    ngapIp: 0.0.0.0   
+{{- else }}
+    ngapIp: {{ .n2if.ipAddress }} 
+{{- end }}
+    gtpIp: {{ .n3if.ipAddress }}    # gNB's local IP address for N3 Interface (Usually same with local IP)
+    
+    # List of AMF address information
+    amfConfigs:
+      - address: {{ .amf.n2if.ipAddress }}
+        port: {{ .amf.n2if.port }}
+
+{{- end }}
+{{- end }}

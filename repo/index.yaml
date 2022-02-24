@@ -3,7 +3,61 @@ entries:
   free5gc:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-05-30T23:06:53.491074112+02:00"
+    created: "2021-12-02T19:38:48.358513638+01:00"
+    dependencies:
+    - condition: deployMongoDB
+      name: mongodb
+      repository: ""
+    - condition: deployAMF
+      name: free5gc-amf
+      repository: ""
+    - condition: deployAUSF
+      name: free5gc-ausf
+      repository: ""
+    - condition: deployN3IWF
+      name: free5gc-n3iwf
+      repository: ""
+    - condition: deployNRF
+      name: free5gc-nrf
+      repository: ""
+    - condition: deployNSSF
+      name: free5gc-nssf
+      repository: ""
+    - condition: deployPCF
+      name: free5gc-pcf
+      repository: ""
+    - condition: deploySMF
+      name: free5gc-smf
+      repository: ""
+    - condition: deployUDM
+      name: free5gc-udm
+      repository: ""
+    - condition: deployUDR
+      name: free5gc-udr
+      repository: ""
+    - condition: deployUPF
+      name: free5gc-upf
+      repository: ""
+    - condition: deployWEBUI
+      name: free5gc-webui
+      repository: ""
+    description: A Helm chart to deploy Free5gc
+    digest: 517901391a469d4b9b562d3118d10ddd8d7b29fa3f36a86e1307cbf2d38e3f7d
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc
+    urls:
+    - free5gc-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-12-02T19:38:48.305394453+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -33,7 +87,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-05-30T23:06:53.460477104+02:00"
+    created: "2021-12-02T19:38:48.290556918+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -63,7 +117,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-05-30T23:06:53.431344823+02:00"
+    created: "2021-12-02T19:38:48.273155253+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -91,10 +145,441 @@ entries:
     urls:
     - free5gc-0.1.0.tgz
     version: 0.1.0
+  free5gc-amf:
+  - apiVersion: v2
+    appVersion: v3.0.6
+    created: "2021-12-02T19:38:48.362184948+01:00"
+    description: A Helm chart to deploy the Free5GC AMF
+    digest: 1952438f966ba656a952519cc9ced6c4a2d07b2baa93d87f64042aa4faed6531
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-amf
+    type: application
+    urls:
+    - free5gc-amf-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-12-02T19:38:48.360280957+01:00"
+    description: A Helm chart to deploy the Free5GC AMF
+    digest: 58b7071ce2e97457bf26202c6954882053fb505d47e652b4135126bd14308e24
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-amf
+    type: application
+    urls:
+    - free5gc-amf-0.1.0.tgz
+    version: 0.1.0
+  free5gc-ausf:
+  - apiVersion: v2
+    appVersion: v3.0.6
+    created: "2021-12-02T19:38:48.365241578+01:00"
+    description: A Helm chart to deploy the Free5GC AUSF
+    digest: 4b82ea0a0a748cfba626cf838b805862393344b8a61e0e52926fcc178a6fc7c0
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-ausf
+    type: application
+    urls:
+    - free5gc-ausf-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-12-02T19:38:48.363649791+01:00"
+    description: A Helm chart to deploy the Free5GC AUSF
+    digest: 01fbf36fdf10ef785401dd1da60d37d71b77f921cc54a05ccc078a156e0e9156
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-ausf
+    type: application
+    urls:
+    - free5gc-ausf-0.1.0.tgz
+    version: 0.1.0
+  free5gc-n3iwf:
+  - apiVersion: v2
+    appVersion: v3.0.6
+    created: "2021-12-02T19:38:48.368582559+01:00"
+    description: A Helm chart to deploy the Free5GC N3IWF
+    digest: 12d9ee3a2892c1cff818b246c9ab03d342a60c6f51226589aa37c2d5933d4b9d
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-n3iwf
+    type: application
+    urls:
+    - free5gc-n3iwf-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-12-02T19:38:48.366878557+01:00"
+    description: A Helm chart to deploy the Free5GC N3IWF
+    digest: 40afbce29e88d4cdb7f8ffd781d59193f0edc93f4160712d8ba66d5372d87832
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-n3iwf
+    type: application
+    urls:
+    - free5gc-n3iwf-0.1.0.tgz
+    version: 0.1.0
+  free5gc-nrf:
+  - apiVersion: v2
+    appVersion: v3.0.6
+    created: "2021-12-02T19:38:48.384362501+01:00"
+    dependencies:
+    - condition: db.enabled
+      name: mongodb
+      repository: ""
+    description: A Helm chart to deploy the Free5GC NRF
+    digest: 41e234f2a891997378c42196254c8d82d60c639d190025ab6b77b1473d8233e0
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-nrf
+    type: application
+    urls:
+    - free5gc-nrf-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-12-02T19:38:48.377108002+01:00"
+    dependencies:
+    - condition: db.enabled
+      name: mongodb
+      repository: ""
+    description: A Helm chart to deploy the Free5GC NRF
+    digest: a994d61ab8a87e7e3fb29163dcc7d59605d670b0c9730e895650f47b563fb5c3
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-nrf
+    type: application
+    urls:
+    - free5gc-nrf-0.1.0.tgz
+    version: 0.1.0
+  free5gc-nssf:
+  - apiVersion: v2
+    appVersion: v3.0.6
+    created: "2021-12-02T19:38:48.388173474+01:00"
+    description: A Helm chart to deploy the Free5GC NSSF
+    digest: c1a5b9517d518afc24f23e1fd5fe9477b6b0c1c03a14790b22826eb0125613cd
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-nssf
+    type: application
+    urls:
+    - free5gc-nssf-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-12-02T19:38:48.385974421+01:00"
+    description: A Helm chart to deploy the Free5GC NSSF
+    digest: 76f8c9a55a86b615eb5a325e0bf2667288ad3fa3fb728769aa3c2404c087c52e
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-nssf
+    type: application
+    urls:
+    - free5gc-nssf-0.1.0.tgz
+    version: 0.1.0
+  free5gc-pcf:
+  - apiVersion: v2
+    appVersion: v3.0.6
+    created: "2021-12-02T19:38:48.391795142+01:00"
+    description: A Helm chart to deploy the Free5GC PCF
+    digest: 2e4ccac0c2951596b8d88116259a0f807cfe28306280ca64f4dc472caed525db
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-pcf
+    type: application
+    urls:
+    - free5gc-pcf-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-12-02T19:38:48.390274408+01:00"
+    description: A Helm chart to deploy the Free5GC PCF
+    digest: 9b069592bcd8a86c8f6ef463a0a215d4308acab95259aa9d865ec6eae64d7e77
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-pcf
+    type: application
+    urls:
+    - free5gc-pcf-0.1.0.tgz
+    version: 0.1.0
+  free5gc-smf:
+  - apiVersion: v2
+    appVersion: v3.0.6
+    created: "2021-12-02T19:38:48.395314196+01:00"
+    description: A Helm chart to deploy the Free5GC SMF
+    digest: 14f612844967c313c9b49c6837afe923518d7cf8986fe0953456a47bd532ed1d
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-smf
+    type: application
+    urls:
+    - free5gc-smf-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-12-02T19:38:48.393442584+01:00"
+    description: A Helm chart to deploy the Free5GC SMF
+    digest: c32f1eb26de693af7726623bf7aa03981163dac5c59ea0eb6a6c414d50ebdeef
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-smf
+    type: application
+    urls:
+    - free5gc-smf-0.1.0.tgz
+    version: 0.1.0
+  free5gc-udm:
+  - apiVersion: v2
+    appVersion: v3.0.6
+    created: "2021-12-02T19:38:48.398021105+01:00"
+    description: A Helm chart to deploy the Free5GC UDM
+    digest: 85375dde68bf7c6194f495d503d8075a9cb5005679d9bc394fcad2958a706c5b
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-udm
+    type: application
+    urls:
+    - free5gc-udm-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-12-02T19:38:48.396617533+01:00"
+    description: A Helm chart to deploy the Free5GC UDM
+    digest: 1910073f167aa8b48e6aeeed72dcf2a565250a3b97996980697570c1ea38b03a
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-udm
+    type: application
+    urls:
+    - free5gc-udm-0.1.0.tgz
+    version: 0.1.0
+  free5gc-udr:
+  - apiVersion: v2
+    appVersion: v3.0.6
+    created: "2021-12-02T19:38:48.418237731+01:00"
+    dependencies:
+    - condition: db.enabled
+      name: mongodb
+      repository: ""
+    description: A Helm chart to deploy the Free5GC UDR
+    digest: 8c3693b77f03a97a23639dfef4958b46dd52476c20b686eabf67f28c73d06c76
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-udr
+    type: application
+    urls:
+    - free5gc-udr-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-12-02T19:38:48.405429896+01:00"
+    dependencies:
+    - condition: db.enabled
+      name: mongodb
+      repository: ""
+    description: A Helm chart to deploy the Free5GC UDR
+    digest: 3012e84080a3a89e92e17d70b460728628e6cc7e8ae8fffb5a45977eca892a83
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-udr
+    type: application
+    urls:
+    - free5gc-udr-0.1.0.tgz
+    version: 0.1.0
+  free5gc-upf:
+  - apiVersion: v2
+    appVersion: v3.0.6
+    created: "2021-12-02T19:38:48.426613231+01:00"
+    description: A Helm chart to deploy the Free5GC User Plane
+    digest: 991475f2f6d36a1509ee2d1a547732c84c348d47babe3eb19909c6cc58afea1e
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-upf
+    type: application
+    urls:
+    - free5gc-upf-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-12-02T19:38:48.422466314+01:00"
+    description: A Helm chart to deploy the Free5GC User Plane
+    digest: 109602e92d650d2e96a91bab01cdf0d8a4c3e29b69ea0affe0d5096c87a70d19
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-upf
+    type: application
+    urls:
+    - free5gc-upf-0.1.0.tgz
+    version: 0.1.0
+  free5gc-webui:
+  - apiVersion: v2
+    appVersion: v3.0.6
+    created: "2021-12-02T19:38:48.443400448+01:00"
+    dependencies:
+    - condition: db.enabled
+      name: mongodb
+      repository: ""
+    description: A Helm chart to deploy the Free5GC WEBUI
+    digest: 581452ac27bb63a50b28411aa4f450f56deb6f1e062682af10a229c3909fb954
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-webui
+    type: application
+    urls:
+    - free5gc-webui-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v3.0.5
+    created: "2021-12-02T19:38:48.436197904+01:00"
+    dependencies:
+    - condition: db.enabled
+      name: mongodb
+      repository: ""
+    description: A Helm chart to deploy the Free5GC WEBUI
+    digest: 74ad7e7d1bd59eebea7b9bf881e17ae6e0b7c619223d99e3e1bb79e1afc2d1f2
+    icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    - email: ayoub.bousselmi@orange.com
+      name: Ayoub BOUSSELMI
+    name: free5gc-webui
+    type: application
+    urls:
+    - free5gc-webui-0.1.0.tgz
+    version: 0.1.0
   free5gcControlPlane:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-05-30T23:06:53.548048558+02:00"
+    created: "2021-12-02T19:38:48.474948374+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -102,8 +587,9 @@ entries:
     - condition: db.enabled
       name: mongodb
       repository: ""
-    description: A Helm chart to deploy the control plane of free5gc
-    digest: 79110eef1ca24b0f61bd128cd2fc198c38dceb0af0e8dd3617777992d9d5120c
+    deprecated: true
+    description: DEPRECATED - A Helm chart to deploy the control plane of free5gc
+    digest: fd5e244cf2f2c35ff3795b703c8d26353725980e878dff3ba5dde8cb2ec00980
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
     maintainers:
     - email: abderaouf.khichane@orange.com
@@ -118,7 +604,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-05-30T23:06:53.528625872+02:00"
+    created: "2021-12-02T19:38:48.46388896+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -142,7 +628,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-05-30T23:06:53.510908687+02:00"
+    created: "2021-12-02T19:38:48.454293588+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -167,13 +653,14 @@ entries:
   free5gcN3iwf:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-05-30T23:06:53.557827998+02:00"
+    created: "2021-12-02T19:38:48.480890518+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
       repository: ""
-    description: A Helm chart to deploy the n3iwf function of free5gc
-    digest: de8892db8cc7c3e461935bef02dfbb2b7967bc8c8c6e49ff9134bbe69840f547
+    deprecated: true
+    description: DEPRECATED - A Helm chart to deploy the n3iwf function of free5gc
+    digest: d84be8e74fdbb14ae0833e1cc0d89cfa63970919cdee99c58de9ffc5177f1ac0
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
     maintainers:
     - email: abderaouf.khichane@orange.com
@@ -188,7 +675,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-05-30T23:06:53.554574665+02:00"
+    created: "2021-12-02T19:38:48.47881553+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -209,7 +696,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-05-30T23:06:53.551273799+02:00"
+    created: "2021-12-02T19:38:48.476848925+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -231,13 +718,14 @@ entries:
   free5gcUserPlane:
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-05-30T23:06:53.569315772+02:00"
+    created: "2021-12-02T19:38:48.487801077+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
       repository: ""
-    description: A Helm chart to deploy the user plane of free5gc
-    digest: f8cf516e006c14b7fc9a75afde02920f3e4068f0a821a7ac68f6d63c2fcac000
+    deprecated: true
+    description: DEPRECATED - Helm chart to deploy the user plane of free5gc
+    digest: c57724cbc4edb46eb32c138175aede4e98010d0a640e4fccf919373a1b87fb15
     icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
     maintainers:
     - email: abderaouf.khichane@orange.com
@@ -252,7 +740,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: v3.0.5
-    created: "2021-05-30T23:06:53.565437313+02:00"
+    created: "2021-12-02T19:38:48.485335173+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -273,7 +761,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-05-30T23:06:53.561590232+02:00"
+    created: "2021-12-02T19:38:48.483040543+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -295,9 +783,10 @@ entries:
   networks5g:
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2021-05-30T23:06:53.575932808+02:00"
-    description: A Helm chart to deploy the user plane of free5gc
-    digest: a2e3e57e5a0ae24108f74849521303a8ae083ca131d86973b69d55a41bd4c56b
+    created: "2021-12-02T19:38:48.490791091+01:00"
+    deprecated: true
+    description: DEPRECATED - A Helm chart to deploy the user plane of free5gc
+    digest: 89ad942bd85e1a3e9d6e9321f32f2ae03050c96d9e924fed7cd0fbabdd5b07b6
     icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
     maintainers:
     - email: abderaouf.khichane@orange.com
@@ -310,7 +799,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2021-05-30T23:06:53.574349624+02:00"
+    created: "2021-12-02T19:38:48.489776253+01:00"
     description: A Helm chart to deploy the user plane of free5gc
     digest: 51fd3eaf752f2406b62125facb7471f20d8d7cb0a0936779e1b33a90dd19ec28
     icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
@@ -325,7 +814,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 3.0.4
-    created: "2021-05-30T23:06:53.572896704+02:00"
+    created: "2021-12-02T19:38:48.488736457+01:00"
     description: A Helm chart to deploy the user plane of free5gc
     digest: b9f3b1628aed64ab8ae898f63a7d4b1c6b11e8b9cd8bf0207665653f69c1a15b
     icon: https://upload.wikimedia.org/wikipedia/commons/6/6f/5G_logo.jpg
@@ -340,8 +829,222 @@ entries:
     version: 0.1.0
   ueransim:
   - apiVersion: v2
+    appVersion: v3.2.4
+    created: "2021-12-02T19:38:48.525013913+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: 597c7e96fa53fb0913ca2702a85ff3fee12bbbd4a4eec1f7adadd9ab34588e92
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.12.tgz
+    version: 2.0.12
+  - apiVersion: v2
+    appVersion: v3.2.3
+    created: "2021-12-02T19:38:48.523418971+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: 4a49a9ca839e5d9fd89e155737e3f0bbeee2266db3f00b20fbfceae4c8354cd9
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.11.tgz
+    version: 2.0.11
+  - apiVersion: v2
+    appVersion: v3.2.2
+    created: "2021-12-02T19:38:48.521859806+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: 8a82426b6d7cf6e4f13ad7f0291040658f406cb93870a44fe7bebf7e9f387fb0
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.10.tgz
+    version: 2.0.10
+  - apiVersion: v2
+    appVersion: v3.2.1
+    created: "2021-12-02T19:38:48.544659364+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: 225d33ecd196bdf334de605154a1afa067fd44c29eba41af09bb9785bd0d4947
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.9.tgz
+    version: 2.0.9
+  - apiVersion: v2
+    appVersion: v3.2.0
+    created: "2021-12-02T19:38:48.5421555+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: b5b450d15e62df7cd63be5dad6deede46877f127b76eaae551b5d12c2af25aa0
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.8.tgz
+    version: 2.0.8
+  - apiVersion: v2
+    appVersion: v3.1.9
+    created: "2021-12-02T19:38:48.539701048+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: da8ffc287f9cfb9de4fbfd761d06dc65b0bfad00e78c71f8190d170165721fa6
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.7.tgz
+    version: 2.0.7
+  - apiVersion: v2
+    appVersion: v3.1.8
+    created: "2021-12-02T19:38:48.537141132+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: 583e190259db8c30cdb54eacde75a3574e069559238d011531330fc9caa3def5
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.6.tgz
+    version: 2.0.6
+  - apiVersion: v2
+    appVersion: v3.1.7
+    created: "2021-12-02T19:38:48.534716142+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: 44ff62339df353d3ab37296717ae6cacd3fa12c29b815970040803676ed15a40
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.5.tgz
+    version: 2.0.5
+  - apiVersion: v2
+    appVersion: v3.1.6
+    created: "2021-12-02T19:38:48.532265053+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: cc63e0fba0663c9554f4bc9447547e215fe72b8998b049f829785f0b7261b38c
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.4.tgz
+    version: 2.0.4
+  - apiVersion: v2
+    appVersion: v3.1.5
+    created: "2021-12-02T19:38:48.529790069+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: 3c33655099792a0efe3c0f069af4bfdda3a80924e9009ec7b4bb8146b7789b0e
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.3.tgz
+    version: 2.0.3
+  - apiVersion: v2
+    appVersion: v3.1.4
+    created: "2021-12-02T19:38:48.526583295+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: 20487e5d1e6cfd277438e0fd5b01e18cad074c220f442cf814aec59d36796e3f
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.2.tgz
+    version: 2.0.2
+  - apiVersion: v2
     appVersion: v3.1.3
-    created: "2021-05-30T23:06:53.615183926+02:00"
+    created: "2021-12-02T19:38:48.520291337+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: 6d3af31549d6b13eaefe0b504f4d56dc18734fff1106b041469b6a2b800bba5b
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.1.tgz
+    version: 2.0.1
+  - apiVersion: v2
+    appVersion: v3.1.3
+    created: "2021-12-02T19:38:48.518593907+01:00"
+    description: A Helm chart to deploy UERANSIM
+    digest: b2c9e30784ae031cef287decef2f87484918cd8e6d7272e60d44630a1b7074ef
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-2.0.0.tgz
+    version: 2.0.0
+  - apiVersion: v2
+    appVersion: v3.1.3
+    created: "2021-12-02T19:38:48.516894335+01:00"
+    dependencies:
+    - condition: createNetworks
+      name: networks5g
+      repository: ""
+    description: A Helm chart to deploy UERANSIM
+    digest: e5697baf3390093f3c96b6d32f25cce7cf17b47ddf6722980b4d5b5337a987ae
+    icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
+    maintainers:
+    - email: abderaouf.khichane@orange.com
+      name: Abderaouf KHICHANE
+    - email: ilhem.fajjari@orange.com
+      name: Ilhem FAJJARI
+    name: ueransim
+    urls:
+    - ueransim-1.1.6.tgz
+    version: 1.1.6
+  - apiVersion: v2
+    appVersion: v3.1.3
+    created: "2021-12-02T19:38:48.514386312+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -360,7 +1063,7 @@ entries:
     version: 1.1.4
   - apiVersion: v2
     appVersion: v3.1.3
-    created: "2021-05-30T23:06:53.61088524+02:00"
+    created: "2021-12-02T19:38:48.511836593+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -379,7 +1082,7 @@ entries:
     version: 1.1.3
   - apiVersion: v2
     appVersion: v3.1.2
-    created: "2021-05-30T23:06:53.607155735+02:00"
+    created: "2021-12-02T19:38:48.508046062+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -398,7 +1101,7 @@ entries:
     version: 1.1.2
   - apiVersion: v2
     appVersion: v3.1.1
-    created: "2021-05-30T23:06:53.601106901+02:00"
+    created: "2021-12-02T19:38:48.505888383+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -417,7 +1120,7 @@ entries:
     version: 1.1.1
   - apiVersion: v2
     appVersion: v3.1.0
-    created: "2021-05-30T23:06:53.597480469+02:00"
+    created: "2021-12-02T19:38:48.503844097+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -436,7 +1139,7 @@ entries:
     version: 1.1.0
   - apiVersion: v2
     appVersion: v3.0.3
-    created: "2021-05-30T23:06:53.593884132+02:00"
+    created: "2021-12-02T19:38:48.501786619+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -455,7 +1158,7 @@ entries:
     version: 1.0.3
   - apiVersion: v2
     appVersion: v3.0.2
-    created: "2021-05-30T23:06:53.590250152+02:00"
+    created: "2021-12-02T19:38:48.499763236+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -474,7 +1177,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: v3.0.1
-    created: "2021-05-30T23:06:53.586494855+02:00"
+    created: "2021-12-02T19:38:48.497704962+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -493,7 +1196,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 2.2.2
-    created: "2021-05-30T23:06:53.582776898+02:00"
+    created: "2021-12-02T19:38:48.495660428+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -512,7 +1215,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 2.2.1
-    created: "2021-05-30T23:06:53.579401362+02:00"
+    created: "2021-12-02T19:38:48.493773664+01:00"
     dependencies:
     - condition: createNetworks
       name: networks5g
@@ -529,4 +1232,4 @@ entries:
     urls:
     - ueransim-0.1.0.tgz
     version: 0.1.0
-generated: "2021-05-30T23:06:53.398913546+02:00"
+generated: "2021-12-02T19:38:48.250516204+01:00"

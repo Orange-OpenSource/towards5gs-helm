@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 # This software is distributed under the Apache License 2.0,
-# the text of which is available at todo
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
 # or see the "LICENSE" file for more details.
 #
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
@@ -13,17 +13,33 @@
 apiVersion: v2
 name: free5gc
 description: A Helm chart to deploy Free5gc
-version: 0.1.2
-appVersion: v3.0.5
+version: 1.0.2
+appVersion: "v3.0.6"
 dependencies:
-- name: networks5g
-  condition: createNetworks
-- name: free5gcUserPlane
-  condition: deployUserPlane
-- name: free5gcControlPlane
-  condition: deployControlPlane
-- name: free5gcN3iwf
-  condition: deployN3iwf
+- name: mongodb
+  condition: deployMongoDB
+- name: free5gc-amf
+  condition: deployAMF
+- name: free5gc-ausf
+  condition: deployAUSF
+- name: free5gc-n3iwf
+  condition: deployN3IWF
+- name: free5gc-nrf
+  condition: deployNRF
+- name: free5gc-nssf
+  condition: deployNSSF
+- name: free5gc-pcf
+  condition: deployPCF
+- name: free5gc-smf
+  condition: deploySMF
+- name: free5gc-udm
+  condition: deployUDM
+- name: free5gc-udr
+  condition: deployUDR
+- name: free5gc-upf
+  condition: deployUPF
+- name: free5gc-webui
+  condition: deployWEBUI
 icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
 maintainers:
   - email: abderaouf.khichane@orange.com
