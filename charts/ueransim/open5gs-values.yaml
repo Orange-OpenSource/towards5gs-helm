@@ -23,7 +23,7 @@ gnb:
     mnc: '70'
     slices:
       - sst: 1
-        sd: 1
+
 ue:
   configuration: |-
     supi: 'imsi-901700000000001'
