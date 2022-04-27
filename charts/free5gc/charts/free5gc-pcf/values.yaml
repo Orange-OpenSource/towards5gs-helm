@@ -110,6 +110,7 @@ pcf:
       pcfName: PCF
       timeFormat: 2019-01-02 15:04:05
       defaultBdtRefId: BdtPolicyId-
+      locality: area1
       serviceList:
         - serviceName: npcf-am-policy-control
         - serviceName: npcf-smpolicycontrol
@@ -126,10 +127,3 @@ pcf:
       PCF:
         debugLevel: info
         ReportCaller: false
-      PathUtil:
-        debugLevel: info
-        ReportCaller: false
-      OpenApi:
-        debugLevel: info
-        ReportCaller: false
-        

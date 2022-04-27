@@ -31,6 +31,7 @@ data:
 {{- else }}
           - {{ $.Values.global.amf.n2if.ipAddress }}
 {{- end }}
+          Port: {{ $.Values.global.amf.service.ngap.port }}
 
       # Bind Interfaces
       # IKE interface

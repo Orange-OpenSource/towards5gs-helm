@@ -315,6 +315,8 @@ upfb:
       debugLevel: info
       ReportCaller: false
 
+      packetBufferHoldTime: 30
+
       dnn_list:
         - dnn: internet
           cidr: 10.1.0.0/17

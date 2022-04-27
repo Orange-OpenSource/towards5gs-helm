@@ -20,7 +20,7 @@ metadata:
 data:
   udrcfg.yaml: |
     info:
-      version: 1.0.0
+      version: 1.0.1
       description: UDR initial local configuration
 
     configuration:
@@ -29,6 +29,9 @@ data:
         registerIPv4: {{ .service.name }} # IP used to register to NRF
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ .service.port }}
+        tls:
+          key: config/TLS/udr.key
+          pem: config/TLS/udr.pem
 
       mongodb:
         name: free5gc

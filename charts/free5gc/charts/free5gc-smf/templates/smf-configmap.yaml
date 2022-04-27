@@ -30,8 +30,8 @@ data:
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ .service.port }}
         tls:
-          key: free5gc/support/TLS/smf.key
-          pem: free5gc/support/TLS/smf.pem
+          key: config/TLS/smf.key
+          pem: config/TLS/smf.pem
       
       nrfUri: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
 

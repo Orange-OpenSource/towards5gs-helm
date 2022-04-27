@@ -20,7 +20,7 @@ metadata:
 data:
   udmcfg.yaml: |
     info:
-      version: 1.0.1
+      version: 1.0.2
       description: UDM initial local configuration
 
     configuration:
@@ -30,9 +30,8 @@ data:
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ .service.port }}
         tls:
-          log: free5gc/udmsslkey.log
-          pem: free5gc/support/TLS/udm.pem
-          key: free5gc/support/TLS/udm.key
+          key: config/TLS/udm.key
+          pem: config/TLS/udm.pem
       
       nrfUri: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
       
