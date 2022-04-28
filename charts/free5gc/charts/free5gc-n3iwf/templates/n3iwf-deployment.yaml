@@ -68,7 +68,7 @@ spec:
         imagePullPolicy: {{ .image.pullPolicy }}
         securityContext:
             {{- toYaml .securityContext | nindent 12 }}
-        command: ["sh", "-c", "../config/n3iwf-ipsec.sh && ./n3iwf -n3iwfcfg ../config/n3iwfcfg.yaml"]
+        command: ["sh", "-c", "../config/n3iwf-ipsec.sh && ./n3iwf -c ../config/n3iwfcfg.yaml"]
         env:
           - name: GIN_MODE
             value: release

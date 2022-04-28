@@ -61,7 +61,7 @@ spec:
         ports:
         - containerPort: {{ .service.port }}
         command: ["./udm"]
-        args: ["-udmcfg", "../config/udmcfg.yaml"]
+        args: ["-c", "../config/udmcfg.yaml"]
         env: 
           - name: GIN_MODE
             value: release

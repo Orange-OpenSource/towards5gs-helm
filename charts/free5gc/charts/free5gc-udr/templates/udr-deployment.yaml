@@ -61,7 +61,7 @@ spec:
         ports:
         - containerPort: {{ .service.port }}
         command: ["./udr"]
-        args: ["-udrcfg", "../config/udrcfg.yaml"]
+        args: ["-c", "../config/udrcfg.yaml"]
         env: 
           - name: DB_URI
             value: mongodb://{{ $.Values.mongodb.service.name }}/free5gc

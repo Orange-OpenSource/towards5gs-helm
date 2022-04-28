@@ -46,7 +46,7 @@ data:
     iptables -t nat -A POSTROUTING -o n9 -j MASQUERADE
     iptables -t nat -A POSTROUTING -o n3 -j MASQUERADE
 
-    /free5gc/free5gc-upfd/free5gc-upfd -f {{ .volume.mount }}/upfcfg.yaml
+    /free5gc/free5gc-upfd/free5gc-upfd -c {{ .volume.mount }}/upfcfg.yaml
 
 {{- end }}
 {{- end }}
