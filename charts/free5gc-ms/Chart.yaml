@@ -27,7 +27,9 @@ dependencies:
   condition: deployN3IWF
 - name: free5gc-nrf
   condition: deployNRF
-- name: free5gc-nssf
+- name: free5gc-nnssf-nssaiavailability
+  condition: deployNSSF
+- name: free5gc-nnssf-nsselection
   condition: deployNSSF
 - name: free5gc-pcf
   condition: deployPCF
