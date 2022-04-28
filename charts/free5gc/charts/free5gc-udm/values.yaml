@@ -50,7 +50,7 @@ udm:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-udm
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   service:
     name: udm-nudm
     type: ClusterIP

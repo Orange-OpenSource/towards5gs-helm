@@ -52,7 +52,7 @@ udr:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-udr
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   service:
     name: udr-nudr
     type: ClusterIP

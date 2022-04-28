@@ -50,7 +50,7 @@ n3iwf:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-n3iwf
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   configmap:
     name: n3iwf-configmap
   volume:
