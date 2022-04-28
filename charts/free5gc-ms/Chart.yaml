@@ -12,9 +12,9 @@
 #
 apiVersion: v2
 name: free5gc-ms
-description: A Helm chart to deploy Free5gc
+description: A Helm chart to deploy Free5gc based on microservices
 version: 0.1.0
-appVersion: "latest"
+appVersion: "v3.1.1"
 dependencies:
 - name: mongodb
   condition: deployMongoDB
