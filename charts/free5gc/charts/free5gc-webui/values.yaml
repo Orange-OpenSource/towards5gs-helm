@@ -52,7 +52,7 @@ webui:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-webui
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   service:
     name: webui-service
     type: NodePort
@@ -114,14 +114,5 @@ webui:
     # ReportCaller: enable the caller report or not, value: true or false
     logger:
       WEBUI:
-        debugLevel: info
-        ReportCaller: true
-      PathUtil:
-        debugLevel: info
         ReportCaller: false
-      OpenApi:
         debugLevel: info
-        ReportCaller: false
-      MongoDBLibrary:
-        debugLevel: info
-        ReportCaller: false

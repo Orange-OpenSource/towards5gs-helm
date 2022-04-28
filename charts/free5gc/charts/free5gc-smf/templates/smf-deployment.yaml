@@ -74,7 +74,7 @@ spec:
           containerPort: 8805
           protocol: UDP
         command: ["./smf"]
-        args: ["-smfcfg", "../config/smfcfg.yaml"]
+        args: ["-c", "../config/smfcfg.yaml", "-u", "../config/uerouting.yaml"]
         env:
           - name: GIN_MODE
             value: release

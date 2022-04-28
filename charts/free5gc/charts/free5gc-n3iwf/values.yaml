@@ -50,7 +50,7 @@ n3iwf:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-n3iwf
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   configmap:
     name: n3iwf-configmap
   volume:
@@ -144,11 +144,11 @@ n3iwf:
       
       # Security
       # Private Key File Path
-      PrivateKey:
+      PrivateKey: config/TLS/n3iwf.key
       # Certificate Authority (CA)
-      CertificateAuthority:
+      CertificateAuthority: config/TLS/n3iwf.pem
       # Certificate
-      Certificate:
+      Certificate: config/TLS/n3iwf.pem 
 
       # IP address that will be allocated to UE in IPSec tunnel
       UEIPAddressRange: 10.0.0.0/24
@@ -158,15 +158,12 @@ n3iwf:
       # ReportCaller: enable the caller report or not, value: true or false
     logger:
       N3IWF:
-        debugLevel: info
+        debugLevel: debug
         ReportCaller: false
       NGAP:
         debugLevel: info
         ReportCaller: false
       Aper:
-        debugLevel: info
-        ReportCaller: false
-      PathUtil:
         debugLevel: info
         ReportCaller: false
 

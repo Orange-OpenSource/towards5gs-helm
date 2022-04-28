@@ -62,7 +62,7 @@ spec:
         ports:
         - containerPort: {{ $.Values.global.nrf.service.port }}
         command: ["./nrf"]
-        args: ["-nrfcfg", "../config/nrfcfg.yaml"]
+        args: ["-c", "../config/nrfcfg.yaml"]
         env: 
           - name: DB_URI
             value: mongodb://{{ $.Values.mongodb.service.name }}/free5gc

@@ -49,13 +49,13 @@ smf:
       plmnList: # the list of PLMN IDs that this SMF belongs to (optional, remove this key when unnecessary)
         - mcc: "208" # Mobile Country Code (3 digits string, digit: 0~9)
           mnc: "93" # Mobile Network Code (2 or 3 digits string, digit: 0~9)
-      userplane_information: # list of userplane information
-        up_nodes: # information of userplane node (AN or UPF)
+      userplaneInformation: # list of userplane information
+        upNodes: # information of userplane node (AN or UPF)
           gNB1: # the name of the node
             type: AN # the type of the node (AN or UPF)
           BranchingUPF:
             type: UPF
-            node_id: 10.100.50.241 # PFCP address
+            nodeID: 10.100.50.241 # PFCP address
             sNssaiUpfInfos:
               - sNssai:
                   sst: 1
@@ -78,7 +78,7 @@ smf:
                 networkInstance: internet
           AnchorUPF1:
             type: UPF
-            node_id: 10.100.50.242 # PFCP address
+            nodeID: 10.100.50.242 # PFCP address
             sNssaiUpfInfos:
               - sNssai:
                   sst: 1
@@ -94,7 +94,7 @@ smf:
                 networkInstance: internet
           AnchorUPF2:
             type: UPF
-            node_id: 10.100.50.243 # PFCP address
+            nodeID: 10.100.50.243 # PFCP address
             sNssaiUpfInfos:
               - sNssai:
                   sst: 1

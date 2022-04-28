@@ -50,7 +50,7 @@ udm:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-udm
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   service:
     name: udm-nudm
     type: ClusterIP
@@ -125,11 +125,5 @@ udm:
 
     logger:
       UDM:
-        debugLevel: info
-        ReportCaller: false
-      OpenApi:
-        debugLevel: info
-        ReportCaller: false
-      PathUtil:
         debugLevel: info
         ReportCaller: false

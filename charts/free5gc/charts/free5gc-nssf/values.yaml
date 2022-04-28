@@ -50,7 +50,7 @@ nssf:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-nssf
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   service:
     name: nssf-nnssf
     type: ClusterIP
@@ -323,11 +323,5 @@ nssf:
       # ReportCaller: enable the caller report or not, value: true or false
     logger:
       NSSF:
-        debugLevel: info
-        ReportCaller: false
-      PathUtil:
-        debugLevel: info
-        ReportCaller: false
-      OpenApi:
         debugLevel: info
         ReportCaller: false

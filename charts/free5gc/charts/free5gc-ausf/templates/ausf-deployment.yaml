@@ -61,7 +61,7 @@ spec:
         ports:
         - containerPort: {{ .service.port }}
         command: ["./ausf"]
-        args: ["-ausfcfg", "../config/ausfcfg.yaml"]
+        args: ["-c", "../config/ausfcfg.yaml"]
         env:
           - name: GIN_MODE
             value: release

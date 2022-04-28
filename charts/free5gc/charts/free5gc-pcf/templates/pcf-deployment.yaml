@@ -62,7 +62,7 @@ spec:
         ports:
         - containerPort: {{ .service.port }}
         command: ["./pcf"]
-        args: ["-pcfcfg", "../config/pcfcfg.yaml"]
+        args: ["-c", "../config/pcfcfg.yaml"]
         env:
           - name: GIN_MODE
             value: release

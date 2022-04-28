@@ -50,7 +50,7 @@ ausf:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-ausf
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   service:
     name: ausf-nausf
     type: ClusterIP
@@ -115,16 +115,11 @@ ausf:
         - mcc: 123
           mnc: 45
       groupId: ausfGroup001
+      eapAkaSupiImsiPrefix: false
     # the kind of log output
       # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
       # ReportCaller: enable the caller report or not, value: true or false
     logger:
       AUSF:
-        debugLevel: info
-        ReportCaller: false
-      PathUtil:
-        debugLevel: info
-        ReportCaller: false
-      OpenApi:
         debugLevel: info
         ReportCaller: false

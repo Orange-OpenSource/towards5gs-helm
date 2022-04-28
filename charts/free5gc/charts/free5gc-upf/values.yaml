@@ -54,7 +54,7 @@ upf:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-upf
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   configmap:
     name: upf-configmap
   volume:
@@ -123,7 +123,7 @@ upf1:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-upf
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   configmap:
     name: upf1-configmap
   volume:
@@ -190,7 +190,7 @@ upf2:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-upf
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   configmap:
     name: upf2-configmap
   volume:
@@ -257,7 +257,7 @@ upfb:
   replicaCount: 1
   image:
     name: towards5gs/free5gc-upf
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   configmap:
     name: upfb-configmap
   volume:
@@ -314,6 +314,8 @@ upfb:
       # debugLevel: panic|fatal|error|warn|info|debug|trace
       debugLevel: info
       ReportCaller: false
+
+      packetBufferHoldTime: 30
 
       dnn_list:
         - dnn: internet
