@@ -1,0 +1,90 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.udr }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "free5gc-udr.fullname" $ }}-{{ .name }}
+  labels:
+    {{- include "free5gc-udr.labels" $ | nindent 4 }}
+    project: {{ $.Values.global.projectName }}
+    nf: {{ .name }}
+spec:
+  {{- if not .autoscaling.enabled }}
+  replicas: {{ .replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "free5gc-udr.selectorLabels" $ | nindent 6 }}
+      project: {{ $.Values.global.projectName }}
+      nf: {{ .name }}
+  template:
+    metadata:
+      annotations:
+        {{- include "free5gc-udr.udrAnnotations" $ | nindent 8 }}
+        checksum/config: {{ include (print $.Template.BasePath "/udr-configmap.yaml") $ | sha256sum }}
+      labels:
+        {{- include "free5gc-udr.selectorLabels" $ | nindent 8 }}
+        project: {{ $.Values.global.projectName }}
+        nf: {{ .name }}
+    spec:
+      imagePullSecrets:
+        {{- toYaml .imagePullSecrets | nindent 8 }}
+      securityContext:
+        {{- toYaml .podSecurityContext | nindent 8 }}
+      initContainers:
+      - name: wait-nrf
+        {{- with $.Values.initcontainers.curl }}
+        image: {{ .registry }}/{{ .image }}:{{ .tag }}
+        {{- end }}
+        env:
+        - name: DEPENDENCIES
+          value: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
+        command: ['sh', '-c', 'set -x; for dependency in $DEPENDENCIES; do while [ $(curl --insecure --connect-timeout 1 -s -o /dev/null -w "%{http_code}" $dependency) -ne 200 ]; do echo waiting for dependencies; sleep 1; done; done;']
+
+      containers:
+      - name: {{ .name }}
+        image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}
+        imagePullPolicy: {{ .image.pullPolicy }}
+        securityContext:
+            {{- toYaml .securityContext | nindent 12 }}
+        ports:
+        - containerPort: {{ .service.port }}
+        command: ["./udr"]
+        args: ["-c", "../config/udrcfg.yaml"]
+        env: 
+          - name: DB_URI
+            value: mongodb://{{ $.Values.mongodb.service.name }}/free5gc
+          - name: GIN_MODE
+            value: release
+        volumeMounts:
+        - mountPath: {{ .volume.mount }}
+          name: {{ .volume.name }}
+        resources:
+            {{- toYaml .resources | nindent 12 }}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      nodeSelector:
+        {{- toYaml .nodeSelector | nindent 8 }}
+      affinity:
+        {{- toYaml .affinity | nindent 8 }}
+      tolerations:
+        {{- toYaml .tolerations | nindent 8 }}
+
+      volumes:
+      - name: {{ .volume.name }}
+        projected:
+          sources:
+          - configMap:
+              name: {{ .configmap.name }}
+{{- end }}

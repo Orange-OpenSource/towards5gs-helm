@@ -1,0 +1,324 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for free5gcUserPlane chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+global:
+  projectName: free5gc
+  userPlaneArchitecture: single  # possible values are "single" and "ulcl"
+  uesubnet: 10.1.0.0/16
+#Global network parametes
+  n4network:
+    name: n4network
+    masterIf: eth0
+    subnetIP: 10.100.50.240
+    cidr: 29
+    gatewayIP: 10.100.50.246
+    excludeIP: 10.100.50.246
+  n3network:
+    name: n3network
+    masterIf: eth0
+    subnetIP: 10.100.50.232
+    cidr: 29
+    gatewayIP: 10.100.50.238
+    excludeIP: 10.100.50.238
+  n6network:
+    name: n6network
+    masterIf: eth1
+    subnetIP: 10.100.100.0
+    cidr: 24
+    gatewayIP: 10.100.100.1
+    excludeIP: 10.100.100.254
+  n9network:
+    name: n9network
+    masterIf: eth0
+    subnetIP: 10.100.50.224
+    cidr: 29
+    gatewayIP: 10.100.50.230
+    excludeIP: 10.100.50.230
+
+upf:
+  name: upf
+  replicaCount: 1
+  image:
+    name: towards5gs/free5gc-upf
+    pullPolicy: Always
+  configmap:
+    name: upf-configmap
+  volume:
+    name: upf-volume
+    mount: /free5gc/config/
+
+  # network paramters
+  n3if:  # GTP-U
+    ipAddress: 10.100.50.233
+  n4if:  # PFCP
+    ipAddress: 10.100.50.241
+  n6if:  # DN
+    ipAddress: 10.100.100.12
+
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext:
+    capabilities:
+      add: ["NET_ADMIN"]
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  readinessProbe:
+    initialDelaySeconds: 0
+    periodSeconds: 1
+    timeoutSeconds: 1
+    failureThreshold:  40
+    successThreshold: 1
+  livenessProbe:
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 10
+    failureThreshold: 3
+    successThreshold: 1
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  configuration:
+    configuration:
+      # debugLevel: panic|fatal|error|warn|info|debug|trace
+      debugLevel: info
+      ReportCaller: false
+
+      dnn_list:
+        - dnn: internet
+          cidr: 10.1.0.0/17
+          # [optional] apn_list[*].natifname
+          natifname: n6
+
+
+# The followed values will be considered in the case of choosing "ulcl" architecture for the user plane
+upf1:
+  name: upf1
+  replicaCount: 1
+  image:
+    name: towards5gs/free5gc-upf
+    pullPolicy: Always
+  configmap:
+    name: upf1-configmap
+  volume:
+    name: upf1-volume
+    mount: /free5gc/config/
+
+  # network paramters
+  n9if:  # GTP-U
+    ipAddress: 10.100.50.226
+  n4if:  # PFCP
+    ipAddress: 10.100.50.242
+  n6if:  # DN
+    ipAddress: 10.100.100.13
+
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext:
+    capabilities:
+      add: ["NET_ADMIN"]
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  readinessProbe:
+    initialDelaySeconds: 0
+    periodSeconds: 1
+    timeoutSeconds: 1
+    failureThreshold:  40
+    successThreshold: 1
+  livenessProbe:
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 10
+    failureThreshold: 3
+    successThreshold: 1
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  configuration:
+    configuration:
+      # debugLevel: panic|fatal|error|warn|info|debug|trace
+      debugLevel: info
+      ReportCaller: false
+
+      dnn_list:
+        - dnn: internet
+          cidr: 10.1.0.0/17
+          # [optional] apn_list[*].natifname
+          natifname: n6
+
+upf2:
+  name: upf2
+  replicaCount: 1
+  image:
+    name: towards5gs/free5gc-upf
+    pullPolicy: Always
+  configmap:
+    name: upf2-configmap
+  volume:
+    name: upf2-volume
+    mount: /free5gc/config/
+
+  # network paramters
+  n9if:  # GTP-U
+    ipAddress: 10.100.50.227
+  n4if:  # PFCP
+    ipAddress: 10.100.50.243
+  n6if:  # DN
+    ipAddress: 10.100.100.14
+
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext:
+    capabilities:
+      add: ["NET_ADMIN"]
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  readinessProbe:
+    initialDelaySeconds: 0
+    periodSeconds: 1
+    timeoutSeconds: 1
+    failureThreshold:  40
+    successThreshold: 1
+  livenessProbe:
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 10
+    failureThreshold: 3
+    successThreshold: 1
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  configuration:
+    configuration:
+      # debugLevel: panic|fatal|error|warn|info|debug|trace
+      debugLevel: info
+      ReportCaller: false
+
+      dnn_list:
+        - dnn: internet
+          cidr: 10.1.0.0/17
+          # [optional] apn_list[*].natifname
+          natifname: n6
+
+upfb:
+  name: upfb
+  replicaCount: 1
+  image:
+    name: towards5gs/free5gc-upf
+    pullPolicy: Always
+  configmap:
+    name: upfb-configmap
+  volume:
+    name: upfb-volume
+    mount: /free5gc/config/
+
+  # network paramters
+  n3if:  # GTP-U
+    ipAddress: 10.100.50.233
+  n9if:  # GTP-U
+    ipAddress: 10.100.50.225
+  n4if:  # PFCP
+    ipAddress: 10.100.50.241
+  n6if:  # DN
+    ipAddress: 10.100.100.12
+
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext:
+    capabilities:
+      add: ["NET_ADMIN"]
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  readinessProbe:
+    initialDelaySeconds: 0
+    periodSeconds: 1
+    timeoutSeconds: 1
+    failureThreshold:  40
+    successThreshold: 1
+  livenessProbe:
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 10
+    failureThreshold: 3
+    successThreshold: 1
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  configuration:
+    configuration:
+      # debugLevel: panic|fatal|error|warn|info|debug|trace
+      debugLevel: info
+      ReportCaller: false
+
+      packetBufferHoldTime: 30
+
+      dnn_list:
+        - dnn: internet
+          cidr: 10.1.0.0/17
+          # [optional] apn_list[*].natifname
+          # natifname: n6

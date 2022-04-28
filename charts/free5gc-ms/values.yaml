@@ -1,0 +1,138 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for free5gc-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  name: free5gc
+  userPlaneArchitecture: single  # possible values are "single" and "ulcl"
+  nrf:
+    service:
+      name: nrf-nnrf
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30800"
+  sbi:
+    scheme: http
+  amf:
+    n2if:  # NGAP
+      ipAddress: 10.100.50.249
+    service:
+      ngap:
+        enabled: false
+        name: amf-n2
+        port: 38412
+        nodeport: 31412
+        protocol: SCTP
+        type: NodePort
+  smf:
+    n4if:
+      ipAddress: 10.100.50.244
+  #Global network parametes
+  n2network:
+    name: n2network
+    masterIf: eth0
+    subnetIP: 10.100.50.248
+    cidr: 29
+    gatewayIP: 10.100.50.254
+    excludeIP: 10.100.50.254
+  n3network:
+    name: n3network
+    masterIf: eth0
+    subnetIP: 10.100.50.232
+    cidr: 29
+    gatewayIP: 10.100.50.238
+    excludeIP: 10.100.50.238
+  n4network:
+    name: n4network
+    masterIf: eth0
+    subnetIP: 10.100.50.240
+    cidr: 29
+    gatewayIP: 10.100.50.246
+    excludeIP: 10.100.50.246
+  n6network:
+    name: n6network
+    masterIf: eth1
+    subnetIP: 10.100.100.0
+    cidr: 24
+    gatewayIP: 10.100.100.1
+    excludeIP: 10.100.100.254
+  n9network:
+    name: n9network
+    masterIf: eth0
+    subnetIP: 10.100.50.224
+    cidr: 29
+    gatewayIP: 10.100.50.230
+    excludeIP: 10.100.50.230
+
+
+# These parameters can be used to enable/disable deployment of subcharts
+deployMongoDB: true              
+deployAMF: true                 
+deployAUSF: true
+deployN3IWF: false
+deployNRF: true              
+deployNSSF: true                 
+deployPCF: true
+deploySMF: true
+deployUDM: true
+deployUDR: true
+deployUPF: true
+deployWEBUI: true
+
+# Disable the deployment of mongodb as an NRF subchart
+free5gc-nrf:
+  db:
+    enabled: false
+
+# Subcharts parameters
+nnssf-nsselection:
+  nssf:
+    name: nnssf-nsselection
+    service:
+      name: nnssf-nsselection
+    configmap:
+      name: nnssf-nsselection-configmap
+    volume:
+      name: nnssf-nsselection-volume
+    configuration: 
+      serviceNameList: |-
+        - nnssf-nsselection    
+nnssf-nssaiavailability:
+  nssf:
+    name: nnssf-nssaiavailability
+    service:
+      name: nnssf-nssaiavailability
+    configmap:
+      name: nnssf-nssaiavailability-configmap
+    volume:
+      name: nnssf-nssaiavailability-volume
+    configuration: 
+      serviceNameList: |-
+        - nnssf-nssaiavailability
+
+# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
+mongodb:
+  fullnameOverride: "mongodb"
+  useStatefulSet: true
+  auth:
+    enabled: false
+  persistence:
+    size: 6Gi
+    mountPath: /bitnami/mongodb/data/db/
+  service:
+    name: mongodb
+    type: ClusterIP
+    port: 27017
+    nodePort: "30017"

@@ -1,0 +1,59 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.n3iwf }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .configmap.name }}
+  labels:
+    app: {{ $.Values.global.projectName }}
+data:
+  n3iwfcfg.yaml: |
+    info:
+      version: 1.0.0
+      description: N3IWF initial local configuration
+
+    configuration:
+      AMFSCTPAddresses:
+        - IP:
+{{- if $.Values.global.amf.service.ngap.enabled }}
+          - {{ $.Values.global.amf.service.ngap.name }}
+{{- else }}
+          - {{ $.Values.global.amf.n2if.ipAddress }}
+{{- end }}
+          Port: {{ $.Values.global.amf.service.ngap.port }}
+
+      # Bind Interfaces
+      # IKE interface
+      IKEBindAddress: {{ .ike.ipAddress }} 
+      # contrarly to the example used in docker compose here we attribute a special interface for the IKE daemon (as specified in the free5gc main project in github)
+
+      # GTP interface
+      GTPBindAddress: {{ .n3if.ipAddress }}
+      
+      {{- .configuration.configuration | nindent 6 }}
+
+    logger:
+      {{- toYaml .configuration.logger | nindent 6 }}
+
+  
+  n3iwf-ipsec.sh: |
+    #!/bin/sh
+    
+    ### N3iwf IPSec tunnel configuration
+    
+    ip l add name ipsec0 type vti local {{ .ike.ipAddress }} remote 0.0.0.0 key 5
+    ip a add {{ .configuration.IPSecInterfaceAddress }}/24 dev ipsec0
+    ip l set dev ipsec0 up
+
+{{- end }}

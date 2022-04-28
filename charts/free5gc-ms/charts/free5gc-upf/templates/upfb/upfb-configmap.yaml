@@ -1,0 +1,53 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- if eq .Values.global.userPlaneArchitecture "ulcl" }}
+{{- with .Values.upfb }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .configmap.name }}
+  labels:
+    app: {{ $.Values.global.projectName }}
+data:
+  upfcfg.yaml: |
+    info:
+      version: 1.0.0
+      description: UPF configuration
+    
+    configuration:
+      {{- toYaml .configuration.configuration | nindent 6 }}
+    
+      pfcp:
+        - addr: {{ .n4if.ipAddress }}
+    
+      gtpu:
+        - addr: {{ .n3if.ipAddress }}
+        - addr: {{ .n9if.ipAddress }}
+        # [optional] gtpu.name
+        # - name: upf.5gc.nctu.me
+        # [optional] gtpu.ifname
+        # - ifname: gtpif
+    
+  wrapper.sh: |
+    #!/bin/sh
+
+    iptables -A FORWARD -j ACCEPT
+    iptables -t nat -A POSTROUTING -s {{ $.Values.global.uesubnet }} -o n6 -j MASQUERADE  # Allow routing traffic comming from the UE SUBNET to the interface N6
+    iptables -t nat -A POSTROUTING -o n9 -j MASQUERADE
+    iptables -t nat -A POSTROUTING -o n3 -j MASQUERADE
+
+    /free5gc/free5gc-upfd/free5gc-upfd -c {{ .volume.mount }}/upfcfg.yaml
+
+{{- end }}
+{{- end }}
+
