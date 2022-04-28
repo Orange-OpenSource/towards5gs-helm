@@ -97,7 +97,7 @@ free5gc-nrf:
     enabled: false
 
 # Subcharts parameters
-nnssf-nsselection:
+free5gc-nnssf-nsselection:
   nssf:
     name: nnssf-nsselection
     service:
@@ -109,7 +109,7 @@ nnssf-nsselection:
     configuration: 
       serviceNameList: |-
         - nnssf-nsselection    
-nnssf-nssaiavailability:
+free5gc-nnssf-nssaiavailability:
   nssf:
     name: nnssf-nssaiavailability
     service:

@@ -11,7 +11,7 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 apiVersion: v2
-name: free5gc-nssf
+name: free5gc-nnssf-nsselection
 description: A Helm chart to deploy the Free5GC NSSF
 type: application
 version: 0.2.1
