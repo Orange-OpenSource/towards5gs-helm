@@ -108,7 +108,12 @@ udr:
     #    hosts:
     #      - chart-example.local
   configuration:
-    configuration: {}
+    serviceNameList: |-
+
+    
+    configuration: |-
+
+
     # the kind of log output
       # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
       # ReportCaller: enable the caller report or not, value: true or false
@@ -130,16 +135,16 @@ free5gc:
   configmap:
     create: true
     name: free5gc4udr-configmap
-  configuration:
-      #all logging levels
-      #panic
-      #fatal
-      #error
-      #warn
-      #info
-      #debug
-      #trace
-      logger:
-        UDR:
-          debugLevel: info
-          ReportCaller: true
+  configuration:    
+    #all logging levels
+    #panic
+    #fatal
+    #error
+    #warn
+    #info
+    #debug
+    #trace
+    logger:
+      UDR:
+        debugLevel: info
+        ReportCaller: true

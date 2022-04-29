@@ -106,14 +106,13 @@ udm:
     #    hosts:
     #      - chart-example.local
   configuration:
-    configuration: |-
-      serviceNameList:
+    serviceNameList: |-
         - nudm-sdm
         - nudm-uecm
         - nudm-ueau
         - nudm-ee
         - nudm-pp
-
+    configuration: |-
       # test data set from TS33501-f60 Annex C.4
       SuciProfile:
         - ProtectionScheme: 1 # Protect Scheme: Profile A

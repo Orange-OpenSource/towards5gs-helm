@@ -24,6 +24,9 @@ data:
       description: SMF initial local configuration
 
     configuration:
+      serviceNameList:
+        {{- .configuration.serviceNameList | nindent 8 }}
+      
       sbi:
         scheme: {{ $.Values.global.sbi.scheme }}
         registerIPv4: {{ .service.name }} # IP used to register to NRF

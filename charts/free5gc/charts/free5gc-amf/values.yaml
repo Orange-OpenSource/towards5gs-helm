@@ -63,6 +63,7 @@ mongodb:
     port: 27017
     nodePort: "30017"
 
+isNgapNeeded: true
 amf:
   name: amf
   replicaCount: 1
@@ -123,7 +124,13 @@ amf:
     #  - secretName: chart-example-tls
     #    hosts:
     #      - chart-example.local
-  configuration: 
+  configuration:
+    serviceNameList: |-
+        - namf-comm
+        - namf-evts
+        - namf-mt
+        - namf-loc
+        - namf-oam
     configuration: |-
       amfName: AMF
       serviceNameList:

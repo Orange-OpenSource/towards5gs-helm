@@ -24,6 +24,9 @@ data:
       description: PCF initial local configuration
 
     configuration:
+      serviceList:
+        {{- .configuration.serviceList | nindent 8 }}
+
       sbi:
         scheme: {{ $.Values.global.sbi.scheme }}
         registerIPv4: {{ .service.name }} # IP used to register to NRF

@@ -32,6 +32,7 @@ spec:
     metadata:
       annotations:
         {{- include "free5gc-amf.amfAnnotations" $ | nindent 8 }}
+{{- if $.Values.isNgapNeeded }}
 {{- if not $.Values.global.amf.service.ngap.enabled }}        
         k8s.v1.cni.cncf.io/networks: '[
             { "name": "{{ $.Values.global.n2network.name }}-{{ .name }}",
@@ -39,6 +40,7 @@ spec:
               "ips": [ "{{ $.Values.global.amf.n2if.ipAddress }}/{{ $.Values.global.n2network.cidr }}" ],
               "gateway": [ "{{ $.Values.global.n2network.gatewayIP }}" ]
             }]'
+{{- end }}
 {{- end }}
         checksum/config: {{ include (print $.Template.BasePath "/amf-configmap.yaml") $ | sha256sum }}
       labels:
@@ -71,9 +73,11 @@ spec:
         ports:
         - name: namf
           containerPort: {{ .service.port }}
+        {{- if $.Values.isNgapNeeded }}
         - name: n2
           containerPort: {{ $.Values.global.amf.service.ngap.port }}
           protocol: {{ $.Values.global.amf.service.ngap.protocol }}
+        {{- end }}
         command: ["./amf"]
         args: ["-c", "../config/amfcfg.yaml"]
         env:

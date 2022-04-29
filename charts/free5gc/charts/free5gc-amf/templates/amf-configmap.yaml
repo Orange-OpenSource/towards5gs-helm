@@ -24,6 +24,9 @@ data:
       description: AMF initial local configuration
 
     configuration:
+      serviceNameList:
+        {{- .configuration.serviceNameList | nindent 8 }}
+
       ngapIpList:
 {{- if $.Values.global.amf.service.ngap.enabled }}
         - 0.0.0.0

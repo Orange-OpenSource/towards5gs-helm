@@ -105,12 +105,12 @@ nssf:
     #  - secretName: chart-example-tls
     #    hosts:
     #      - chart-example.local
-  configuration:  
+  configuration: 
+    serviceNameList: |-
+      - nnssf-nsselection
+      - nnssf-nssaiavailability
     configuration: |-
       nssfName: NSSF
-      serviceNameList:
-        - nnssf-nsselection
-        - nnssf-nssaiavailability
       supportedPlmnList:
         - mcc: 208
           mnc: 93

@@ -111,13 +111,13 @@ nrf:
     #    hosts:
     #      - chart-example.local
   configuration:
+    serviceNameList: |-
+      - nnrf-nfm
+      - nnrf-disc
     configuration: |-
       DefaultPlmnId:
         mcc: 208
         mnc: 93
-      serviceNameList:
-        - nnrf-nfm
-        - nnrf-disc
     logger:
       NRF:
         debugLevel: info

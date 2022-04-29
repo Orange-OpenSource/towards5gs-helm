@@ -32,12 +32,14 @@ spec:
     metadata:
       annotations:
         {{- include "free5gc-smf.smfAnnotations" $ | nindent 8 }}
+        {{- if $.Values.isPfcpNeeded }}
         k8s.v1.cni.cncf.io/networks: '[
             { "name": "{{ $.Values.global.n4network.name }}-{{ .name }}",
               "interface": "n4",
               "ips": [ "{{ $.Values.global.smf.n4if.ipAddress }}/{{ $.Values.global.n4network.cidr }}" ],
               "gateway": [ "{{ $.Values.global.n4network.gatewayIP }}" ]
             }]'
+        {{- end }}
         checksum/config: {{ include (print $.Template.BasePath "/smf-configmap.yaml") $ | sha256sum }}
       labels:
         {{- include "free5gc-smf.selectorLabels" $ | nindent 8 }}
@@ -58,7 +60,6 @@ spec:
           value: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
         command: ['sh', '-c', 'set -x; for dependency in $DEPENDENCIES; do while [ $(curl --insecure --connect-timeout 1 -s -o /dev/null -w "%{http_code}" $dependency) -ne 200 ]; do echo waiting for dependencies; sleep 1; done; done;']
 
-
       containers:
       - name: {{ .name }}
         image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}
@@ -70,9 +71,11 @@ spec:
         ports:
         - name: nsmf
           containerPort: {{ .service.port }}
+        {{- if $.Values.isPfcpNeeded }}
         - name: n4
           containerPort: 8805
           protocol: UDP
+        {{- end }}
         command: ["./smf"]
         args: ["-c", "../config/smfcfg.yaml", "-u", "../config/uerouting.yaml"]
         env:
