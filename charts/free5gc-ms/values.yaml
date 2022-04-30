@@ -96,8 +96,70 @@ free5gc-nrf:
   db:
     enabled: false
 
-# Subcharts parameters
-free5gc-nnssf-nsselection:
+### Subcharts parameters
+# AMF
+free5gc-amf-1:
+  amf:
+    name: namf-comm
+    service:
+      name: namf-comm
+    configmap:
+      name: namf-comm-configmap
+    volume:
+      name: namf-comm-volume
+    configuration: 
+      serviceNameList: |-
+        - namf-comm
+free5gc-amf-1:
+  amf:
+    name: namf-evts
+    service:
+      name: namf-evts
+    configmap:
+      name: namf-evts-configmap
+    volume:
+      name: namf-evts-volume
+    configuration: 
+      serviceNameList: |-
+        - namf-evts
+free5gc-amf-1:
+  amf:
+    name: namf-mt
+    service:
+      name: namf-mt
+    configmap:
+      name: namf-mt-configmap
+    volume:
+      name: namf-mt-volume
+    configuration: 
+      serviceNameList: |-
+        - namf-mt
+free5gc-amf-1:
+  amf:
+    name: namf-loc
+    service:
+      name: namf-loc
+    configmap:
+      name: namf-loc-configmap
+    volume:
+      name: namf-loc-volume
+    configuration: 
+      serviceNameList: |-
+        - namf-loc
+free5gc-amf-1:
+  amf:
+    name: namf-oam
+    service:
+      name: namf-oam
+    configmap:
+      name: namf-oam-configmap
+    volume:
+      name: namf-oam-volume
+    configuration: 
+      serviceNameList: |-
+        - namf-oam
+# NSSF
+free5gc-nssf-1:
   nssf:
     name: nnssf-nsselection
     service:
@@ -109,7 +171,7 @@ free5gc-nnssf-nsselection:
     configuration: 
       serviceNameList: |-
         - nnssf-nsselection    
-free5gc-nnssf-nssaiavailability:
+free5gc-nssf-2:
   nssf:
     name: nnssf-nssaiavailability
     service:
@@ -121,6 +183,182 @@ free5gc-nnssf-nssaiavailability:
     configuration: 
       serviceNameList: |-
         - nnssf-nssaiavailability
+# PCF
+free5gc-pcf-1:
+  pcf:
+    name: npcf-ampolicycontrol
+    service:
+      name: npcf-ampolicycontrol
+    configmap:
+      name: npcf-ampolicycontrol-configmap
+    volume:
+      name: npcf-ampolicycontrol-volume
+    configuration: 
+      serviceList: |-
+        - serviceName: npcf-am-policy-control
+free5gc-pcf-2:
+  pcf:
+    name: npcf-smpolicycontrol
+    service:
+      name: npcf-smpolicycontrol
+    configmap:
+      name: npcf-smpolicycontrol-configmap
+    volume:
+      name: npcf-smpolicycontrol-volume
+    configuration: 
+      serviceList: |-
+        - serviceName: npcf-smpolicycontrol
+          suppFeat: 3fff
+free5gc-pcf-3:
+  pcf:
+    name: npcf-bdtpolicycontrol
+    service:
+      name: npcf-smpolicycontrol
+    configmap:
+      name: npcf-smpolicycontrol-configmap
+    volume:
+      name: npcf-smpolicycontrol-volume
+    configuration: 
+      serviceList: |-
+        - serviceName: npcf-bdtpolicycontrol
+free5gc-pcf-4:
+  pcf:
+    name: npcf-policyauthorization
+    service:
+      name: npcf-smpolicycontrol
+    configmap:
+      name: npcf-smpolicycontrol-configmap
+    volume:
+      name: npcf-smpolicycontrol-volume
+    configuration: 
+      serviceList: |-
+        - serviceName: npcf-policyauthorization
+          suppFeat: 3
+free5gc-pcf-5:
+  pcf:
+    name: npcf-eventexposure
+    service:
+      name: npcf-eventexposure
+    configmap:
+      name: npcf-eventexposure-configmap
+    volume:
+      name: npcf-eventexposure-volume
+    configuration: 
+      serviceList: |-
+        - serviceName: npcf-eventexposure
+free5gc-pcf-6:
+  pcf:
+    name: npcf-uepolicycontrol
+    service:
+      name: npcf-uepolicycontrol
+    configmap:
+      name: npcf-uepolicycontrol-configmap
+    volume:
+      name: npcf-uepolicycontrol-volume
+    configuration: 
+      serviceList: |-
+        - serviceName: npcf-ue-policy-control                                     
+# SMF
+free5gc-smf-1:
+  smf:
+    name: nsmf-pdusession
+    service:
+      name: nsmf-pdusession
+    configmap:
+      name: nsmf-pdusession-configmap
+    volume:
+      name: nsmf-pdusession-volume
+    configuration: 
+      serviceNameList: |-
+        - nsmf-pdusession 
+free5gc-smf-2:
+  isPfcpNeeded: false
+  smf:
+    name: nsmf-event-exposure
+    service:
+      name: nsmf-event-exposure
+    configmap:
+      name: nsmf-event-exposure-configmap
+    volume:
+      name: nsmf-event-exposure-volume
+    configuration: 
+      serviceNameList: |-
+        - nsmf-event-exposure   
+free5gc-smf-3:
+  isPfcpNeeded: false
+  smf:
+    name: nsmf-oam
+    service:
+      name: nsmf-oam
+    configmap:
+      name: nsmf-oam-configmap
+    volume:
+      name: nsmf-oam-volume
+    configuration: 
+      serviceNameList: |-
+        - nsmf-oam
+# UDM
+free5gc-udm-1:
+  udm:
+    name: nudm-sdm
+    service:
+      name: nudm-sdm
+    configmap:
+      name: nudm-sdm-configmap
+    volume:
+      name: nudm-sdm-volume
+    configuration: 
+      serviceNameList: |-
+        - nudm-sdm
+free5gc-udm-2:
+  udm:
+    name: nudm-uecm
+    service:
+      name: nudm-uecm
+    configmap:
+      name: nudm-uecm-configmap
+    volume:
+      name: nudm-uecm-volume
+    configuration: 
+      serviceNameList: |-
+        - nudm-uecm
+free5gc-udm-3:
+  udm:
+    name: nudm-ueau
+    service:
+      name: nudm-ueau
+    configmap:
+      name: nudm-ueau-configmap
+    volume:
+      name: nudm-ueau-volume
+    configuration: 
+      serviceNameList: |-
+        - nudm-ueau
+free5gc-udm-4:
+  udm:
+    name: nudm-ee
+    service:
+      name: nudm-ee
+    configmap:
+      name: nudm-ee-configmap
+    volume:
+      name: nudm-ee-volume
+    configuration: 
+      serviceNameList: |-
+        - nudm-ee
+free5gc-udm-5:
+  udm:
+    name: nudm-pp
+    service:
+      name: nudm-pp
+    configmap:
+      name: nudm-pp-configmap
+    volume:
+      name: nudm-pp-volume
+    configuration: 
+      serviceNameList: |-
+        - nudm-pp                        
+
 
 # This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
 mongodb:
