@@ -23,7 +23,7 @@ data:
       version: 1.0.1
       description: UDR initial local configuration
 
-    configuration:.
+    configuration:
       sbi:
         scheme: {{ $.Values.global.sbi.scheme }}
         registerIPv4: {{ .service.name }} # IP used to register to NRF
