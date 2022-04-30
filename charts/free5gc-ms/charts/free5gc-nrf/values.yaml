@@ -1,0 +1,124 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for free5gcControlPlane chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+global:
+  projectName: free5gc
+  nrf:
+    service:
+      name: nrf-nnrf
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30800"
+  sbi:
+    scheme: http
+
+initcontainers:
+  curl:
+    registry: towards5gs
+    image: initcurl
+    tag: "1.0.0"
+  busybox:
+    image: busybox
+    tag: "1.32.0"
+
+db:
+  enabled: true
+# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
+mongodb:
+  fullnameOverride: "mongodb"
+  useStatefulSet: true
+  auth:
+    enabled: false
+  persistence:
+    size: 6Gi
+    mountPath: /bitnami/mongodb/data/db/
+  service:
+    name: mongodb
+    type: ClusterIP
+    port: 27017
+    nodePort: "30017"
+
+nrf:
+  name: nrf
+  replicaCount: 1
+  image:
+    name: towards5gs/free5gc-nrf
+    pullPolicy: Always
+  configmap:
+    name: nrf-configmap
+  volume:
+    name: nrf-volume
+    mount: /free5gc/config/
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  readinessProbe:
+    initialDelaySeconds: 0
+    periodSeconds: 1
+    timeoutSeconds: 1
+    failureThreshold:  40
+    successThreshold: 1
+  livenessProbe:
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 10
+    failureThreshold: 3
+    successThreshold: 1
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  ingress:
+    enabled: false
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths: []
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+  configuration:
+    serviceNameList: |-
+      - nnrf-nfm
+      - nnrf-disc
+    configuration: |-
+      DefaultPlmnId:
+        mcc: 208
+        mnc: 93
+    logger:
+      NRF:
+        debugLevel: info
+        ReportCaller: false

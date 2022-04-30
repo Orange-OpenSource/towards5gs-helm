@@ -1,0 +1,327 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for free5gcControlPlane chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+global:
+  projectName: free5gc
+  nrf:
+    service:
+      name: nrf-nnrf
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30800"
+  sbi:
+    scheme: http
+
+initcontainers:
+  curl:
+    registry: towards5gs
+    image: initcurl
+    tag: "1.0.0"
+  busybox:
+    image: busybox
+    tag: "1.32.0"
+
+# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
+mongodb:
+  service:
+    name: mongodb
+    type: ClusterIP
+    port: 27017
+    nodePort: "30017"
+
+nssf:
+  name: nssf
+  replicaCount: 1
+  image:
+    name: towards5gs/free5gc-nssf
+    pullPolicy: Always
+  service:
+    name: nssf-nnssf
+    type: ClusterIP
+    port: 80
+  configmap:
+    name: nssf-configmap
+  volume:
+    name: nssf-volume
+    mount: /free5gc/config/
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  readinessProbe:
+    initialDelaySeconds: 0
+    periodSeconds: 1
+    timeoutSeconds: 1
+    failureThreshold:  40
+    successThreshold: 1
+  livenessProbe:
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 10
+    failureThreshold: 3
+    successThreshold: 1
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  ingress:
+    enabled: false
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths: []
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+  configuration: 
+    serviceNameList: |-
+      - nnssf-nsselection
+      - nnssf-nssaiavailability
+    configuration: |-
+      nssfName: NSSF
+      supportedPlmnList:
+        - mcc: 208
+          mnc: 93
+      supportedNssaiInPlmnList:
+        - plmnId:
+            mcc: 208
+            mnc: 93
+          supportedSnssaiList:
+            - sst: 1
+              sd: 010203
+            - sst: 1
+              sd: 112233
+            - sst: 1
+              sd: 3
+            - sst: 2
+              sd: 1
+            - sst: 2
+              sd: 2
+      amfList:
+        - nfId: 469de254-2fe5-4ca0-8381-af3f500af77c
+          supportedNssaiAvailabilityData:
+            - tai:
+                plmnId:
+                  mcc: 466
+                  mnc: 92
+                tac: 33456
+              supportedSnssaiList:
+                - sst: 1
+                - sst: 1
+                  sd: 2
+                - sst: 2
+            - tai:
+                plmnId:
+                  mcc: 466
+                  mnc: 92
+                tac: 33457
+              supportedSnssaiList:
+                - sst: 1
+                  sd: 1
+                - sst: 1
+                  sd: 2
+        - nfId: fbe604a8-27b2-417e-bd7c-8a7be2691f8d
+          supportedNssaiAvailabilityData:
+            - tai:
+                plmnId:
+                  mcc: 466
+                  mnc: 92
+                tac: 33458
+              supportedSnssaiList:
+                - sst: 1
+                - sst: 1
+                  sd: 1
+                - sst: 1
+                  sd: 3
+                - sst: 2
+            - tai:
+                plmnId:
+                  mcc: 466
+                  mnc: 92
+                tac: 33459
+              supportedSnssaiList:
+                - sst: 1
+                - sst: 1
+                  sd: 1
+                - sst: 2
+                - sst: 2
+                  sd: 1
+        - nfId: b9e6e2cb-5ce8-4cb6-9173-a266dd9a2f0c
+          supportedNssaiAvailabilityData:
+            - tai:
+                plmnId:
+                  mcc: 466
+                  mnc: 92
+                tac: 33456
+              supportedSnssaiList:
+                - sst: 1
+                - sst: 1
+                  sd: 1
+                - sst: 1
+                  sd: 2
+                - sst: 2
+            - tai:
+                plmnId:
+                  mcc: 466
+                  mnc: 92
+                tac: 33458
+              supportedSnssaiList:
+                - sst: 1
+                - sst: 1
+                  sd: 1
+                - sst: 2
+                - sst: 2
+                  sd: 1
+      taList:
+        - tai:
+            plmnId:
+              mcc: 466
+              mnc: 92
+            tac: 33456
+          accessType: 3GPP_ACCESS
+          supportedSnssaiList:
+            - sst: 1
+            - sst: 1
+              sd: 1
+            - sst: 1
+              sd: 2
+            - sst: 2
+        - tai:
+            plmnId:
+              mcc: 466
+              mnc: 92
+            tac: 33457
+          accessType: 3GPP_ACCESS
+          supportedSnssaiList:
+            - sst: 1
+            - sst: 1
+              sd: 1
+            - sst: 1
+              sd: 2
+            - sst: 2
+        - tai:
+            plmnId:
+              mcc: 466
+              mnc: 92
+            tac: 33458
+          accessType: 3GPP_ACCESS
+          supportedSnssaiList:
+            - sst: 1
+            - sst: 1
+              sd: 1
+            - sst: 1
+              sd: 3
+            - sst: 2
+          restrictedSnssaiList:
+            - homePlmnId:
+                mcc: 310
+                mnc: 560
+              sNssaiList:
+                - sst: 1
+                  sd: 3
+        - tai:
+            plmnId:
+              mcc: 466
+              mnc: 92
+            tac: 33459
+          accessType: 3GPP_ACCESS
+          supportedSnssaiList:
+            - sst: 1
+            - sst: 1
+              sd: 1
+            - sst: 2
+            - sst: 2
+              sd: 1
+          restrictedSnssaiList:
+            - homePlmnId:
+                mcc: 310
+                mnc: 560
+              sNssaiList:
+                - sst: 2
+                  sd: 1
+      mappingListFromPlmn:
+        - operatorName: NTT Docomo
+          homePlmnId:
+            mcc: 440
+            mnc: 10
+          mappingOfSnssai:
+            - servingSnssai:
+                sst: 1
+                sd: 1
+              homeSnssai:
+                sst: 1
+                sd: 1
+            - servingSnssai:
+                sst: 1
+                sd: 2
+              homeSnssai:
+                sst: 1
+                sd: 3
+            - servingSnssai:
+                sst: 1
+                sd: 3
+              homeSnssai:
+                sst: 1
+                sd: 4
+            - servingSnssai:
+                sst: 2
+                sd: 1
+              homeSnssai:
+                sst: 2
+                sd: 2
+        - operatorName: AT&T Mobility
+          homePlmnId:
+            mcc: 310
+            mnc: 560
+          mappingOfSnssai:
+            - servingSnssai:
+                sst: 1
+                sd: 1
+              homeSnssai:
+                sst: 1
+                sd: 2
+            - servingSnssai:
+                sst: 1
+                sd: 2
+              homeSnssai:
+                sst: 1
+                sd: 3      
+    # the kind of log output
+      # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      # ReportCaller: enable the caller report or not, value: true or false
+    logger:
+      NSSF:
+        debugLevel: info
+        ReportCaller: false

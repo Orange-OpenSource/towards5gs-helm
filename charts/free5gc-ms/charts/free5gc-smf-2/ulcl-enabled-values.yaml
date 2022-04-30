@@ -1,0 +1,117 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+global:
+  userPlaneArchitecture: ulcl  # possible values are "single" and "ulcl"
+
+smf:
+  configuration:
+    configuration: |-
+      smfName: SMF
+      snssaiInfos:
+        - sNssai:
+            sst: 1
+            sd: 010203
+          dnnInfos: # DNN information list
+            - dnn: internet # Data Network Name
+              dns: # the IP address of DNS
+                ipv4: 8.8.8.8
+                ipv6: 2001:4860:4860::8888
+        - sNssai:
+            sst: 1
+            sd: 112233
+          dnnInfos: # DNN information list
+            - dnn: internet # Data Network Name
+              dns: # the IP address of DNS
+                ipv4: 8.8.8.8
+                ipv6: 2001:4860:4860::8888
+        - sNssai:
+            sst: 2
+            sd: 112234    
+          dnnInfos:
+            - dnn: internet
+              dns: 
+                ipv4: 8.8.8.8
+                ipv6: 2001:4860:4860::8888
+      plmnList: # the list of PLMN IDs that this SMF belongs to (optional, remove this key when unnecessary)
+        - mcc: "208" # Mobile Country Code (3 digits string, digit: 0~9)
+          mnc: "93" # Mobile Network Code (2 or 3 digits string, digit: 0~9)
+      userplaneInformation: # list of userplane information
+        upNodes: # information of userplane node (AN or UPF)
+          gNB1: # the name of the node
+            type: AN # the type of the node (AN or UPF)
+          BranchingUPF:
+            type: UPF
+            nodeID: 10.100.50.241 # PFCP address
+            sNssaiUpfInfos:
+              - sNssai:
+                  sst: 1
+                  sd: 010203
+                dnnUpfInfoList:
+                  - dnn: internet
+              - sNssai:
+                  sst: 1
+                  sd: 112233
+                dnnUpfInfoList:
+                  - dnn: internet
+            interfaces:
+              - interfaceType: N3
+                endpoints:
+                  - 10.100.50.233
+                networkInstance: internet
+              - interfaceType: N9
+                endpoints:
+                  - 10.100.50.225
+                networkInstance: internet
+          AnchorUPF1:
+            type: UPF
+            nodeID: 10.100.50.242 # PFCP address
+            sNssaiUpfInfos:
+              - sNssai:
+                  sst: 1
+                  sd: 010203
+                dnnUpfInfoList:
+                  - dnn: internet
+                    pools:
+                    - cidr: 10.1.0.0/17
+            interfaces:
+              - interfaceType: N9
+                endpoints:
+                  - 10.100.50.226 # AnchorUPF1 N9 address
+                networkInstance: internet
+          AnchorUPF2:
+            type: UPF
+            nodeID: 10.100.50.243 # PFCP address
+            sNssaiUpfInfos:
+              - sNssai:
+                  sst: 1
+                  sd: 010203
+                dnnUpfInfoList:
+                  - dnn: internet
+                    pools:
+                    - cidr: 10.1.128.0/17
+            interfaces:
+              - interfaceType: N9
+                endpoints:
+                  - 10.100.50.227 # AnchorUPF2 N9 address
+                networkInstance: internet
+        links:
+          - A: gNB1
+            B: BranchingUPF
+          - A: BranchingUPF
+            B: AnchorUPF1
+          - A: BranchingUPF
+            B: AnchorUPF2
+      locality: area1 # Name of the location where a set of AMF, SMF and UPFs are located
+      ulcl: true
+
+

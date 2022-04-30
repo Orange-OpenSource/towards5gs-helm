@@ -1,0 +1,57 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.smf }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .configmap.name }}
+  labels:
+    app: {{ $.Values.global.projectName }}
+data:
+  smfcfg.yaml: |
+    info:
+      version: 1.0.2
+      description: SMF initial local configuration
+
+    configuration:
+      serviceNameList:
+        {{- .configuration.serviceNameList | nindent 8 }}
+      
+      sbi:
+        scheme: {{ $.Values.global.sbi.scheme }}
+        registerIPv4: {{ .service.name }} # IP used to register to NRF
+        bindingIPv4: 0.0.0.0  # IP used to bind the service
+        port: {{ .service.port }}
+        tls:
+          key: config/TLS/smf.key
+          pem: config/TLS/smf.pem
+      
+      nrfUri: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
+
+      pfcp:
+        addr: {{ $.Values.global.smf.n4if.ipAddress }}
+      
+      {{- .configuration.configuration | nindent 6 }}
+
+    logger:
+      {{- toYaml .configuration.logger | nindent 6 }}
+
+
+  uerouting.yaml: |
+    info:
+      version: 1.0.1
+      description: Routing information for UE
+    ueRoutingInfo:
+      {{- .configuration.ueRoutingInfo | nindent 6 }}
+      
+{{- end }}

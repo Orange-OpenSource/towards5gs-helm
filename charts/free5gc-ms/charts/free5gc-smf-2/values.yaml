@@ -1,0 +1,232 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for free5gcControlPlane chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+global:
+  projectName: free5gc
+  userPlaneArchitecture: single  # possible values are "single" and "ulcl"
+  nrf:
+    service:
+      name: nrf-nnrf
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30800"
+  sbi:
+    scheme: http
+  smf:
+    n4if:
+      ipAddress: 10.100.50.244
+  n4network:
+    name: n4network
+    masterIf: eth0
+    subnetIP: 10.100.50.240
+    cidr: 29
+    gatewayIP: 10.100.50.246
+    excludeIP: 10.100.50.246
+
+initcontainers:
+  curl:
+    registry: towards5gs
+    image: initcurl
+    tag: "1.0.0"
+  busybox:
+    image: busybox
+    tag: "1.32.0"
+
+# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
+mongodb:
+  service:
+    name: mongodb
+    type: ClusterIP
+    port: 27017
+    nodePort: "30017"
+
+isPfcpNeeded: true
+smf:
+  name: smf
+  replicaCount: 1
+  image:
+    name: towards5gs/free5gc-smf
+    pullPolicy: Always
+  service:
+    name: smf-nsmf
+    type: ClusterIP
+    port: 80
+  configmap:
+    name: smf-configmap
+  volume:
+    name: smf-volume
+    mount: /free5gc/config/
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  readinessProbe:
+    initialDelaySeconds: 0
+    periodSeconds: 1
+    timeoutSeconds: 1
+    failureThreshold:  40
+    successThreshold: 1
+  livenessProbe:
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 10
+    failureThreshold: 3
+    successThreshold: 1
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  ingress:
+    enabled: false
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths: []
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+  configuration:
+    serviceNameList: |-
+        - nsmf-pdusession
+        - nsmf-event-exposure
+        - nsmf-oam
+    configuration: |-
+      smfName: SMF
+      snssaiInfos:
+        - sNssai:
+            sst: 1
+            sd: 010203
+          dnnInfos: # DNN information list
+            - dnn: internet # Data Network Name
+              dns: # the IP address of DNS
+                ipv4: 8.8.8.8
+        - sNssai:
+            sst: 1
+            sd: 112233
+          dnnInfos: # DNN information list
+            - dnn: internet # Data Network Name
+              dns: # the IP address of DNS
+                ipv4: 8.8.8.8
+        - sNssai:
+            sst: 2
+            sd: 112234    
+          dnnInfos:
+            - dnn: internet
+              dns: 
+                ipv4: 8.8.8.8
+      plmnList: # the list of PLMN IDs that this SMF belongs to (optional, remove this key when unnecessary)
+        - mcc: "208" # Mobile Country Code (3 digits string, digit: 0~9)
+          mnc: "93" # Mobile Network Code (2 or 3 digits string, digit: 0~9)
+      userplaneInformation: # list of userplane information
+        upNodes: # information of userplane node (AN or UPF)
+          gNB1: # the name of the node
+            type: AN # the type of the node (AN or UPF)
+          UPF:  # the name of the node
+            type: UPF # the type of the node (AN or UPF)
+            nodeID: 10.100.50.241 # the IP/FQDN of N4 interface on this UPF (PFCP)
+            sNssaiUpfInfos: # S-NSSAI information list for this UPF
+                  - sNssai: # S-NSSAI (Single Network Slice Selection Assistance Information)
+                      sst: 1 # Slice/Service Type (uinteger, range: 0~255)
+                      sd: 010203 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
+                    dnnUpfInfoList: # DNN information list for this S-NSSAI
+                      - dnn: internet
+                        pools:
+                          - cidr: 10.1.0.0/17
+                  - sNssai: # S-NSSAI (Single Network Slice Selection Assistance Information)
+                      sst: 1 # Slice/Service Type (uinteger, range: 0~255)
+                      sd: 112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
+                    dnnUpfInfoList: # DNN information list for this S-NSSAI
+                      - dnn: internet
+                        pools:
+                          - cidr: 10.1.128.0/17 
+            interfaces: # Interface list for this UPF
+                  - interfaceType: N3 # the type of the interface (N3 or N9)
+                    endpoints: # the IP address of this N3/N9 interface on this UPF
+                      - 10.100.50.233
+                    networkInstance: internet # Data Network Name (DNN)
+        links: # the topology graph of userplane, A and B represent the two nodes of each link
+          - A: gNB1
+            B: UPF
+      locality: area1 # Name of the location where a set of AMF, SMF and UPFs are located
+    
+    ueRoutingInfo: |-
+      UE1: # Group Name
+        members:
+        - imsi-208930000000003 # Subscription Permanent Identifier of the UE
+        topology: # Network topology for this group (Uplink: A->B, Downlink: B->A)
+        # default path derived from this topology
+        # node name should be consistent with smfcfg.yaml
+          - A: gNB1
+            B: BranchingUPF
+          - A: BranchingUPF
+            B: AnchorUPF1
+        specificPath:
+          - dest: 10.100.100.26/32 # the destination IP address on Data Network (DN)
+            # the order of UPF nodes in this path. We use the UPF's name to represent each UPF node.
+            # The UPF's name should be consistent with smfcfg.yaml
+            path: [BranchingUPF, AnchorUPF2]
+
+      UE2: # Group Name
+        members:
+        - imsi-208930000000004 # Subscription Permanent Identifier of the UE
+        topology: # Network topology for this group (Uplink: A->B, Downlink: B->A)
+        # default path derived from this topology
+        # node name should be consistent with smfcfg.yaml
+          - A: gNB1
+            B: BranchingUPF
+          - A: BranchingUPF
+            B: AnchorUPF1
+        specificPath:
+          - dest: 10.100.100.16/32 # the destination IP address on Data Network (DN)
+            # the order of UPF nodes in this path. We use the UPF's name to represent each UPF node.
+            # The UPF's name should be consistent with smfcfg.yaml
+            path: [BranchingUPF, AnchorUPF2]
+
+    logger:
+      SMF:
+        debugLevel: info
+        ReportCaller: false
+      NAS:
+        debugLevel: info
+        ReportCaller: false
+      NGAP:
+        debugLevel: info
+        ReportCaller: false
+      Aper:
+        debugLevel: info
+        ReportCaller: false
+      PFCP:
+        debugLevel: info
+        ReportCaller: false

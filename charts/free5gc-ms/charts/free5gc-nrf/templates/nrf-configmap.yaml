@@ -1,0 +1,48 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.nrf }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .configmap.name }}
+  labels:
+    app: {{ $.Values.global.projectName }}
+data:
+  nrfcfg.yaml: |
+    info:
+      version: 1.0.1
+      description: NRF initial local configuration
+    
+    configuration:
+      MongoDBName: free5gc
+      MongoDBUrl: mongodb://{{ $.Values.mongodb.service.name }}:{{ $.Values.mongodb.service.port }}
+
+      serviceNameList:
+        {{- .configuration.serviceNameList | nindent 8 }}
+
+      sbi:
+        scheme: {{ $.Values.global.sbi.scheme }}
+        registerIPv4: {{ $.Values.global.nrf.service.name }} # IP used to serve NFs or register to another NRF
+        bindingIPv4: 0.0.0.0  # IP used to bind the service
+        port: {{ $.Values.global.nrf.service.port }}
+        tls:
+          key: config/TLS/nrf.key
+          pem: config/TLS/nrf.pem
+
+      {{- .configuration.configuration | nindent 6 }}
+
+    logger:
+      {{- toYaml .configuration.logger | nindent 6 }}
+
+{{- end }}
+
