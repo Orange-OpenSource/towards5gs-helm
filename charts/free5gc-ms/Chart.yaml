@@ -40,6 +40,16 @@ dependencies:
   condition: deployNSSF
 - name: free5gc-pcf-1
   condition: deployPCF
+- name: free5gc-pcf-2
+  condition: deployPCF
+- name: free5gc-pcf-3
+  condition: deployPCF
+- name: free5gc-pcf-4
+  condition: deployPCF
+- name: free5gc-pcf-5
+  condition: deployPCF
+- name: free5gc-pcf-6
+  condition: deployPCF
 - name: free5gc-smf-1
   condition: deploySMF
 - name: free5gc-smf-2
