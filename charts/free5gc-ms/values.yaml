@@ -213,11 +213,11 @@ free5gc-pcf-3:
   pcf:
     name: npcf-bdtpolicycontrol
     service:
-      name: npcf-smpolicycontrol
+      name: npcf-bdtpolicycontrol
     configmap:
-      name: npcf-smpolicycontrol-configmap
+      name: npcf-bdtpolicycontrol-configmap
     volume:
-      name: npcf-smpolicycontrol-volume
+      name: npcf-bdtpolicycontrol-volume
     configuration: 
       serviceList: |-
         - serviceName: npcf-bdtpolicycontrol
@@ -225,11 +225,11 @@ free5gc-pcf-4:
   pcf:
     name: npcf-policyauthorization
     service:
-      name: npcf-smpolicycontrol
+      name: npcf-policyauthorization
     configmap:
-      name: npcf-smpolicycontrol-configmap
+      name: npcf-policyauthorization-configmap
     volume:
-      name: npcf-smpolicycontrol-volume
+      name: npcf-policyauthorization-volume
     configuration: 
       serviceList: |-
         - serviceName: npcf-policyauthorization
