@@ -18,15 +18,7 @@ appVersion: "v3.1.1"
 dependencies:
 - name: mongodb
   condition: deployMongoDB
-- name: free5gc-amf-1
-  condition: deployAMF
-- name: free5gc-amf-2
-  condition: deployAMF
-- name: free5gc-amf-3
-  condition: deployAMF
-- name: free5gc-amf-4
-  condition: deployAMF
-- name: free5gc-amf-5
+- name: free5gc-amf
   condition: deployAMF
 - name: free5gc-ausf
   condition: deployAUSF
@@ -50,11 +42,7 @@ dependencies:
   condition: deployPCF
 - name: free5gc-pcf-6
   condition: deployPCF
-- name: free5gc-smf-1
-  condition: deploySMF
-- name: free5gc-smf-2
-  condition: deploySMF
-- name: free5gc-smf-3
+- name: free5gc-smf
   condition: deploySMF
 - name: free5gc-udm-1
   condition: deployUDM
