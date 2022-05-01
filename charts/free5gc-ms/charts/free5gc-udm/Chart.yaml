@@ -11,47 +11,11 @@
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 apiVersion: v2
-name: free5gc-ms
-description: A Helm chart to deploy Free5gc based on microservices
-version: 0.1.0
+name: free5gc-udm
+description: A Helm chart to deploy the Free5GC UDM
+type: application
+version: 0.2.2
 appVersion: "v3.1.1"
-dependencies:
-- name: mongodb
-  condition: deployMongoDB
-- name: free5gc-amf
-  condition: deployAMF
-- name: free5gc-ausf
-  condition: deployAUSF
-- name: free5gc-n3iwf
-  condition: deployN3IWF
-- name: free5gc-nrf
-  condition: deployNRF
-- name: free5gc-nssf-1
-  condition: deployNSSF
-- name: free5gc-nssf-2
-  condition: deployNSSF
-- name: free5gc-pcf-1
-  condition: deployPCF
-- name: free5gc-pcf-2
-  condition: deployPCF
-- name: free5gc-pcf-3
-  condition: deployPCF
-- name: free5gc-pcf-4
-  condition: deployPCF
-- name: free5gc-pcf-5
-  condition: deployPCF
-- name: free5gc-pcf-6
-  condition: deployPCF
-- name: free5gc-smf
-  condition: deploySMF
-- name: free5gc-udm
-  condition: deployUDM
-- name: free5gc-udr
-  condition: deployUDR
-- name: free5gc-upf
-  condition: deployUPF
-- name: free5gc-webui
-  condition: deployWEBUI
 icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
 maintainers:
   - email: abderaouf.khichane@orange.com
