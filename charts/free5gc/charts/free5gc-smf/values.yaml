@@ -56,6 +56,7 @@ mongodb:
     port: 27017
     nodePort: "30017"
 
+isPfcpNeeded: true
 smf:
   name: smf
   replicaCount: 1
@@ -117,12 +118,12 @@ smf:
     #    hosts:
     #      - chart-example.local
   configuration:
-    configuration: |-
-      smfName: SMF
-      serviceNameList:
+    serviceNameList: |-
         - nsmf-pdusession
         - nsmf-event-exposure
         - nsmf-oam
+    configuration: |-
+      smfName: SMF
       snssaiInfos:
         - sNssai:
             sst: 1

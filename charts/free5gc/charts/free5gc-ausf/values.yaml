@@ -106,9 +106,9 @@ ausf:
     #    hosts:
     #      - chart-example.local
   configuration:
-    configuration: |-
-      serviceNameList:
-        - nausf-auth      
+    serviceNameList: |-
+      - nausf-auth
+    configuration: |-      
       plmnSupportList:
         - mcc: 208
           mnc: 93

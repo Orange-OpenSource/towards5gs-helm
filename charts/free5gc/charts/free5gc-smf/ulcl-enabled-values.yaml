@@ -17,10 +17,6 @@ smf:
   configuration:
     configuration: |-
       smfName: SMF
-      serviceNameList:
-        - nsmf-pdusession
-        - nsmf-event-exposure
-        - nsmf-oam
       snssaiInfos:
         - sNssai:
             sst: 1

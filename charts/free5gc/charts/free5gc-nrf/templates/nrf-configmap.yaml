@@ -26,6 +26,10 @@ data:
     configuration:
       MongoDBName: free5gc
       MongoDBUrl: mongodb://{{ $.Values.mongodb.service.name }}:{{ $.Values.mongodb.service.port }}
+
+      serviceNameList:
+        {{- .configuration.serviceNameList | nindent 8 }}
+
       sbi:
         scheme: {{ $.Values.global.sbi.scheme }}
         registerIPv4: {{ $.Values.global.nrf.service.name }} # IP used to serve NFs or register to another NRF
