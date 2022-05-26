@@ -6,7 +6,7 @@ This guideline shows how to deploy the free5gc on a Kubernetes cluster and then 
 
 ## Prerequisites
  - A Kubernetes cluster supporting SCTP
- - Kubernetrs worker nodes with kernel 5.0.0-23-generic and containing gtp5g kernel module ([required for the Free5GC UPF element](https://github.com/free5gc/free5gc/wiki/Installation#a-prerequisites)).
+ - Kubernetes worker nodes with kernel 5.0.0-23-generic and containing gtp5g kernel module ([required for the Free5GC UPF element](https://github.com/free5gc/free5gc/wiki/Installation#a-prerequisites)).
  - [Multus-CNI](https://github.com/intel/multus-cni).
  - [Helm3](https://helm.sh/docs/intro/install/).
  - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (optional).
@@ -14,7 +14,7 @@ This guideline shows how to deploy the free5gc on a Kubernetes cluster and then 
  - A physical network interface on each Kubernetes node named eth0.
  - A physical network interface on each Kubernetes node named eth1 to connect the UPF to the Data Network.
 
-Note: If the names of network interfaces on your Kubernetes nodes are different from eth0 and eth1, see Networks configuration.
+
 **Note:** If the names of network interfaces on your Kubernetes nodes are different from `eth0` and `eth1`, see [Networks configuration](#networks-configuration).
 
 ## Networks configuration
