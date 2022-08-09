@@ -20,34 +20,39 @@ metadata:
     app: {{ $.Values.global.projectName }}
 data:
   upfcfg.yaml: |
-    info:
-      version: 1.0.0
-      description: UPF configuration
-    
-    configuration:
-      {{- toYaml .configuration.configuration | nindent 6 }}
-    
-      pfcp:
-        - addr: {{ .n4if.ipAddress }}
-    
-      gtpu:
+    version: 1.0.3
+    description: UPF initial local configuration
+
+    # The listen IP and nodeID of the N4 interface on this UPF (Can't set to 0.0.0.0)
+    pfcp:
+      addr: {{ .n4if.ipAddress }}   # IP addr for listening
+      nodeID: {{ .n4if.ipAddress }} # External IP or FQDN can be reached
+      retransTimeout: 1s # retransmission timeout
+      maxRetrans: 3 # the max number of retransmission
+
+    gtpu:
+      forwarder: gtp5g
+      # The IP list of the N3/N9 interfaces on this UPF
+      # If there are multiple connection, set addr to 0.0.0.0 or list all the addresses
+      ifList:
         - addr: {{ .n9if.ipAddress }}
-        # [optional] gtpu.name
-        # - name: upf.5gc.nctu.me
-        # [optional] gtpu.ifname
-        # - ifname: gtpif
-    
+          type: N9
+          # name: upf.5gc.nctu.me
+          # ifname: gtpif
+
+    {{- toYaml .configuration | nindent 4 }}
+
   wrapper.sh: |
     #!/bin/sh
 
     ### Implement networking rules
     iptables -A FORWARD -j ACCEPT
-    iptables -t nat -A POSTROUTING -s {{ $.Values.global.uesubnet }} -o n6 -j MASQUERADE  # route traffic comming from the UE SUBNET to the interface N6    
+    iptables -t nat -A POSTROUTING -s {{ $.Values.global.uesubnet }} -o n6 -j MASQUERADE  # route traffic comming from the UE SUBNET to the interface N6
     echo "1200 n6if" >> /etc/iproute2/rt_tables # create a routing table for the interface N6
-    ip rule add from {{ $.Values.global.uesubnet }} table n6if   # use the created ip table to route the traffic comming from the UE SUBNET 
+    ip rule add from {{ $.Values.global.uesubnet }} table n6if   # use the created ip table to route the traffic comming from the UE SUBNET
     ip route add default via {{ $.Values.global.n6network.gatewayIP }} dev n6 table n6if  # add a default route in the created table so that all UEs will use this gateway for external communications (target IP not in the Data Network attached to the interface N6) and then the Data Network will manage to route the traffic
 
-    /free5gc/free5gc-upfd/free5gc-upfd -c {{ .volume.mount }}/upfcfg.yaml
+    /free5gc/upf/upf -c {{ .volume.mount }}/upfcfg.yaml
 
 {{- end }}
 {{- end }}
