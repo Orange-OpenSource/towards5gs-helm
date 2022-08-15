@@ -105,17 +105,15 @@ upf:
     targetCPUUtilizationPercentage: 80
     # targetMemoryUtilizationPercentage: 80
   configuration:
-    configuration:
-      # debugLevel: panic|fatal|error|warn|info|debug|trace
-      debugLevel: info
-      ReportCaller: false
+    dnnList: # The DNN list supported by UPF
+      - dnn: internet # Data Network Name
+        cidr: 10.1.0.0/17 # Classless Inter-Domain Routing for assigned IPv4 pool of UE
+        natifname: n6
 
-      dnn_list:
-        - dnn: internet
-          cidr: 10.1.0.0/17
-          # [optional] apn_list[*].natifname
-          natifname: n6
-
+    logger: # log output setting
+      enable: true # true or false
+      level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      reportCaller: false # enable the caller report or not, value: true or false
 
 # The followed values will be considered in the case of choosing "ulcl" architecture for the user plane
 upf1:
@@ -174,16 +172,15 @@ upf1:
     targetCPUUtilizationPercentage: 80
     # targetMemoryUtilizationPercentage: 80
   configuration:
-    configuration:
-      # debugLevel: panic|fatal|error|warn|info|debug|trace
-      debugLevel: info
-      ReportCaller: false
+    dnnList: # The DNN list supported by UPF
+      - dnn: internet # Data Network Name
+        cidr: 10.1.0.0/17 # Classless Inter-Domain Routing for assigned IPv4 pool of UE
+        natifname: n6
 
-      dnn_list:
-        - dnn: internet
-          cidr: 10.1.0.0/17
-          # [optional] apn_list[*].natifname
-          natifname: n6
+    logger: # log output setting
+      enable: true # true or false
+      level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      reportCaller: false # enable the caller report or not, value: true or false
 
 upf2:
   name: upf2
@@ -241,16 +238,15 @@ upf2:
     targetCPUUtilizationPercentage: 80
     # targetMemoryUtilizationPercentage: 80
   configuration:
-    configuration:
-      # debugLevel: panic|fatal|error|warn|info|debug|trace
-      debugLevel: info
-      ReportCaller: false
+    dnnList: # The DNN list supported by UPF
+      - dnn: internet # Data Network Name
+        cidr: 10.1.0.0/17 # Classless Inter-Domain Routing for assigned IPv4 pool of UE
+        natifname: n6
 
-      dnn_list:
-        - dnn: internet
-          cidr: 10.1.0.0/17
-          # [optional] apn_list[*].natifname
-          natifname: n6
+    logger: # log output setting
+      enable: true # true or false
+      level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      reportCaller: false # enable the caller report or not, value: true or false
 
 upfb:
   name: upfb
@@ -310,15 +306,12 @@ upfb:
     targetCPUUtilizationPercentage: 80
     # targetMemoryUtilizationPercentage: 80
   configuration:
-    configuration:
-      # debugLevel: panic|fatal|error|warn|info|debug|trace
-      debugLevel: info
-      ReportCaller: false
+    dnnList: # The DNN list supported by UPF
+      - dnn: internet # Data Network Name
+        cidr: 10.1.0.0/17 # Classless Inter-Domain Routing for assigned IPv4 pool of UE
+        natifname: n6
 
-      packetBufferHoldTime: 30
-
-      dnn_list:
-        - dnn: internet
-          cidr: 10.1.0.0/17
-          # [optional] apn_list[*].natifname
-          # natifname: n6
+    logger: # log output setting
+      enable: true # true or false
+      level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      reportCaller: false # enable the caller report or not, value: true or false
