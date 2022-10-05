@@ -108,7 +108,7 @@ upf:
     dnnList: # The DNN list supported by UPF
       - dnn: internet # Data Network Name
         cidr: 10.1.0.0/17 # Classless Inter-Domain Routing for assigned IPv4 pool of UE
-        natifname: n6
+        natifname: eth0
 
     logger: # log output setting
       enable: true # true or false

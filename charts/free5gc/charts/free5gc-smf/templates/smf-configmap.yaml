@@ -39,7 +39,7 @@ data:
       nrfUri: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
 
       pfcp:
-        addr: {{ $.Values.global.smf.n4if.ipAddress }}
+        addr: __IP__
       
       {{- .configuration.configuration | nindent 6 }}
 

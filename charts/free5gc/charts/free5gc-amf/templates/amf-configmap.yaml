@@ -31,7 +31,7 @@ data:
 {{- if $.Values.global.amf.service.ngap.enabled }}
         - 0.0.0.0
 {{- else }}
-        - {{ $.Values.global.amf.n2if.ipAddress }}
+        - 0.0.0.0
 {{- end }}
       sbi:
         scheme: {{ $.Values.global.sbi.scheme }}

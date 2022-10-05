@@ -42,17 +42,6 @@ spec:
         {{- toYaml .imagePullSecrets | nindent 8 }}
       securityContext:
         {{- toYaml .podSecurityContext | nindent 8 }}
-      initContainers:
-      - name: wait-mongo
-        {{- with $.Values.initcontainers.busybox }}
-        image: {{ .image }}:{{ .tag }}
-        {{- end }}
-        env:
-        - name: DEPENDENCIES
-          {{- with $.Values.mongodb.service }}
-          value: {{ .name }}:{{ .port }}
-          {{- end }}
-        command: ["sh", "-c", "until nc -z $DEPENDENCIES; do echo waiting for the MongoDB; sleep 2; done;"]
       containers:
       - name: {{ .name }}
         image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}

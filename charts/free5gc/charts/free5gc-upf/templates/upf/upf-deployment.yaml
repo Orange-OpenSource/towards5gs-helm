@@ -60,6 +60,16 @@ spec:
         {{- toYaml .imagePullSecrets | nindent 8 }}
       securityContext:
         {{- toYaml .podSecurityContext | nindent 8 }}
+      initContainers:
+      - name: fix-ip
+        image: busybox
+        command: ['/bin/sh']
+        args: ['-c', 'sed s/__IP__/$(hostname -i)/g /free5gc/config/upfcfg.yaml > /cfg/upfcfg.yaml']
+        volumeMounts:
+        - mountPath: {{ .volume.mount }}
+          name: {{ .volume.name }}
+        - name: shared-data
+          mountPath: /cfg
       containers:
       - name: {{ .name }}
         image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}
@@ -70,10 +80,15 @@ spec:
         - name: n4
           containerPort: 8805
           protocol: UDP
+        - name: n3
+          containerPort: 2152
+          protocol: UDP
         command: ["{{ .volume.mount }}/wrapper.sh"]
         volumeMounts:
         - mountPath: {{ .volume.mount }}
           name: {{ .volume.name }}
+        - name: shared-data
+          mountPath: /cfg
         resources:
             {{- toYaml .resources | nindent 12 }}
       dnsPolicy: ClusterFirst
@@ -86,6 +101,8 @@ spec:
         {{- toYaml .tolerations | nindent 8 }}
 
       volumes:
+      - name: shared-data
+        emptyDir: {}
       - name: {{ .volume.name }}
         projected:
           sources:

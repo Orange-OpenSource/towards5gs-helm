@@ -29,13 +29,13 @@ data:
 {{- if .amf.service.ngap.enabled }}
     ngapIp: 0.0.0.0   
 {{- else }}
-    ngapIp: {{ .n2if.ipAddress }} 
+    ngapIp: 0.0.0.0
 {{- end }}
-    gtpIp: {{ .n3if.ipAddress }}    # gNB's local IP address for N3 Interface (Usually same with local IP)
+    gtpIp: __IP__    # gNB's local IP address for N3 Interface (Usually same with local IP)
     
     # List of AMF address information
     amfConfigs:
-      - address: {{ .amf.n2if.ipAddress }}
+      - address: amf-n2
         port: {{ .amf.n2if.port }}
 
 {{- end }}

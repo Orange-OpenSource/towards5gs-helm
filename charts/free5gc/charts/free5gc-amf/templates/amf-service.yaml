@@ -31,8 +31,6 @@ spec:
     project: {{ $.Values.global.projectName }}
     nf: {{ .name }}
 
-{{- if $.Values.isNgapNeeded }}
-{{- if $.Values.global.amf.service.ngap.enabled }}
 ---
 apiVersion: v1
 kind: Service
@@ -51,7 +49,5 @@ spec:
   selector:
     project: {{ $.Values.global.projectName }}
     nf: {{ .name }}
-{{- end }}
-{{- end }}
 
 {{- end }}
