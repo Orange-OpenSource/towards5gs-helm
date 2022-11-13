@@ -71,16 +71,13 @@ gnb:
   imagePullSecrets: []
   podSecurityContext: {}
   resources:
-    limits:
-      cpu: 250m
-      memory: 256Mi
     requests:
       cpu: 250m
       memory: 256Mi
   nodeSelector: {}
   tolerations: []
   affinity: {}
-  
+
   configuration: |-
     mcc: '208' # Mobile Country Code value
     mnc: '93'  # Mobile Network Code value (2 or 3 digits)
@@ -119,9 +116,6 @@ ue:
     capabilities:
             add: ["NET_ADMIN"]
   resources:
-    limits:
-      cpu: 120m
-      memory: 128Mi
     requests:
       cpu: 120m
       memory: 128Mi
@@ -178,7 +172,7 @@ ue:
     integrityMaxRate:
       uplink: 'full'
       downlink: 'full'
-  
+
   test:
     connectivity:
       name: ue-connectivity-test
