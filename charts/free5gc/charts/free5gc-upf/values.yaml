@@ -77,9 +77,6 @@ upf:
     capabilities:
       add: ["NET_ADMIN"]
   resources:
-    limits:
-      cpu: 500m
-      memory: 512Mi
     requests:
       cpu: 500m
       memory: 512Mi
@@ -144,9 +141,6 @@ upf1:
     capabilities:
       add: ["NET_ADMIN"]
   resources:
-    limits:
-      cpu: 500m
-      memory: 512Mi
     requests:
       cpu: 500m
       memory: 512Mi
@@ -210,9 +204,6 @@ upf2:
     capabilities:
       add: ["NET_ADMIN"]
   resources:
-    limits:
-      cpu: 500m
-      memory: 512Mi
     requests:
       cpu: 500m
       memory: 512Mi
@@ -278,9 +269,6 @@ upfb:
     capabilities:
       add: ["NET_ADMIN"]
   resources:
-    limits:
-      cpu: 500m
-      memory: 512Mi
     requests:
       cpu: 500m
       memory: 512Mi

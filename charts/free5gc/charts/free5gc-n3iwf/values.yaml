@@ -77,9 +77,6 @@ n3iwf:
     capabilities:
       add: ["NET_ADMIN"]
   resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
     requests:
       cpu: 100m
       memory: 128Mi
@@ -129,26 +126,26 @@ n3iwf:
                   - SNSSAI:
                       SST: 1
                       SD: 112233
-      
+
       # IPSec virtual interface
       IPSecInterfaceAddress: 10.0.0.1
-      
+
       # IPSec virtual interface mark
       IPSecInterfaceMark: 5
-      
+
       # NAS TCP Listen Port
-      NASTCPPort: 20000    
-      
+      NASTCPPort: 20000
+
       # N3IWF FQDN
-      FQDN: n3iwf.free5gc.org    
-      
+      FQDN: n3iwf.free5gc.org
+
       # Security
       # Private Key File Path
       PrivateKey: config/TLS/n3iwf.key
       # Certificate Authority (CA)
       CertificateAuthority: config/TLS/n3iwf.pem
       # Certificate
-      Certificate: config/TLS/n3iwf.pem 
+      Certificate: config/TLS/n3iwf.pem
 
       # IP address that will be allocated to UE in IPSec tunnel
       UEIPAddressRange: 10.0.0.0/24

@@ -55,7 +55,7 @@ initcontainers:
     image: busybox
     tag: "1.32.0"
 
-# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
+# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it.
 mongodb:
   service:
     name: mongodb
@@ -85,9 +85,6 @@ amf:
   podSecurityContext: {}
   securityContext: {}
   resources:
-    limits:
-      cpu: 150m
-      memory: 128Mi
     requests:
       cpu: 150m
       memory: 128Mi
@@ -167,7 +164,7 @@ amf:
           - NEA0
       networkName:
         full: free5GC
-        short: free      
+        short: free
       locality: area1 # Name of the location where a set of AMF, SMF and UPFs are located
       networkFeatureSupport5GS: # 5gs Network Feature Support IE, refer to TS 24.501
         enable: true # append this IE in Registration accept or not

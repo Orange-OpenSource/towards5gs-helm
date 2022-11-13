@@ -39,7 +39,7 @@ initcontainers:
 
 db:
   enabled: false
-# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
+# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it.
 mongodb:
   service:
     name: mongodb
@@ -57,7 +57,7 @@ webui:
     name: webui-service
     type: NodePort
     port: 5000
-    nodePort: 30500    
+    nodePort: 30500
   configmap:
     name: webui-configmap
   volume:
@@ -69,9 +69,6 @@ webui:
   podSecurityContext: {}
   securityContext: {}
   resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
     requests:
       cpu: 100m
       memory: 128Mi

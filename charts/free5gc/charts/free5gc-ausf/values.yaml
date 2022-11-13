@@ -37,7 +37,7 @@ initcontainers:
     image: busybox
     tag: "1.32.0"
 
-# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
+# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it.
 mongodb:
   service:
     name: mongodb
@@ -66,9 +66,6 @@ ausf:
   podSecurityContext: {}
   securityContext: {}
   resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
     requests:
       cpu: 100m
       memory: 128Mi
@@ -108,7 +105,7 @@ ausf:
   configuration:
     serviceNameList: |-
       - nausf-auth
-    configuration: |-      
+    configuration: |-
       plmnSupportList:
         - mcc: 208
           mnc: 93
