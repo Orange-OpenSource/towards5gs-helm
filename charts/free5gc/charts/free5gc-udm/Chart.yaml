@@ -14,8 +14,8 @@ apiVersion: v2
 name: free5gc-udm
 description: A Helm chart to deploy the Free5GC UDM
 type: application
-version: 0.2.3
-appVersion: "v3.2.0"
+version: 0.2.4
+appVersion: "v3.2.1"
 icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
 maintainers:
   - email: abderaouf.khichane@orange.com

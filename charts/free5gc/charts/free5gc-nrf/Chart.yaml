@@ -14,8 +14,8 @@ apiVersion: v2
 name: free5gc-nrf
 description: A Helm chart to deploy the Free5GC NRF
 type: application
-version: 0.2.3
-appVersion: "v3.2.0"
+version: 0.2.4
+appVersion: "v3.2.1"
 dependencies:
 - name: mongodb
   condition: db.enabled
