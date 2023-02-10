@@ -33,12 +33,8 @@ uname -r
 It should be `5.0.0-23-generic`.
 
 ### Install the gtp5g kernel module on worker nodes
-```console
-git clone https://github.com/PrinzOwO/gtp5g.git
-cd gtp5g
-make
-sudo make install
-```
+Please follow [Free5GC's wiki](https://github.com/free5gc/free5gc/wiki/Installation#c-install-user-plane-function-upf).
+
 
 ### Create a Persistent Volume
 If you don't have a Persistent Volume provisioner, you can use the following commands to create a namespace for the project and a [Persistent Volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) within this namespace that will be consumed by MongoDB by adapting it to your implementation (you have to replace `worker1` by the name of the node and `/home/vagrant/kubedata` by the right directory on this node in which you want to persist the MongoDB data).
@@ -190,8 +186,3 @@ These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 ## Reference
  - https://github.com/free5gc/free5gc
  - https://github.com/free5gc/free5gc-compose
-
-
-
-
-

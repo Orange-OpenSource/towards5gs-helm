@@ -19,15 +19,15 @@ gnb:
     # Indicates whether or not SCTP stream number errors should be ignored.
     ignoreStreamIds: true
 
-    mcc: '901'
+    mcc: '999'
     mnc: '70'
     slices:
       - sst: 1
 
 ue:
   configuration: |-
-    supi: 'imsi-901700000000001'
-    mcc: '901'
+    supi: 'imsi-999700000000001'
+    mcc: '999'
     mnc: '70'
     key: '465B5CE8B199B49FAA5F0A2EE238A6BC'
     op: 'E8ED289DEBA952E4283B54E88E6183CA'

@@ -22,12 +22,7 @@ uname -r
 It should be `5.0.0-23-generic`.
 
 ### Install the gtp5g kernel module on worker nodes
-```console
-git clone https://github.com/PrinzOwO/gtp5g.git
-cd gtp5g
-make
-sudo make install
-```
+Please follow [Free5GC's wiki](https://github.com/free5gc/free5gc/wiki/Installation#c-install-user-plane-function-upf).
 
 ### Install the user plane
 Run the following commands on a host that can communicate with the API server of your cluster.
@@ -186,5 +181,3 @@ Currently, this Helm chart uses the [MACVLAN plugin](https://www.cni.dev/plugins
 
 ## Reference
  - https://github.com/free5gc/free5gc
-
-

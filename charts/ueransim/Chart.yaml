@@ -13,7 +13,7 @@
 apiVersion: v2
 name: ueransim
 description: A Helm chart to deploy UERANSIM
-version: 2.0.14
+version: 2.0.15
 appVersion: v3.2.6
 icon: https://raw.githubusercontent.com/aligungr/UERANSIM/master/.github/logo.png
 maintainers:
