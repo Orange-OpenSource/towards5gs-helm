@@ -16,14 +16,14 @@ kind: ServiceAccount
 metadata:
   name: {{ include "ueransim.fullname" . }}-test-connection
   annotations:
-    "halm.sh/hook": test
+    "helm.sh/hook": test
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: {{ include "ueransim.fullname" . }}-test-connection
   annotations:
-    "halm.sh/hook": test
+    "helm.sh/hook": test
 rules:
 - apiGroups: [""]
   resources: ["pods"]
@@ -37,7 +37,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: {{ include "ueransim.fullname" . }}-test-connection
   annotations:
-    "halm.sh/hook": test
+    "helm.sh/hook": test
 subjects:
 - kind: ServiceAccount
   name: {{ include "ueransim.fullname" . }}-test-connection
@@ -100,7 +100,7 @@ metadata:
   labels:
     {{- include "ueransim.labels" . | nindent 4 }}
   annotations:
-    helm.sh/hook: test
+    "helm.sh/hook": test
 spec:
       serviceAccountName: {{ include "ueransim.fullname" . }}-test-connection
       containers:
