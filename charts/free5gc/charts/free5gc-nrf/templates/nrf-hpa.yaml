@@ -12,17 +12,17 @@
 #
 {{- with .Values.nrf }}
 {{- if .autoscaling.enabled }}
-apiVersion: autoscaling/v2beta1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "free5gc-nrf.fullname" . }}-{{ .name }}-hpa
+  name: {{ include "free5gc-nrf.fullname" $ }}-{{ .name }}-hpa
   labels:
-    {{- include "free5gc-nrf.labels" . | nindent 4 }}
+    {{- include "free5gc-nrf.labels" $ | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "free5gc-nrf.fullname" . }}-{{ .name }}
+    name: {{ include "free5gc-nrf.fullname" $ }}-{{ .name }}
   minReplicas: {{ .autoscaling.minReplicas }}
   maxReplicas: {{ .autoscaling.maxReplicas }}
   metrics:
@@ -30,13 +30,17 @@ spec:
     - type: Resource
       resource:
         name: cpu
-        targetAverageUtilization: {{ .autoscaling.targetCPUUtilizationPercentage }}
+        target:
+          type: Utilization
+          averageUtilization: {{ .autoscaling.targetCPUUtilizationPercentage }}
     {{- end }}
     {{- if .autoscaling.targetMemoryUtilizationPercentage }}
     - type: Resource
       resource:
         name: memory
-        targetAverageUtilization: {{ .autoscaling.targetMemoryUtilizationPercentage }}
+        target:
+          type: Utilization
+          averageUtilization: {{ .autoscaling.targetMemoryUtilizationPercentage }}
     {{- end }}
 {{- end }}
 {{- end }}
