@@ -10,7 +10,7 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI, Michal CHABIERA
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-{{- if .Values.ue.enabled }}
+{{- if and .Values.ue.enabled .Values.ue.test.enabled }}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
