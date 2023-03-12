@@ -5,6 +5,7 @@ on:
     - main
     paths:
     - 'charts/**'
+    - '.github/workflows/helm-charts-testing.yml'
   pull_request:
 
 jobs:
@@ -19,7 +20,7 @@ jobs:
       - name: Set up Helm
         uses: azure/setup-helm@v1
         with:
-          version: latest
+          version: v3.11.2
 
       - uses: actions/setup-python@v2
         with:
@@ -27,6 +28,4 @@ jobs:
 
       - name: Run chart-testing (lint)
         run: |
-          helm lint charts/*
-          helm lint charts/free5gc/charts/*         
-        
+          helm lint --with-subcharts charts/*
