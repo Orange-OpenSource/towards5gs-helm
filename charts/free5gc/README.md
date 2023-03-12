@@ -1,17 +1,17 @@
 # free5gc Helm chart
 
-This is a Helm chart for deploying the [free5GC](https://github.com/free5gc/free5gc)-v3.0.5 on Kubernetes. Tt can be used to deploy the following Helm charts:
- - [free5gc-amf](./charts/free5gc-amf).
- - [free5gc-ausf](./charts/free5gc-ausf).
- - [free5gc-n3iwf](./charts/free5gc-n3iwf).
- - [free5gc-nrf](./charts/free5gc-nrf).
- - [free5gc-nssf](./charts/free5gc-nssf).
- - [free5gc-pcf](./charts/free5gc-pcf).
- - [free5gc-smf](./charts/free5gc-smf).
- - [free5gc-udm](./charts/free5gc-udm).
- - [free5gc-udr](./charts/free5gc-udr).
- - [free5gc-upf](./charts/free5gc-upf).
- - [free5gc-webui](./charts/free5gc-webui).
+This is a Helm chart for deploying the [free5GC](https://github.com/free5gc/free5gc) on Kubernetes. It can be used to deploy the following Helm charts:
+ - [free5gc-amf](./charts/free5gc-amf)
+ - [free5gc-ausf](./charts/free5gc-ausf)
+ - [free5gc-n3iwf](./charts/free5gc-n3iwf)
+ - [free5gc-nrf](./charts/free5gc-nrf)
+ - [free5gc-nssf](./charts/free5gc-nssf)
+ - [free5gc-pcf](./charts/free5gc-pcf)
+ - [free5gc-smf](./charts/free5gc-smf)
+ - [free5gc-udm](./charts/free5gc-udm)
+ - [free5gc-udr](./charts/free5gc-udr)
+ - [free5gc-upf](./charts/free5gc-upf)
+ - [free5gc-webui](./charts/free5gc-webui)
 
 ## Prerequisites
  - A Kubernetes cluster ready to use with all worker nodes using kernel `5.0.0-23-generic` and they should contain gtp5g kernel module.
@@ -33,7 +33,7 @@ uname -r
 It should be `5.0.0-23-generic`.
 
 ### Install the gtp5g kernel module on worker nodes
-Please follow [Free5GC's wiki](https://github.com/free5gc/free5gc/wiki/Installation#c-install-user-plane-function-upf).
+Please follow [free5GC's wiki](https://github.com/free5gc/free5gc/wiki/Installation#c-install-user-plane-function-upf).
 
 
 ### Create a Persistent Volume
@@ -111,8 +111,7 @@ This chart allows you to customize its installation. The table below shows the p
 | Parameter | Description | Default value |
 | --- | --- | --- |
 | `deployMongoDB` | If `true` then the MongoDB subchart will be installed. | `true` |
-| `deploy<NFName in capital letters>` | If `true` then the `<NFName>` subchart will be installed. `<NFName>` must be one of the following: AMF, AUSF, NRF, NSSF, PCF, SMF, UDM, UDR, UPF, WEBUI. | `true` |
-| `deployN3IWF` | If `true` then the N3IWF subchart will be installed. | `false` |
+| `deploy<NFName in capital letters>` | If `true` then the `<NFName>` subchart will be installed. `<NFName>` must be one of the following: AMF, AUSF, N3IWF, NRF, NSSF, PCF, SMF, UDM, UDR, UPF, WEBUI. | `see values.yaml` |
 
 ### Global and subcharts' parameters
 Please check this [link](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/) to see how to customize global and subcharts' parameters.
@@ -122,7 +121,7 @@ Please check this [link](https://helm.sh/docs/chart_template_guide/subcharts_and
 | `global.projectName` | The name of the project. | `free5gc` |
 | `global.userPlaneArchitecture` | User plane topology. Possible values are `single` and `ulcl` | `single` |
 | `global.sbi.scheme` | The SBI scheme for all control plane NFs. Possible values are `http` and `https` | `http` |
-| `global.nrf.service.name` | The name of the service used to expose the NRF SBI interface. | `nrf-service` |
+| `global.nrf.service.name` | The name of the service used to expose the NRF SBI interface. | `nrf-nnrf` |
 | `global.nrf.service.type` | The type of the NRF SBI service. | `NodePort` |
 | `global.nrf.service.port` | The NRF SBI port number. | `8000` |
 | `global.nrf.service.port` | The NRF SBI service nodePort number. | `30800` |
