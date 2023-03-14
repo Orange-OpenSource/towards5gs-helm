@@ -42,6 +42,7 @@ global:
   #Global network parametes
   n2network:
     name: n2network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.248
     cidr: 29
@@ -49,6 +50,7 @@ global:
     excludeIP: 10.100.50.254
   n3network:
     name: n3network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.232
     cidr: 29
@@ -56,6 +58,7 @@ global:
     excludeIP: 10.100.50.238
   n4network:
     name: n4network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.240
     cidr: 29
@@ -63,6 +66,7 @@ global:
     excludeIP: 10.100.50.246
   n6network:
     name: n6network
+    type: ipvlan
     masterIf: eth1
     subnetIP: 10.100.100.0
     cidr: 24
@@ -70,6 +74,7 @@ global:
     excludeIP: 10.100.100.254
   n9network:
     name: n9network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.224
     cidr: 29
@@ -78,25 +83,26 @@ global:
 
 
 # These parameters can be used to enable/disable deployment of subcharts
-deployMongoDB: true              
-deployAMF: true                 
-deployAUSF: true
-deployN3IWF: false
-deployNRF: true              
-deployNSSF: true                 
-deployPCF: true
-deploySMF: true
-deployUDM: true
-deployUDR: true
-deployUPF: true
-deployWEBUI: true
+deployMongoDb: true
+deployAmf: true
+deployAusf: true
+deployN3iwf: false
+deployNrf: true
+deployNssf: true
+deployPcf: true
+deploySmf: true
+deployUdm: true
+deployUdr: true
+deployUpf: true
+deployWebui: true
+deployDbPython: true
 
 # Disable the deployment of mongodb as an NRF subchart
 free5gc-nrf:
   db:
     enabled: false
 
-# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
+# This section can be used to override the default values in the MongoDB chart
 mongodb:
   fullnameOverride: "mongodb"
   useStatefulSet: true
