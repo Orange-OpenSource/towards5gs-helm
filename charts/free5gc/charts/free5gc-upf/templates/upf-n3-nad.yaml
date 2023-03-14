@@ -19,10 +19,15 @@ spec:
       "cniVersion": "0.3.1",
       "plugins": [
         {
-          "type": "macvlan",
+          "type": {{ .Values.global.n3network.type | quote }},
           "capabilities": { "ips": true },
           "master": {{ .Values.global.n3network.masterIf | quote }},
+{{- if eq .Values.global.n3network.type "macvlan" }}
           "mode": "bridge",
+{{- end }}
+{{- if eq .Values.global.n3network.type "ipvlan" }}
+          "mode": "l2",
+{{- end }}
           "ipam": {
             "type": "static",
             "routes": [
@@ -30,11 +35,14 @@ spec:
                 "dst": "0.0.0.0/0",
                 "gw": "{{ .Values.global.n3network.gatewayIP }}"
               }
-            ] 
+            ]
           }
-        }, {
+        }
+{{- if eq .Values.global.n3network.type "macvlan" -}}
+        , {
           "capabilities": { "mac": true },
           "type": "tuning"
         }
+{{- end }}
       ]
     }'

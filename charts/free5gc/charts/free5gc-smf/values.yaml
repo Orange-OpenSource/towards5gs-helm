@@ -33,6 +33,7 @@ global:
       ipAddress: 10.100.50.244
   n4network:
     name: n4network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.240
     cidr: 29

@@ -33,9 +33,9 @@ spec:
       annotations:
         {{- include "free5gc-amf.amfAnnotations" $ | nindent 8 }}
 {{- if $.Values.isNgapNeeded }}
-{{- if not $.Values.global.amf.service.ngap.enabled }}        
+{{- if not $.Values.global.amf.service.ngap.enabled }}
         k8s.v1.cni.cncf.io/networks: '[
-            { "name": "{{ $.Values.global.n2network.name }}-{{ .name }}",
+            { "name": "{{ $.Values.global.n2network.name }}-{{ include "free5gc-amf.fullname" $ }}",
               "interface": "n2",
               "ips": [ "{{ $.Values.global.amf.n2if.ipAddress }}/{{ $.Values.global.n2network.cidr }}" ],
               "gateway": [ "{{ $.Values.global.n2network.gatewayIP }}" ]
@@ -60,8 +60,8 @@ spec:
         env:
         - name: DEPENDENCIES
           value: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
-        command: ['sh', '-c', 'set -x; for dependency in $DEPENDENCIES; do while [ $(curl --insecure --connect-timeout 1 -s -o /dev/null -w "%{http_code}" $dependency) -ne 200 ]; do echo waiting for dependencies; sleep 1; done; done;']   
-      
+        command: ['sh', '-c', 'set -x; for dependency in $DEPENDENCIES; do while [ $(curl --insecure --connect-timeout 1 -s -o /dev/null -w "%{http_code}" $dependency) -ne 200 ]; do echo waiting for dependencies; sleep 1; done; done;']
+
       containers:
       - name: {{ .name }}
         image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}

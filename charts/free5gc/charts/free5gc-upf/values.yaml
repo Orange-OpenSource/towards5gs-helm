@@ -22,6 +22,7 @@ global:
 #Global network parametes
   n4network:
     name: n4network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.240
     cidr: 29
@@ -29,6 +30,7 @@ global:
     excludeIP: 10.100.50.246
   n3network:
     name: n3network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.232
     cidr: 29
@@ -36,6 +38,7 @@ global:
     excludeIP: 10.100.50.238
   n6network:
     name: n6network
+    type: ipvlan
     masterIf: eth1
     subnetIP: 10.100.100.0
     cidr: 24
@@ -43,6 +46,7 @@ global:
     excludeIP: 10.100.100.254
   n9network:
     name: n9network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.224
     cidr: 29
