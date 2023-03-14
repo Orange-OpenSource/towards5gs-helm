@@ -75,23 +75,7 @@ data:
     echo ""
 
     echo "Test connectivity"
-    ping_output="$(kubectl -n {{ $.Release.Namespace }} exec -i ${pod_name} -- bash -c 'ping -c 10 -I uesimtun0  www.google.com')"
-    echo "${ping_output}"
-    echo "***********************************************************************"
-    echo ""
-    ping_statistics="$(echo "$ping_output" |tail -n -2 |awk -F', ' 'NR==1 {print}')"
-    loss_rate="$(echo "$ping_statistics" |awk -F', ' '{for(i=1; i<=NF; i++){if(match($i, /packet loss$/))print $i}}')"
-    echo "Packet loss-rate is $loss_rate"
-    if [ "$loss_rate" != "100% packet loss" ] ; then
-      echo "Connection test passed - ${loss_rate}"
-      exit 0
-    else
-      echo "Connection test failed - ${loss_rate}"
-      exit 1
-    fi
-#    echo "$ping_output" |tail -n -2 |awk -F', ' 'NR==1 { print ($3 == "0% packet loss"? "Connection passed - " $3: "Connection failed - " $3)}'
-
-    #ping -qc10 google.com |awk -F', ' 'END {print ($3 == "0% packet loss"? "Connection passed - " $3: "Connection failed - " $3)}'
+    kubectl -n {{ $.Release.Namespace }} exec -i ${pod_name} -- curl --interface uesimtun0 www.google.com
 ---
 apiVersion: v1
 kind: Pod
