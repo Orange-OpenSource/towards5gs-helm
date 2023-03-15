@@ -60,11 +60,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `pcf.replicaCount` | The number of PCF replicas. | `1` |
 | `pcf.image.name` | The PCF Docker image name. | `towards5gs/free5gc-pcf` |
 | `pcf.image.tag` | The PCF Docker image tag. | `defaults to chart AppVersion` |
-| `pcf.service.name` | The name of the service used to expose the PCF SBI interface. | `pcf-namf` |
 | `pcf.service.port` | The PCF SBI port number. | `80` |
-| `pcf.configmap.name` | The name of the configmap to be used to import the configuration to the PCF POD. | `pcf-configmap` |
-| `pcf.volume.name` | The name of the volume to be mounted to the PCF POD. | `pcf-volume` |
-| `pcf.volume.mount` | The name of the volume to be mounted to the PCF POD. | `pcf-volume` |
 | `pcf.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/`|
 | `pcf.podAnnotations` | Pod annotations. | `{}`|
 | `pcf.imagePullSecrets` | Image pull secrets. | `[]`|
@@ -83,5 +79,3 @@ This chart allows you to customize its installation. The table below shows the p
 
 ## Reference
  - https://github.com/free5gc/free5gc
-
-

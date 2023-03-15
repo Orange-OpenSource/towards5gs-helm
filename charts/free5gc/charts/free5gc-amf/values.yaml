@@ -39,7 +39,9 @@ global:
         protocol: SCTP
         type: NodePort
   n2network:
+    enabled: true
     name: n2network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.248
     cidr: 29
@@ -55,15 +57,8 @@ initcontainers:
     image: busybox
     tag: "1.32.0"
 
-# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it.
-mongodb:
-  service:
-    name: mongodb
-    type: ClusterIP
-    port: 27017
-    nodePort: "30017"
-
 isNgapNeeded: true
+
 amf:
   name: amf
   replicaCount: 1
@@ -71,13 +66,9 @@ amf:
     name: towards5gs/free5gc-amf
     pullPolicy: Always
   service:
-    name: amf-namf
     type: ClusterIP
     port: 80
-  configmap:
-    name: amf-configmap
   volume:
-    name: amf-volume
     mount: /free5gc/config/
   podAnnotations: {}
     # additional annotations

@@ -15,7 +15,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .configmap.name }}
+  name: {{ include "free5gc-upf.fullname" $ }}-{{ .name }}-configmap
   labels:
     app: {{ $.Values.global.projectName }}
 data:

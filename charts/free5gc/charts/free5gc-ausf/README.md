@@ -60,11 +60,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `ausf.replicaCount` | The number of AUSF replicas. | `1` |
 | `ausf.image.name` | The AUSF Docker image name. | `towards5gs/free5gc-ausf` |
 | `ausf.image.tag` | The AUSF Docker image tag. | `defaults to chart AppVersion` |
-| `ausf.service.name` | The name of the service used to expose the AUSF SBI interface. | `ausf-namf` |
 | `ausf.service.port` | The AUSF SBI port number. | `80` |
-| `ausf.configmap.name` | The name of the configmap to be used to import the configuration to the AUSF POD. | `ausf-configmap` |
-| `ausf.volume.name` | The name of the volume to be mounted to the AUSF POD. | `ausf-volume` |
-| `ausf.volume.mount` | The name of the volume to be mounted to the AUSF POD. | `ausf-volume` |
 | `ausf.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/`|
 | `ausf.podAnnotations` | Pod annotations. | `{}`|
 | `ausf.imagePullSecrets` | Image pull secrets. | `[]`|
@@ -83,5 +79,3 @@ This chart allows you to customize its installation. The table below shows the p
 
 ## Reference
  - https://github.com/free5gc/free5gc
-
-

@@ -64,11 +64,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `udr.replicaCount` | The number of UDR replicas. | `1` |
 | `udr.image.name` | The UDR Docker image name. | `towards5gs/free5gc-udr` |
 | `udr.image.tag` | The UDR Docker image tag. | `defaults to chart AppVersion` |
-| `udr.service.name` | The name of the service used to expose the UDR SBI interface. | `udr-namf` |
 | `udr.service.port` | The UDR SBI port number. | `80` |
-| `udr.configmap.name` | The name of the configmap to be used to import the configuration to the UDR POD. | `udr-configmap` |
-| `udr.volume.name` | The name of the volume to be mounted to the UDR POD. | `udr-volume` |
-| `udr.volume.mount` | The name of the volume to be mounted to the UDR POD. | `udr-volume` |
 | `udr.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/`|
 | `udr.podAnnotations` | Pod annotations. | `{}`|
 | `udr.imagePullSecrets` | Image pull secrets. | `[]`|
@@ -87,5 +83,3 @@ This chart allows you to customize its installation. The table below shows the p
 
 ## Reference
  - https://github.com/free5gc/free5gc
-
-

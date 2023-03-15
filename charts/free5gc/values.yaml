@@ -41,35 +41,45 @@ global:
       ipAddress: 10.100.50.244
   #Global network parametes
   n2network:
+    enabled: true
     name: n2network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.248
     cidr: 29
     gatewayIP: 10.100.50.254
     excludeIP: 10.100.50.254
   n3network:
+    enabled: true
     name: n3network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.232
     cidr: 29
     gatewayIP: 10.100.50.238
     excludeIP: 10.100.50.238
   n4network:
+    enabled: true
     name: n4network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.240
     cidr: 29
     gatewayIP: 10.100.50.246
     excludeIP: 10.100.50.246
   n6network:
+    enabled: true
     name: n6network
+    type: ipvlan
     masterIf: eth1
     subnetIP: 10.100.100.0
     cidr: 24
     gatewayIP: 10.100.100.1
     excludeIP: 10.100.100.254
   n9network:
+    enabled: true
     name: n9network
+    type: ipvlan
     masterIf: eth0
     subnetIP: 10.100.50.224
     cidr: 29
@@ -78,25 +88,26 @@ global:
 
 
 # These parameters can be used to enable/disable deployment of subcharts
-deployMongoDB: true              
-deployAMF: true                 
-deployAUSF: true
-deployN3IWF: false
-deployNRF: true              
-deployNSSF: true                 
-deployPCF: true
-deploySMF: true
-deployUDM: true
-deployUDR: true
-deployUPF: true
-deployWEBUI: true
+deployMongoDb: true
+deployAmf: true
+deployAusf: true
+deployN3iwf: false
+deployNrf: true
+deployNssf: true
+deployPcf: true
+deploySmf: true
+deployUdm: true
+deployUdr: true
+deployUpf: true
+deployWebui: true
+deployDbPython: true
 
 # Disable the deployment of mongodb as an NRF subchart
 free5gc-nrf:
   db:
     enabled: false
 
-# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it. 
+# This section can be used to override the default values in the MongoDB chart
 mongodb:
   fullnameOverride: "mongodb"
   useStatefulSet: true

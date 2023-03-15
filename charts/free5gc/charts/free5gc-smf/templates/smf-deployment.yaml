@@ -32,9 +32,9 @@ spec:
     metadata:
       annotations:
         {{- include "free5gc-smf.smfAnnotations" $ | nindent 8 }}
-        {{- if $.Values.isPfcpNeeded }}
+        {{- if and $.Values.isPfcpNeeded $.Values.global.n4network.enabled}}
         k8s.v1.cni.cncf.io/networks: '[
-            { "name": "{{ $.Values.global.n4network.name }}-{{ .name }}",
+            { "name": "{{ $.Values.global.n4network.name }}-{{ include "free5gc-smf.fullname" $ }}",
               "interface": "n4",
               "ips": [ "{{ $.Values.global.smf.n4if.ipAddress }}/{{ $.Values.global.n4network.cidr }}" ],
               "gateway": [ "{{ $.Values.global.n4network.gatewayIP }}" ]
@@ -81,7 +81,7 @@ spec:
             value: release
         volumeMounts:
         - mountPath: {{ .volume.mount }}
-          name: {{ .volume.name }}
+          name: {{ include "free5gc-smf.fullname" $ }}-volume
         resources:
             {{- toYaml .resources | nindent 12 }}
       dnsPolicy: ClusterFirst
@@ -94,11 +94,11 @@ spec:
         {{- toYaml .tolerations | nindent 8 }}
 
       volumes:
-      - name: {{ .volume.name }}
+      - name: {{ include "free5gc-smf.fullname" $ }}-volume
         projected:
           sources:
           - configMap:
-              name: {{ .configmap.name }}
+              name: {{ include "free5gc-smf.fullname" $ }}-configmap
               items:
               - key: smfcfg.yaml
                 path: smfcfg.yaml

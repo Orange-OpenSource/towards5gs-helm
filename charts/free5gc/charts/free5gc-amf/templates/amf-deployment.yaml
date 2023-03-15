@@ -32,16 +32,14 @@ spec:
     metadata:
       annotations:
         {{- include "free5gc-amf.amfAnnotations" $ | nindent 8 }}
-{{- if $.Values.isNgapNeeded }}
-{{- if not $.Values.global.amf.service.ngap.enabled }}        
+        {{- if and $.Values.isNgapNeeded $.Values.global.n2network.enabled}}
         k8s.v1.cni.cncf.io/networks: '[
-            { "name": "{{ $.Values.global.n2network.name }}-{{ .name }}",
+            { "name": "{{ $.Values.global.n2network.name }}-{{ include "free5gc-amf.fullname" $ }}",
               "interface": "n2",
               "ips": [ "{{ $.Values.global.amf.n2if.ipAddress }}/{{ $.Values.global.n2network.cidr }}" ],
               "gateway": [ "{{ $.Values.global.n2network.gatewayIP }}" ]
             }]'
-{{- end }}
-{{- end }}
+        {{- end }}
         checksum/config: {{ include (print $.Template.BasePath "/amf-configmap.yaml") $ | sha256sum }}
       labels:
         {{- include "free5gc-amf.selectorLabels" $ | nindent 8 }}
@@ -60,8 +58,8 @@ spec:
         env:
         - name: DEPENDENCIES
           value: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
-        command: ['sh', '-c', 'set -x; for dependency in $DEPENDENCIES; do while [ $(curl --insecure --connect-timeout 1 -s -o /dev/null -w "%{http_code}" $dependency) -ne 200 ]; do echo waiting for dependencies; sleep 1; done; done;']   
-      
+        command: ['sh', '-c', 'set -x; for dependency in $DEPENDENCIES; do while [ $(curl --insecure --connect-timeout 1 -s -o /dev/null -w "%{http_code}" $dependency) -ne 200 ]; do echo waiting for dependencies; sleep 1; done; done;']
+
       containers:
       - name: {{ .name }}
         image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}
@@ -85,7 +83,7 @@ spec:
             value: release
         volumeMounts:
         - mountPath: {{ .volume.mount }}
-          name: {{ .volume.name }}
+          name: {{ include "free5gc-amf.fullname" $ }}-volume
         resources:
             {{- toYaml .resources | nindent 12 }}
       dnsPolicy: ClusterFirst
@@ -98,9 +96,9 @@ spec:
         {{- toYaml .tolerations | nindent 8 }}
 
       volumes:
-      - name: {{ .volume.name }}
+      - name: {{ include "free5gc-amf.fullname" $ }}-volume
         projected:
           sources:
           - configMap:
-              name: {{ .configmap.name }}
+              name: {{ include "free5gc-amf.fullname" $ }}-configmap
 {{- end }}

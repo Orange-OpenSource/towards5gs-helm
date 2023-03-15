@@ -137,6 +137,7 @@ Please check this [link](https://helm.sh/docs/chart_template_guide/subcharts_and
 ### N2 Network parameters
 | Parameter | Description | Default value |
 | --- | --- | --- |
+| `global.n2network.enabled` | If `true` then N2-related Network Attachment Definitions resources will be created. | `true` |
 | `global.n2network.name` | N2 network name. | `n2network` |
 | `global.n2network.masterIf` | N2 network MACVLAN master interface. | `eth0` |
 | `global.n2network.subnetIP` | N2 network subnet IP address. | `10.100.50.248` |
@@ -146,6 +147,7 @@ Please check this [link](https://helm.sh/docs/chart_template_guide/subcharts_and
 ### N3 Network parameters
 | Parameter | Description | Default value |
 | --- | --- | --- |
+| `global.n3network.enabled` | If `true` then N3-related Network Attachment Definitions resources will be created. | `true` |
 | `global.n3network.name` | N3 network name. | `n3network` |
 | `global.n3network.masterIf` | N3 network MACVLAN master interface. | `eth0` |
 | `global.n3network.subnetIP` | N3 network subnet IP address. | `10.100.50.232` |
@@ -155,6 +157,7 @@ Please check this [link](https://helm.sh/docs/chart_template_guide/subcharts_and
 ### N4 Network parameters
 | Parameter | Description | Default value |
 | --- | --- | --- |
+| `global.n4network.enabled` | If `true` then N4-related Network Attachment Definitions resources will be created. | `true` |
 | `global.n4network.name` | N4 network name. | `n4network` |
 | `global.n4network.masterIf` | N4 network MACVLAN master interface. | `eth0` |
 | `global.n4network.subnetIP` | N4 network subnet IP address. | `10.100.50.240` |
@@ -164,6 +167,7 @@ Please check this [link](https://helm.sh/docs/chart_template_guide/subcharts_and
 ### N6 Network parameters
 | Parameter | Description | Default value |
 | --- | --- | --- |
+| `global.n6network.enabled` | If `true` then N6-related Network Attachment Definitions resources will be created. | `true` |
 | `global.n6network.name` | N6 network name. | `n6network` |
 | `global.n6network.masterIf` | N6 network MACVLAN master interface. The IP address of this interface must be in the N6 network subnet IP rang. | `eth1` |
 | `global.n6network.subnetIP` | N6 network subnet IP address (The IP address of the Data Network. | `10.100.100.0` |
@@ -176,6 +180,7 @@ These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
 | Parameter | Description | Default value |
 | --- | --- | --- |
 These parameters if `global.userPlaneArchitecture` is set to `ulcl`.
+| `global.n9network.enabled` | If `true` then N9-related Network Attachment Definitions resources will be created. | `true` |
 | `global.n9network.name` | N9 network name. | `n9network` |
 | `global.n9network.masterIf` | N9 network MACVLAN master interface. The IP address of this interface must be in the N9 network subnet IP rang. | `eth0` |
 | `global.n9network.subnetIP` | N9 network subnet IP address (The IP address of the Data Network. | `10.100.50.224` |

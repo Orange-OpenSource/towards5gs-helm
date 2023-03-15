@@ -10,33 +10,41 @@
 # Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
-{{- if $.Values.isPfcpNeeded }}
+{{- if and $.Values.isNgapNeeded $.Values.global.n2network.enabled}}
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-  name: {{ .Values.global.n4network.name }}-{{ .Values.smf.name }}
+  name: {{ .Values.global.n2network.name }}-{{ include "free5gc-amf.fullname" $ }}
 spec:
   config: '{
       "cniVersion": "0.3.1",
       "plugins": [
         {
-          "type": "macvlan",
+          "type": {{ .Values.global.n2network.type | quote }},
           "capabilities": { "ips": true },
-          "master": {{ .Values.global.n4network.masterIf | quote }},
+          "master": {{ .Values.global.n2network.masterIf | quote }},
+{{- if eq .Values.global.n2network.type "macvlan" }}
           "mode": "bridge",
+{{- end }}
+{{- if eq .Values.global.n2network.type "ipvlan" }}
+          "mode": "l2",
+{{- end }}
           "ipam": {
             "type": "static",
             "routes": [
               {
                 "dst": "0.0.0.0/0",
-                "gw": "{{ .Values.global.n4network.gatewayIP }}"
+                "gw": "{{ .Values.global.n2network.gatewayIP }}"
               }
-            ] 
+            ]
           }
-        }, {
+        }
+{{- if eq .Values.global.n2network.type "macvlan" -}}
+        , {
           "capabilities": { "mac": true },
           "type": "tuning"
         }
+{{- end }}
       ]
     }'
 {{- end }}

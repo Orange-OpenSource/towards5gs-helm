@@ -54,13 +54,9 @@ udr:
     name: towards5gs/free5gc-udr
     pullPolicy: Always
   service:
-    name: udr-nudr
     type: ClusterIP
     port: 80
-  configmap:
-    name: udr-configmap
   volume:
-    name: udr-volume
     mount: /free5gc/config/
   podAnnotations: {}
     # additional annotations

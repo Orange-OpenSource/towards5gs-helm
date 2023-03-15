@@ -37,14 +37,6 @@ initcontainers:
     image: busybox
     tag: "1.32.0"
 
-# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it.
-mongodb:
-  service:
-    name: mongodb
-    type: ClusterIP
-    port: 27017
-    nodePort: "30017"
-
 ausf:
   name: ausf
   replicaCount: 1
@@ -52,13 +44,9 @@ ausf:
     name: towards5gs/free5gc-ausf
     pullPolicy: Always
   service:
-    name: ausf-nausf
     type: ClusterIP
     port: 80
-  configmap:
-    name: ausf-configmap
   volume:
-    name: ausf-volume
     mount: /free5gc/config/
   podAnnotations: {}
     # additional annotations

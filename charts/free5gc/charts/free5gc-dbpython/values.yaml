@@ -1,0 +1,62 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for free5GC dbpython chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+global:
+  projectName: free5gc
+
+initcontainers:
+  curl:
+    registry: towards5gs
+    image: initcurl
+    tag: "1.0.0"
+  busybox:
+    image: busybox
+    tag: "1.32.0"
+
+# This section can be used to override the default values in the MongoDB
+mongodb:
+  service:
+    name: mongodb
+    type: ClusterIP
+    port: 27017
+    nodePort: "30017"
+
+dbpython:
+  name: dbpython
+  replicaCount: 1
+  image:
+    name: towards5gs/free5gc-dbpython
+    pullPolicy: Always
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  readinessProbe: {}
+  livenessProbe: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}

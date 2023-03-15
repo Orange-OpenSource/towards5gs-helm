@@ -61,6 +61,7 @@ These parameters apply only if `global.amf.service.ngap.enabled` is set to `fals
 | Parameter | Description | Default value |
 | --- | --- | --- |
 | `global.amf.n2if.ipAddress` | The IP address of the AMF’s N2 interface. | `10.100.50.249` |
+| `global.n2network.enabled` | If `true` then N2-related Network Attachment Definitions resources will be created. | `true` |
 | `global.n2network.name` | N2 network name. | `n2network` |
 | `global.n2network.masterIf` | N2 network MACVLAN master interface. | `eth0` |
 | `global.n2network.subnetIP` | N2 network subnet IP address. | `10.100.50.248` |
@@ -83,11 +84,7 @@ These parameters apply only if `global.amf.service.ngap.enabled` is set to `fals
 | `amf.replicaCount` | The number of AMF replicas. | `1` |
 | `amf.image.name` | The AMF Docker image name. | `towards5gs/free5gc-amf` |
 | `amf.image.tag` | The AMF Docker image tag. | `defaults to chart AppVersion` |
-| `amf.service.name` | The name of the service used to expose the AMF SBI interface. | `amf-namf` |
 | `amf.service.port` | The AMF SBI port number. | `80` |
-| `amf.configmap.name` | The name of the configmap to be used to import the configuration to the AMF POD. | `amf-configmap` |
-| `amf.volume.name` | The name of the volume to be mounted to the AMF POD. | `amf-volume` |
-| `amf.volume.mount` | The name of the volume to be mounted to the AMF POD. | `amf-volume` |
 | `amf.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/`|
 | `amf.podAnnotations` | Pod annotations. | `{}`|
 | `amf.imagePullSecrets` | Image pull secrets. | `[]`|
@@ -106,5 +103,3 @@ These parameters apply only if `global.amf.service.ngap.enabled` is set to `fals
 
 ## Reference
  - https://github.com/free5gc/free5gc
-
-

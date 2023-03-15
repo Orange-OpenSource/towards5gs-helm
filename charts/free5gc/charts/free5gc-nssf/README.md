@@ -60,11 +60,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `nssf.replicaCount` | The number of NSSF replicas. | `1` |
 | `nssf.image.name` | The NSSF Docker image name. | `towards5gs/free5gc-nssf` |
 | `nssf.image.tag` | The NSSF Docker image tag. | `defaults to chart AppVersion` |
-| `nssf.service.name` | The name of the service used to expose the NSSF SBI interface. | `nssf-namf` |
 | `nssf.service.port` | The NSSF SBI port number. | `80` |
-| `nssf.configmap.name` | The name of the configmap to be used to import the configuration to the NSSF POD. | `nssf-configmap` |
-| `nssf.volume.name` | The name of the volume to be mounted to the NSSF POD. | `nssf-volume` |
-| `nssf.volume.mount` | The name of the volume to be mounted to the NSSF POD. | `nssf-volume` |
 | `nssf.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/`|
 | `nssf.podAnnotations` | Pod annotations. | `{}`|
 | `nssf.imagePullSecrets` | Image pull secrets. | `[]`|
@@ -83,5 +79,3 @@ This chart allows you to customize its installation. The table below shows the p
 
 ## Reference
  - https://github.com/free5gc/free5gc
-
-

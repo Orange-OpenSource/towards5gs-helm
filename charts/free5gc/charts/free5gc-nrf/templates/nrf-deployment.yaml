@@ -63,14 +63,14 @@ spec:
         - containerPort: {{ $.Values.global.nrf.service.port }}
         command: ["./nrf"]
         args: ["-c", "../config/nrfcfg.yaml"]
-        env: 
+        env:
           - name: DB_URI
             value: mongodb://{{ $.Values.mongodb.service.name }}/free5gc
           - name: GIN_MODE
             value: release
         volumeMounts:
         - mountPath: {{ .volume.mount }}
-          name: {{ .volume.name }}
+          name: {{ include "free5gc-nrf.fullname" $ }}-volume
         resources:
             {{- toYaml .resources | nindent 12 }}
         readinessProbe:
@@ -101,9 +101,9 @@ spec:
         {{- toYaml .tolerations | nindent 8 }}
 
       volumes:
-      - name: {{ .volume.name }}
+      - name: {{ include "free5gc-nrf.fullname" $ }}-volume
         projected:
           sources:
           - configMap:
-              name: {{ .configmap.name }}
+              name: {{ include "free5gc-nrf.fullname" $ }}-configmap
 {{- end }}
