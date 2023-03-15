@@ -31,3 +31,7 @@ If you want to run connectivity tests manually, follow:
   kubectl --namespace {{ $.Release.Namespace }} exec -it $POD_NAME -- curl --interface uesimtun0 www.google.com
   kubectl --namespace {{ $.Release.Namespace }} exec -it $POD_NAME -- traceroute -i uesimtun0 www.google.com
 
+Release notes (What's changed in this version):
+- add the release notes
+- add an initContainer to wait for the AMF to be ready
+- enhance the handling of k8s NGAP service and network parameters
