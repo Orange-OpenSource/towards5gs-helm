@@ -21,6 +21,7 @@ global:
   uesubnet: 10.1.0.0/16
 #Global network parametes
   n4network:
+    enabled: true
     name: n4network
     type: ipvlan
     masterIf: eth0
@@ -29,6 +30,7 @@ global:
     gatewayIP: 10.100.50.246
     excludeIP: 10.100.50.246
   n3network:
+    enabled: true
     name: n3network
     type: ipvlan
     masterIf: eth0
@@ -37,6 +39,7 @@ global:
     gatewayIP: 10.100.50.238
     excludeIP: 10.100.50.238
   n6network:
+    enabled: true
     name: n6network
     type: ipvlan
     masterIf: eth1
@@ -45,6 +48,7 @@ global:
     gatewayIP: 10.100.100.1
     excludeIP: 10.100.100.254
   n9network:
+    enabled: true
     name: n9network
     type: ipvlan
     masterIf: eth0
@@ -59,10 +63,7 @@ upf:
   image:
     name: towards5gs/free5gc-upf
     pullPolicy: Always
-  configmap:
-    name: upf-configmap
   volume:
-    name: upf-volume
     mount: /free5gc/config/
 
   # network paramters
@@ -123,10 +124,7 @@ upf1:
   image:
     name: towards5gs/free5gc-upf
     pullPolicy: Always
-  configmap:
-    name: upf1-configmap
   volume:
-    name: upf1-volume
     mount: /free5gc/config/
 
   # network paramters
@@ -186,10 +184,7 @@ upf2:
   image:
     name: towards5gs/free5gc-upf
     pullPolicy: Always
-  configmap:
-    name: upf2-configmap
   volume:
-    name: upf2-volume
     mount: /free5gc/config/
 
   # network paramters
@@ -249,10 +244,7 @@ upfb:
   image:
     name: towards5gs/free5gc-upf
     pullPolicy: Always
-  configmap:
-    name: upfb-configmap
   volume:
-    name: upfb-volume
     mount: /free5gc/config/
 
   # network paramters

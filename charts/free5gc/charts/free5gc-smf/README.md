@@ -54,6 +54,7 @@ This chart allows you to customize its installation. The table below shows the p
 | Parameter | Description | Default value |
 | --- | --- | --- |
 | `global.smf.n4if.ipAddress` | The IP address of the SMF’s N4 interface. | `10.100.50.244` |
+| `global.n4network.enabled` | If `true` then N4-related Network Attachment Definitions resources will be created. | `true` |
 | `global.n4network.name` | N4 network name. | `n4network` |
 | `global.n4network.masterIf` | N4 network MACVLAN master interface. | `eth0` |
 | `global.n4network.subnetIP` | N4 network subnet IP address. | `10.100.50.240` |
@@ -76,11 +77,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `smf.replicaCount` | The number of SMF replicas. | `1` |
 | `smf.image.name` | The SMF Docker image name. | `towards5gs/free5gc-smf` |
 | `smf.image.tag` | The SMF Docker image tag. | `defaults to chart AppVersion` |
-| `smf.service.name` | The name of the service used to expose the SMF SBI interface. | `smf-namf` |
 | `smf.service.port` | The SMF SBI port number. | `80` |
-| `smf.configmap.name` | The name of the configmap to be used to import the configuration to the SMF POD. | `smf-configmap` |
-| `smf.volume.name` | The name of the volume to be mounted to the SMF POD. | `smf-volume` |
-| `smf.volume.mount` | The name of the volume to be mounted to the SMF POD. | `smf-volume` |
 | `smf.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/`|
 | `smf.podAnnotations` | Pod annotations. | `{}`|
 | `smf.imagePullSecrets` | Image pull secrets. | `[]`|
@@ -100,5 +97,3 @@ This chart allows you to customize its installation. The table below shows the p
 
 ## Reference
  - https://github.com/free5gc/free5gc
-
-

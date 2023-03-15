@@ -60,11 +60,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `udm.replicaCount` | The number of UDM replicas. | `1` |
 | `udm.image.name` | The UDM Docker image name. | `towards5gs/free5gc-udm` |
 | `udm.image.tag` | The UDM Docker image tag. | `defaults to chart AppVersion` |
-| `udm.service.name` | The name of the service used to expose the UDM SBI interface. | `udm-namf` |
 | `udm.service.port` | The UDM SBI port number. | `80` |
-| `udm.configmap.name` | The name of the configmap to be used to import the configuration to the UDM POD. | `udm-configmap` |
-| `udm.volume.name` | The name of the volume to be mounted to the UDM POD. | `udm-volume` |
-| `udm.volume.mount` | The name of the volume to be mounted to the UDM POD. | `udm-volume` |
 | `udm.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/`|
 | `udm.podAnnotations` | Pod annotations. | `{}`|
 | `udm.imagePullSecrets` | Image pull secrets. | `[]`|
@@ -83,5 +79,3 @@ This chart allows you to customize its installation. The table below shows the p
 
 ## Reference
  - https://github.com/free5gc/free5gc
-
-

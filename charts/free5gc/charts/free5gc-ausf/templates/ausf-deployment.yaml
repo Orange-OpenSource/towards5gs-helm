@@ -51,7 +51,7 @@ spec:
         - name: DEPENDENCIES
           value: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
         command: ['sh', '-c', 'set -x; for dependency in $DEPENDENCIES; do while [ $(curl --insecure --connect-timeout 1 -s -o /dev/null -w "%{http_code}" $dependency) -ne 200 ]; do echo waiting for dependencies; sleep 1; done; done;']
-      
+
       containers:
       - name: {{ .name }}
         image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}
@@ -67,7 +67,7 @@ spec:
             value: release
         volumeMounts:
         - mountPath: {{ .volume.mount }}
-          name: {{ .volume.name }}
+          name: {{ include "free5gc-ausf.fullname" $ }}-volume
         resources:
             {{- toYaml .resources | nindent 12 }}
       dnsPolicy: ClusterFirst
@@ -80,9 +80,9 @@ spec:
         {{- toYaml .tolerations | nindent 8 }}
 
       volumes:
-      - name: {{ .volume.name }}
+      - name: {{ include "free5gc-ausf.fullname" $ }}-volume
         projected:
           sources:
           - configMap:
-              name: {{ .configmap.name }}
+              name: {{ include "free5gc-ausf.fullname" $ }}-configmap
 {{- end }}

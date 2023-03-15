@@ -68,7 +68,7 @@ spec:
             value: release
         volumeMounts:
         - mountPath: {{ .volume.mount }}
-          name: {{ .volume.name }}
+          name: {{ include "free5gc-pcf.fullname" $ }}-volume
         resources:
             {{- toYaml .resources | nindent 12 }}
       dnsPolicy: ClusterFirst
@@ -81,9 +81,9 @@ spec:
         {{- toYaml .tolerations | nindent 8 }}
 
       volumes:
-      - name: {{ .volume.name }}
+      - name: {{ include "free5gc-pcf.fullname" $ }}-volume
         projected:
           sources:
           - configMap:
-              name: {{ .configmap.name }}
+              name: {{ include "free5gc-pcf.fullname" $ }}-configmap
 {{- end }}

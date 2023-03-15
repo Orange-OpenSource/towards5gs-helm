@@ -14,7 +14,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .configmap.name }}
+  name: {{ include "free5gc-nrf.fullname" $ }}-configmap
   labels:
     app: {{ $.Values.global.projectName }}
 data:
@@ -22,7 +22,7 @@ data:
     info:
       version: 1.0.1
       description: NRF initial local configuration
-    
+
     configuration:
       MongoDBName: free5gc
       MongoDBUrl: mongodb://{{ $.Values.mongodb.service.name }}:{{ $.Values.mongodb.service.port }}
@@ -45,4 +45,3 @@ data:
       {{- toYaml .configuration.logger | nindent 6 }}
 
 {{- end }}
-

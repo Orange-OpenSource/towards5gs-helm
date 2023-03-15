@@ -63,9 +63,6 @@ This chart allows you to customize its installation. The table below shows the p
 | `nrf.replicaCount` | The number of NRF replicas. | `1` |
 | `nrf.image.name` | The NRF Docker image name. | `towards5gs/free5gc-nrf` |
 | `nrf.image.tag` | The NRF Docker image tag. | `defaults to chart AppVersion` |
-| `nrf.configmap.name` | The name of the configmap to be used to import the configuration to the NRF POD. | `nrf-configmap` |
-| `nrf.volume.name` | The name of the volume to be mounted to the NRF POD. | `nrf-volume` |
-| `nrf.volume.mount` | The name of the volume to be mounted to the NRF POD. | `nrf-volume` |
 | `nrf.volume.mount` | The path to the folder where configuration files should be mounted. | `/free5gc/config/`|
 | `nrf.podAnnotations` | Pod annotations. | `{}`|
 | `nrf.imagePullSecrets` | Image pull secrets. | `[]`|
@@ -84,5 +81,3 @@ This chart allows you to customize its installation. The table below shows the p
 
 ## Reference
  - https://github.com/free5gc/free5gc
-
-

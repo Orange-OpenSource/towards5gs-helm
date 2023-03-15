@@ -73,7 +73,7 @@ spec:
         command: ["{{ .volume.mount }}/wrapper.sh"]
         volumeMounts:
         - mountPath: {{ .volume.mount }}
-          name: {{ .volume.name }}
+          name: {{ include "free5gc-upf.fullname" $ }}-{{ .name }}-volume
         resources:
             {{- toYaml .resources | nindent 12 }}
       dnsPolicy: ClusterFirst
@@ -86,11 +86,11 @@ spec:
         {{- toYaml .tolerations | nindent 8 }}
 
       volumes:
-      - name: {{ .volume.name }}
+      - name: {{ include "free5gc-upf.fullname" $ }}-{{ .name }}-volume
         projected:
           sources:
           - configMap:
-              name: {{ .configmap.name }}
+              name: {{ include "free5gc-upf.fullname" $ }}-{{ .name }}-configmap
               items:
               - key: upfcfg.yaml
                 path: upfcfg.yaml

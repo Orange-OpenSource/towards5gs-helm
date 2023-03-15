@@ -52,13 +52,9 @@ pcf:
     name: towards5gs/free5gc-pcf
     pullPolicy: Always
   service:
-    name: pcf-npcf
     type: ClusterIP
     port: 80
-  configmap:
-    name: pcf-configmap
   volume:
-    name: pcf-volume
     mount: /free5gc/config/
   podAnnotations: {}
     # additional annotations

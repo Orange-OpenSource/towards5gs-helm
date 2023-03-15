@@ -32,6 +32,7 @@ global:
     n4if:
       ipAddress: 10.100.50.244
   n4network:
+    enabled: true
     name: n4network
     type: ipvlan
     masterIf: eth0
@@ -49,15 +50,8 @@ initcontainers:
     image: busybox
     tag: "1.32.0"
 
-# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the free5gcControlplane chart since control plane NFs rely on it.
-mongodb:
-  service:
-    name: mongodb
-    type: ClusterIP
-    port: 27017
-    nodePort: "30017"
-
 isPfcpNeeded: true
+
 smf:
   name: smf
   replicaCount: 1
@@ -65,13 +59,9 @@ smf:
     name: towards5gs/free5gc-smf
     pullPolicy: Always
   service:
-    name: smf-nsmf
     type: ClusterIP
     port: 80
-  configmap:
-    name: smf-configmap
   volume:
-    name: smf-volume
     mount: /free5gc/config/
   podAnnotations: {}
     # additional annotations

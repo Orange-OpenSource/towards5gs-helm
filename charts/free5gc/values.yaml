@@ -41,6 +41,7 @@ global:
       ipAddress: 10.100.50.244
   #Global network parametes
   n2network:
+    enabled: true
     name: n2network
     type: ipvlan
     masterIf: eth0
@@ -49,6 +50,7 @@ global:
     gatewayIP: 10.100.50.254
     excludeIP: 10.100.50.254
   n3network:
+    enabled: true
     name: n3network
     type: ipvlan
     masterIf: eth0
@@ -57,6 +59,7 @@ global:
     gatewayIP: 10.100.50.238
     excludeIP: 10.100.50.238
   n4network:
+    enabled: true
     name: n4network
     type: ipvlan
     masterIf: eth0
@@ -65,6 +68,7 @@ global:
     gatewayIP: 10.100.50.246
     excludeIP: 10.100.50.246
   n6network:
+    enabled: true
     name: n6network
     type: ipvlan
     masterIf: eth1
@@ -73,6 +77,7 @@ global:
     gatewayIP: 10.100.100.1
     excludeIP: 10.100.100.254
   n9network:
+    enabled: true
     name: n9network
     type: ipvlan
     masterIf: eth0

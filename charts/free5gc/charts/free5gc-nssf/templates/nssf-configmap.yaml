@@ -14,7 +14,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .configmap.name }}
+  name: {{ include "free5gc-nssf.fullname" $ }}-configmap
   labels:
     app: {{ $.Values.global.projectName }}
 data:
@@ -35,9 +35,9 @@ data:
         tls:
           key: config/TLS/nssf.key
           pem: config/TLS/nssf.pem
-      
+
       nrfUri: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
-      
+
       nsiList:
         - snssai:
             sst: 1
