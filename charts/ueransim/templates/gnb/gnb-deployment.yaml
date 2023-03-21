@@ -58,13 +58,10 @@ spec:
         {{- toYaml .podSecurityContext | nindent 8 }}
       initContainers:
       - name: wait-amf
-        {{- with $.Values.initcontainers.busybox }}
+        {{- with $.Values.initcontainers.sctp_test }}
         image: {{ .image }}:{{ .tag }}
         {{- end }}
-        env:
-        - name: DEPENDENCIES
-          value: {{ .amf.n2if.ipAddress }}:{{ .amf.n2if.port }}
-        command: ["sh", "-c", "until nc -z $DEPENDENCIES; do echo waiting for the MongoDB; sleep 2; done;"]
+        command: ["sh", "-c", "until sctp_test -s -H 0.0.0.0 -P 25000 -h {{ .amf.n2if.ipAddress }} -p {{ .amf.n2if.port }}; do echo waiting for the AMF; sleep 2; done;"]
       containers:
       - image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}
         name: {{ .name }}

@@ -39,9 +39,9 @@ global:
 projectName: ueransim
 
 initcontainers:
-  busybox:
-    image: busybox
-    tag: "1.32.0"
+  sctp_test:
+    image: towards5gs/sctp_test
+    tag: latest
 
 gnb:
   enabled: true
