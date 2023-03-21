@@ -54,10 +54,10 @@ kubectl -n <namespace> exec -it <ue-pod-name> -- bash
 Whithin the POD:
  - Verify that the TUN interface has been created. Its name should be `uesimtun0`.
 ```console
-ip address
+ip address 
 ...
 5: uesimtun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 500
-    link/none
+    link/none 
     inet 10.1.0.1/32 scope global uesimtun0
        valid_lft forever preferred_lft forever
 ```
@@ -71,12 +71,23 @@ curl --interface uesimtun0 www.google.com
 ## Customized installation
 This chart allows you to customize its installation. The table below shows the parameters that can be modified before installing the chart or when upgrading it as well as their default values.
 
+### Global parameters
+
+| Parameter | Description | Default value |
+| --- | --- | --- |
+| `global.multiCluster` | Must be set to `true` if you are deploying the the UERANSIM in a different cluster from the one where AMF is deployed and `global.amf.service.ngap.enabled` is set to true. | `false` |
+| `global.cpClusterIP` | The IP address of one of the cluster nodes where the control plane is deployed. | `nil` |
+| `global.amf.service.ngap.name` | The name of the AMF NGAP service. | `amf-n2` |
+| `global.amf.service.ngap.type` | The type of the AMF NGAP service. | `ClusterIP` |
+| `global.amf.service.ngap.port` | The AMF NGAP port number. | `38412` |
+| `global.amf.service.ngap.nodeport` | The nodePort number to access the AMF NGAP service from outside of cluster. | `31412` |
+| `global.amf.service.ngap.protocol` | The protocol used for this service. | `SCTP` |
+| `global.gnb.n3if.ipAddress` | The IP address of the UERANSIM’s N3 interface. | `10.100.50.233` |
+
 ### N2 Network parameters
 | Parameter | Description | Default value |
 | --- | --- | --- |
-| `global.n2network.enabled` | If `true` then N2-related Network Attachment Definitions resources will be created. | `true` |
 | `global.n2network.name` | N2 network name. | `n2network` |
-| `global.n2network.type` | N2 network type. | `ipvlan` |
 | `global.n2network.masterIf` | N2 network MACVLAN master interface. | `eth0` |
 | `global.n2network.subnetIP` | N2 network subnet IP address. | `10.100.50.248` |
 | `global.n2network.cidr` | N2 network cidr. | `29` |
@@ -85,9 +96,7 @@ This chart allows you to customize its installation. The table below shows the p
 ### N3 Network parameters
 | Parameter | Description | Default value |
 | --- | --- | --- |
-| `global.n3network.enabled` | If `true` then N3-related Network Attachment Definitions resources will be created. | `true` |
 | `global.n3network.name` | N3 network name. | `n3network` |
-| `global.n3network.type` | N2 network type. | `ipvlan` |
 | `global.n3network.masterIf` | N3 network MACVLAN master interface. | `eth0` |
 | `global.n3network.subnetIP` | N3 network subnet IP address. | `10.100.50.232` |
 | `global.n3network.cidr` | N3 network cidr. | `29` |
@@ -119,7 +128,7 @@ This chart allows you to customize its installation. The table below shows the p
 | `gnb.n3if.ipAddress`| The IP address of gNB’s N3 interface. | `10.100.50.250` |
 | `gnb.amf.n2if.ipAddress` | The IP address of the AMF’s N2 interface. | `10.100.50.249` |
 | `gnb.amf.n2if.port` | AMF NGAP port number. | `10.100.50.249` |
-| `gnb.amf.service.ngap.enabled` | If `true` then a Kubernetes service will be used to access the AMF NGAP service instead of accessing directly the AMF’s N2 interface. If true then `global.n2network.enabled` must be set to `false` and `gnb.amf.n2if.ipAddress` must be set to the name of the service or IP address of a node where AMF is deployed. | `false` |
+| `gnb.amf.service.ngap.enabled` | If `true` then a Kubernetes service will be used to access the AMF NGAP service instead of accessing directly the AMF’s N2 interface. `gnb.amf.n2if.ipAddress` must be set to the name of the service or IP address of a node where AMF is deployed. | `false` |
 | `gnb.configuration` | The UERANSIM gNB [configuration](https://github.com/aligungr/UERANSIM/wiki/Configuration#gnb-configuration) in plain text. | Check [values.yaml](./values.yaml) |
 | `gnb.podAnnotations` | Pod annotations. | `{}`|
 | `gnb.imagePullSecrets` | Image pull secrets. | `[]`|
@@ -147,3 +156,4 @@ This chart allows you to customize its installation. The table below shows the p
 
 ## Reference
  - https://github.com/aligungr/UERANSIM/wiki/
+
