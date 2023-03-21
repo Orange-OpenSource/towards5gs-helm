@@ -29,7 +29,7 @@ data:
 
       sbi:
         scheme: {{ $.Values.global.sbi.scheme }}
-        registerIPv4: {{ .service.name }} # IP used to register to NRF
+        registerIPv4: {{ include "free5gc-pcf.fullname" $ }}-service # IP used to register to NRF
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ .service.port }}
         tls:
