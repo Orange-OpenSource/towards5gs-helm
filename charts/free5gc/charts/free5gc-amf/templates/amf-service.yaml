@@ -37,7 +37,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "open5gs-amf.fullname" $ }}-{{ $.Values.global.amf.service.ngap.name }}
+  name: {{ include "free5gc-amf.fullname" $ }}-{{ $.Values.global.amf.service.ngap.name }}
   labels:
     project: {{ $.Values.global.projectName }}
     nf: {{ .name }}
