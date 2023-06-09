@@ -7,7 +7,7 @@
 # the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
 # or see the "LICENSE" file for more details.
 #
-# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI, Ian Chen
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 {{- with .Values.amf }}
@@ -20,7 +20,7 @@ metadata:
 data:
   amfcfg.yaml: |
     info:
-      version: 1.0.3
+      version: 1.0.9
       description: AMF initial local configuration
 
     configuration:
@@ -33,20 +33,21 @@ data:
 {{- else }}
         - {{ $.Values.global.amf.n2if.ipAddress }}
 {{- end }}
+      ngapPort: 38412 # the SCTP port listened by NGAP
       sbi:
         scheme: {{ $.Values.global.sbi.scheme }}
         registerIPv4: {{ include "free5gc-amf.fullname" $ }}-service # IP used to register to NRF
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ .service.port }}
         tls:
-          key: config/TLS/amf.key
-          pem: config/TLS/amf.pem
+          key: cert/amf.key
+          pem: cert/amf.pem
 
       nrfUri: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
 
       {{- .configuration.configuration | nindent 6 }}
 
     logger:
-      {{- toYaml .configuration.logger | nindent 6 }}
+      {{- toYaml .configuration.logger | nindent 4 }}
 
 {{- end }}

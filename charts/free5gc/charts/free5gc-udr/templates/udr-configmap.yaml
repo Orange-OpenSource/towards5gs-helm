@@ -7,7 +7,7 @@
 # the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
 # or see the "LICENSE" file for more details.
 #
-# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI, Ian Chen
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 {{- with .Values.udr }}
@@ -20,7 +20,7 @@ metadata:
 data:
   udrcfg.yaml: |
     info:
-      version: 1.0.1
+      version: 1.0.2
       description: UDR initial local configuration
 
     configuration:
@@ -30,8 +30,8 @@ data:
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ .service.port }}
         tls:
-          key: config/TLS/udr.key
-          pem: config/TLS/udr.pem
+          key: cert/udr.key
+          pem: cert/udr.pem
 
       mongodb:
         name: free5gc

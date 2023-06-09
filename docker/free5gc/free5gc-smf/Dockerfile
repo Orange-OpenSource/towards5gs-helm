@@ -6,12 +6,12 @@ LABEL maintainer="raoufkh <khichane.araouf@gmail.com>"
 ENV GIN_MODE="release"
 
 WORKDIR /free5gc
-RUN mkdir -p log/ config/TLS/ smf/
+RUN mkdir -p log/ cert/ smf/
 
 # Copy executable and default certs
 COPY --from=builder /free5gc/smf ./smf
-COPY --from=builder /free5gc/config/TLS/smf.pem ./config/TLS/
-COPY --from=builder /free5gc/config/TLS/smf.key ./config/TLS/
+COPY --from=builder /free5gc/cert/smf.pem ./cert/
+COPY --from=builder /free5gc/cert/smf.key ./cert/
 COPY --from=builder /free5gc/config/smfcfg.yaml ./config/
 COPY --from=builder /free5gc/config/uerouting.yaml ./config/
 

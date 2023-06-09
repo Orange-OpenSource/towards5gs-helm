@@ -6,12 +6,12 @@ LABEL maintainer="raoufkh <khichane.araouf@gmail.com>"
 ENV GIN_MODE="release"
 
 WORKDIR /free5gc
-RUN mkdir -p config/ log/ config/TLS/ pcf/
+RUN mkdir -p config/ log/ cert/ pcf/
 
 # Copy executable and default certs
 COPY --from=builder /free5gc/pcf ./pcf
-COPY --from=builder /free5gc/config/TLS/pcf.pem ./config/TLS/
-COPY --from=builder /free5gc/config/TLS/pcf.key ./config/TLS/
+COPY --from=builder /free5gc/cert/pcf.pem ./cert/
+COPY --from=builder /free5gc/cert/pcf.key ./cert/
 COPY --from=builder /free5gc/config/pcfcfg.yaml ./config/
 
 VOLUME [ "/free5gc/config" ]

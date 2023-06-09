@@ -7,7 +7,7 @@
 # the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
 # or see the "LICENSE" file for more details.
 #
-# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI, Ian Chen
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 {{- with .Values.nrf }}
@@ -20,7 +20,7 @@ metadata:
 data:
   nrfcfg.yaml: |
     info:
-      version: 1.0.1
+      version: 1.0.2
       description: NRF initial local configuration
 
     configuration:
@@ -36,8 +36,8 @@ data:
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ $.Values.global.nrf.service.port }}
         tls:
-          key: config/TLS/nrf.key
-          pem: config/TLS/nrf.pem
+          key: cert/nrf.key
+          pem: cert/nrf.pem
 
       {{- .configuration.configuration | nindent 6 }}
 

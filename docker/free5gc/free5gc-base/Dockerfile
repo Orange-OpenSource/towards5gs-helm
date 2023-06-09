@@ -12,7 +12,7 @@ RUN apt-get -y install wget git sudo
 
 # Get Free5GC source code
 RUN cd $GOPATH/src \
-    && git clone --recursive -b v3.2.1 -j `nproc` https://github.com/free5gc/free5gc.git
+    && git clone --recursive -b v3.3.0 -j `nproc` https://github.com/free5gc/free5gc.git
 
 # Build all NFs
 RUN cd $GOPATH/src/free5gc \
@@ -38,7 +38,7 @@ FROM alpine
 
 WORKDIR /free5gc
 
-RUN mkdir -p config/ config/TLS/ public
+RUN mkdir -p config/ cert/ public
 
 # Copy executables
 COPY --from=builder /go/src/free5gc/bin/* ./
@@ -49,4 +49,4 @@ COPY --from=builder /go/src/free5gc/webconsole/public ./public
 
 # Copy certificates and config files
 COPY --from=builder /go/src/free5gc/config/* ./config/
-COPY --from=builder /go/src/free5gc/config/TLS/* ./config/TLS/
+COPY --from=builder /go/src/free5gc/cert/* ./cert/
