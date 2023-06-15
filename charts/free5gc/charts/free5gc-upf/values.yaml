@@ -63,6 +63,10 @@ upf:
   image:
     name: towards5gs/free5gc-upf
     pullPolicy: Always
+  configmap:
+    wrapperAdditionalCommands: ""
+    # wrapperAdditionalCommands: |
+    #   echo "123" > /tmp/123
   volume:
     mount: /free5gc/config/
 
@@ -124,6 +128,10 @@ upf1:
   image:
     name: towards5gs/free5gc-upf
     pullPolicy: Always
+  configmap:
+    wrapperAdditionalCommands: ""
+    # wrapperAdditionalCommands: |
+    #   echo "123" > /tmp/123
   volume:
     mount: /free5gc/config/
 
@@ -184,6 +192,10 @@ upf2:
   image:
     name: towards5gs/free5gc-upf
     pullPolicy: Always
+  configmap:
+    wrapperAdditionalCommands: ""
+    # wrapperAdditionalCommands: |
+    #   echo "123" > /tmp/123
   volume:
     mount: /free5gc/config/
 
@@ -244,6 +256,10 @@ upfb:
   image:
     name: towards5gs/free5gc-upf
     pullPolicy: Always
+  configmap:
+    wrapperAdditionalCommands: ""
+    # wrapperAdditionalCommands: |
+    #   echo "123" > /tmp/123
   volume:
     mount: /free5gc/config/
 
