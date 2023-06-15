@@ -1,4 +1,4 @@
-# Setup free5gc on one single one and test with UERANSIM
+# Setup free5gc on one single cluster and test with UERANSIM
 
 This guideline shows how to deploy the free5gc on a Kubernetes cluster and then test it with UERANSIM. 
 
