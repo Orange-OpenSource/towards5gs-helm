@@ -33,7 +33,7 @@ data:
 {{- else }}
         - {{ $.Values.global.amf.n2if.ipAddress }}
 {{- end }}
-      ngapPort: 38412 # the SCTP port listened by NGAP
+      ngapPort: {{ $.Values.global.amf.service.ngap.port }} # the SCTP port listened by NGAP
       sbi:
         scheme: {{ $.Values.global.sbi.scheme }}
         registerIPv4: {{ include "free5gc-amf.fullname" $ }}-service # IP used to register to NRF

@@ -178,6 +178,16 @@ smf:
             B: UPF
       locality: area1 # Name of the location where a set of AMF, SMF and UPFs are located
 
+      t3591:
+        enable: true     # true or false
+        expireTime: 16s   # default is 6 seconds
+        maxRetryTimes: 3 # the max number of retransmission
+      # retransmission timer for pdu session release command
+      t3592:
+        enable: true     # true or false
+        expireTime: 16s   # default is 6 seconds
+        maxRetryTimes: 3 # the max number of retransmission
+
     ueRoutingInfo: |-
       UE1: # Group Name
         members:
