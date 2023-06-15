@@ -7,7 +7,7 @@
 # the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
 # or see the "LICENSE" file for more details.
 #
-# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI, Ian Chen
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 {{- with .Values.smf }}
@@ -20,7 +20,7 @@ metadata:
 data:
   smfcfg.yaml: |
     info:
-      version: 1.0.2
+      version: 1.0.7
       description: SMF initial local configuration
 
     configuration:
@@ -33,13 +33,23 @@ data:
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ .service.port }}
         tls:
-          key: config/TLS/smf.key
-          pem: config/TLS/smf.pem
-
+          key: cert/smf.key
+          pem: cert/smf.pem
+      t3591:
+        enable: true     # true or false
+        expireTime: 16s   # default is 6 seconds
+        maxRetryTimes: 3 # the max number of retransmission
+      # retransmission timer for pdu session release command
+      t3592:
+        enable: true     # true or false
+        expireTime: 16s   # default is 6 seconds
+        maxRetryTimes: 3 # the max number of retransmission
       nrfUri: {{ $.Values.global.sbi.scheme }}://{{ $.Values.global.nrf.service.name }}:{{ $.Values.global.nrf.service.port }}
 
       pfcp:
-        addr: {{ $.Values.global.smf.n4if.ipAddress }}
+        nodeID: {{ $.Values.global.smf.n4if.ipAddress }}
+        listenAddr: {{ $.Values.global.smf.n4if.ipAddress }}
+        externalAddr: {{ $.Values.global.smf.n4if.ipAddress }}
 
       {{- .configuration.configuration | nindent 6 }}
 
@@ -49,7 +59,7 @@ data:
 
   uerouting.yaml: |
     info:
-      version: 1.0.1
+      version: 1.0.7
       description: Routing information for UE
     ueRoutingInfo:
       {{- .configuration.ueRoutingInfo | nindent 6 }}

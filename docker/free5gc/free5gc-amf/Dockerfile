@@ -10,8 +10,8 @@ RUN mkdir -p log/ config/ TLS/ amf/
 
 # Copy executable and default certs/configs
 COPY --from=builder /free5gc/amf ./amf
-COPY --from=builder /free5gc/config/TLS/amf.pem ./config/TLS/
-COPY --from=builder /free5gc/config/TLS/amf.key ./config/TLS/
+COPY --from=builder /free5gc/cert/amf.pem ./cert/
+COPY --from=builder /free5gc/cert/amf.key ./cert/
 COPY --from=builder /free5gc/config/amfcfg.yaml ./config/
 
 VOLUME [ "/free5gc/config" ]

@@ -7,7 +7,7 @@
 # the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
 # or see the "LICENSE" file for more details.
 #
-# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI, Ian Chen
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # Default values for free5gcControlPlane chart.
@@ -120,6 +120,7 @@ smf:
             - dnn: internet # Data Network Name
               dns: # the IP address of DNS
                 ipv4: 8.8.8.8
+                ipv6: 2001:4860:4860::8888
         - sNssai:
             sst: 1
             sd: 112233
@@ -127,6 +128,7 @@ smf:
             - dnn: internet # Data Network Name
               dns: # the IP address of DNS
                 ipv4: 8.8.8.8
+                ipv6: 2001:4860:4860::8888
         - sNssai:
             sst: 2
             sd: 112234
@@ -134,9 +136,10 @@ smf:
             - dnn: internet
               dns:
                 ipv4: 8.8.8.8
+                ipv6: 2001:4860:4860::8888
       plmnList: # the list of PLMN IDs that this SMF belongs to (optional, remove this key when unnecessary)
-        - mcc: "208" # Mobile Country Code (3 digits string, digit: 0~9)
-          mnc: "93" # Mobile Network Code (2 or 3 digits string, digit: 0~9)
+        - mcc: 208 # Mobile Country Code (3 digits string, digit: 0~9)
+          mnc: 93 # Mobile Network Code (2 or 3 digits string, digit: 0~9)
       userplaneInformation: # list of userplane information
         upNodes: # information of userplane node (AN or UPF)
           gNB1: # the name of the node
@@ -144,6 +147,7 @@ smf:
           UPF:  # the name of the node
             type: UPF # the type of the node (AN or UPF)
             nodeID: 10.100.50.241 # the IP/FQDN of N4 interface on this UPF (PFCP)
+            addr: 10.100.50.241 # the IP/FQDN of N4 interface on this UPF (PFCP)
             sNssaiUpfInfos: # S-NSSAI information list for this UPF
                   - sNssai: # S-NSSAI (Single Network Slice Selection Assistance Information)
                       sst: 1 # Slice/Service Type (uinteger, range: 0~255)
@@ -152,6 +156,8 @@ smf:
                       - dnn: internet
                         pools:
                           - cidr: 10.1.0.0/17
+                        staticPools:
+                          - cidr: 10.1.64.0/24
                   - sNssai: # S-NSSAI (Single Network Slice Selection Assistance Information)
                       sst: 1 # Slice/Service Type (uinteger, range: 0~255)
                       sd: 112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
@@ -159,11 +165,14 @@ smf:
                       - dnn: internet
                         pools:
                           - cidr: 10.1.128.0/17
+                        staticPools:
+                          - cidr: 10.1.192.0/24
             interfaces: # Interface list for this UPF
                   - interfaceType: N3 # the type of the interface (N3 or N9)
                     endpoints: # the IP address of this N3/N9 interface on this UPF
                       - 10.100.50.233
-                    networkInstance: internet # Data Network Name (DNN)
+                    networkInstance:
+                      - internet # Data Network Name (DNN)
         links: # the topology graph of userplane, A and B represent the two nodes of each link
           - A: gNB1
             B: UPF
@@ -202,19 +211,8 @@ smf:
             # The UPF's name should be consistent with smfcfg.yaml
             path: [BranchingUPF, AnchorUPF2]
 
-    logger:
-      SMF:
-        debugLevel: info
-        ReportCaller: false
-      NAS:
-        debugLevel: info
-        ReportCaller: false
-      NGAP:
-        debugLevel: info
-        ReportCaller: false
-      Aper:
-        debugLevel: info
-        ReportCaller: false
-      PFCP:
-        debugLevel: info
-        ReportCaller: false
+    logger: |-
+      logger: # log output setting
+        enable: true # true or false
+        level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+        reportCaller: false # enable the caller report or not, value: true or false

@@ -7,7 +7,7 @@
 # the text of which is available at todo
 # or see the "LICENSE" file for more details.
 #
-# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI, Ian Chen
 # Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
 #
 # Default values for free5gcControlPlane chart.
@@ -109,7 +109,8 @@ webui:
     # the kind of log output
     # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
     # ReportCaller: enable the caller report or not, value: true or false
-    logger:
-      WEBUI:
-        ReportCaller: false
-        debugLevel: info
+    logger: |-
+      logger: # log output setting
+        enable: true # true or false
+        level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+        reportCaller: false # enable the caller report or not, value: true or false
