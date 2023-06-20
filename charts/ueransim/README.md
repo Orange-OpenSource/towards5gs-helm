@@ -125,9 +125,9 @@ This chart allows you to customize its installation. The table below shows the p
 | `gnb.service.port` | The port number used for the RADIO interface. | `4997` |
 | `gnb.service.protocol` | The protocol used for the RADIO interface. | `UDP` |
 | `gnb.n2if.ipAddress`| The IP address of gNB’s N2 interface. | `10.100.50.250` |
-| `gnb.n3if.ipAddress`| The IP address of gNB’s N3 interface. | `10.100.50.250` |
+| `gnb.n3if.ipAddress`| The IP address of gNB’s N3 interface. | `10.100.50.236` |
 | `gnb.amf.n2if.ipAddress` | The IP address of the AMF’s N2 interface. | `10.100.50.249` |
-| `gnb.amf.n2if.port` | AMF NGAP port number. | `10.100.50.249` |
+| `gnb.amf.n2if.port` | AMF NGAP port number. | `38412` |
 | `gnb.amf.service.ngap.enabled` | If `true` then a Kubernetes service will be used to access the AMF NGAP service instead of accessing directly the AMF’s N2 interface. `gnb.amf.n2if.ipAddress` must be set to the name of the service or IP address of a node where AMF is deployed. | `false` |
 | `gnb.configuration` | The UERANSIM gNB [configuration](https://github.com/aligungr/UERANSIM/wiki/Configuration#gnb-configuration) in plain text. | Check [values.yaml](./values.yaml) |
 | `gnb.podAnnotations` | Pod annotations. | `{}`|
