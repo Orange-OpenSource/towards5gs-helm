@@ -110,19 +110,10 @@ udr:
     # the kind of log output
       # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
       # ReportCaller: enable the caller report or not, value: true or false
-    logger:
-      UDR:
-        debugLevel: info
-        ReportCaller: false
-      MongoDBLibrary:
-        debugLevel: info
-        ReportCaller: false
-      PathUtil:
-        debugLevel: info
-        ReportCaller: false
-      OpenApi:
-        debugLevel: info
-        ReportCaller: false
+    logger: # log output setting
+      enable: true # true or false
+      level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      reportCaller: false # enable the caller report or not, value: true or false
 
 free5gc:
   configmap:
