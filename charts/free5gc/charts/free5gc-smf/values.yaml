@@ -176,6 +176,7 @@ smf:
           - A: gNB1
             B: UPF
       locality: area1 # Name of the location where a set of AMF, SMF and UPFs are located
+
       t3591:
         enable: true     # true or false
         expireTime: 16s   # default is 6 seconds
@@ -202,6 +203,7 @@ smf:
             # the order of UPF nodes in this path. We use the UPF's name to represent each UPF node.
             # The UPF's name should be consistent with smfcfg.yaml
             path: [BranchingUPF, AnchorUPF2]
+
       UE2: # Group Name
         members:
         - imsi-208930000000004 # Subscription Permanent Identifier of the UE
