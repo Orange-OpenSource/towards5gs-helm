@@ -153,11 +153,10 @@ n3iwf:
     # the kind of log output
       # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
       # ReportCaller: enable the caller report or not, value: true or false
-    logger: |-
-      logger: # log output setting
-        enable: true # true or false
-        level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
-        reportCaller: false # enable the caller report or not, value: true or false
+    logger: # log output setting
+      enable: true # true or false
+      level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      reportCaller: false # enable the caller report or not, value: true or false
 
 # These parameters apply in case of deployinh N3IWF if a different cluster from the one where AMF is deployed and a Kubernetes service is used for AMF' N2 interface
 multiCluster: false
