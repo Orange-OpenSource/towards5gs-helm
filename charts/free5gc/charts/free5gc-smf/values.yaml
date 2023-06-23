@@ -171,7 +171,7 @@ smf:
                   - interfaceType: N3 # the type of the interface (N3 or N9)
                     endpoints: # the IP address of this N3/N9 interface on this UPF
                       - 10.100.50.233
-                    networkInstance:
+                    networkInstances:
                       - internet # Data Network Name (DNN)
         links: # the topology graph of userplane, A and B represent the two nodes of each link
           - A: gNB1
@@ -221,8 +221,7 @@ smf:
             # The UPF's name should be consistent with smfcfg.yaml
             path: [BranchingUPF, AnchorUPF2]
 
-    logger: |-
-      logger: # log output setting
-        enable: true # true or false
-        level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
-        reportCaller: false # enable the caller report or not, value: true or false
+    logger: # log output setting
+      enable: true # true or false
+      level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      reportCaller: false # enable the caller report or not, value: true or false

@@ -48,6 +48,6 @@ data:
       {{- .configuration.configuration | nindent 6 }}
 
     logger:
-      {{- toYaml .configuration.logger | nindent 4 }}
+      {{- toYaml .configuration.logger | nindent 6 }}
 
 {{- end }}
