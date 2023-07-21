@@ -39,7 +39,7 @@ data:
         registerIPv4: {{ include "free5gc-amf.fullname" $ }}-service # IP used to register to NRF
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ .service.port }}
-        tls:
+        cert:
           key: ../cert/amf.key
           pem: ../cert/amf.pem
 
