@@ -141,11 +141,11 @@ n3iwf:
 
       # Security
       # Private Key File Path
-      PrivateKey: cert/n3iwf.key
+      PrivateKey: ../cert/n3iwf.key
       # Certificate Authority (CA)
-      CertificateAuthority: cert/n3iwf.pem
+      CertificateAuthority: ../cert/n3iwf.pem
       # Certificate
-      Certificate: cert/n3iwf.pem
+      Certificate: ../cert/n3iwf.pem
 
       # IP address that will be allocated to UE in IPSec tunnel
       UEIPAddressRange: 10.0.0.0/24

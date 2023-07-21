@@ -36,8 +36,8 @@ data:
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ $.Values.global.nrf.service.port }}
         tls:
-          key: cert/nrf.key
-          pem: cert/nrf.pem
+          key: ../cert/nrf.key
+          pem: ../cert/nrf.pem
 
       {{- .configuration.configuration | nindent 6 }}
 

@@ -30,8 +30,8 @@ data:
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ .service.port }}
         tls:
-          key: cert/udr.key
-          pem: cert/udr.pem
+          key: ../cert/udr.key
+          pem: ../cert/udr.pem
 
       mongodb:
         name: free5gc
