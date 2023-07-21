@@ -32,7 +32,7 @@ data:
         registerIPv4: {{ include "free5gc-udm.fullname" $ }}-service # IP used to register to NRF
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ .service.port }}
-        cert:
+        tls:
           key: ../cert/udm.key
           pem: ../cert/udm.pem
 
