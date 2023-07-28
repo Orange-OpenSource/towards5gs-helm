@@ -18,6 +18,4 @@
   kubectl get pods --namespace {{ $.Release.Namespace }} -l "project={{ $.Values.global.projectName }}"
 
 Release notes (What's changed in this version):
-- add the release notes
-- enhance the handling of network parameters
-- remove parameters from values.yaml (service, configmap and volume names)
+- Fix TLS configuration for SBI communications
