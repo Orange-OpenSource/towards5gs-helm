@@ -1,0 +1,118 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+apiVersion: v2
+name: open5gs-5g
+description: A Helm chart to deploy Open5GS
+version: 1.0.0
+appVersion: "latest"
+dependencies:
+- name: mongodb
+  condition: deployMongoDB
+- name: open5gs-amf
+  version: 0.1.0
+  condition: deployAmf
+- name: open5gs-amf
+  alias: open5gs-namf-comm
+  version: 0.1.0
+  condition: deployNamfComm
+- name: open5gs-ausf
+  version: 0.1.0
+  condition: deployAusf
+- name: open5gs-ausf
+  alias: open5gs-nausf-auth
+  version: 0.1.0
+  condition: deployNausfAuth
+- name: open5gs-bsf
+  version: 0.1.0
+  condition: deployBsf
+- name: open5gs-bsf
+  alias: open5gs-nbsf-management
+  version: 0.1.0
+  condition: deployBsfManagement
+- name: open5gs-nrf
+  version: 0.1.0
+  condition: deployNRF
+- name: open5gs-nssf
+  version: 0.1.0
+  condition: deployNssf
+- name: open5gs-nssf
+  version: 0.1.0
+  alias: open5gs-nnssf-nsselection
+  version: 0.1.0
+  condition: deployNnssfNsselection
+- name: open5gs-pcf
+  version: 0.1.0
+  condition: deployPcf
+- name: open5gs-pcf
+  alias: open5gs-npcf-am-policy-control
+  version: 0.1.0
+  condition: deployNpcfAmPolicyControl
+- name: open5gs-pcf
+  alias: open5gs-npcf-smpolicycontrol
+  version: 0.1.0
+  condition: deployNpcfSmpolicycontrol
+- name: open5gs-pcf
+  alias: open5gs-npcf-policyauthorization
+  version: 0.1.0
+  condition: deployNpcfPolicyauthorization
+- name: open5gs-scp
+  version: 0.1.0
+  condition: deployScp
+- name: open5gs-smf
+  version: 0.1.0
+  condition: deploySmf
+- name: open5gs-smf
+  alias: open5gs-nsmf-pdusession
+  version: 0.1.0
+  condition: deployNsmfPdusession
+- name: open5gs-udm
+  version: 0.1.0
+  condition: deployUdm
+- name: open5gs-udm
+  alias: open5gs-nudm-sdm
+  version: 0.1.0
+  condition: deployNudmSdm
+- name: open5gs-udm
+  alias: open5gs-nudm-uecm
+  version: 0.1.0
+  condition: deployNudmUecm
+- name: open5gs-udm
+  alias: open5gs-nudm-ueau
+  version: 0.1.0
+  condition: deployNudmUeau
+- name: open5gs-udr
+  version: 0.1.0
+  condition: deployUdr
+- name: open5gs-udr
+  alias: open5gs-nudr-dr
+  version: 0.1.0
+  condition: deployNudrDr
+- name: open5gs-upf
+  version: 0.1.0
+  condition: deployUpf
+- name: open5gs-webui
+  version: 0.1.0
+  condition: deployWebui
+- name: open5gs-dbctl
+  version: 0.1.0
+  condition: deployDbctl
+- name: open5gs-dbpython
+  version: 0.1.0
+  condition: deployDbpython
+
+icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
+maintainers:
+  - email: abderaouf.khichane@orange.com
+    name: Abderaouf KHICHANE
+  - email: ilhem.fajjari@orange.com
+    name: Ilhem FAJJARI

@@ -1,0 +1,53 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.upf }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "open5gs-upf.fullname" $ }}-configmap
+  labels:
+    app: {{ $.Values.global.projectName }}
+data:
+  upf.yaml: |
+    {{- .configuration.global | nindent 4 }}
+
+    upf:
+        {{- .configuration.upf | nindent 8 }}
+        pfcp:
+          - dev: n4
+        gtpu:
+          - dev: n3
+
+        metrics:
+          - addr: 0.0.0.0
+            port: {{ .metricService.port }}
+
+  wrapper.sh: |
+    #!/bin/sh
+
+    ip tuntap add name ogstun mode tun
+    ip addr add 10.45.0.1/16 dev ogstun
+    ip link set ogstun up
+
+    ### Implement networking rules
+    iptables -t nat -A POSTROUTING -s {{ $.Values.global.uesubnet }} ! -o ogstun -j MASQUERADE
+    #iptables -t nat -A POSTROUTING -s {{ $.Values.global.uesubnet }} -o n6 -j MASQUERADE
+    #iptables -I FORWARD 1 -j ACCEPT
+
+    echo "1200 n6if" >> /etc/iproute2/rt_tables # create a routing table for the interface N6
+    ip rule add from {{ $.Values.global.uesubnet }} table n6if   # use the created ip table to route the traffic comming from the UE SUBNET
+    ip route add default via {{ $.Values.global.n6network.gatewayIP }} dev n6 table n6if  # add a default route in the created table so that all UEs will use this gateway for external communications (target IP not in the Data Network attached to the interface N6) and then the Data Network will manage to route the traffic
+
+    /open5gs/install/bin/open5gs-upfd -c {{ .volume.mount }}/upf.yaml
+
+{{- end }}

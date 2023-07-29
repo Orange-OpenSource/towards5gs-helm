@@ -1,0 +1,9 @@
+open5gs-nrf:
+  nrf:
+    configuration:
+      global: |-
+        parameter:
+        max:
+        time:
+          nf_instance:
+            heartbeat: 0

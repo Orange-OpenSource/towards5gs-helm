@@ -1,0 +1,128 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for Open5GS-5G chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  name: open5gs
+  nrf:
+    service:
+      name: nrf-nnrf
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30800"
+  scp:
+    service:
+      name: scp-nscp
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30801"
+  amf:
+    n2if:  # NGAP
+      ipAddress: 10.100.50.249
+    service:
+      ngap:
+        enabled: false
+        name: amf-n2
+        port: 38412
+        nodeport: 31412
+        protocol: SCTP
+        type: NodePort
+  smf:
+    n4if:
+      ipAddress: 10.100.50.244
+  #Global network parametes
+  n2network:
+    name: n2network
+    type: macvlan
+    masterIf: eth0
+    subnetIP: 10.100.50.248
+    cidr: 29
+    gatewayIP: 10.100.50.254
+    excludeIP: 10.100.50.254
+  n3network:
+    name: n3network
+    type: macvlan
+    masterIf: eth0
+    subnetIP: 10.100.50.232
+    cidr: 29
+    gatewayIP: 10.100.50.238
+    excludeIP: 10.100.50.238
+  n4network:
+    name: n4network
+    type: macvlan
+    masterIf: eth0
+    subnetIP: 10.100.50.240
+    cidr: 29
+    gatewayIP: 10.100.50.246
+    excludeIP: 10.100.50.246
+  n6network:
+    name: n6network
+    type: macvlan
+    masterIf: eth1
+    subnetIP: 10.100.100.0
+    cidr: 24
+    gatewayIP: 10.100.100.1
+    excludeIP: 10.100.100.254
+
+
+# These parameters can be used to enable/disable deployment of subcharts
+deployMongoDb: true
+deployAmf: true
+deployAusf: true
+deployBsf: true
+deployNrf: true
+deployNssf: true
+deployPcf: true
+deployScp: true
+deploySmf: true
+deployUdm: true
+deployUdr: true
+deployUpf: true
+deployWebui: true
+deployDbctl: false
+deployDbpython: true
+# Microservices deployment is disabled by default
+deployNamfComm: false
+deployNausfAuth: false
+deployBsfManagement: false
+deployNnssfNsselection: false
+deployNpcfAmPolicyControl: false
+deployNpcfSmpolicycontrol: false
+deployNpcfPolicyauthorization: false
+deployNsmfPdusession: false
+deployNudmSdm: false
+deployNudmUecm: false
+deployNudmUeau: false
+deployNudrDr: false
+
+# Disable the deployment of mongodb as an NRF subchart
+open5gs-nrf:
+  db:
+    enabled: false
+
+# This section can be used to override the default values in the MongoDB chart
+mongodb:
+  fullnameOverride: "mongodb"
+  useStatefulSet: true
+  auth:
+    enabled: false
+  persistence:
+    size: 6Gi
+    mountPath: /bitnami/mongodb/data/db/
+  service:
+    name: mongodb
+    type: ClusterIP
+    port: 27017
+    nodePort: "30017"

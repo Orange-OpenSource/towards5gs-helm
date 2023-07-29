@@ -1,0 +1,161 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for Open5GS SMF chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+global:
+  projectName: open5gs
+  userPlaneArchitecture: single  # possible values are "single" and "ulcl"
+  nrf:
+    service:
+      name: nrf-nnrf
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30800"
+  scp:
+    service:
+      name: scp-nscp
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30801"
+  sbi:
+    scheme: http
+  smf:
+    n4if:
+      ipAddress: 10.100.50.244
+  n4network:
+    name: n4network
+    type: ipvlan
+    masterIf: eth0
+    subnetIP: 10.100.50.240
+    cidr: 29
+    gatewayIP: 10.100.50.246
+    excludeIP: 10.100.50.246
+  n3network:
+    name: n3network
+    type: ipvlan
+    masterIf: eth0
+    subnetIP: 10.100.50.232
+    cidr: 29
+    gatewayIP: 10.100.50.238
+    excludeIP: 10.100.50.238
+
+initcontainers:
+  curl:
+    registry: towards5gs
+    image: initcurl
+    tag: "1.0.0"
+  busybox:
+    image: busybox
+    tag: "1.32.0"
+
+# This section can be used to override the default values in the MongoDB chart (remember MongoDB is a subchart of the open5gsControlplane chart since control plane NFs rely on it.
+mongodb:
+  service:
+    name: mongodb
+    type: ClusterIP
+    port: 27017
+    nodePort: "30017"
+
+smf:
+  name: smf
+  replicaCount: 1
+  image:
+    name: towards5gs/open5gs-smf
+    pullPolicy: Always
+  service:
+    type: ClusterIP
+    port: 80
+  metricService:
+    type: ClusterIP
+    port: 9090
+  volume:
+    mount: /open5gs/install
+  n3if:  # GTP-U
+    ipAddress: 10.100.50.237
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  readinessProbe:
+    initialDelaySeconds: 0
+    periodSeconds: 1
+    timeoutSeconds: 1
+    failureThreshold:  40
+    successThreshold: 1
+  livenessProbe:
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 10
+    failureThreshold: 3
+    successThreshold: 1
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  ingress:
+    enabled: false
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths: []
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+  configuration:
+    tls:
+      server:
+        no_tls: "true"
+      client:
+        no_tls: "true"
+
+    global: |-
+      parameter:
+      max:
+      time:
+      upf:
+          pfcp:
+            - addr: 10.100.50.241
+    smf: |-
+          subnet:
+            - addr: 10.45.0.1/16
+              dnn: internet
+            - addr: 2001:db8:cafe::1/48
+          dns:
+            - 8.8.8.8
+            - 8.8.4.4
+            - 2001:4860:4860::8888
+            - 2001:4860:4860::8844
+          mtu: 1400
+          ctf:
+            enabled: auto
+          #freeDiameter: @sysconfdir@/freeDiameter/smf.conf
+
+    logger: |-

@@ -1,0 +1,53 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.bsf }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "open5gs-bsf.fullname" $ }}-configmap
+  labels:
+    app: {{ $.Values.global.projectName }}
+data:
+  bsf.yaml: |
+    {{- .configuration.global | nindent 4 }}
+
+    sbi:
+      server:
+        no_tls: {{ .configuration.tls.server.no_tls }}
+        cacert: {{ .volume.mount }}/tls/ca.crt
+        key: {{ .volume.mount }}/tls/bsf.key
+        cert: {{ .volume.mount }}/tls/bsf.crt
+      client:
+        no_tls: {{ .configuration.tls.client.no_tls }}
+        cacert: {{ .volume.mount }}/tls/ca.crt
+        key: {{ .volume.mount }}/tls/bsf.key
+        cert: {{ .volume.mount }}/tls/bsf.crt
+
+    bsf:
+          {{- .configuration.bsf | nindent 10 }}
+
+          sbi:
+            - dev: eth0
+              advertise: {{ include "open5gs-bsf.fullname" $ }}-service
+              port: {{ .service.port }}
+
+    scp:
+          sbi:
+            - addr: {{ $.Values.global.scp.service.name }}
+              port: {{ $.Values.global.scp.service.port }}
+
+
+    logger:
+      {{- .configuration.global | nindent 6 }}
+
+{{- end }}

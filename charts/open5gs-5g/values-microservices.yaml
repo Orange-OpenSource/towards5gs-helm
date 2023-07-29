@@ -1,0 +1,174 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for Open5GS-5G chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+deployAmf: false
+deployNamfComm: true
+deployAusf: false
+deployNausfAuth: true
+deployBsf: false
+deployBsfManagement: true
+deployNssf: false
+deployNnssfNsselection: true
+deployPcf: false
+deployNpcfAmPolicyControl: true
+deployNpcfSmpolicycontrol: true
+deployNpcfPolicyauthorization: true
+deploySmf: false
+deployNsmfPdusession: true
+deployUdm: false
+deployNudmSdm: true
+deployNudmUecm: true
+deployNudmUeau: true
+deployUdr: false
+deployNudrDr: true
+
+# AMF microservices
+open5gs-namf-comm:
+  amf:
+    name: namf-comm
+    configuration:
+      amf: |-
+            service_name:
+              - namf-comm
+            guami:
+              - plmn_id:
+                  mcc: 999
+                  mnc: 70
+                amf_id:
+                  region: 2
+                  set: 1
+            tai:
+              - plmn_id:
+                  mcc: 999
+                  mnc: 70
+                tac: 1
+            plmn_support:
+              - plmn_id:
+                  mcc: 999
+                  mnc: 70
+                s_nssai:
+                  - sst: 1
+            security:
+                integrity_order : [ NIA2, NIA1, NIA0 ]
+                ciphering_order : [ NEA0, NEA1, NEA2 ]
+            network_name:
+                full: Open5GS
+            amf_name: open5gs-amf0
+
+# AUSF microservices
+open5gs-nausf-auth:
+  ausf:
+    name: nausf-auth
+    configuration:
+      ausf: |-
+            service_name:
+              - nausf-auth
+
+# BSF microservices
+open5gs-nbsf-management:
+  bsf:
+    name: nbsf-management
+    configuration:
+      bsf: |-
+            service_name:
+              - nbsf-management
+
+# NSSF microservices
+open5gs-nnssf-nsselection:
+  nssf:
+    name: nnssf-nsselection
+    configuration:
+      nssf: |-
+            service_name:
+              - nnssf-nsselection
+
+# PCF microservices
+open5gs-npcf-am-policy-control:
+  pcf:
+    name: npcf-am-policy-control
+    configuration:
+      pcf: |-
+            service_name:
+              - npcf-am-policy-control
+open5gs-npcf-smpolicycontrol:
+  pcf:
+    name: npcf-smpolicycontrol
+    configuration:
+      pcf: |-
+            service_name:
+              - npcf-smpolicycontrol
+open5gs-npcf-policyauthorization:
+  pcf:
+    name: npcf-policyauthorization
+    configuration:
+      pcf: |-
+            service_name:
+              - npcf-policyauthorization
+
+# SMF microservices
+open5gs-nsmf-pdusession:
+  smf:
+    name: nsmf-pdusession
+    configuration:
+      smf: |-
+            service_name:
+              - nsmf-pdusession
+            subnet:
+              - addr: 10.45.0.1/16
+                dnn: internet
+              - addr: 2001:db8:cafe::1/48
+            dns:
+              - 8.8.8.8
+              - 8.8.4.4
+              - 2001:4860:4860::8888
+              - 2001:4860:4860::8844
+            mtu: 1400
+            ctf:
+              enabled: auto
+            #freeDiameter: @sysconfdir@/freeDiameter/smf.conf
+
+# UDM microservices
+open5gs-nudm-sdm:
+  udm:
+    name: nudm-sdm
+    configuration:
+      udm: |-
+            service_name:
+              - nudm-sdm
+open5gs-nudm-uecm:
+  udm:
+    name: nudm-uecm
+    configuration:
+      udm: |-
+            service_name:
+              - nudm-uecm
+open5gs-nudm-ueau:
+  udm:
+    name: nudm-ueau
+    configuration:
+      udm: |-
+            service_name:
+              - nudm-ueau
+
+# UDR microservices
+open5gs-nudr-dr:
+  udr:
+    name: nudr-dr
+    configuration:
+      udr: |-
+            service_name:
+              - nudr-dr

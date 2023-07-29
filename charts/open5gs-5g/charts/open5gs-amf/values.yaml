@@ -1,0 +1,181 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for open5gs-amf chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+global:
+  projectName: open5gs
+  nrf:
+    service:
+      name: nrf-nnrf
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30800"
+  scp:
+    service:
+      name: scp-nscp
+      type: ClusterIP
+      port: "8000"
+      nodePort: "30801"
+  sbi:
+    scheme: http
+  amf:
+    n2if:  # NGAP
+      ipAddress: 10.100.50.249
+    service:
+      ngap:
+        enabled: false
+        name: amf-n2
+        port: 38412
+        nodeport: 31412
+        protocol: SCTP
+        type: NodePort
+  n2network:
+    name: n2network
+    type: ipvlan
+    masterIf: eth0
+    subnetIP: 10.100.50.248
+    cidr: 29
+    gatewayIP: 10.100.50.254
+    excludeIP: 10.100.50.254
+
+initcontainers:
+  curl:
+    registry: towards5gs
+    image: initcurl
+    tag: "1.0.0"
+  busybox:
+    image: busybox
+    tag: "1.32.0"
+
+# This section can be used to override the default values in the MongoDB chart
+mongodb:
+  service:
+    name: mongodb
+    type: ClusterIP
+    port: 27017
+    nodePort: "30017"
+
+amf:
+  name: amf
+  replicaCount: 1
+  image:
+    name: towards5gs/open5gs-amf
+    pullPolicy: Always
+  service:
+    type: ClusterIP
+    port: 80
+  metricService:
+    type: ClusterIP
+    port: 9090
+  volume:
+    mount: /open5gs/install
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  readinessProbe:
+    initialDelaySeconds: 0
+    periodSeconds: 1
+    timeoutSeconds: 1
+    failureThreshold:  40
+    successThreshold: 1
+  livenessProbe:
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 10
+    failureThreshold: 3
+    successThreshold: 1
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  ingress:
+    enabled: false
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths: []
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+  configuration:
+    tls:
+      server:
+        no_tls: "true"
+      client:
+        no_tls: "true"
+
+    global: |-
+      parameter:
+      max:
+      usrsctp:
+      time:
+        t3512:
+          value: 540
+    amf: |-
+          guami:
+            - plmn_id:
+                mcc: 999
+                mnc: 70
+              amf_id:
+                region: 2
+                set: 1
+          tai:
+            - plmn_id:
+                mcc: 999
+                mnc: 70
+              tac: 1
+          plmn_support:
+            - plmn_id:
+                mcc: 999
+                mnc: 70
+              s_nssai:
+                - sst: 1
+          security:
+              integrity_order : [ NIA2, NIA1, NIA0 ]
+              ciphering_order : [ NEA0, NEA1, NEA2 ]
+          network_name:
+              full: Open5GS
+          amf_name: open5gs-amf0
+    ngap: |-
+      option:
+        sctp:
+          spp_hbinterval : 5000
+          spp_sackdelay : 200
+          srto_initial : 3000
+          srto_min : 1000
+          srto_max : 7000
+          sinit_num_ostreams : 50
+          sinit_max_instreams : 65535
+          sinit_max_attempts : 4
+          sinit_max_init_timeo : 8000
+
+    logger: |-

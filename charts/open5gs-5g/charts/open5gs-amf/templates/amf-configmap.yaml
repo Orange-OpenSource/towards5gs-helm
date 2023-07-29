@@ -1,0 +1,64 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.amf }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "open5gs-amf.fullname" $ }}-configmap
+  labels:
+    app: {{ $.Values.global.projectName }}
+data:
+  amf.yaml: |
+    {{- .configuration.global | nindent 4 }}
+
+    sbi:
+      server:
+        no_tls: {{ .configuration.tls.server.no_tls }}
+        cacert: {{ .volume.mount }}/tls/ca.crt
+        key: {{ .volume.mount }}/tls/amf.key
+        cert: {{ .volume.mount }}/tls/amf.crt
+      client:
+        no_tls: {{ .configuration.tls.client.no_tls }}
+        cacert: {{ .volume.mount }}/tls/ca.crt
+        key: {{ .volume.mount }}/tls/amf.key
+        cert: {{ .volume.mount }}/tls/amf.crt
+
+    amf:
+          {{- .configuration.amf | nindent 10 }}
+
+          sbi:
+            - dev: eth0
+              advertise: {{ include "open5gs-amf.fullname" $ }}-service
+              port: {{ .service.port }}
+
+          ngap:
+{{- if $.Values.global.amf.service.ngap.enabled }}
+            dev: eth0
+{{- else }}
+            dev: n2
+{{- end }}
+            {{- .configuration.ngap | nindent 12 }}
+
+          metrics:
+            - addr: 0.0.0.0
+              port: {{ .metricService.port }}
+
+    scp:
+          sbi:
+            - addr: {{ $.Values.global.scp.service.name }}
+              port: {{ $.Values.global.scp.service.port }}
+
+    logger:
+      {{- .configuration.logger | nindent 6 }}
+
+{{- end }}
