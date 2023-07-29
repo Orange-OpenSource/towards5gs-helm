@@ -1,0 +1,11 @@
+apiVersion: v2
+name: upg-vpp
+description: A Helm chart to deploy Travelping UPG-VPP
+type: application
+version: 0.1.0
+appVersion: latest
+maintainers:
+  - email: abderaouf.khichane@orange.com
+    name: Abderaouf KHICHANE
+
+

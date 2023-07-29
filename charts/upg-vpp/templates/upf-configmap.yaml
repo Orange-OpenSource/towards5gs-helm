@@ -1,0 +1,53 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at https://github.com/Orange-OpenSource/towards5gs-helm/blob/main/LICENSE
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.upf }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .configmap.name }}
+  labels:
+    app: {{ $.Values.global.projectName }}
+data:
+  startup.conf: |
+    unix {
+      nodaemon
+      log /tmp/vpp.log
+      full-coredump
+      gid vpp
+      interactive
+      cli-listen /run/vpp/cli.sock
+      exec /upg-vpp/etc/init.conf
+    }
+
+    api-trace {
+      on
+    }
+
+    api-segment {
+      gid vpp
+    }
+
+    plugins {
+        path /usr/local/lib/vpp_plugins/
+        plugin dpdk_plugin.so { disable }
+        plugin gtpu_plugin.so { disable }
+        plugin upf_plugin.so { enable }
+    }
+    
+  init.conf: |
+    ip table add 1
+    ip table add 2
+
+       
+
+{{- end }}
