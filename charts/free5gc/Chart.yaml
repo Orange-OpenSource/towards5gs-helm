@@ -18,30 +18,56 @@ appVersion: latest
 dependencies:
 - name: mongodb
   condition: deployMongoDb
+  version: ~10.7.0
+  repository: 'file://charts/mongodb'
 - name: free5gc-amf
   condition: deployAmf
+  version: ~0.2.7
+  repository: 'file://charts/free5gc-amf'
 - name: free5gc-ausf
   condition: deployAusf
+  version: ~0.2.7
+  repository: 'file://charts/free5gc-ausf'
 - name: free5gc-n3iwf
   condition: deployN3iwf
+  version: ~0.2.5
+  repository: 'file://charts/free5gc-n3iwf'
 - name: free5gc-nrf
   condition: deployNrf
+  version: ~0.2.7
+  repository: 'file://charts/free5gc-nrf'
 - name: free5gc-nssf
   condition: deployNssf
+  version: ~0.2.7
+  repository: 'file://charts/free5gc-nssf'
 - name: free5gc-pcf
   condition: deployPcf
+  version: ~0.2.7
+  repository: 'file://charts/free5gc-pcf'
 - name: free5gc-smf
   condition: deploySmf
+  version: ~0.2.7
+  repository: 'file://charts/free5gc-smf'
 - name: free5gc-udm
   condition: deployUdm
+  version: ~0.2.7
+  repository: 'file://charts/free5gc-udm'
 - name: free5gc-udr
   condition: deployUdr
+  version: ~0.2.7
+  repository: 'file://charts/free5gc-udr'
 - name: free5gc-upf
   condition: deployUpf
+  version: ~0.2.6
+  repository: 'file://charts/free5gc-upf'
 - name: free5gc-webui
   condition: deployWebui
+  version: ~0.1.5
+  repository: 'file://charts/free5gc-webui'
 - name: free5gc-dbpython
   condition: deployDbPython
+  version: ~0.1.0
+  repository: 'file://charts/free5gc-dbpython'
 icon: https://camo.githubusercontent.com/915dcf8299b3d2bfe2b2693c5401916cb31e31fb690a73e7da327808000efa37/68747470733a2f2f666f72756d2e667265653567632e6f72672f75706c6f6164732f64656661756c742f6f726967696e616c2f31582f333234363935626663363438316264353536633131303138663238333430383663663565633634352e706e67
 maintainers:
 - email: abderaouf.khichane@orange.com
