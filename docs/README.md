@@ -43,6 +43,7 @@ helm pull {replace by the name of the chart} --version --version {replace by the
 ## Setup methods
 In addition to the README provided in each Helm chart, the [Documentation](.) directory provides several guidelines for different implementations:
  - [Setup Free5GC and test with UERANSIM](demo/Setup-free5gc-and-test-with-UERANSIM.md)
+ - [Setup free5gc on KinD cluster and test with UERANSIM](demo/Setup-free5gc-on-KinD-cluster-and-test-with-UERANSIM.md)
  - [Setup free5gc on multiple clusters and test with UERANSIM](demo/Setup-free5gc-on-multiple-clusters-and-test-with-UERANSIM.md)
  - [Setup free5gc on multiple clusters with ULCL mode and test with UERANSIM](demo/Setup-free5gc-on-multiple-clusters-with-ULCL-mode-and-test-with-UERANSIM.md)
 
