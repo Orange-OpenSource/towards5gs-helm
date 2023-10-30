@@ -103,6 +103,7 @@ ausf:
     #    hosts:
     #      - chart-example.local
   configuration:
+    delegated_discovery: no
     tls:
       server:
         no_tls: "true"
@@ -115,5 +116,8 @@ ausf:
       time:
 
     ausf: |-
+      discovery:
+        delegated: no
 
     logger: |-
+      level: info

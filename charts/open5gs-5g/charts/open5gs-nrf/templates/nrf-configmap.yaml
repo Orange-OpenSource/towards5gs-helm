@@ -34,6 +34,8 @@ data:
         cert: {{ .volume.mount }}/tls/nrf.crt
 
     nrf:
+          {{- .configuration.nrf | nindent 10 }}
+
           sbi:
             - dev: eth0
               advertise: {{ $.Values.global.nrf.service.name }}

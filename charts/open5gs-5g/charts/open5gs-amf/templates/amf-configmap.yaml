@@ -53,12 +53,17 @@ data:
             - addr: 0.0.0.0
               port: {{ .metricService.port }}
 
+    nrf:
+          sbi:
+            - addr: {{ $.Values.global.nrf.service.name }}
+              port: {{ $.Values.global.nrf.service.port }}
+
     scp:
           sbi:
             - addr: {{ $.Values.global.scp.service.name }}
               port: {{ $.Values.global.scp.service.port }}
 
     logger:
-      {{- .configuration.logger | nindent 6 }}
+      {{- .configuration.logger | nindent 4 }}
 
 {{- end }}

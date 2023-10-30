@@ -116,5 +116,8 @@ scp:
       time:
 
     scp: |-
+      discovery:
+        delegated: no
 
     logger: |-
+      level: info

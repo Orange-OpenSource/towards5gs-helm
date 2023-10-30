@@ -137,5 +137,8 @@ udm:
       time:
 
     udm: |-
+      discovery:
+        delegated: no
 
     logger: |-
+      level: info

@@ -120,5 +120,8 @@ nssf:
       time:
 
     nssf: |-
+      discovery:
+        delegated: no
 
     logger: |-
+      level: info

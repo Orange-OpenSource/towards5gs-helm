@@ -34,10 +34,17 @@ data:
         cert: {{ .volume.mount }}/tls/ausf.crt
 
     ausf:
+          {{- .configuration.ausf | nindent 10 }}
+
           sbi:
             - dev: eth0
               advertise: {{ include "open5gs-ausf.fullname" $ }}-service
               port: {{ .service.port }}
+
+    nrf:
+          sbi:
+            - addr: {{ $.Values.global.nrf.service.name }}
+              port: {{ $.Values.global.nrf.service.port }}
 
     scp:
           sbi:
@@ -45,6 +52,6 @@ data:
               port: {{ $.Values.global.scp.service.port }}
 
     logger:
-      {{- toYaml .configuration.logger | nindent 6 }}
+      {{- .configuration.logger | nindent 6 }}
 
 {{- end }}

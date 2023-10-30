@@ -144,18 +144,21 @@ smf:
           pfcp:
             - addr: 10.100.50.241
     smf: |-
-          subnet:
-            - addr: 10.45.0.1/16
-              dnn: internet
-            - addr: 2001:db8:cafe::1/48
-          dns:
-            - 8.8.8.8
-            - 8.8.4.4
-            - 2001:4860:4860::8888
-            - 2001:4860:4860::8844
-          mtu: 1400
-          ctf:
-            enabled: auto
-          #freeDiameter: @sysconfdir@/freeDiameter/smf.conf
+      discovery:
+        delegated: no
+      subnet:
+        - addr: 10.45.0.1/16
+          dnn: internet
+        - addr: 2001:db8:cafe::1/48
+      dns:
+        - 8.8.8.8
+        - 8.8.4.4
+        - 2001:4860:4860::8888
+        - 2001:4860:4860::8844
+      mtu: 1400
+      ctf:
+        enabled: auto
+      #freeDiameter: @sysconfdir@/freeDiameter/smf.conf
 
     logger: |-
+      level: info

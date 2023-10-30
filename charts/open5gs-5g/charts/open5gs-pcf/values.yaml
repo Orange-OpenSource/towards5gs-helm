@@ -122,5 +122,8 @@ pcf:
       time:
 
     pcf: |-
+      discovery:
+        delegated: no
 
     logger: |-
+      level: info

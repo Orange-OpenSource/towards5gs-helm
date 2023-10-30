@@ -109,5 +109,8 @@ bsf:
       time:
 
     bsf: |-
+      discovery:
+        delegated: no
 
     logger: |-
+      level: info

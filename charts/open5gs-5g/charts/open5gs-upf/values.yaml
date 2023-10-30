@@ -116,9 +116,10 @@ upf:
       time:
 
     upf: |-
-          subnet:
-            - addr: 10.45.0.1/16
-              dnn: internet
-            - addr: 2001:db8:cafe::1/48
+      subnet:
+        - addr: 10.45.0.1/16
+          dnn: internet
+        - addr: 2001:db8:cafe::1/48
 
     logger: |-
+      level: info
