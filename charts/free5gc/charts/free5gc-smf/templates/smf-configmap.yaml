@@ -43,8 +43,7 @@ data:
         listenAddr: {{ $.Values.global.smf.n4if.ipAddress }}
         externalAddr: {{ $.Values.global.smf.n4if.ipAddress }}
 
-      {{- .configuration.configuration | nindent 6 }}
-
+      {{- $.Files.Get "config.yaml" | nindent 6 }}
     logger:
       {{- toYaml .configuration.logger | nindent 6 }}
 

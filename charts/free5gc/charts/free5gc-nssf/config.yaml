@@ -1,0 +1,208 @@
+nssfName: NSSF
+supportedPlmnList:
+  - mcc: 208
+    mnc: 93
+supportedNssaiInPlmnList:
+  - plmnId:
+      mcc: 208
+      mnc: 93
+    supportedSnssaiList:
+      - sst: 1
+        sd: 010203
+      - sst: 1
+        sd: 112233
+      - sst: 1
+        sd: 3
+      - sst: 2
+        sd: 1
+      - sst: 2
+        sd: 2
+amfList:
+  - nfId: 469de254-2fe5-4ca0-8381-af3f500af77c
+    supportedNssaiAvailabilityData:
+      - tai:
+          plmnId:
+            mcc: 466
+            mnc: 92
+          tac: 33456
+        supportedSnssaiList:
+          - sst: 1
+          - sst: 1
+            sd: 2
+          - sst: 2
+      - tai:
+          plmnId:
+            mcc: 466
+            mnc: 92
+          tac: 33457
+        supportedSnssaiList:
+          - sst: 1
+            sd: 1
+          - sst: 1
+            sd: 2
+  - nfId: fbe604a8-27b2-417e-bd7c-8a7be2691f8d
+    supportedNssaiAvailabilityData:
+      - tai:
+          plmnId:
+            mcc: 466
+            mnc: 92
+          tac: 33458
+        supportedSnssaiList:
+          - sst: 1
+          - sst: 1
+            sd: 1
+          - sst: 1
+            sd: 3
+          - sst: 2
+      - tai:
+          plmnId:
+            mcc: 466
+            mnc: 92
+          tac: 33459
+        supportedSnssaiList:
+          - sst: 1
+          - sst: 1
+            sd: 1
+          - sst: 2
+          - sst: 2
+            sd: 1
+  - nfId: b9e6e2cb-5ce8-4cb6-9173-a266dd9a2f0c
+    supportedNssaiAvailabilityData:
+      - tai:
+          plmnId:
+            mcc: 466
+            mnc: 92
+          tac: 33456
+        supportedSnssaiList:
+          - sst: 1
+          - sst: 1
+            sd: 1
+          - sst: 1
+            sd: 2
+          - sst: 2
+      - tai:
+          plmnId:
+            mcc: 466
+            mnc: 92
+          tac: 33458
+        supportedSnssaiList:
+          - sst: 1
+          - sst: 1
+            sd: 1
+          - sst: 2
+          - sst: 2
+            sd: 1
+taList:
+  - tai:
+      plmnId:
+        mcc: 466
+        mnc: 92
+      tac: 33456
+    accessType: 3GPP_ACCESS
+    supportedSnssaiList:
+      - sst: 1
+      - sst: 1
+        sd: 1
+      - sst: 1
+        sd: 2
+      - sst: 2
+  - tai:
+      plmnId:
+        mcc: 466
+        mnc: 92
+      tac: 33457
+    accessType: 3GPP_ACCESS
+    supportedSnssaiList:
+      - sst: 1
+      - sst: 1
+        sd: 1
+      - sst: 1
+        sd: 2
+      - sst: 2
+  - tai:
+      plmnId:
+        mcc: 466
+        mnc: 92
+      tac: 33458
+    accessType: 3GPP_ACCESS
+    supportedSnssaiList:
+      - sst: 1
+      - sst: 1
+        sd: 1
+      - sst: 1
+        sd: 3
+      - sst: 2
+    restrictedSnssaiList:
+      - homePlmnId:
+          mcc: 310
+          mnc: 560
+        sNssaiList:
+          - sst: 1
+            sd: 3
+  - tai:
+      plmnId:
+        mcc: 466
+        mnc: 92
+      tac: 33459
+    accessType: 3GPP_ACCESS
+    supportedSnssaiList:
+      - sst: 1
+      - sst: 1
+        sd: 1
+      - sst: 2
+      - sst: 2
+        sd: 1
+    restrictedSnssaiList:
+      - homePlmnId:
+          mcc: 310
+          mnc: 560
+        sNssaiList:
+          - sst: 2
+            sd: 1
+mappingListFromPlmn:
+  - operatorName: NTT Docomo
+    homePlmnId:
+      mcc: 440
+      mnc: 10
+    mappingOfSnssai:
+      - servingSnssai:
+          sst: 1
+          sd: 1
+        homeSnssai:
+          sst: 1
+          sd: 1
+      - servingSnssai:
+          sst: 1
+          sd: 2
+        homeSnssai:
+          sst: 1
+          sd: 3
+      - servingSnssai:
+          sst: 1
+          sd: 3
+        homeSnssai:
+          sst: 1
+          sd: 4
+      - servingSnssai:
+          sst: 2
+          sd: 1
+        homeSnssai:
+          sst: 2
+          sd: 2
+  - operatorName: AT&T Mobility
+    homePlmnId:
+      mcc: 310
+      mnc: 560
+    mappingOfSnssai:
+      - servingSnssai:
+          sst: 1
+          sd: 1
+        homeSnssai:
+          sst: 1
+          sd: 2
+      - servingSnssai:
+          sst: 1
+          sd: 2
+        homeSnssai:
+          sst: 1
+          sd: 3
