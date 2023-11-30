@@ -108,10 +108,6 @@ nrf:
     serviceNameList: |-
       - nnrf-nfm
       - nnrf-disc
-    configuration: |-
-      DefaultPlmnId:
-        mcc: 208
-        mnc: 93
     logger: # log output setting
       enable: true # true or false
       level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic

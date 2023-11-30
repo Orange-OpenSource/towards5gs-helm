@@ -1,0 +1,7 @@
+plmnSupportList:
+  - mcc: 208
+    mnc: 93
+  - mcc: 123
+    mnc: 45
+groupId: ausfGroup001
+eapAkaSupiImsiPrefix: false

@@ -41,8 +41,7 @@ data:
       # GTP interface
       GTPBindAddress: {{ .n3if.ipAddress }}
       
-      {{- .configuration.configuration | nindent 6 }}
-
+      {{- $.Files.Get "config.yaml" | nindent 6 }}
     logger:
       {{- toYaml .configuration.logger | nindent 6 }}
 

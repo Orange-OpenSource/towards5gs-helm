@@ -139,8 +139,7 @@ data:
                   sd: 1
                 - sst: 2
 
-      {{- .configuration.configuration | nindent 6 }}
-
+      {{- $.Files.Get "config.yaml" | nindent 6 }}
     logger:
       {{- toYaml .configuration.logger | nindent 6 }}
 
