@@ -61,7 +61,8 @@ spec:
         name: {{ .name }}
         securityContext:
             {{- toYaml .securityContext | nindent 12 }}
-        command: ["{{ .volume.mount }}/wrapper.sh"]
+        # command: ["{{ .volume.mount }}/wrapper.sh"]
+        command: ['sleep', '10000']
         volumeMounts:
         - mountPath: {{ .volume.mount }}
           name: {{ include "packetrusher.fullname" $ }}-volume
@@ -81,8 +82,8 @@ spec:
         configMap:
           name: {{ include "packetrusher.fullname" $ }}-configmap
           items:
-          - key: config.yaml
-            path: config.yaml
+          - key: config.yml
+            path: config.yml
           - key: wrapper.sh
             path: wrapper.sh
             mode: 0755

@@ -67,9 +67,9 @@ packetrusher:
     name: towards5gs/packetrusher
     pullPolicy: Always
   volume:
-    mount: /packetrusher/config
+    mount: /app/config
 
-  command: "bin/packetrusher ue"
+  command: "./packetrusher ue"
   script: ""
   # script: |-
   #   ping .....
