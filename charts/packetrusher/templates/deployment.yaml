@@ -1,0 +1,90 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.packetrusher }}
+{{- if .enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "packetrusher.fullname" $ }}-{{ .name }}
+  labels:
+    {{- include "packetrusher.labels" $ | nindent 4 }}
+    app: {{ $.Values.projectName }}
+    component: {{ .name }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "packetrusher.selectorLabels" $ | nindent 6 }}
+      app: {{ $.Values.projectName }}
+      component: {{ .name }}
+  replicas: {{ .replicaCount }}
+  template:
+    metadata:
+      labels:
+        {{- include "packetrusher.selectorLabels" $ | nindent 8 }}
+        app: {{ $.Values.projectName }}
+        component: {{ .name }}
+      annotations:
+        {{- include "packetrusher.packetrusherAnnotations" $ | nindent 8 }}
+        {{- if or $.Values.global.n2network.enabled $.Values.global.n3network.enabled}}
+        k8s.v1.cni.cncf.io/networks: '[
+        {{- if $.Values.global.n2network.enabled }}
+            { "name": "{{ $.Values.global.n2network.name }}-{{ include "packetrusher.fullname" $ }}",
+              "interface": "n2",
+              "ips": [ "{{ .configuration.gnodeb.controlif.ip }}/{{ $.Values.global.n2network.cidr }}" ],
+              "gateway": [ "{{ $.Values.global.n2network.gatewayIP }}" ]
+            },
+        {{- end }}
+            { "name": "{{ $.Values.global.n3network.name }}-{{ include "packetrusher.fullname" $ }}",
+              "interface": "n3",
+              "ips": [ "{{ .configuration.gnodeb.dataif.ip }}/{{ $.Values.global.n3network.cidr }}" ],
+              "gateway": [ "{{ $.Values.global.n3network.gatewayIP }}" ]
+            }
+            ]'
+        {{- end }}
+    spec:
+      imagePullSecrets:
+        {{- toYaml .imagePullSecrets | nindent 8 }}
+      securityContext:
+        {{- toYaml .podSecurityContext | nindent 8 }}
+      containers:
+      - image: {{ .image.name }}:{{ .image.tag | default $.Chart.AppVersion }}
+        name: {{ .name }}
+        securityContext:
+            {{- toYaml .securityContext | nindent 12 }}
+        command: ["{{ .volume.mount }}/wrapper.sh"]
+        volumeMounts:
+        - mountPath: {{ .volume.mount }}
+          name: {{ include "packetrusher.fullname" $ }}-volume
+        resources:
+            {{- toYaml .resources | nindent 12 }}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      nodeSelector:
+        {{- toYaml .nodeSelector | nindent 8 }}
+      affinity:
+        {{- toYaml .affinity | nindent 8 }}
+      tolerations:
+        {{- toYaml .tolerations | nindent 8 }}
+
+      volumes:
+      - name: {{ include "packetrusher.fullname" $ }}-volume
+        configMap:
+          name: {{ include "packetrusher.fullname" $ }}-configmap
+          items:
+          - key: config.yaml
+            path: config.yaml
+          - key: wrapper.sh
+            path: wrapper.sh
+            mode: 0755
+{{- end }}
+{{- end }}

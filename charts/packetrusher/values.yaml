@@ -1,0 +1,139 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+# Default values for ueransim-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  #Global network parametes
+  n2network:
+    enabled: true
+    name: n2network
+    type: ipvlan
+    masterIf: eth0
+    subnetIP: 10.100.50.248
+    cidr: 29
+    gatewayIP: 10.100.50.254
+    excludeIP: 10.100.50.254
+  n3network:
+    enabled: true
+    name: n3network
+    type: ipvlan
+    masterIf: eth0
+    subnetIP: 10.100.50.232
+    cidr: 29
+    gatewayIP: 10.100.50.238
+    excludeIP: 10.100.50.238
+
+
+projectName: packetrusher
+
+initcontainers:
+  sctp_test:
+    image: towards5gs/sctp_test
+    tag: latest
+
+packetrusher:
+  enabled: true
+  name: packetrusher
+  replicaCount: 1
+
+  podAnnotations: {}
+    # additional annotations
+  imagePullSecrets: []
+  podSecurityContext: {}
+  securityContext:
+    capabilities:
+            add: ["NET_ADMIN"]
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+  image:
+    name: towards5gs/packetrusher
+    pullPolicy: Always
+  volume:
+    mount: /ueransim/config
+
+  command: "./nr-ue -c ../config/ue-config.yaml"
+  script: ""
+  # script: |-
+  #   ping .....
+
+  amf:
+    n2if:  # NGAP
+      ipAddress: 10.100.50.249
+      port: 38412
+    service:
+      ngap:
+        enabled: false
+
+  configuration:
+    gnodeb:
+      controlif:
+        ip: "10.100.50.250"
+        port: 9487
+      dataif:
+        ip: "10.100.50.236"
+        port: 2152
+      plmnlist:
+        mcc: "208"
+        mnc: "93"
+        tac: "000001"
+        gnbid: "000010"
+      slicesupportlist:
+        sst: "01"
+        sd: "000001" # optional, can be removed if not used
+
+    ue:
+      msin: "0000000003"
+      key: "8baf473f2f8fd09487cccbd7097c6862"
+      opc: "8e27b6af0e692e750f32667a3b14605d"
+      amf: "8000"
+      sqn: "00000000"
+      dnn: "internet"
+      routingindicator: "0000"
+      hplmn:
+        mcc: "208"
+        mnc: "93"
+      snssai:
+        sst: 01
+        sd: "010203" # optional, can be removed if not used
+      integrity:
+        nia0: false
+        nia1: false
+        nia2: true
+        nia3: false
+      ciphering:
+        nea0: true
+        nea1: false
+        nea2: true
+        nea3: false
+
+    logs:
+      level: 4
+
+  # test:
+  #   connectivity:
+  #     name: ue-connectivity-test
+  #     image: bitnami/kubectl:1.22.0
+  #     configmap:
+  #       name: connectivity-test-configmap
+  #     volume:
+  #       name: connectivity-test-volume
+  #       mount: /scripts
+  #     ttlseconds: 50

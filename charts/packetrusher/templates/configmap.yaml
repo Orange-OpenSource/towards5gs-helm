@@ -1,0 +1,41 @@
+#
+# Software Name : towards5gs-helm
+# SPDX-FileCopyrightText: Copyright (c) 2021 Orange
+# SPDX-License-Identifier: Apache-2.0
+#
+# This software is distributed under the Apache License 2.0,
+# the text of which is available at todo
+# or see the "LICENSE" file for more details.
+#
+# Author: Abderaouf KHICHANE, Ilhem FAJJARI, Ayoub BOUSSELMI
+# Software description: An open-source project providing Helm charts to deploy 5G components (Core + RAN) on top of Kubernetes
+#
+{{- with .Values.packetrusher }}
+{{- if .enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "packetrusher.fullname" $ }}-configmap
+  labels:
+    app: {{ $.Values.projectName }}
+    component: {{ .name }}
+data:
+  config.yml: |
+    {{- toYaml .configuration | nindent 4 }}
+
+    amfif:
+      ip: {{ .amf.n2if.ipAddress }}
+      port: {{ .amf.n2if.port }}
+
+  wrapper.sh: |
+    #!/bin/bash
+
+    mkdir /dev/net
+    mknod /dev/net/tun c 10 200
+
+    {{ .command }}
+
+    {{ .script | nindent 4 }}
+
+{{- end }}
+{{- end }}
