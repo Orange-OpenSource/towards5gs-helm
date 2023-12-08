@@ -67,9 +67,9 @@ packetrusher:
     name: towards5gs/packetrusher
     pullPolicy: Always
   volume:
-    mount: /ueransim/config
+    mount: /packetrusher/config
 
-  command: "./nr-ue -c ../config/ue-config.yaml"
+  command: "bin/packetrusher ue"
   script: ""
   # script: |-
   #   ping .....
