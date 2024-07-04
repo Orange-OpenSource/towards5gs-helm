@@ -48,6 +48,9 @@ data:
         - dev: eth0
           advertise: {{ include "open5gs-udm.fullname" $ }}-service
           port: {{ .service.port }}
+        - dev: eth0
+          advertise: {{ include "open5gs-udm.fullname" $ }}-service
+          port: 443
 
         client:
           nrf:

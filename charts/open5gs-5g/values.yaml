@@ -29,7 +29,7 @@ global:
       port: "7777"
       nodePort: "30801"
   sbi:
-    scheme: http  # http or https
+    scheme: https  # http or https
     tls:
       issuerRef:
         name: open5gs-ca-issuer
@@ -85,7 +85,7 @@ global:
 
 # These parameters can be used to enable/disable deployment of subcharts
 deployMongoDb: true
-deployCAIssuer: false
+deployCAIssuer: true
 deployAmf: true
 deployAusf: true
 deployBsf: true

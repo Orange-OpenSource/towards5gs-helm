@@ -48,6 +48,9 @@ data:
           - dev: eth0
             advertise: {{ $.Values.global.nrf.service.name }}
             port: {{ $.Values.global.nrf.service.port }}
+          - dev: eth0
+            advertise: {{ $.Values.global.nrf.service.name }}
+            port: 443
 
     logger:
       {{- .configuration.logger | nindent 6 }}

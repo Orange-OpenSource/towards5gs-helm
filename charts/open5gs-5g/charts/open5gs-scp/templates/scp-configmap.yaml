@@ -48,6 +48,10 @@ data:
           - dev: eth0
             advertise: {{ $.Values.global.scp.service.name }}
             port: {{ $.Values.global.scp.service.port }}
+          - dev: eth0
+            advertise: {{ $.Values.global.scp.service.name }}
+            port: 443
+
 
         client:
           nrf:

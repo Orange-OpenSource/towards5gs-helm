@@ -47,6 +47,9 @@ data:
           - dev: eth0
             advertise: {{ include "open5gs-smf.fullname" $ }}-service
             port: {{ .service.port }}
+          - dev: eth0
+            advertise: {{ include "open5gs-smf.fullname" $ }}-service
+            port: 443 
 
         client:
           nrf:
