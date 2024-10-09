@@ -111,6 +111,7 @@ smf:
         - nsmf-event-exposure
         - nsmf-oam
     configuration: |-
+      nwInstFqdnEncoding: true
       smfName: SMF
       snssaiInfos:
         - sNssai:
